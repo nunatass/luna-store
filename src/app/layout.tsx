@@ -1,8 +1,24 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Charm, Jost, Oregano } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const charm = Charm({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-charm',
+});
+
+const jost = Jost({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-jost',
+});
+
+const oregano = Oregano({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-oregano',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +32,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`${charm.variable} ${jost.variable} ${oregano.variable} font-jost`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
