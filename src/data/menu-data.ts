@@ -3,7 +3,7 @@ import home_2 from '@/assets/img/menu/menu-home-2.jpg';
 import home_3 from '@/assets/img/menu/menu-home-3.jpg';
 import home_4 from '@/assets/img/menu/menu-home-4.jpg';
 
-const menu_data = [
+export const menu_data = [
   {
     id: 1,
     homes: true,
@@ -118,8 +118,6 @@ const menu_data = [
   },
 ];
 
-export default menu_data;
-
 // mobile_menu
 export const mobile_menu = [
   {
@@ -192,12 +190,6 @@ export const mobile_menu = [
     ],
   },
   {
-    id: 4,
-    single_link: true,
-    title: 'Coupons',
-    link: '/coupon',
-  },
-  {
     id: 5,
     sub_menu: true,
     title: 'Blog',
@@ -209,6 +201,12 @@ export const mobile_menu = [
       { title: 'Blog Details', link: '/blog-details' },
       { title: 'Blog Details Full Width', link: '/blog-details-2' },
     ],
+  },
+  {
+    id: 4,
+    single_link: true,
+    title: 'Coupons',
+    link: '/coupon',
   },
   {
     id: 6,

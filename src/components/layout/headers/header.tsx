@@ -12,8 +12,11 @@ import { useSticky } from '@/hooks/use-sticky';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { SideMenu } from '../side-menu';
+import { SidePanel } from '../side-panel';
 import { Menus } from './components/menu';
+import { SearchBar } from './components/search-bar';
+import { SideCart } from './components/side-cart';
+import { SideMenu } from './components/side-menu';
 
 // import SearchBar from './header-com/search-bar';
 // import OffCanvas from '@/components/common/off-canvas';
@@ -22,27 +25,28 @@ import { Menus } from './components/menu';
 // import { openCartMini } from '@/redux/features/cartSlice';
 
 export const Header = () => {
-  // const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [sideMenuOpen, setSideMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const [isSideCartOpen, setIsSideCartOpen] = useState(false);
   // const { wishlist } = useSelector((state) => state.wishlist);
   // const { quantity } = useCartInfo();
   const { sticky } = useSticky();
-  // const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   return (
-    <>
+    <div className="relative">
       <header>
         <motion.div
           initial={false}
           animate={{ opacity: 1, y: sticky ? 96 : 0 }}
           transition={{ duration: 0.7, ease: 'easeInOut' }}
           className={cn(
-            'bg-[#AB9774] w-full flex items-center py-4 lg:px-20 px-14 justify-between gap-20 border-b-[1px] border-[#b7a687]',
+            'bg-[#AB9774] w-full flex items-center py-4 px-4 sm:px-6 md:px-10 lg:px-20 justify-between gap-20 border-b-[1px] border-[#b7a687]',
             sticky &&
-              'fixed left-0 -top-24 z-[99] bg-white shadow-md border-0 opacity-0'
+              'fixed left-0 -top-24 z-20 bg-white shadow-md border-0 opacity-0'
           )}
         >
-          <div className="logo">
+          <div className="">
             <Link href="/">
               <Image
                 className={cn('block', sticky && 'hidden')}
@@ -72,11 +76,7 @@ export const Header = () => {
               )}
             >
               <div className="">
-                <button
-                  // onClick={() => setIsSearchOpen(true)}
-                  type="button"
-                  className=""
-                >
+                <button onClick={() => setIsSearchOpen(true)} type="button">
                   <Search />
                 </button>
               </div>
@@ -88,7 +88,7 @@ export const Header = () => {
               </div>
               <div className="">
                 <button
-                  // onClick={() => dispatch(openCartMini())}
+                  onClick={() => setIsSideCartOpen(true)}
                   type="button"
                   className=""
                 >
@@ -98,7 +98,7 @@ export const Header = () => {
               </div>
               <div className="lg:hidden block">
                 <button
-                  onClick={() => setSideMenuOpen(true)}
+                  onClick={() => setIsSideMenuOpen(true)}
                   type="button"
                   className=""
                 >
@@ -110,21 +110,18 @@ export const Header = () => {
         </motion.div>
       </header>
 
-      {/* search bar start */}
-      {/* <SearchBar isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen} /> */}
-      {/* search bar end */}
-
-      {/* cart mini sidebar start */}
-      {/* <CartMiniSidebar /> */}
-      {/* cart mini sidebar end */}
-
-      {/* off canvas start */}
-      <SideMenu
-        isMenuOpen={sideMenuOpen}
-        setIsMenuOpen={setSideMenuOpen}
-        categoryType="beauty"
+      <SearchBar
+        isSearchOpen={isSearchOpen}
+        setIsSearchOpen={setIsSearchOpen}
       />
-      {/* off canvas end */}
-    </>
+
+      <SidePanel isOpen={isSideCartOpen} setIsOpen={setIsSideCartOpen}>
+        <SideCart />
+      </SidePanel>
+
+      <SidePanel isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen}>
+        <SideMenu isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen} />
+      </SidePanel>
+    </div>
   );
 };
