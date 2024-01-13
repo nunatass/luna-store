@@ -31,22 +31,23 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
   return (
     <div className="w-full h-full flex flex-col p-6 gap-8 justify-between">
       <div className="flex items-center justify-between">
-        <Link href="/">
+        <Link href="/" aria-label="home">
           <Image src={logo} alt="logo" />
         </Link>
 
         <button
+          aria-label="close button"
           onClick={() => setIsOpen(false)}
           className="flex items-center justify-center h-8 w-8 bg-gray-200 hover:bg-blue-500 hover:text-white transition-all duration-500 ease-in-out"
         >
-          <CloseTwo />
+          <CloseTwo aria-label="close icon" />
         </button>
       </div>
       <div className="h-full flex flex-col">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger className="flex items-center justify-between w-full px-4 py-3 bg-blue-500 text-white hover:bg-blue-500/90 transition-all duration-500 ease-in-out hover:no-underline font-normal">
-              <MenuIcon />
+              <MenuIcon aria-label="menu icon" />
               All Categories
             </AccordionTrigger>
             <AccordionContent>
@@ -63,7 +64,7 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
             <DropdownMenuTrigger asChild>
               <div className="flex gap-2 items-center">
                 Currency: USD
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-4 w-4" aria-label="chevron icon" />
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
@@ -83,7 +84,7 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
               <div className="flex gap-2 items-center">
                 <Image src={language_img} alt="language-flag" />
                 English
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-4 w-4" aria-label="chevron icon" />
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">

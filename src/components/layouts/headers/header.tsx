@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 //import { useDispatch, useSelector } from 'react-redux';
 // internal
-import logo_white from '@/assets/img/logo/logo-white.svg';
-import logo_dark from '@/assets/img/logo/logo.svg';
+import logoLight from '@/assets/img/logo/logo-white.svg';
+import logoDark from '@/assets/img/logo/logo.svg';
 import { CartTwo, Menu, Search, Wishlist } from '@/components/icons';
 import { useSticky } from '@/hooks/use-sticky';
 import { cn } from '@/lib/utils';
@@ -46,13 +46,15 @@ export const Header = () => {
             <Link href="/">
               <Image
                 className={cn('block', sticky && 'hidden')}
-                src={logo_white}
+                src={logoLight}
                 alt="logo"
+                loading="eager"
               />
               <Image
                 className={cn('hidden', sticky && 'block')}
-                src={logo_dark}
+                src={logoDark}
                 alt="logo"
+                loading="eager"
               />
             </Link>
           </div>
@@ -72,13 +74,17 @@ export const Header = () => {
               )}
             >
               <div className="">
-                <button onClick={() => setIsSearchOpen(true)} type="button">
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  type="button"
+                  aria-label="search button"
+                >
                   <Search />
                 </button>
               </div>
               <div className="">
-                <Link href="/wishlist" className="">
-                  <Wishlist />
+                <Link href="/wishlist" aria-label="wishlist">
+                  <Wishlist aria-label="wishlist icon" />
                   <span className="">{/* {wishlist.length} */}</span>
                 </Link>
               </div>
@@ -86,9 +92,9 @@ export const Header = () => {
                 <button
                   onClick={() => setIsSideCartOpen(true)}
                   type="button"
-                  className=""
+                  aria-label="cart button"
                 >
-                  <CartTwo />
+                  <CartTwo aria-label="cart icon" />
                   <span className="">{/* {quantity} */}</span>
                 </button>
               </div>
@@ -96,9 +102,9 @@ export const Header = () => {
                 <button
                   onClick={() => setIsSideMenuOpen(true)}
                   type="button"
-                  className=""
+                  aria-label="menu button"
                 >
-                  <Menu />
+                  <Menu aria-label="menu icon" />
                 </button>
               </div>
             </div>

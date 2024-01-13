@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
 import { Charm, Jost, Oregano } from 'next/font/google';
 import './globals.css';
 

@@ -76,8 +76,8 @@ export const Menus = () => {
             >
               <div className="invisible absolute top-14 z-10 h-max w-[80%] bg-white opacity-0  shadow-sm transition-all delay-200 duration-300 ease-in-out group-hover/menu-home:visible group-hover/menu-home:-translate-y-3 group-hover/menu-home:opacity-100 ">
                 <div className="flex items-center justify-center gap-3 p-5 ">
-                  {instagram_data.map((item, i) => (
-                    <div key={i} className="group relative">
+                  {instagram_data.map((item) => (
+                    <div key={item.link} className="group relative">
                       <Image
                         src={item.img}
                         alt="instagram img"
@@ -108,13 +108,16 @@ export const Menus = () => {
                     <Link
                       href={product.link}
                       className="font-medium hover:text-[#be844c]"
+                      aria-label="menu link"
                     >
                       {product.title}
                     </Link>
                     <ul className="flex flex-col gap-2 text-sm">
                       {product.mega_menus.map((menu, i) => (
                         <li key={i} className="hover:text-[#be844c]">
-                          <Link href={menu.link}>{menu.title}</Link>
+                          <Link href={menu.link} aria-label="menu link">
+                            {menu.title}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -133,7 +136,9 @@ export const Menus = () => {
               <ul className="transform-all invisible absolute top-14 z-10 flex h-max flex-col justify-between  gap-2.5 bg-white px-8 py-6 text-sm font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/sub_menu:visible group-hover/sub_menu:-translate-y-3 group-hover/sub_menu:opacity-100">
                 {menu.sub_menus.map((b, i) => (
                   <li key={i} className="hover:text-[#be844c]">
-                    <Link href={b.link}>{b.title}</Link>
+                    <Link href={b.link} aria-label="menu link">
+                      {b.title}
+                    </Link>
                   </li>
                 ))}
               </ul>

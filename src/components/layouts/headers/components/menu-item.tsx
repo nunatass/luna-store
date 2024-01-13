@@ -30,9 +30,15 @@ export function MenuItem({
           'hover:text-white',
           sticky && 'hover:text-[#be844c]'
         )}
+        aria-label={`${title}`}
       >
         <span>{title}</span>
-        {hasDropdown && <ChevronDown className="ml-[2px] h-4 w-4" />}
+        {hasDropdown && (
+          <ChevronDown
+            className="ml-[2px] h-4 w-4"
+            aria-label="ChevronDown icon"
+          />
+        )}
       </Link>
       {children}
     </li>

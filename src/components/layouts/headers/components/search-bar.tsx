@@ -46,12 +46,14 @@ export const SearchBar = ({
                     type="text"
                     placeholder="Search for product..."
                     className="w-full h-full py-4 outline-none"
+                    aria-label="input search text"
                   />
                   <button
                     type="submit"
                     className="text-gray-400 hover:text-black"
+                    aria-label="search button"
                   >
-                    <Search />
+                    <Search aria-label="search icon" />
                   </button>
                 </div>
                 <div className="mt-4 text-sm">
@@ -61,6 +63,7 @@ export const SearchBar = ({
                       key={category}
                       onClick={() => handleCategory(category)}
                       className="cursor-pointer hover:text-[#be844c] transition-all text-gray-700"
+                      aria-label="category"
                     >
                       {category}
                       {i < categories.length - 1 && ', '}

@@ -16,11 +16,13 @@ export function NavButtons({ slider }: NavButtonsProps) {
     >
       <button
         className="h-14 w-14 hover:ring-2 ring-white ease-in-out duration-300 transition-all rounded-full flex justify-center items-center"
+        aria-label="slider prev button"
         onClick={() => slider?.slickPrev()}
       >
         <ArrowPrevTwo />
       </button>
       <button
+        aria-label="slider next button"
         className="h-14 w-14 hover:ring-2 ring-white ease-in-out duration-300 transition-all rounded-full flex justify-center items-center"
         onClick={() => slider?.slickNext()}
       >

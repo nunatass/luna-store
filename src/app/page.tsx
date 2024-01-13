@@ -1,6 +1,6 @@
-import { JewelryBanner } from '@/components/layout/banners/jewelry/jewelry-banner';
-import { Header } from '@/components/layout/headers/header';
-import Wrapper from '@/components/layout/wrapper';
+import { JewelryBanner } from '@/components/layouts/banners/jewelry/jewelry-banner';
+import { Header } from '@/components/layouts/headers/header';
+import Wrapper from '@/components/layouts/wrapper';
 import { SEO } from '@/components/seo';
 
 export default function Home() {

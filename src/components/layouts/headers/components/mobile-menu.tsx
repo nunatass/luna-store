@@ -101,8 +101,15 @@ export const MobileMenus = () => {
                         />
                         <div className="w-full h-full bg-black absolute top-0 right-0 opacity-0 group-hover:opacity-25 ease-in-out transition-all duration-300" />
                         <div className="absolute z-20 top-1/2 left-1/2 bg-white w-14 h-14 -translate-x-1/2 -translate-y-[calc(50% - 40px)] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300 shadow-sm transform-all ease-in-out hover:bg-[#821f40] hover:text-white text-black group-hover:-translate-y-[20px] ">
-                          <a href={item.link} target="_blank" className="">
-                            <InstagramIcon className="w-4 h-4" />
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            aria-label="instagram link"
+                          >
+                            <InstagramIcon
+                              className="w-4 h-4"
+                              aria-label="instagram icon"
+                            />
                           </a>
                         </div>
                       </div>
@@ -126,6 +133,7 @@ export const MobileMenus = () => {
                         key={subMenu.title}
                         href={subMenu.link}
                         className="pt-4 hover:text-blue-500"
+                        aria-label="menu link"
                       >
                         {subMenu.title}
                       </Link>
@@ -135,7 +143,9 @@ export const MobileMenus = () => {
               </Accordion>
             ) : (
               <li key={menu.id} className="px-4 pt-4 hover:text-blue-500">
-                <Link href={menu.link}>{menu.title}</Link>
+                <Link href={menu.link} aria-label="menu link">
+                  {menu.title}
+                </Link>
               </li>
             )}
           </ul>
