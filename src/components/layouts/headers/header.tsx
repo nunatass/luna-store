@@ -37,7 +37,7 @@ export const Header = () => {
       <header className="absolute left-0 top-0 right-0">
         <div
           className={cn(
-            'flex w-full items-center justify-between gap-20 border-b-[1px] border-[#b7a687] bg-[#AB9774] px-4 py-4 sm:px-6 md:px-10 lg:px-24',
+            'flex w-full items-center justify-between gap-20 border-b-[1px] border-[#b7a687] bg-transparent px-4 py-4 sm:px-6 md:px-10 lg:px-24',
             sticky &&
               'fixed -top-24 left-0 z-30 translate-y-24 border-0 bg-white shadow-md transition-all duration-700 ease-in-out'
           )}

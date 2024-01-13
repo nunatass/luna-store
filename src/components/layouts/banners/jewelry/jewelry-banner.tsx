@@ -56,7 +56,7 @@ export const JewelryBanner = () => {
   return (
     <section
       className={cn(
-        'relative h-[90vh] w-screen overflow-hidden bg-[#AB9774] sm:h-screen'
+        'relative h-[90vh] w-screen overflow-hidden bg-[#AB9774] sm:min-h-[110vh]'
       )}
     >
       <Slider
