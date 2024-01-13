@@ -42,7 +42,7 @@ const Wrapper = ({ children }: WrapperProps) => {
   //     {/* product modal end */}
   //   </div>
   // );
-  return <div className="bg-[#AB9774] h-screen">{children}</div>;
+  return <div className="h-max min-h-screen">{children}</div>;
 };
 
 export default Wrapper;

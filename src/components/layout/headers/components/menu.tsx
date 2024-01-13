@@ -64,7 +64,7 @@ export const Menus = () => {
 
   return (
     <nav className="max-w">
-      <ul className="flex gap-8 font-medium relative w-full">
+      <ul className="relative flex w-full gap-8 font-medium">
         {menu_data.map((menu) =>
           menu.homes ? (
             <MenuItem
@@ -74,19 +74,19 @@ export const Menus = () => {
               hasDropdown
               className="group/menu-home"
             >
-              <div className="absolute bg-white top-14 z-10 shadow-sm h-max w-[80%] opacity-0  invisible group-hover/menu-home:opacity-100 group-hover/menu-home:visible duration-300 transform-all ease-in-out group-hover/menu-home:-translate-y-3 delay-200 ">
-                <div className="flex items-center justify-center p-5 gap-3 ">
+              <div className="invisible absolute top-14 z-10 h-max w-[80%] bg-white opacity-0  shadow-sm transition-all delay-200 duration-300 ease-in-out group-hover/menu-home:visible group-hover/menu-home:-translate-y-3 group-hover/menu-home:opacity-100 ">
+                <div className="flex items-center justify-center gap-3 p-5 ">
                   {instagram_data.map((item, i) => (
-                    <div key={i} className="relative group">
+                    <div key={i} className="group relative">
                       <Image
                         src={item.img}
                         alt="instagram img"
-                        className="max-w h-full relative"
+                        className="max-w relative h-full"
                       />
-                      <div className="w-full h-full bg-black absolute top-0 right-0 opacity-0 group-hover:opacity-25 ease-in-out transition-all duration-300" />
-                      <div className="absolute z-20 top-1/2 left-1/2 bg-white w-14 h-14 -translate-x-1/2 -translate-y-[calc(50% - 40px)] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300 shadow-sm transform-all ease-in-out hover:bg-[#821f40] hover:text-white text-black group-hover:-translate-y-[20px] ">
+                      <div className="absolute right-0 top-0 h-full w-full bg-black opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-25" />
+                      <div className="-translate-y-[calc(50% - 40px)] transform-all absolute left-1/2 top-1/2 z-20 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-white text-black opacity-0 shadow-sm duration-300 ease-in-out hover:bg-[#821f40] hover:text-white group-hover:-translate-y-[20px] group-hover:opacity-100 ">
                         <a href={item.link} target="_blank" className="">
-                          <InstagramIcon className="w-4 h-4" />
+                          <InstagramIcon className="h-4 w-4" />
                         </a>
                       </div>
                     </div>
@@ -102,7 +102,7 @@ export const Menus = () => {
               hasDropdown
               className="group/menu-products"
             >
-              <ul className="absolute bg-white top-14 left-0 z-10 px-8 py-5  shadow-sm h-max xl:w-[80%] opacity-0  invisible group-hover/menu-products:opacity-100 group-hover/menu-products:visible duration-300 transform-all ease-in-out group-hover/menu-products:-translate-y-3 delay-200 flex text-black font-normal justify-between">
+              <ul className="transform-all invisible absolute left-0 top-14 z-10 flex  h-max justify-between bg-white px-8  py-5 font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/menu-products:visible group-hover/menu-products:-translate-y-3 group-hover/menu-products:opacity-100 xl:w-[80%]">
                 {menu.product_pages.map((product, i) => (
                   <li key={i} className="flex flex-col gap-2.5">
                     <Link
@@ -111,7 +111,7 @@ export const Menus = () => {
                     >
                       {product.title}
                     </Link>
-                    <ul className="text-sm flex flex-col gap-2">
+                    <ul className="flex flex-col gap-2 text-sm">
                       {product.mega_menus.map((menu, i) => (
                         <li key={i} className="hover:text-[#be844c]">
                           <Link href={menu.link}>{menu.title}</Link>
@@ -130,7 +130,7 @@ export const Menus = () => {
               hasDropdown
               className="group/sub_menu"
             >
-              <ul className="absolute bg-white top-14 z-10 px-8 py-6 shadow-sm h-max opacity-0  invisible group-hover/sub_menu:opacity-100 group-hover/sub_menu:visible duration-300 transform-all ease-in-out group-hover/sub_menu:-translate-y-3 delay-200 flex flex-col text-black justify-between gap-2.5 text-sm font-normal">
+              <ul className="transform-all invisible absolute top-14 z-10 flex h-max flex-col justify-between  gap-2.5 bg-white px-8 py-6 text-sm font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/sub_menu:visible group-hover/sub_menu:-translate-y-3 group-hover/sub_menu:opacity-100">
                 {menu.sub_menus.map((b, i) => (
                   <li key={i} className="hover:text-[#be844c]">
                     <Link href={b.link}>{b.title}</Link>

@@ -32,7 +32,7 @@ export function MenuItem({
         )}
       >
         <span>{title}</span>
-        {hasDropdown && <ChevronDown className="h-4 w-4 ml-[2px]" />}
+        {hasDropdown && <ChevronDown className="ml-[2px] h-4 w-4" />}
       </Link>
       {children}
     </li>

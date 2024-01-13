@@ -84,6 +84,6 @@ export const SideCart = () => {
     //   <div onClick={handleCloseCartMini} className={`body-overlay ${cartMiniOpen ? 'opened' : ''}`}></div>
     //   {/* overlay end */}
     // </>
-    <></>
+    <>ghvdhjfb</>
   );
 };

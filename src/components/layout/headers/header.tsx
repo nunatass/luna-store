@@ -10,7 +10,6 @@ import logo_dark from '@/assets/img/logo/logo.svg';
 import { CartTwo, Menu, Search, Wishlist } from '@/components/icons';
 import { useSticky } from '@/hooks/use-sticky';
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { SidePanel } from '../side-panel';
 import { Menus } from './components/menu';
@@ -34,19 +33,16 @@ export const Header = () => {
   //const dispatch = useDispatch();
 
   return (
-    <div className="relative">
-      <header>
-        <motion.div
-          initial={false}
-          animate={{ opacity: 1, y: sticky ? 96 : 0 }}
-          transition={{ duration: 0.7, ease: 'easeInOut' }}
+    <div className="relative z-20">
+      <header className="absolute left-0 top-0 right-0">
+        <div
           className={cn(
-            'bg-[#AB9774] w-full flex items-center py-4 px-4 sm:px-6 md:px-10 lg:px-20 justify-between gap-20 border-b-[1px] border-[#b7a687]',
+            'flex w-full items-center justify-between gap-20 border-b-[1px] border-[#b7a687] bg-[#AB9774] px-4 py-4 sm:px-6 md:px-10 lg:px-24',
             sticky &&
-              'fixed left-0 -top-24 z-20 bg-white shadow-md border-0 opacity-0'
+              'fixed -top-24 left-0 z-30 translate-y-24 border-0 bg-white shadow-md transition-all duration-700 ease-in-out'
           )}
         >
-          <div className="">
+          <div>
             <Link href="/">
               <Image
                 className={cn('block', sticky && 'hidden')}
@@ -63,7 +59,7 @@ export const Header = () => {
           <div className="flex items-center lg:w-full">
             <div
               className={cn(
-                'hidden lg:block text-white/80 w-full',
+                'hidden w-full text-white/80 lg:block',
                 sticky && 'text-black'
               )}
             >
@@ -71,7 +67,7 @@ export const Header = () => {
             </div>
             <div
               className={cn(
-                'flex gap-4 justify-end items-center text-white',
+                'flex items-center justify-end gap-4 text-white',
                 sticky && 'text-black'
               )}
             >
@@ -96,7 +92,7 @@ export const Header = () => {
                   <span className="">{/* {quantity} */}</span>
                 </button>
               </div>
-              <div className="lg:hidden block">
+              <div className="block lg:hidden">
                 <button
                   onClick={() => setIsSideMenuOpen(true)}
                   type="button"
@@ -107,7 +103,7 @@ export const Header = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </header>
 
       <SearchBar
