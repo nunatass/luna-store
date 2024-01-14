@@ -68,7 +68,7 @@ export const Menus = () => {
         {menu_data.map((menu) =>
           menu.homes ? (
             <MenuItem
-              key={menu.id}
+              key={menu.title}
               link={menu.link}
               title={menu.title}
               hasDropdown
@@ -77,7 +77,7 @@ export const Menus = () => {
               <div className="invisible absolute top-14 z-10 h-max w-[80%] bg-white opacity-0  shadow-sm transition-all delay-200 duration-300 ease-in-out group-hover/menu-home:visible group-hover/menu-home:-translate-y-3 group-hover/menu-home:opacity-100 ">
                 <div className="flex items-center justify-center gap-3 p-5 ">
                   {instagram_data.map((item) => (
-                    <div key={item.link} className="group relative">
+                    <div key={item.id} className="group relative">
                       <Image
                         src={item.img}
                         alt="instagram img"
@@ -96,15 +96,15 @@ export const Menus = () => {
             </MenuItem>
           ) : menu.products ? (
             <MenuItem
-              key={menu.id}
+              key={menu.title}
               link={menu.link}
               title={menu.title}
               hasDropdown
               className="group/menu-products"
             >
               <ul className="transform-all invisible absolute left-0 top-14 z-10 flex  h-max justify-between bg-white px-8  py-5 font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/menu-products:visible group-hover/menu-products:-translate-y-3 group-hover/menu-products:opacity-100 xl:w-[80%]">
-                {menu.product_pages.map((product, i) => (
-                  <li key={i} className="flex flex-col gap-2.5">
+                {menu.product_pages.map((product) => (
+                  <li key={product.title} className="flex flex-col gap-2.5">
                     <Link
                       href={product.link}
                       className="font-medium hover:text-[#be844c]"
@@ -113,8 +113,8 @@ export const Menus = () => {
                       {product.title}
                     </Link>
                     <ul className="flex flex-col gap-2 text-sm">
-                      {product.mega_menus.map((menu, i) => (
-                        <li key={i} className="hover:text-[#be844c]">
+                      {product.mega_menus.map((menu) => (
+                        <li key={menu.title} className="hover:text-[#be844c]">
                           <Link href={menu.link} aria-label="menu link">
                             {menu.title}
                           </Link>
@@ -127,24 +127,24 @@ export const Menus = () => {
             </MenuItem>
           ) : menu.sub_menu ? (
             <MenuItem
-              key={menu.id}
+              key={menu.title}
               link={menu.link}
               title={menu.title}
               hasDropdown
               className="group/sub_menu"
             >
               <ul className="transform-all invisible absolute top-14 z-10 flex h-max flex-col justify-between  gap-2.5 bg-white px-8 py-6 text-sm font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/sub_menu:visible group-hover/sub_menu:-translate-y-3 group-hover/sub_menu:opacity-100">
-                {menu.sub_menus.map((b, i) => (
-                  <li key={i} className="hover:text-[#be844c]">
-                    <Link href={b.link} aria-label="menu link">
-                      {b.title}
+                {menu.sub_menus.map((subMenu) => (
+                  <li key={subMenu.title} className="hover:text-[#be844c]">
+                    <Link href={subMenu.link} aria-label="menu link">
+                      {subMenu.title}
                     </Link>
                   </li>
                 ))}
               </ul>
             </MenuItem>
           ) : (
-            <MenuItem key={menu.id} link={menu.link} title={menu.title} />
+            <MenuItem key={menu.title} link={menu.link} title={menu.title} />
           )
         )}
       </ul>

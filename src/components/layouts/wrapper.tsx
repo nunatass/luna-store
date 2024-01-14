@@ -15,7 +15,7 @@
 type WrapperProps = {
   children: React.ReactNode;
 };
-const Wrapper = ({ children }: WrapperProps) => {
+export const Wrapper = ({ children }: WrapperProps) => {
   // const { productItem } = useSelector((state) => state.productModal);
   // const dispatch = useDispatch();
   // const authChecked = useAuthCheck();
@@ -44,5 +44,3 @@ const Wrapper = ({ children }: WrapperProps) => {
   // );
   return <div className="h-max min-h-screen">{children}</div>;
 };
-
-export default Wrapper;

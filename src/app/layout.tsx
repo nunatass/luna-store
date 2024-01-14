@@ -1,3 +1,4 @@
+import { BackToTopButton } from '@/components/ui/back-to-top-button';
 import { Metadata } from 'next';
 import { Charm, Jost, Oregano } from 'next/font/google';
 import './globals.css';
@@ -35,7 +36,10 @@ export default function RootLayout({
       <body
         className={`${charm.variable} ${jost.variable} ${oregano.variable} font-jost`}
       >
-        {children}
+        <div className="relative">
+          {children}
+          <BackToTopButton />
+        </div>
       </body>
     </html>
   );
