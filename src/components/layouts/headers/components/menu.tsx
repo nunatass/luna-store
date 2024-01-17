@@ -1,27 +1,16 @@
-import { menu_data } from '@/data/menu-data';
-import Image from 'next/image';
 // import OfferCouponArea from "@/components/offerHeader/OfferCouponArea";
 // import { useGetProductTypeQuery } from "@/redux/features/productApi";
 // import { HomeNewArrivalPrdLoader } from "@/components/loader";
 // import ErrorMsg from "@/components/common/error-msg";
 // import ProductItem from "@/components/products/electronics/product-item";
 
-// internal
-import insta_1 from '@/assets/img/instagram/4/instagram-1.jpg';
-import insta_3 from '@/assets/img/instagram/4/instagram-3.jpg';
-import insta_4 from '@/assets/img/instagram/4/instagram-4.jpg';
-import insta_6 from '@/assets/img/instagram/4/instagram-6.jpg';
-import { InstagramIcon } from 'lucide-react';
+import { InstagramImageCard } from '@/components/ui/instagram-image-card';
+import { instagramMenuData } from '@/data/instagram-data';
+import { menuData } from '@/data/menu-data';
+
 import Link from 'next/link';
 import { MenuItem } from './menu-item';
 
-// instagram data
-const instagram_data = [
-  { id: 1, link: 'https://www.instagram.com/', img: insta_1 },
-  { id: 2, link: 'https://www.instagram.com/', img: insta_3 },
-  { id: 3, link: 'https://www.instagram.com/', img: insta_4 },
-  { id: 4, link: 'https://www.instagram.com/', img: insta_6 },
-];
 export const Menus = () => {
   // const { data: products, isError, isLoading } = useGetProductTypeQuery({
   //   type: 'electronics',
@@ -65,7 +54,7 @@ export const Menus = () => {
   return (
     <nav className="max-w">
       <ul className="relative flex w-full gap-8 font-medium">
-        {menu_data.map((menu) =>
+        {menuData.map((menu) =>
           menu.homes ? (
             <MenuItem
               key={menu.title}
@@ -76,20 +65,12 @@ export const Menus = () => {
             >
               <div className="invisible absolute top-14 z-10 h-max w-[80%] bg-white opacity-0  shadow-sm transition-all delay-200 duration-300 ease-in-out group-hover/menu-home:visible group-hover/menu-home:-translate-y-3 group-hover/menu-home:opacity-100 ">
                 <div className="flex items-center justify-center gap-3 p-5 ">
-                  {instagram_data.map((item) => (
-                    <div key={item.id} className="group relative">
-                      <Image
-                        src={item.img}
-                        alt="instagram img"
-                        className="max-w relative h-full"
-                      />
-                      <div className="absolute right-0 top-0 h-full w-full bg-black opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-25" />
-                      <div className="-translate-y-[calc(50% - 40px)] transform-all absolute left-1/2 top-1/2 z-20 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-white text-black opacity-0 shadow-sm duration-300 ease-in-out hover:bg-[#821f40] hover:text-white group-hover:-translate-y-[20px] group-hover:opacity-100 ">
-                        <a href={item.link} target="_blank" className="">
-                          <InstagramIcon className="h-4 w-4" />
-                        </a>
-                      </div>
-                    </div>
+                  {instagramMenuData.map((item) => (
+                    <InstagramImageCard
+                      key={item.id}
+                      image={item.img}
+                      link={item.link}
+                    />
                   ))}
                 </div>
               </div>

@@ -3,7 +3,7 @@ import home_2 from '@/assets/img/menu/menu-home-2.jpg';
 import home_3 from '@/assets/img/menu/menu-home-3.jpg';
 import home_4 from '@/assets/img/menu/menu-home-4.jpg';
 
-export const menu_data = [
+export const menuData = [
   {
     id: 1,
     homes: true,
@@ -119,7 +119,7 @@ export const menu_data = [
 ];
 
 // mobile_menu
-export const mobile_menu = [
+export const mobileMenuData = [
   {
     id: 1,
     homes: true,

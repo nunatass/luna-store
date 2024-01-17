@@ -1,14 +1,12 @@
-import { mobile_menu } from '@/data/menu-data';
+import { instagramMenuData } from '@/data/instagram-data';
+import { mobileMenuData } from '@/data/menu-data';
+
 import Link from 'next/link';
 // import ProductItem from "../products/electronics/product-item";
 // import ErrorMsg from "./error-msg";
 // import { HomeNewArrivalPrdLoader } from "../loader";
 // import { useGetProductTypeQuery } from "@/redux/features/productApi";
-// internal
-import insta_1 from '@/assets/img/instagram/4/instagram-1.jpg';
-import insta_3 from '@/assets/img/instagram/4/instagram-3.jpg';
-import insta_4 from '@/assets/img/instagram/4/instagram-4.jpg';
-import insta_6 from '@/assets/img/instagram/4/instagram-6.jpg';
+
 import {
   Accordion,
   AccordionContent,
@@ -17,13 +15,6 @@ import {
 } from '@/components/ui/accordion';
 import { InstagramImageCard } from '@/components/ui/instagram-image-card';
 
-// instagram data
-const instagram_data = [
-  { id: 1, link: 'https://www.instagram.com/', img: insta_1 },
-  { id: 2, link: 'https://www.instagram.com/', img: insta_3 },
-  { id: 3, link: 'https://www.instagram.com/', img: insta_4 },
-  { id: 4, link: 'https://www.instagram.com/', img: insta_6 },
-];
 export const MobileMenus = () => {
   //const [isActiveMenu, setIsActiveMenu] = useState('');
 
@@ -78,7 +69,7 @@ export const MobileMenus = () => {
   return (
     <>
       <nav className="tp-main-menu-content">
-        {mobile_menu.map((menu) => (
+        {mobileMenuData.map((menu) => (
           <ul key={menu.id}>
             {menu.homes ? (
               <Accordion
@@ -90,8 +81,8 @@ export const MobileMenus = () => {
                   <AccordionTrigger className="font-normal hover:text-blue-500">
                     Home
                   </AccordionTrigger>
-                  <AccordionContent className="w-full grid  grid-cols-2 gap-2">
-                    {instagram_data.map((item) => (
+                  <AccordionContent className="w-full grid grid-cols-2 gap-2">
+                    {instagramMenuData.map((item) => (
                       <InstagramImageCard
                         key={item.id}
                         link={item.link}

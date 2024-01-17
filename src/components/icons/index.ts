@@ -7,6 +7,8 @@ export * from './cart-two';
 export * from './close-two';
 export * from './delivery';
 export * from './discount';
+export * from './email';
+export * from './location';
 export * from './menu';
 export * from './pause';
 export * from './play';
