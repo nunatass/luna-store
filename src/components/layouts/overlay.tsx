@@ -19,7 +19,7 @@ export default function Overlay({ isOpen, setIsOpen }: OverlayProps) {
         <motion.div
           onClick={() => setIsOpen(false)}
           {...overlayAnimation}
-          className={`h-screen w-full bg-black fixed  top-0 right-0 opacity-50 z-30 cursor-close`}
+          className={`h-screen w-full bg-black fixed  top-0 right-0 opacity-50 z-[999] cursor-close`}
         />
       )}
     </AnimatePresence>

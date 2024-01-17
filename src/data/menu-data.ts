@@ -203,13 +203,13 @@ export const mobile_menu = [
     ],
   },
   {
-    id: 4,
+    id: 6,
     single_link: true,
     title: 'Coupons',
     link: '/coupon',
   },
   {
-    id: 6,
+    id: 7,
     single_link: true,
     title: 'Contact',
     link: '/contact',

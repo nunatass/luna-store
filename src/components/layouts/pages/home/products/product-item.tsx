@@ -78,11 +78,11 @@ export const ProductItem = ({
   //   dispatch(add_to_wishlist(prd));
   // };
   return (
-    <Link href={`/product-details/${_id}`}>
-      <motion.div
-        {...animationsProps}
-        className="w-28 sm:w-full h-max text-center bg-[#f6f6f6] max-w-80 flex flex-col relative"
-      >
+    <motion.div
+      {...animationsProps}
+      className="w-40 sm:w-full h-max text-center bg-[#f6f6f6] max-w-80 flex flex-col relative"
+    >
+      <Link href={`/product-details/${_id}`}>
         <Image
           src={img}
           alt="product img"
@@ -90,47 +90,21 @@ export const ProductItem = ({
           width={284}
           height={352}
         />
+      </Link>
 
-        <div className="tp-product-badge">
-          {status === 'out-of-stock' && <span className="">out-stock</span>}
-        </div>
-        <motion.div
-          variants={optionsAnimationVariants}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
-          className="sm:flex flex-col z-10 absolute right-4 top-4 gap-2 hidden "
-        >
-          <AnimatePresence>
-            {isAddedToCart ? (
-              <motion.div {...animationsProps}>
-                <Link
-                  href="/cart"
-                  className="flex flex-row-reverse items-center gap-2"
-                >
-                  <motion.div
-                    {...optionHoverAnimation}
-                    className="ring-1 ring-gray-300 p-2 text-gray-4"
-                  >
-                    <Cart />
-                  </motion.div>
-                  <motion.span
-                    variants={tooltipAnimationVariants}
-                    transition={{ duration: 0.4, ease: 'easeInOut' }}
-                    className=" bg-black text-white py-0.5 px-2 rounded-xl text-xs font-medium"
-                  >
-                    View Cart
-                  </motion.span>
-                </Link>
-              </motion.div>
-            ) : (
-              <motion.button
-                {...animationsProps}
-                transition={{
-                  duration: 5,
-                  stiffness: 100,
-                  type: 'spring',
-                }}
-                type="button"
-                //onClick={() => handleAddProduct(product)}
+      <div className="tp-product-badge">
+        {status === 'out-of-stock' && <span className="">out-stock</span>}
+      </div>
+      <motion.div
+        variants={optionsAnimationVariants}
+        transition={{ duration: 0.4, ease: 'easeInOut' }}
+        className="sm:flex flex-col z-10 absolute right-4 top-4 gap-2 hidden "
+      >
+        <AnimatePresence>
+          {isAddedToCart ? (
+            <motion.div {...animationsProps}>
+              <Link
+                href="/cart"
                 className="flex flex-row-reverse items-center gap-2"
               >
                 <motion.div
@@ -139,93 +113,119 @@ export const ProductItem = ({
                 >
                   <Cart />
                 </motion.div>
-                <motion.div
+                <motion.span
                   variants={tooltipAnimationVariants}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
                   className=" bg-black text-white py-0.5 px-2 rounded-xl text-xs font-medium"
                 >
-                  Add to Cart
-                </motion.div>
-              </motion.button>
-            )}
-          </AnimatePresence>
-          <motion.button
-            type="button"
-            {...animationsProps}
-            className="flex flex-row-reverse items-center gap-2"
+                  View Cart
+                </motion.span>
+              </Link>
+            </motion.div>
+          ) : (
+            <motion.button
+              {...animationsProps}
+              transition={{
+                duration: 5,
+                stiffness: 100,
+                type: 'spring',
+              }}
+              type="button"
+              //onClick={() => handleAddProduct(product)}
+              className="flex flex-row-reverse items-center gap-2"
+            >
+              <motion.div
+                {...optionHoverAnimation}
+                className="ring-1 ring-gray-300 p-2 text-gray-4"
+              >
+                <Cart />
+              </motion.div>
+              <motion.div
+                variants={tooltipAnimationVariants}
+                className=" bg-black text-white py-0.5 px-2 rounded-xl text-xs font-medium"
+              >
+                Add to Cart
+              </motion.div>
+            </motion.button>
+          )}
+        </AnimatePresence>
+        <motion.button
+          type="button"
+          {...animationsProps}
+          className="flex flex-row-reverse items-center gap-2"
 
-            // onClick={() => dispatch(handleProductModal(product))}
+          // onClick={() => dispatch(handleProductModal(product))}
+        >
+          <motion.div
+            {...optionHoverAnimation}
+            className="ring-1 ring-gray-300 p-2 text-gray-4"
           >
-            <motion.div
-              {...optionHoverAnimation}
-              className="ring-1 ring-gray-300 p-2 text-gray-4"
-            >
-              <QuickView />
-            </motion.div>
-            <motion.div
-              variants={tooltipAnimationVariants}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className=" bg-black text-white py-0.5 px-2 rounded-xl text-xs font-medium"
-            >
-              Quick View
-            </motion.div>
-          </motion.button>
-          <motion.button
-            type="button"
-            {...animationsProps}
-            // onClick={() => handleWishlistProduct(product)}
-            className="flex flex-row-reverse items-center gap-2"
+            <QuickView />
+          </motion.div>
+          <motion.div
+            variants={tooltipAnimationVariants}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            className=" bg-black text-white py-0.5 px-2 rounded-xl text-xs font-medium"
           >
-            <motion.div
-              {...optionHoverAnimation}
-              className="ring-1 ring-gray-300 p-2 text-gray-4"
-            >
-              <Wishlist />
-            </motion.div>
+            Quick View
+          </motion.div>
+        </motion.button>
+        <motion.button
+          type="button"
+          {...animationsProps}
+          // onClick={() => handleWishlistProduct(product)}
+          className="flex flex-row-reverse items-center gap-2"
+        >
+          <motion.div
+            {...optionHoverAnimation}
+            className="ring-1 ring-gray-300 p-2 text-gray-4"
+          >
+            <Wishlist />
+          </motion.div>
 
-            <motion.div
-              variants={tooltipAnimationVariants}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className=" bg-black text-white py-0.5 px-2 rounded-xl text-xs font-medium"
-            >
-              Add To Wishlist
-            </motion.div>
-          </motion.button>
-        </motion.div>
-
-        <div className="font-medium flex flex-col gap-1 z-10 bg-white py-4 text-left">
-          <h3 className="text-xs sm:text-xl transition-all duration-300 ease-in-out">
-            <Link href={`/product-details/${_id}`}>{title}</Link>
-          </h3>
-
-          <div className="text-sm font-normal">
-            <p>{tags[0]}</p>
-          </div>
-
-          <div className="tp-category-price-wrapper-4 ">
-            <span className="text-sm sm:font-base transition-all duration-300 ease-in-out">
-              ${price.toFixed(2)}
-            </span>
-            <motion.div
-              variants={cartAnimationVariants}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="absolute bottom-4 left-0 py-1 bg-white w-full flex items-center justify-start"
-            >
-              {isAddedToCart ? (
-                <Link href="/cart" className="flex gap-2 items-center">
-                  <AddCart /> View Cart
-                </Link>
-              ) : (
-                <button
-                  // onClick={() => handleAddProduct(product)}
-                  className="flex gap-2 items-center"
-                >
-                  <AddCart /> Add to Cart
-                </button>
-              )}
-            </motion.div>
-          </div>
-        </div>
+          <motion.div
+            variants={tooltipAnimationVariants}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            className=" bg-black text-white py-0.5 px-2 rounded-xl text-xs font-medium"
+          >
+            Add To Wishlist
+          </motion.div>
+        </motion.button>
       </motion.div>
-    </Link>
+
+      <div className="font-medium flex flex-col gap-1 z-10 bg-white py-4 text-left">
+        <h3 className="text-xs sm:text-xl transition-all duration-300 ease-in-out">
+          <Link href={`/product-details/${_id}`}>{title}</Link>
+        </h3>
+
+        <div className="text-sm font-normal">
+          <p>{tags[0]}</p>
+        </div>
+
+        <div className="tp-category-price-wrapper-4 ">
+          <span className="text-sm sm:font-base transition-all duration-300 ease-in-out">
+            ${price.toFixed(2)}
+          </span>
+          <motion.div
+            variants={cartAnimationVariants}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            className="absolute bottom-4 left-0 py-1 bg-white w-full flex items-center justify-start"
+          >
+            {isAddedToCart ? (
+              <Link href="/cart" className="flex gap-2 items-center">
+                <AddCart /> View Cart
+              </Link>
+            ) : (
+              <button
+                // onClick={() => handleAddProduct(product)}
+                className="flex gap-2 items-center"
+              >
+                <AddCart /> Add to Cart
+              </button>
+            )}
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
   );
 };

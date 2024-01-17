@@ -36,14 +36,14 @@ export const BackToTopButton = ({ className }: BackToTopButtonProps) => {
   }
 
   return (
-    <>
+    <div className="z-[80]">
       <AnimatePresence mode="wait" initial>
         {showBackToTopButton && (
           <motion.button
             type="button"
             aria-label="back to top button"
             className={cn(
-              'w-11 h-11 fixed bottom-10 right-10 bg-black rounded-full text-white flex items-center justify-center drop-shadow-lg z-[999999]',
+              'w-11 h-11 fixed bottom-10 right-10 bg-black rounded-full text-white flex items-center justify-center drop-shadow-lg',
               className
             )}
             onClick={handleClick}
@@ -67,6 +67,6 @@ export const BackToTopButton = ({ className }: BackToTopButtonProps) => {
           </motion.button>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };

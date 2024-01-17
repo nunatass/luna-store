@@ -79,12 +79,14 @@ export const ProductSliderItem = ({
   return (
     <motion.div
       {...animationsProps}
-      className="w-full h-96 text-center bg-white min-w-72 max-w-sm flex flex-col pb-8 relative overflow-hidden"
+      className="w-full h-96 text-center bg-white min-w-72 max-w-sm flex flex-col pb-8 relative overflow-hidden px-8"
     >
-      <div
-        className="w-full h-full bg-no-repeat bg-contain bg-white scale-125 z-0 bg-center"
-        style={{ backgroundImage: `url(${img})` }}
-      />
+      <Link className="w-full h-full" href={`/product-details/${_id}`}>
+        <div
+          className="w-full h-full bg-no-repeat bg-contain bg-white scale-125 z-0 bg-center"
+          style={{ backgroundImage: `url(${img})` }}
+        />
+      </Link>
       <motion.div
         variants={optionsAnimationVariants}
         transition={{ duration: 0.4, ease: 'easeInOut' }}

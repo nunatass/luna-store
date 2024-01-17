@@ -29,12 +29,12 @@ export const SidePanel = ({
   };
 
   return (
-    <>
+    <div className="z-[9999]">
       <AnimatePresence mode="wait" initial={false}>
         {isOpen && (
           <motion.div
             className={cn(
-              'scrollbar-hide scrollbar-hide fixed right-0  top-0 z-50 h-full min-h-screen w-full max-w-96 overflow-scroll bg-white shadow-sm',
+              'scrollbar-hide scrollbar-hide fixed right-0  top-0 z-[9999] h-full min-h-screen w-full max-w-96 overflow-scroll bg-white shadow-sm',
               className
             )}
             {...sidebarPanelAnimation}
@@ -45,6 +45,6 @@ export const SidePanel = ({
       </AnimatePresence>
 
       <Overlay isOpen={isOpen} setIsOpen={setIsOpen} />
-    </>
+    </div>
   );
 };

@@ -85,10 +85,10 @@ export const PopularProducts = () => {
     );
   }
   return (
-    <section className="py-28 my-14 w-full bg-gray-100 flex flex-col gap-16">
+    <section className="py-28 my-14 w-full bg-gray-100 flex flex-col gap-12">
       <div className="text-center flex flex-col gap-2">
         <span className="text-[#bd844c]">Shop by Category</span>
-        <h3 className="text-4xl sm:text-5xl font-medium">
+        <h3 className="text-3xl sm:text-5xl font-medium">
           Popular on the Luna store.
         </h3>
       </div>
