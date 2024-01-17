@@ -38,7 +38,7 @@ export function SliderNav({
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ ease: 'easeInOut', duration: 0.3 }}
+      transition={{ ease: 'easeInOut', duration: 0.6 }}
       className="hidden sm:block absolute bottom-40 left-10 sm:left-20 lg:left-60 xl:left-96 h-32 w-40 "
     >
       <Slider

@@ -23,7 +23,7 @@ const animateButton = {
 };
 
 export const BackToTopButton = ({ className }: BackToTopButtonProps) => {
-  const viewportHeight = window?.innerHeight;
+  const viewportHeight = window?.innerHeight ?? 1000;
   const [showBackToTopButton, setShowBackToTopButton] = useState(false);
   const { scrollY } = useScroll();
 
@@ -32,7 +32,7 @@ export const BackToTopButton = ({ className }: BackToTopButtonProps) => {
   });
 
   function handleClick() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window && window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
@@ -43,7 +43,7 @@ export const BackToTopButton = ({ className }: BackToTopButtonProps) => {
             type="button"
             aria-label="back to top button"
             className={cn(
-              'w-11 h-11 fixed bottom-10 right-10 bg-black rounded-full text-white flex items-center justify-center drop-shadow-lg',
+              'w-11 h-11 fixed bottom-10 right-10 bg-black rounded-full text-white flex items-center justify-center drop-shadow-lg z-[999999]',
               className
             )}
             onClick={handleClick}
