@@ -1,4 +1,4 @@
-export const Discount = () => {
+export const DiscountIcon = () => {
   return (
     <svg
       width="31"

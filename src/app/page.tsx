@@ -1,6 +1,5 @@
 import { JewelryBanner } from '@/components/layouts/banners/jewelry/jewelry-banner';
 import { ShopBanner } from '@/components/layouts/banners/shop/shop-banner';
-import { Footer } from '@/components/layouts/footer';
 import { Header } from '@/components/layouts/headers/header';
 import { FeatureArea } from '@/components/layouts/pages/home/feature-area';
 import { InstagramArea } from '@/components/layouts/pages/home/instagram-area';
@@ -10,7 +9,7 @@ import { ProductArea } from '@/components/layouts/pages/home/products/product-ar
 import { Wrapper } from '@/components/layouts/wrapper';
 import { SEO } from '@/components/seo';
 
-export default function Home() {
+export default function HomePage() {
   return (
     <Wrapper>
       <SEO pageTitle="Home" />
@@ -21,7 +20,6 @@ export default function Home() {
       <PopularProducts />
       <ProductArea />
       <InstagramArea />
-      <Footer />
     </Wrapper>
   );
 }

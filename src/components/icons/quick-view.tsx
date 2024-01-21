@@ -1,4 +1,4 @@
-export const QuickView = () => {
+export const QuickViewIcon = () => {
   return (
     <svg
       width="20"

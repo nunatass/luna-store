@@ -1,12 +1,7 @@
-// internal
-// import MobileCategory from '@/layout/headers/header-com/mobile-category';
-
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode } from 'react';
 import Overlay from './overlay';
-
-//import MobileMenus from './mobile-menus';
 
 type SidePanelProps = {
   isOpen: boolean;
@@ -34,7 +29,7 @@ export const SidePanel = ({
         {isOpen && (
           <motion.div
             className={cn(
-              'scrollbar-hide scrollbar-hide fixed right-0  top-0 z-[9999] h-full min-h-screen w-full max-w-96 overflow-scroll bg-white shadow-sm',
+              'scrollbar-hide scrollbar-hide fixed right-0  top-0 z-[9999] h-full min-h-screen w-full max-w-[400px] overflow-scroll bg-white shadow-sm',
               className
             )}
             {...sidebarPanelAnimation}

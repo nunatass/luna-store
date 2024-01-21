@@ -4,14 +4,18 @@ import { instagramAreaData } from '@/data/instagram-data';
 export const InstagramArea = () => {
   return (
     <section className="container my-20 md:my-28">
-      <div className="flex flex-col items-center mb-6 md:mb-12 gap-2">
-        <h3 className="font-medium text-3xl sm:text-5xl text-center">Trends</h3>
-        <p className="text-gray-600">
-          Discover stunning jewelry combinations on our Instagram. Elevate your
-          style with us.
-        </p>
+      <div className="mb-6 flex flex-col items-center gap-2 md:mb-12">
+        <h3 className="text-center text-3xl font-medium sm:text-5xl">Trends</h3>
+        <div>
+          <p className="text-center text-gray-600">
+            Discover stunning jewelry combinations on our Instagram.
+          </p>
+          <p className="text-center text-gray-600">
+            Elevate your style with us.
+          </p>
+        </div>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:flex gap-4 w-full">
+      <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 md:flex">
         {instagramAreaData.map((item) => (
           <InstagramImageCard key={item.id} link={item.link} image={item.img} />
         ))}

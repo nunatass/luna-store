@@ -1,4 +1,4 @@
-export const Location = () => {
+export const LocationIcon = () => {
   return (
     <svg
       width="17"

@@ -10,6 +10,7 @@ type MenuItemProps = {
   link: string;
   title: string;
   className?: string;
+  secondary?: boolean;
   children?: ReactNode;
 };
 
@@ -19,6 +20,7 @@ export function MenuItem({
   title,
   children,
   className,
+  secondary,
 }: MenuItemProps) {
   const { sticky } = useSticky();
   return (
@@ -28,7 +30,7 @@ export function MenuItem({
         className={cn(
           'flex items-center justify-center',
           'hover:text-white',
-          sticky && 'hover:text-[#be844c]'
+          (sticky || secondary) && 'hover:text-[#be844c]'
         )}
         aria-label={`${title}`}
       >

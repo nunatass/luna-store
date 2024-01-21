@@ -1,4 +1,4 @@
-export const Support = () => {
+export const SupportIcon = () => {
   return (
     <svg
       width="31"

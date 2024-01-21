@@ -1,4 +1,4 @@
-export const AddCart = () => {
+export const TrashIcon = () => {
   return (
     <svg
       width="16"

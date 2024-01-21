@@ -1,4 +1,4 @@
-export const Search = () => {
+export const SearchIcon = () => {
   return (
     <svg
       width="20"

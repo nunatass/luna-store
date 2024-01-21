@@ -1,4 +1,4 @@
-export const Wishlist = () => {
+export const WishlistIcon = () => {
   return (
     <svg
       width="20"

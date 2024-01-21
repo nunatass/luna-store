@@ -5,13 +5,19 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "plugins": ["prettier", "@typescript-eslint"],
+  "plugins": ["prettier", "@typescript-eslint", "check-file"],
   "parser": "@typescript-eslint/parser",
   "rules": {
     "prettier/prettier": [
       "warn",
       {
         "endOfLine": "auto"
+      }
+    ],
+    "check-file/filename-naming-convention": [
+      "error",
+      {
+        "**/*.*": "KEBAB_CASE"
       }
     ]
   },

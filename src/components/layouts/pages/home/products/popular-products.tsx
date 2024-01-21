@@ -74,9 +74,9 @@ export const PopularProducts = () => {
         onMouseLeave={carouselPlugin.current.reset}
         className="w-full"
       >
-        <CarouselContent className="w-full ml-1">
+        <CarouselContent className="ml-1 w-full">
           {product_items.map((item) => (
-            <CarouselItem key={item._id} className="basis-auto pr-1">
+            <CarouselItem key={item.id} className="basis-auto pr-1">
               <ProductSliderItem {...item} />
             </CarouselItem>
           ))}
@@ -85,10 +85,10 @@ export const PopularProducts = () => {
     );
   }
   return (
-    <section className="py-28 my-14 w-full bg-gray-100 flex flex-col gap-12">
-      <div className="text-center flex flex-col gap-2">
+    <section className="my-14 flex w-full flex-col gap-12 bg-gray-100 py-28">
+      <div className="flex flex-col gap-2 text-center">
         <span className="text-[#bd844c]">Shop by Category</span>
-        <h3 className="text-3xl sm:text-5xl font-medium">
+        <h3 className="text-3xl font-medium sm:text-5xl">
           Popular on the Luna store.
         </h3>
       </div>

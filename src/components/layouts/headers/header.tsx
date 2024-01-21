@@ -3,13 +3,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-//import { useDispatch, useSelector } from 'react-redux';
-// internal
 import logoLight from '@/assets/img/logo/logo-white.svg';
 import logoDark from '@/assets/img/logo/logo.svg';
-import { CartTwo, Menu, Search, Wishlist } from '@/components/icons';
+import {
+  CartTwoIcon,
+  MenuIcon,
+  SearchIcon,
+  WishlistIcon,
+} from '@/components/icons';
+import { useCart } from '@/hooks/use-cart';
 import { useSticky } from '@/hooks/use-sticky';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { SidePanel } from '../side-panel';
 import { Menus } from './components/menu';
@@ -17,41 +22,45 @@ import { SearchBar } from './components/search-bar';
 import { SideCart } from './components/side-cart';
 import { SideMenu } from './components/side-menu';
 
-// import SearchBar from './header-com/search-bar';
-// import OffCanvas from '@/components/common/off-canvas';
-// import CartMiniSidebar from '@/components/common/cart-mini-sidebar';
-// import useCartInfo from '@/hooks/use-cart-info';
-// import { openCartMini } from '@/redux/features/cartSlice';
+const quantityAnimationVariants = {
+  hide: { opacity: 0, scale: 0 },
+  show: { opacity: 1, scale: 1 },
+};
 
-export const Header = () => {
+type HeaderProps = {
+  secondary?: boolean;
+};
+
+export const Header = ({ secondary }: HeaderProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isSideCartOpen, setIsSideCartOpen] = useState(false);
   // const { wishlist } = useSelector((state) => state.wishlist);
-  // const { quantity } = useCartInfo();
+  const { getTotal } = useCart();
   const { sticky } = useSticky();
-  //const dispatch = useDispatch();
+  const { quantity } = getTotal();
 
   return (
     <div className="relative z-20">
-      <header className="absolute left-0 top-0 right-0">
+      <header className="absolute left-0 right-0 top-0">
         <div
           className={cn(
             'flex w-full items-center justify-between gap-20 border-b-[1px] border-[#b7a687] bg-transparent px-4 py-4 sm:px-6 md:px-10 lg:px-24',
             sticky &&
-              'fixed -top-24 left-0 z-30 translate-y-24 border-0 bg-white shadow-md transition-all duration-700 ease-in-out'
+              'fixed -top-24 left-0 z-30 translate-y-24 border-0 bg-white shadow-md transition-all duration-700 ease-in-out',
+            secondary && 'border-0 bg-white shadow-md'
           )}
         >
           <div>
             <Link href="/">
               <Image
-                className={cn('block', sticky && 'hidden')}
+                className={cn('block', (sticky || secondary) && 'hidden')}
                 src={logoLight}
                 alt="logo"
                 loading="eager"
               />
               <Image
-                className={cn('hidden', sticky && 'block')}
+                className={cn('hidden', (sticky || secondary) && 'block')}
                 src={logoDark}
                 alt="logo"
                 loading="eager"
@@ -62,15 +71,15 @@ export const Header = () => {
             <div
               className={cn(
                 'hidden w-full text-white/80 lg:block',
-                sticky && 'text-black'
+                (sticky || secondary) && 'text-black'
               )}
             >
-              <Menus />
+              <Menus secondary={secondary} />
             </div>
             <div
               className={cn(
-                'flex items-center justify-end gap-4 text-white',
-                sticky && 'text-black'
+                'flex h-full items-center justify-end gap-5 text-white',
+                (sticky || secondary) && 'text-black'
               )}
             >
               <div className="">
@@ -79,23 +88,45 @@ export const Header = () => {
                   type="button"
                   aria-label="search button"
                 >
-                  <Search />
+                  <SearchIcon />
                 </button>
               </div>
-              <div className="">
+              <div className="relative">
                 <Link href="/wishlist" aria-label="wishlist">
-                  <Wishlist aria-label="wishlist icon" />
-                  <span className="">{/* {wishlist.length} */}</span>
+                  <WishlistIcon aria-label="wishlist icon" />
+                  <motion.div
+                    variants={quantityAnimationVariants}
+                    transition={{ duration: 0.4, ease: 'easeInOut' }}
+                    initial="hide"
+                    // animate={quantity ? 'show' : 'hide'}
+                    className={cn(
+                      'absolute -right-[60%] -top-[80%] flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-black',
+                      (sticky || secondary) && 'bg-[#bd844c] text-white'
+                    )}
+                  >
+                    {/* {wishlist.length} */}0
+                  </motion.div>
                 </Link>
               </div>
-              <div className="">
+              <div className="relative">
                 <button
                   onClick={() => setIsSideCartOpen(true)}
                   type="button"
                   aria-label="cart button"
                 >
-                  <CartTwo aria-label="cart icon" />
-                  <span className="">{/* {quantity} */}</span>
+                  <CartTwoIcon aria-label="cart icon" />
+                  <motion.div
+                    variants={quantityAnimationVariants}
+                    transition={{ duration: 0.4, ease: 'easeInOut' }}
+                    initial="hide"
+                    animate={quantity ? 'show' : 'hide'}
+                    className={cn(
+                      'absolute -right-1/2 -top-1/2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-black',
+                      (sticky || secondary) && 'bg-[#bd844c] text-white'
+                    )}
+                  >
+                    {quantity}
+                  </motion.div>
                 </button>
               </div>
               <div className="block lg:hidden">
@@ -104,7 +135,7 @@ export const Header = () => {
                   type="button"
                   aria-label="menu button"
                 >
-                  <Menu aria-label="menu icon" />
+                  <MenuIcon aria-label="menu icon" />
                 </button>
               </div>
             </div>
@@ -118,7 +149,7 @@ export const Header = () => {
       />
 
       <SidePanel isOpen={isSideCartOpen} setIsOpen={setIsSideCartOpen}>
-        <SideCart />
+        <SideCart isOpen={isSideCartOpen} setIsOpen={setIsSideCartOpen} />
       </SidePanel>
 
       <SidePanel isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen}>

@@ -66,13 +66,13 @@ export const ProductArea = () => {
       product_items = products.data;
     }
     content = (
-      <div className="flex flex-col items-center lg:items-start w-full">
-        <span className="text-[#bd844c] text-lg">Product Collection</span>
-        <div className="flex flex-col items-center justify-center lg:items-end lg:justify-between lg:flex-row w-full gap-2 lg:gap-0">
-          <h3 className="font-medium text-3xl sm:text-5xl text-center">
+      <div className="flex w-full flex-col items-center lg:items-start">
+        <span className="text-lg text-[#bd844c]">Product Collection</span>
+        <div className="flex w-full flex-col items-center justify-center gap-2 lg:flex-row lg:items-end lg:justify-between lg:gap-0">
+          <h3 className="text-center text-3xl font-medium sm:text-5xl">
             Discover our Products
           </h3>
-          <div className="flex flex-col w-full max-w-sm lg:mr-10">
+          <div className="flex w-full max-w-sm flex-col lg:mr-10">
             <nav className="flex w-full" id="nav-tab" role="tablist">
               {tabs.map((tab, i) => (
                 <Button
@@ -80,7 +80,7 @@ export const ProductArea = () => {
                   key={i}
                   onClick={() => handleActiveTab(tab)}
                   className={cn(
-                    'hover:bg-white text-gray-400 rounded-none transition-all duration-300 ease-in-out',
+                    'rounded-none text-gray-400 transition-all duration-300 ease-in-out hover:bg-white',
                     activeTab === tab && 'text-black'
                   )}
                 >
@@ -91,10 +91,10 @@ export const ProductArea = () => {
           </div>
         </div>
 
-        <div className="w-full flex justify-center flex-wrap sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6 md:mt-12 justify-items-center lg:justify-items-start">
+        <div className="mt-6 flex w-full flex-wrap justify-center justify-items-center gap-4 sm:grid sm:grid-cols-2 md:mt-12 md:grid-cols-3 lg:grid-cols-4 lg:justify-items-start">
           <AnimatePresence>
             {product_items.map((product) => (
-              <motion.div key={product._id} {...productAnimationProps}>
+              <motion.div key={product.id} {...productAnimationProps}>
                 <ProductItem {...product} />
               </motion.div>
             ))}
@@ -105,7 +105,7 @@ export const ProductArea = () => {
   }
 
   return (
-    <section className="my-20 md:my-28 flex items-center justify-center w-full">
+    <section className="my-20 flex w-full items-center justify-center md:my-28">
       <div className="px-4 sm:container">{content}</div>
     </section>
   );

@@ -1,4 +1,4 @@
-export const Delivery = () => {
+export const DeliveryIcon = () => {
   return (
     <svg
       width="33"

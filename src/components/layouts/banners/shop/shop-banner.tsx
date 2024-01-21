@@ -4,13 +4,13 @@ import banner_bg_1 from '@/assets/img/banner/4/banner-1.jpg';
 import banner_bg_2 from '@/assets/img/banner/4/banner-2.jpg';
 import banner_bg_3 from '@/assets/img/banner/4/banner-3.jpg';
 import banner_bg_4 from '@/assets/img/banner/4/banner-4.jpg';
-import { ArrowRightLong } from '@/components/icons';
+import { ArrowRightLongIcon } from '@/components/icons';
 import { BannerItem } from './components/shop-banner-item';
 
 export const ShopBanner = () => {
   return (
     <section className="container">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-2 py-16">
+      <div className="grid grid-cols-1 gap-6 py-16 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-2">
         <div className="sm:col-span-2 md:row-start-1">
           <BannerItem
             className="md:h-full"
@@ -39,24 +39,24 @@ export const ShopBanner = () => {
             title="Gold Jewelry"
           />
         </div>
-        <div className="sm:col-span-2 md:col-span-2 md:row-start-1 md:row-span-2 py-14 px-14 flex justify-between w-full h-[470px] sm:h-[494px] md:h-[600px] relative overflow-hidden bg-black mt-6 md:mr-6 md:mt-0">
+        <div className="relative mt-6 flex h-[470px] w-full justify-between overflow-hidden bg-black px-14 py-14 sm:col-span-2 sm:h-[494px] md:col-span-2 md:row-span-2 md:row-start-1 md:mr-6 md:mt-0 md:h-[600px]">
           <div
-            className="w-full h-full absolute bg-no-repeat bg-center bg-cover top-0 left-0 z-0 transition-all duration-300 ease-in-out hover:scale-110"
+            className="absolute left-0 top-0 z-0 h-full w-full bg-cover bg-center bg-no-repeat transition-all duration-300 ease-in-out hover:scale-110"
             style={{ backgroundImage: `url(${banner_bg_4.src})` }}
           />
-          <div className="z-10 w-max flex flex-col justify-end text-white ">
+          <div className="z-10 flex w-max flex-col justify-end text-white ">
             <span className="text-base">Collection</span>
             <h3 className="text-4xl">
               <Link href="/shop">
                 Ring gold with <br /> diamonds
               </Link>
             </h3>
-            <div className="mt-8 text-white hover:text-black hover:bg-white hover:ring-white ring-2 ring-gray-200/40 transition-all duration-300 ease-in-out py-1.5 px-6 flex items-center justify-center w-max">
+            <div className="mt-8 flex w-max items-center justify-center px-6 py-1.5 text-white ring-2 ring-gray-200/40 transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:ring-white">
               <Link
                 href="/shop"
                 className="flex items-center justify-center gap-2"
               >
-                Shop Now <ArrowRightLong />
+                Shop Now <ArrowRightLongIcon />
               </Link>
             </div>
           </div>

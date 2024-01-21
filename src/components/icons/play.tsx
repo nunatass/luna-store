@@ -1,4 +1,4 @@
-export const Play = () => {
+export const PlayIcon = () => {
   return (
     <svg
       width="19"

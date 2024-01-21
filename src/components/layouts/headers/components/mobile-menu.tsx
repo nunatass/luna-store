@@ -46,7 +46,7 @@ export const MobileMenus = () => {
   //   content = (
   //     <div className="row">
   //       {product_items.slice(0, 4).map((item) => (
-  //         <div key={item._id} className="col-md-3">
+  //         <div key={item.id} className="col-md-3">
   //           <ProductItem product={item} />
   //         </div>
   //       ))}
@@ -75,13 +75,13 @@ export const MobileMenus = () => {
               <Accordion
                 type="single"
                 collapsible
-                className="w-full h-full px-4"
+                className="h-full w-full px-4"
               >
                 <AccordionItem value="item-1" className="border-0">
                   <AccordionTrigger className="font-normal hover:text-blue-500">
                     Home
                   </AccordionTrigger>
-                  <AccordionContent className="w-full grid grid-cols-2 gap-2">
+                  <AccordionContent className="grid w-full grid-cols-2 gap-2">
                     {instagramMenuData.map((item) => (
                       <InstagramImageCard
                         key={item.id}
@@ -96,7 +96,7 @@ export const MobileMenus = () => {
               <Accordion
                 type="single"
                 collapsible
-                className="w-full h-full px-4"
+                className="h-full w-full px-4"
               >
                 <AccordionItem
                   key={menu.title}
@@ -106,7 +106,7 @@ export const MobileMenus = () => {
                   <AccordionTrigger className="font-normal hover:text-blue-500">
                     {menu.title}
                   </AccordionTrigger>
-                  <AccordionContent className="font-normal flex flex-col gap-4 divide-y">
+                  <AccordionContent className="flex flex-col gap-4 divide-y font-normal">
                     {menu.sub_menus.map((subMenu) => (
                       <Link
                         key={subMenu.title}

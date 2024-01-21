@@ -1,4 +1,4 @@
-export const CartTwo = () => {
+export const CartTwoIcon = () => {
   return (
     <svg
       width="21"

@@ -11,7 +11,11 @@ import { menuData } from '@/data/menu-data';
 import Link from 'next/link';
 import { MenuItem } from './menu-item';
 
-export const Menus = () => {
+type MenusProps = {
+  secondary?: boolean;
+};
+
+export const Menus = ({ secondary }: MenusProps) => {
   // const { data: products, isError, isLoading } = useGetProductTypeQuery({
   //   type: 'electronics',
   //   query: 'new=true'
@@ -40,7 +44,7 @@ export const Menus = () => {
   //   content = (
   //     <div className="row">
   //       {product_items.slice(0, 4).map((item) => (
-  //         <div key={item._id} className="col-md-3">
+  //         <div key={item.id} className="col-md-3">
   //           <ProductItem product={item} />
   //         </div>
   //       ))}
@@ -61,6 +65,7 @@ export const Menus = () => {
               link={menu.link}
               title={menu.title}
               hasDropdown
+              secondary={secondary}
               className="group/menu-home"
             >
               <div className="invisible absolute top-14 z-10 h-max w-[80%] bg-white opacity-0  shadow-sm transition-all delay-200 duration-300 ease-in-out group-hover/menu-home:visible group-hover/menu-home:-translate-y-3 group-hover/menu-home:opacity-100 ">
@@ -81,6 +86,7 @@ export const Menus = () => {
               link={menu.link}
               title={menu.title}
               hasDropdown
+              secondary={secondary}
               className="group/menu-products"
             >
               <ul className="transform-all invisible absolute left-0 top-14 z-10 flex  h-max justify-between bg-white px-8  py-5 font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/menu-products:visible group-hover/menu-products:-translate-y-3 group-hover/menu-products:opacity-100 xl:w-[80%]">
@@ -112,6 +118,7 @@ export const Menus = () => {
               link={menu.link}
               title={menu.title}
               hasDropdown
+              secondary={secondary}
               className="group/sub_menu"
             >
               <ul className="transform-all invisible absolute top-14 z-10 flex h-max flex-col justify-between  gap-2.5 bg-white px-8 py-6 text-sm font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/sub_menu:visible group-hover/sub_menu:-translate-y-3 group-hover/sub_menu:opacity-100">
@@ -125,7 +132,12 @@ export const Menus = () => {
               </ul>
             </MenuItem>
           ) : (
-            <MenuItem key={menu.title} link={menu.link} title={menu.title} />
+            <MenuItem
+              key={menu.title}
+              link={menu.link}
+              title={menu.title}
+              secondary={secondary}
+            />
           )
         )}
       </ul>

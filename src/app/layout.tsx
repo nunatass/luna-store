@@ -1,6 +1,9 @@
+import { Footer } from '@/components/layouts/footer';
 import { BackToTopButton } from '@/components/ui/back-to-top-button';
 import { Metadata } from 'next';
 import { Charm, Jost, Oregano } from 'next/font/google';
+import { Toaster } from 'sonner';
+
 import './globals.css';
 
 const charm = Charm({
@@ -37,8 +40,10 @@ export default function RootLayout({
         className={`${charm.variable} ${jost.variable} ${oregano.variable} font-jost`}
       >
         <div className="relative">
+          <Toaster position="top-right" expand={false} />
           {children}
           <BackToTopButton />
+          <Footer />
         </div>
       </body>
     </html>

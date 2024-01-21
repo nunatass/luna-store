@@ -7,7 +7,7 @@ type OverlayProps = {
 
 const overlayAnimation = {
   initial: { opacity: 0 },
-  animate: { opacity: '50%' },
+  animate: { opacity: '70%' },
   exit: { opacity: 0 },
   transition: { duration: 0.3, ease: 'easeInOut' },
 };
@@ -19,7 +19,7 @@ export default function Overlay({ isOpen, setIsOpen }: OverlayProps) {
         <motion.div
           onClick={() => setIsOpen(false)}
           {...overlayAnimation}
-          className={`h-screen w-full bg-black fixed  top-0 right-0 opacity-50 z-[999] cursor-close`}
+          className={`fixed right-0 top-0 z-[999]  h-screen w-full cursor-close bg-black opacity-70`}
         />
       )}
     </AnimatePresence>

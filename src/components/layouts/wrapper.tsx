@@ -1,4 +1,5 @@
-//import { useDispatch, useSelector } from "react-redux";
+import { cn } from '@/lib/utils';
+
 //import { ToastContainer } from "react-toastify";
 
 // internal
@@ -14,8 +15,9 @@
 // import Loader from "@/components/loader/loader";
 type WrapperProps = {
   children: React.ReactNode;
+  className?: string;
 };
-export const Wrapper = ({ children }: WrapperProps) => {
+export const Wrapper = ({ children, className }: WrapperProps) => {
   // const { productItem } = useSelector((state) => state.productModal);
   // const dispatch = useDispatch();
   // const authChecked = useAuthCheck();
@@ -42,5 +44,9 @@ export const Wrapper = ({ children }: WrapperProps) => {
   //     {/* product modal end */}
   //   </div>
   // );
-  return <div className="h-max min-h-screen overflow-x-hidden">{children}</div>;
+  return (
+    <main className={cn('h-max min-h-screen overflow-x-hidden', className)}>
+      {children}
+    </main>
+  );
 };

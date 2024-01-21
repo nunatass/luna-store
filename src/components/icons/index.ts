@@ -1,4 +1,3 @@
-export * from './add-cart';
 export * from './arrow-next-two';
 export * from './arrow-prev-two';
 export * from './arrow-right-long';
@@ -8,6 +7,7 @@ export * from './close-two';
 export * from './delivery';
 export * from './discount';
 export * from './email';
+export * from './home';
 export * from './location';
 export * from './menu';
 export * from './pause';
@@ -16,4 +16,5 @@ export * from './quick-view';
 export * from './refund';
 export * from './search';
 export * from './support';
+export * from './trash';
 export * from './wishlist';

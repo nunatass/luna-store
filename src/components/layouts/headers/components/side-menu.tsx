@@ -1,4 +1,4 @@
-import { CloseTwo } from '@/components/icons/close-two';
+import { CloseTwoIcon } from '@/components/icons/close-two';
 import {
   Accordion,
   AccordionContent,
@@ -29,7 +29,7 @@ type SideMenuProps = {
 
 export function SideMenu({ setIsOpen }: SideMenuProps) {
   return (
-    <div className="w-full h-full flex flex-col p-6 gap-8 justify-between">
+    <div className="flex h-full w-full flex-col justify-between gap-8 p-6">
       <div className="flex items-center justify-between">
         <Link href="/" aria-label="home">
           <Image src={logo} alt="logo" />
@@ -38,15 +38,17 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
         <button
           aria-label="close button"
           onClick={() => setIsOpen(false)}
-          className="flex items-center justify-center h-8 w-8 bg-gray-200 hover:bg-blue-500 hover:text-white transition-all duration-500 ease-in-out"
+          className="z-50 flex h-8 w-8 items-center justify-center bg-gray-200"
         >
-          <CloseTwo aria-label="close icon" />
+          <div className="transition-all duration-300 ease-in-out hover:rotate-90">
+            <CloseTwoIcon aria-label="close icon" />
+          </div>
         </button>
       </div>
-      <div className="h-full flex flex-col">
+      <div className="flex h-full flex-col">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
-            <AccordionTrigger className="flex items-center justify-between w-full px-4 py-3 bg-blue-500 text-white hover:bg-blue-500/90 transition-all duration-500 ease-in-out hover:no-underline font-normal">
+            <AccordionTrigger className="flex w-full items-center justify-between bg-blue-500 px-4 py-3 font-normal text-white transition-all duration-500 ease-in-out hover:bg-blue-500/90 hover:no-underline">
               <MenuIcon aria-label="menu icon" />
               All Categories
             </AccordionTrigger>
@@ -59,10 +61,10 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
         <div className="tp-main-menu-mobile fix d-lg-none mb-40 h-full ">
           <MobileMenus />
         </div>
-        <div className="flex py-4 border-t-[1.5px] items-center justify-between text-slate-600 font-medium text-sm w-full self-end">
+        <div className="flex w-full items-center justify-between self-end border-t-[1.5px] py-4 text-sm font-medium text-slate-600">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="flex gap-2 items-center">
+              <div className="flex items-center gap-2">
                 Currency: USD
                 <ChevronDown className="h-4 w-4" aria-label="chevron icon" />
               </div>
@@ -81,7 +83,7 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="flex gap-2 items-center">
+              <div className="flex items-center gap-2">
                 <Image src={language_img} alt="language-flag" />
                 English
                 <ChevronDown className="h-4 w-4" aria-label="chevron icon" />

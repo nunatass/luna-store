@@ -1,4 +1,4 @@
-export const Refund = () => {
+export const RefundIcon = () => {
   return (
     <svg
       width="21"
