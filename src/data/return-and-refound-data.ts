@@ -2,7 +2,7 @@ export const returnAndRefundData = [
   {
     title: '',
     content: [
-      " We hope you love your new Luna Jewelry! However, if you're not completely happy with it or you simply changed your mind, we are more than happy to exchange it or give you a refund.",
+      "We hope you love your new Luna Jewelry! However, if you're not completely happy with it or you simply changed your mind, we are more than happy to exchange it or give you a refund.",
 
       'We truly want to provide the best experience to our customers so our number one priority is to make sure you are happy and completely satisfied with your purchase and shopping experience.',
     ],
