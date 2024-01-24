@@ -74,7 +74,7 @@ export const ProductSliderItem = ({
       {...animationsProps}
       className="relative flex h-96 w-full min-w-72 max-w-sm flex-col overflow-hidden bg-white px-8 pb-8 text-center"
     >
-      <Link className="h-full w-full" href={`/product-details/${id}`}>
+      <Link className="h-full w-full" href={`/products/${id}`}>
         <div
           className="z-0 h-full w-full scale-125 bg-white bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${img})` }}
@@ -179,7 +179,7 @@ export const ProductSliderItem = ({
 
       <div className="z-10 flex flex-col gap-1 font-medium">
         <h3 className="text-xl transition-all  duration-300 ease-in-out hover:text-[#be844c]">
-          <Link href={`/product-details/${id}`}>{title}</Link>
+          <Link href={`/products/${id}`}>{title}</Link>
         </h3>
         <div className="tp-category-price-wrapper-4 ">
           <span className="font-base transition-all duration-300 ease-in-out hover:text-[#be844c]">

@@ -40,7 +40,11 @@ export default function RootLayout({
         className={`${charm.variable} ${jost.variable} ${oregano.variable} font-jost`}
       >
         <div className="relative">
-          <Toaster position="top-right" expand={false} />
+          <Toaster
+            position="top-right"
+            expand={false}
+            toastOptions={{ duration: 1500 }}
+          />
           {children}
           <BackToTopButton />
           <Footer />

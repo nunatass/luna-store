@@ -78,7 +78,7 @@ export const ProductItem = ({
       {...animationsProps}
       className="relative flex h-max w-40 max-w-80 flex-col bg-[#f6f6f6] text-center sm:w-full"
     >
-      <Link href={`/product-details/${id}`}>
+      <Link href={`/products/${id}`}>
         <Image
           src={img}
           alt="product img"
@@ -191,7 +191,7 @@ export const ProductItem = ({
 
       <div className="z-10 flex flex-col gap-1 bg-white py-4 text-left font-medium">
         <h3 className="text-xs transition-all duration-300 ease-in-out sm:text-xl">
-          <Link href={`/product-details/${id}`}>{title}</Link>
+          <Link href={`/products/${id}`}>{title}</Link>
         </h3>
 
         <div className="text-sm font-normal">

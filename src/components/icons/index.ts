@@ -1,6 +1,7 @@
 export * from './arrow-next-two';
 export * from './arrow-prev-two';
 export * from './arrow-right-long';
+export * from './ask-a-question';
 export * from './cart';
 export * from './cart-two';
 export * from './close-two';

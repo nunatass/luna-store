@@ -1,5 +1,5 @@
 import { instagramMenuData } from '@/data/instagram-data';
-import { mobileMenuData } from '@/data/menu-data';
+import { MobileMenu, mobileMenuData } from '@/data/menu-data';
 
 import Link from 'next/link';
 // import ProductItem from "../products/electronics/product-item";
@@ -66,70 +66,69 @@ export const MobileMenus = () => {
   //     setIsActiveMenu(title)
   //   }
   // }
-  return (
-    <>
-      <nav className="tp-main-menu-content">
-        {mobileMenuData.map((menu) => (
-          <ul key={menu.id}>
-            {menu.homes ? (
-              <Accordion
-                type="single"
-                collapsible
-                className="h-full w-full px-4"
-              >
-                <AccordionItem value="item-1" className="border-0">
-                  <AccordionTrigger className="font-normal hover:text-blue-500">
-                    Home
-                  </AccordionTrigger>
-                  <AccordionContent className="grid w-full grid-cols-2 gap-2">
-                    {instagramMenuData.map((item) => (
-                      <InstagramImageCard
-                        key={item.id}
-                        link={item.link}
-                        image={item.img}
-                      />
-                    ))}
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            ) : menu.sub_menu ? (
-              <Accordion
-                type="single"
-                collapsible
-                className="h-full w-full px-4"
-              >
-                <AccordionItem
-                  key={menu.title}
-                  value={menu.title}
-                  className="border-0"
+
+  const renderMenu = (menu: MobileMenu) => {
+    if (menu?.homes) {
+      return (
+        <Accordion type="single" collapsible className="h-full w-full px-4">
+          <AccordionItem value="item-1" className="border-0">
+            <AccordionTrigger className="font-normal hover:text-blue-500">
+              Home
+            </AccordionTrigger>
+            <AccordionContent className="grid w-full grid-cols-2 gap-2">
+              {instagramMenuData.map((item) => (
+                <InstagramImageCard
+                  key={item.id}
+                  link={item.link}
+                  image={item.img}
+                />
+              ))}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      );
+    } else if (menu?.sub_menu) {
+      return (
+        <Accordion type="single" collapsible className="h-full w-full px-4">
+          <AccordionItem
+            key={menu.title}
+            value={menu.title}
+            className="border-0"
+          >
+            <AccordionTrigger className="font-normal hover:text-blue-500">
+              {menu.title}
+            </AccordionTrigger>
+            <AccordionContent className="flex flex-col gap-4 divide-y font-normal">
+              {menu?.sub_menus?.map((subMenu) => (
+                <Link
+                  key={subMenu.title}
+                  href={subMenu.link}
+                  className="pt-4 hover:text-blue-500"
+                  aria-label="menu link"
                 >
-                  <AccordionTrigger className="font-normal hover:text-blue-500">
-                    {menu.title}
-                  </AccordionTrigger>
-                  <AccordionContent className="flex flex-col gap-4 divide-y font-normal">
-                    {menu.sub_menus.map((subMenu) => (
-                      <Link
-                        key={subMenu.title}
-                        href={subMenu.link}
-                        className="pt-4 hover:text-blue-500"
-                        aria-label="menu link"
-                      >
-                        {subMenu.title}
-                      </Link>
-                    ))}
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            ) : (
-              <li key={menu.id} className="px-4 pt-4 hover:text-blue-500">
-                <Link href={menu.link} aria-label="menu link">
-                  {menu.title}
+                  {subMenu.title}
                 </Link>
-              </li>
-            )}
-          </ul>
-        ))}
-      </nav>
-    </>
+              ))}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      );
+    } else {
+      return (
+        <li key={menu?.id} className="px-4 pt-4 hover:text-blue-500">
+          <Link href={menu?.link} aria-label="menu link">
+            {menu?.title}
+          </Link>
+        </li>
+      );
+    }
+  };
+
+  return (
+    <nav className="tp-main-menu-content">
+      {mobileMenuData.map((menu) => (
+        <ul key={menu?.id}>{renderMenu(menu)}</ul>
+      ))}
+    </nav>
   );
 };

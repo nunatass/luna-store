@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import pay from '@/assets/img/footer/payments-icons.svg';
+import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
 import logo from '@/assets/img/logo/logo.svg';
 import { EmailIcon, LocationIcon } from '@/components/icons';
+import { footerData } from '@/data/footer-data';
 import { socialData } from '@/data/social-data';
 
 export const Footer = () => {
@@ -49,83 +50,35 @@ export const Footer = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <h4 className="text-xl font-medium">My Account</h4>
-            <ul className="ml-4	flex list-disc flex-col gap-4 text-sm text-gray-600">
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Track Orders</a>
-              </li>
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Shipping</a>
-              </li>
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Wishlist</a>
-              </li>
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">My Account</a>
-              </li>
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Order History</a>
-              </li>
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Returns</a>
-              </li>
-            </ul>
-          </div>
+          {footerData.map((data) => (
+            <div key={data.title} className="flex flex-col gap-2">
+              <h4 className="text-xl font-medium">{data.title}</h4>
+              <ul className="ml-4	flex list-disc flex-col gap-4 text-sm text-gray-600">
+                {data.menu.map((item) => (
+                  <li
+                    key={item.label}
+                    className="transition-all duration-300 ease-in-out hover:text-black"
+                  >
+                    <Link href={item.link}>{item.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
-          <div className="flex flex-col gap-2">
-            <h4 className="text-xl font-medium">Information</h4>
-            <ul className="ml-4	flex list-disc flex-col gap-4 text-sm text-gray-600">
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Our Story</a>
-              </li>
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Careers</a>
-              </li>
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Privacy Policy</a>
-              </li>
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Terms & Conditions</a>
-              </li>
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Latest News</a>
-              </li>
-              <li className="transition-all duration-300 ease-in-out hover:text-black">
-                <a href="#">Contact Us</a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col gap-4">
+          <div className="flex w-full flex-col gap-4 lg:w-[33%]">
             <h4 className="text-xl font-medium">Subscribe.</h4>
-
             <div className="flex flex-col gap-2">
               <p className="text-sm text-gray-600">
-                Our conversation is just getting started
+                Sign up for 10% OFF your first order. Plus, get exclusive early
+                access to amazing sales, special discounts and the chance to win
+                free jewelry!
               </p>
-
-              <form action="#">
-                <div className="flex">
-                  <input
-                    type="email"
-                    placeholder="Enter Your Email"
-                    className="px-2.5 py-4 outline-none	lg:min-w-72"
-                  />
-                  <button
-                    type="submit"
-                    aria-label="button subscribe"
-                    className="bg-black px-2 py-4 text-white transition-all duration-300 ease-in-out hover:bg-[#be844c]"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </form>
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               <h4 className="font-base font-medium">Follow Us On</h4>
-              <div className="flex gap-2 p-2">
+              <div className="flex gap-2">
                 {socialData.map(({ link, id, icon: Icon }) => (
                   <a href={link} key={id} target="_blank">
                     <div className="bg-white p-2 transition-all duration-300 ease-in-out hover:bg-black hover:text-white">
@@ -143,7 +96,7 @@ export const Footer = () => {
             <div className="font-md text-center text-gray-700 lg:text-left">
               <p>© {new Date().getFullYear()} Luna. All Rights Reserved.</p>
             </div>
-            <Image src={pay} alt="pay" className="w-96" />
+            <Image src={paymentOptionImg} alt="pay" className="w-96" />
           </div>
         </div>
       </div>

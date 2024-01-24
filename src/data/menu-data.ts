@@ -2,6 +2,26 @@ import home_1 from '@/assets/img/menu/menu-home-1.jpg';
 import home_2 from '@/assets/img/menu/menu-home-2.jpg';
 import home_3 from '@/assets/img/menu/menu-home-3.jpg';
 import home_4 from '@/assets/img/menu/menu-home-4.jpg';
+import { StaticImageData } from 'next/image';
+
+type HomePage = {
+  img: StaticImageData;
+  title: string;
+  link: string;
+};
+
+type SubMenu = { title: string; link: string };
+
+export type MobileMenu = {
+  id: number;
+  homes?: boolean;
+  title: string;
+  link: string;
+  home_pages?: HomePage[];
+  sub_menu?: boolean;
+  sub_menus?: SubMenu[];
+  single_link?: boolean;
+};
 
 export const menuData = [
   {
@@ -44,12 +64,12 @@ export const menuData = [
         mega_menus: [
           { title: 'Only Categories', link: '/shop-category' },
           { title: 'Shop Grid with Sideber', link: '/shop' },
-          { title: 'Product Details', link: '/product-details' },
+          { title: 'Product Details', link: '/products' },
         ],
       },
       {
         title: 'Products',
-        link: '/product-details',
+        link: '/products',
         mega_menus: [
           { title: 'Product Simple', link: '/product-details' },
           { title: 'With Video', link: '/product-details-video' },
@@ -119,7 +139,7 @@ export const menuData = [
 ];
 
 // mobile_menu
-export const mobileMenuData = [
+export const mobileMenuData: MobileMenu[] = [
   {
     id: 1,
     homes: true,
@@ -158,7 +178,7 @@ export const mobileMenuData = [
       { title: 'Right Sidebar', link: '/shop-right-sidebar' },
       { title: 'Hidden Sidebar', link: '/shop-hidden-sidebar' },
       { title: 'Only Categories', link: '/shop-category' },
-      { title: 'Product Simple', link: '/product-details' },
+      { title: 'Product Simple', link: '/products' },
       { title: 'With Video', link: '/product-details-video' },
       { title: 'With Countdown Timer', link: '/product-details-countdown' },
       { title: 'Variations Swatches', link: '/product-details-swatches' },

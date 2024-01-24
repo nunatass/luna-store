@@ -1,18 +1,21 @@
 import { Header } from '@/components/layouts/headers/header';
-import { CartArea } from '@/components/layouts/pages/cart/cart-area';
+import { FAQsArea } from '@/components/layouts/pages/faqs/faqs-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 import { SEO } from '@/components/seo';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
 
-export default function CartPage() {
+export default function FAQsPage() {
   return (
     <Wrapper>
-      <SEO pageTitle="Shipping Cart" />
+      <SEO pageTitle="FAQs US" />
       <Header secondary />
       <div className="mt-32">
-        <Breadcrumb title="Shopping Cart" label="Shopping Cart" />
+        <Breadcrumb
+          title="Frequently Asked Questions"
+          label="Frequently Asked Questions"
+        />
       </div>
-      <CartArea />
+      <FAQsArea />
     </Wrapper>
   );
 }

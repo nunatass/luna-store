@@ -1,6 +1,7 @@
 'use client';
 // import RenderCartProgress from './render-cart-progress';
 import emptyCartImg from '@/assets/img/product/side-cart/empty-cart.png';
+import { CartProduct } from '@/common/types';
 import { CloseTwoIcon, TrashIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/use-cart';
@@ -32,6 +33,10 @@ type SideMenuProps = {
   setIsOpen: (isOpen: boolean) => void;
 };
 
+const renderEmptyDiv = () => (
+  <motion.div {...itemProductAnimationProps} key="empty-div" />
+);
+
 export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const { products, getTotal, removeProduct } = useCart();
 
@@ -44,6 +49,57 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const handleCloseSideCart = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);
+
+  const renderProductItem = (product: CartProduct) => (
+    <motion.div
+      {...itemProductAnimationProps}
+      key={product.id}
+      className="flex w-full items-start gap-2 py-4"
+    >
+      <div className="border-[1px] border-gray-200">
+        <Link href={`/products/${product.id}`} aria-label="product link">
+          <Image
+            src={product.img}
+            width={70}
+            height={60}
+            alt="product img"
+            className="h-20 w-24"
+          />
+        </Link>
+      </div>
+      <div className="w-full">
+        <h5 className="text-md font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
+          <Link href={`/products/${product.id}`}>{product.title}</Link>
+        </h5>
+        <div className="w-full">
+          {product.discount > 0 ? (
+            <span>
+              $
+              {(
+                Number(product.price) -
+                (Number(product.price) * Number(product.discount)) / 100
+              ).toFixed(2)}
+            </span>
+          ) : (
+            <span className="text-sm font-semibold text-blue-500">
+              ${product.price.toFixed(2)}
+            </span>
+          )}
+          <span className="text-sm font-medium text-gray-600">
+            x{product.orderQuantity}
+          </span>
+        </div>
+      </div>
+      <Button
+        onClick={() => handleRemoveProduct(product.id)}
+        variant="link"
+        size="icon"
+        className="py-0 text-gray-600 hover:text-red-400"
+      >
+        <TrashIcon />
+      </Button>
+    </motion.div>
+  );
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-between p-8">
@@ -70,71 +126,11 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
           {products.length > 0 && (
             <div className="flex w-full flex-col divide-y-[1px] pb-72 pt-16 sm:pb-56">
               {products.map((product, index) => (
-                <AnimatePresence key={index} initial>
-                  {index === products.length ? (
-                    <motion.div
-                      {...itemProductAnimationProps}
-                      key="empty-div"
-                    />
-                  ) : (
-                    <motion.div
-                      {...itemProductAnimationProps}
-                      key={product.id}
-                      className="flex w-full items-start gap-2 py-4"
-                    >
-                      <div className="border-[1px] border-gray-200">
-                        <Link
-                          href={`/product-details/${product.id}`}
-                          aria-label="product link"
-                        >
-                          <Image
-                            src={product.img}
-                            width={70}
-                            height={60}
-                            alt="product img"
-                            className="h-20 w-24"
-                          />
-                        </Link>
-                      </div>
-                      <div className="w-full">
-                        <h5 className="text-md font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
-                          <Link href={`/product-details/${product.id}`}>
-                            {product.title}
-                          </Link>
-                        </h5>
-                        <div className="w-full">
-                          {product.discount > 0 ? (
-                            <span className="">
-                              $
-                              {(
-                                Number(product.price) -
-                                (Number(product.price) *
-                                  Number(product.discount)) /
-                                  100
-                              ).toFixed(2)}
-                            </span>
-                          ) : (
-                            <span className="text-sm font-semibold text-blue-500">
-                              ${product.price.toFixed(2)}
-                            </span>
-                          )}
-                          <span className="text-sm font-medium text-gray-600">
-                            {' '}
-                            x{product.orderQuantity}
-                          </span>
-                        </div>
-                      </div>
-                      <Button
-                        onClick={() => handleRemoveProduct(product.id)}
-                        variant="link"
-                        size="icon"
-                        className="py-0 text-gray-600 hover:text-red-400"
-                      >
-                        <TrashIcon />
-                      </Button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <div key={product.id}>
+                  {index === products.length
+                    ? renderEmptyDiv()
+                    : renderProductItem(product)}
+                </div>
               ))}
             </div>
           )}

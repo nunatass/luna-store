@@ -11,7 +11,7 @@ import { SEO } from '@/components/seo';
 
 export default function HomePage() {
   return (
-    <Wrapper>
+    <Wrapper className="bg-white">
       <SEO pageTitle="Home" />
       <Header />
       <JewelryBanner />

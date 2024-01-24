@@ -8,9 +8,10 @@ import { HomeIcon } from '../icons';
 
 type BreadcrumbProps = {
   title?: string;
+  label?: string;
 };
 
-export function Breadcrumb({ title }: BreadcrumbProps) {
+export function Breadcrumb({ title, label }: BreadcrumbProps) {
   const pathname = usePathname();
 
   const pathSegments = pathname.split('/').filter((segment) => segment);
@@ -24,12 +25,15 @@ export function Breadcrumb({ title }: BreadcrumbProps) {
   });
 
   return (
-    <nav className="container flex flex-col gap-4" aria-label="Breadcrumb">
+    <nav
+      className="container flex flex-col gap-4 sm:flex"
+      aria-label="Breadcrumb"
+    >
       <h3 className="text-3xl font-medium sm:text-5xl">{title}</h3>
-      <ol role="list" className="flex items-center space-x-4">
+      <ol role="list" className="hidden items-center space-x-4 sm:flex">
         <li>
           <div>
-            <a href="/" className={cn('text-gray-400 hover:text-gray-500')}>
+            <a href="/" className={cn('text-gray-500 hover:text-gray-700')}>
               <HomeIcon aria-hidden="true" />
               <span className="sr-only">Home</span>
             </a>
@@ -51,7 +55,9 @@ export function Breadcrumb({ title }: BreadcrumbProps) {
                 )}
                 aria-current={pathname === item.pathLink ? 'page' : undefined}
               >
-                {capitalize(item.pathName)}
+                {pathname === item.pathLink
+                  ? label || capitalize(item.pathName)
+                  : capitalize(item.pathName)}
               </Link>
             </div>
           </li>

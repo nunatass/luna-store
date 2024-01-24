@@ -1,12 +1,12 @@
 'use client';
 
-import type { Product } from '@/common/types';
+import type { CartProduct } from '@/common/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { CartProductCell } from './cart-product-cell';
 import { CartProductQuantityCell } from './cart-product-quantity-cell';
 import { CartRemoveProductCell } from './cart-remove-product-cell';
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<CartProduct>[] = [
   {
     header: 'Product',
     cell: ({ row }) => <CartProductCell {...row.original} />,

@@ -98,7 +98,6 @@ export const Header = ({ secondary }: HeaderProps) => {
                     variants={quantityAnimationVariants}
                     transition={{ duration: 0.4, ease: 'easeInOut' }}
                     initial="hide"
-                    // animate={quantity ? 'show' : 'hide'}
                     className={cn(
                       'absolute -right-[60%] -top-[80%] flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-black',
                       (sticky || secondary) && 'bg-[#bd844c] text-white'

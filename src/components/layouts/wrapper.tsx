@@ -45,7 +45,12 @@ export const Wrapper = ({ children, className }: WrapperProps) => {
   //   </div>
   // );
   return (
-    <main className={cn('h-max min-h-screen overflow-x-hidden', className)}>
+    <main
+      className={cn(
+        'h-max min-h-screen overflow-x-hidden bg-gray-50',
+        className
+      )}
+    >
       {children}
     </main>
   );
