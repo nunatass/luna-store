@@ -3,6 +3,7 @@ import { BackToTopButton } from '@/components/ui/back-to-top-button';
 import { Metadata } from 'next';
 import { Charm, Jost, Oregano } from 'next/font/google';
 import { Toaster } from 'sonner';
+import { Modal } from '@/components/layouts/modal';
 
 import './globals.css';
 
@@ -45,6 +46,7 @@ export default function RootLayout({
             expand={false}
             toastOptions={{ duration: 1500 }}
           />
+          <Modal />
           {children}
           <BackToTopButton />
           <Footer />

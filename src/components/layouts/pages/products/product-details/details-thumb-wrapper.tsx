@@ -1,6 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
 // import PopupVideo from "../common/popup-video";
@@ -10,12 +11,24 @@ type DetailsThumbWrapperProps = {
   imageURLs: ImageItem[];
   imgWidth?: number;
   imgHeight?: number;
+  modal?: boolean;
+};
+
+const imageTransitionAnimation = {
+  initial: { opacity: 0, scale: 0.5 },
+  animate: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.5 },
+  transition: {
+    duration: 0.4,
+    ease: 'easeInOut',
+  },
 };
 
 export const DetailsThumbWrapper = ({
   imageURLs,
   imgWidth = 416,
   imgHeight = 480,
+  modal,
   // videoId = false,
   // status,
 }: DetailsThumbWrapperProps) => {
@@ -32,8 +45,13 @@ export const DetailsThumbWrapper = ({
 
   return (
     <>
-      <div className="flex h-max w-full flex-col-reverse justify-center gap-4 md:justify-start lg:flex-row">
-        <nav className="flex gap-2 lg:flex-col">
+      <div
+        className={cn(
+          'flex h-max w-full flex-col-reverse justify-center gap-4 md:justify-start lg:flex-row',
+          modal && 'flex flex-row'
+        )}
+      >
+        <nav className={cn('flex gap-2 lg:flex-col', modal && 'flex flex-col')}>
           {imageURLs?.map((item) => (
             <Button
               variant="ghost"
@@ -54,20 +72,27 @@ export const DetailsThumbWrapper = ({
             </Button>
           ))}
         </nav>
-
-        <div className="w-full bg-gray-200 sm:h-[500px] sm:w-[85%] md:w-[50vw] lg:h-[600px] lg:w-[500px] xl:w-[580px]">
-          <Image
-            src={activeImg.img}
-            alt="product img"
-            width={imgWidth}
-            height={imgHeight}
-          />
-          {/* <div className="tp-product-badge">
+        <div
+          className={cn(
+            'flex items-center justify-center bg-gray-100',
+            !modal &&
+              'w-full sm:h-[500px] sm:w-[85%] md:w-[50vw] lg:h-[600px] lg:w-[500px] xl:w-[580px]',
+            modal && 'h-[500px] w-full'
+          )}
+        >
+          <motion.div key={activeImg.id} {...imageTransitionAnimation}>
+            <Image
+              src={activeImg.img}
+              alt="product img"
+              width={imgWidth}
+              height={imgHeight}
+            />
+            {/* <div className="tp-product-badge">
             {status === 'out-of-stock' && (
               <span className="product-hot">out-stock</span>
             )}
           </div> */}
-          {/* {videoId && (
+            {/* {videoId && (
             <div
                onClick={() => setIsVideoOpen(true)}
               className="tp-product-details-thumb-video"
@@ -77,6 +102,7 @@ export const DetailsThumbWrapper = ({
               </a>
             </div>
           )} */}
+          </motion.div>
         </div>
       </div>
       {/* modal popup start */}

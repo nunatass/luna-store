@@ -10,6 +10,7 @@ import { ProductQuantity } from './product-quantity';
 import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
 import { Product } from '@/common/types';
 import { useCart } from '@/hooks/use-cart';
+import { useWishlist } from '@/hooks/use-whishlist';
 import { CheckCircle } from 'lucide-react';
 
 type DetailsWrapperProps = {
@@ -17,7 +18,9 @@ type DetailsWrapperProps = {
 };
 
 export const DetailsWrapper = ({ productItem }: DetailsWrapperProps) => {
-  const { addProduct } = useCart();
+  const { addProduct: addCartProduct } = useCart();
+  const { addProduct: addWishlistProduct } = useWishlist();
+
   const { title, category, description, discount, price, reviews } =
     productItem;
   const [ratingVal] = useState(0);
@@ -47,8 +50,8 @@ export const DetailsWrapper = ({ productItem }: DetailsWrapperProps) => {
   }, [price, discount]);
 
   const handleAddProduct = useCallback(() => {
-    addProduct({ ...productItem, orderQuantity: quantity });
-  }, [quantity, productItem, addProduct]);
+    addCartProduct({ ...productItem, orderQuantity: quantity });
+  }, [quantity, productItem, addCartProduct]);
 
   // useEffect(() => {
   //   if (reviews && reviews.length > 0) {
@@ -62,9 +65,9 @@ export const DetailsWrapper = ({ productItem }: DetailsWrapperProps) => {
   // }, [reviews]);
 
   // handle wishlist product
-  // const handleWishlistProduct = (product: Product) => {
-  //   console.log(product);
-  // };
+  const handleWishlistProduct = useCallback(() => {
+    addWishlistProduct({ ...productItem, orderQuantity: quantity });
+  }, [quantity, productItem, addCartProduct]);
 
   return (
     <div className="flex w-full flex-col gap-4 text-gray-600">
@@ -158,8 +161,7 @@ export const DetailsWrapper = ({ productItem }: DetailsWrapperProps) => {
       <div className="flex border-b-[1px] pb-2">
         <Button
           variant="ghost"
-          disabled={status === 'out-of-stock'}
-          // onClick={() => handleWishlistProduct(productItem)}
+          onClick={() => handleWishlistProduct}
           type="button"
           className="flex gap-2"
         >

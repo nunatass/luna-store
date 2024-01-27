@@ -1,10 +1,10 @@
 import { Product } from '@/common/types';
 import { Header } from '@/components/layouts/headers/header';
-import { ProductDetailsArea } from '@/components/layouts/pages/product-details/product-details-area';
+import { ProductDetailsArea } from '@/components/layouts/pages/products/product-details/product-details-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 import { SEO } from '@/components/seo';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
-import { productData } from '@/data/product-data';
+import { productData } from '@/data/products-data';
 
 type ProductPageProps = {
   params: { id: string };

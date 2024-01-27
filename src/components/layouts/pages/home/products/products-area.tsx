@@ -4,11 +4,11 @@
 //import { HomeTwoPrdLoader } from '@/components/loader';
 //import { useGetProductTypeQuery } from '@/redux/features/productApi';
 import { Button } from '@/components/ui/button';
-import { productData } from '@/data/product-data';
+import { productData } from '@/data/products-data';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { ProductItem } from './product-item';
+import { ProductItem } from '../../../product-item';
 // tabs
 const tabs = ['All Collection', 'Bracelets', 'Necklaces', 'Earrings'];
 
@@ -20,7 +20,7 @@ const productAnimationProps = {
   transition: { duration: 0.3, ease: 'easeInOut' },
 };
 
-export const ProductArea = () => {
+export const ProductsArea = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const products = productData;

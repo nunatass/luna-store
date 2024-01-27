@@ -13,6 +13,7 @@ import {
 } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
 import { useSticky } from '@/hooks/use-sticky';
+import { useWishlist } from '@/hooks/use-whishlist';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -21,6 +22,7 @@ import { Menus } from './components/menu';
 import { SearchBar } from './components/search-bar';
 import { SideCart } from './components/side-cart';
 import { SideMenu } from './components/side-menu';
+import { SideWishlist } from './components/side-wishlist';
 
 const quantityAnimationVariants = {
   hide: { opacity: 0, scale: 0 },
@@ -35,8 +37,9 @@ export const Header = ({ secondary }: HeaderProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isSideCartOpen, setIsSideCartOpen] = useState(false);
-  // const { wishlist } = useSelector((state) => state.wishlist);
+  const [isSideWishlistOpen, setIsSideWishlistOpen] = useState(false);
   const { getTotal } = useCart();
+  const { products } = useWishlist();
   const { sticky } = useSticky();
   const { quantity } = getTotal();
 
@@ -92,20 +95,24 @@ export const Header = ({ secondary }: HeaderProps) => {
                 </button>
               </div>
               <div className="relative">
-                <Link href="/wishlist" aria-label="wishlist">
+                <button
+                  aria-label="wishlist"
+                  onClick={() => setIsSideWishlistOpen(true)}
+                >
                   <WishlistIcon aria-label="wishlist icon" />
                   <motion.div
                     variants={quantityAnimationVariants}
                     transition={{ duration: 0.4, ease: 'easeInOut' }}
+                    animate={products.length ? 'show' : 'hide'}
                     initial="hide"
                     className={cn(
-                      'absolute -right-[60%] -top-[80%] flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-black',
+                      'absolute -right-1/2 -top-1/2  flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-black',
                       (sticky || secondary) && 'bg-[#bd844c] text-white'
                     )}
                   >
-                    {/* {wishlist.length} */}0
+                    {products.length}
                   </motion.div>
-                </Link>
+                </button>
               </div>
               <div className="relative">
                 <button
@@ -153,6 +160,13 @@ export const Header = ({ secondary }: HeaderProps) => {
 
       <SidePanel isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen}>
         <SideMenu isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen} />
+      </SidePanel>
+
+      <SidePanel isOpen={isSideWishlistOpen} setIsOpen={setIsSideWishlistOpen}>
+        <SideWishlist
+          isOpen={isSideWishlistOpen}
+          setIsOpen={setIsSideWishlistOpen}
+        />
       </SidePanel>
     </div>
   );

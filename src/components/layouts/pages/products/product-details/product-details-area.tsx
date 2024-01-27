@@ -12,13 +12,11 @@ type ProductDetailsAreaProps = {
 export const ProductDetailsArea = ({
   productItem,
 }: ProductDetailsAreaProps) => {
-  const { imageURLs } = productItem;
-
   return (
     <section className="container pb-20 pt-8">
       <div className="flex flex-col gap-14 md:flex-row xl:gap-20">
         <DetailsThumbWrapper
-          imageURLs={imageURLs}
+          imageURLs={productItem.imageURLs}
           imgWidth={580}
           imgHeight={670}
         />

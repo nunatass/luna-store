@@ -57,16 +57,6 @@ export const MobileMenus = () => {
   //   content = [];
   // }
 
-  // handleOpenSubMenu
-  // const handleOpenSubMenu = (title) => {
-  //   if(title === isActiveMenu){
-  //     setIsActiveMenu("")
-  //   }
-  //   else {
-  //     setIsActiveMenu(title)
-  //   }
-  // }
-
   const renderMenu = (menu: MobileMenu) => {
     if (menu?.homes) {
       return (

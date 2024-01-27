@@ -4,7 +4,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
-import { productData } from '@/data/product-data';
+import { productData } from '@/data/products-data';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
 import { ProductSliderItem } from './product-slider-item';
