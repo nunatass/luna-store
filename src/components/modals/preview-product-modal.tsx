@@ -1,3 +1,4 @@
+import { ImageItem } from '@/common/types';
 import { productData } from '@/data/products-data';
 import { DetailsThumbWrapper } from '../layouts/pages/products/product-details/details-thumb-wrapper';
 // import { DetailsWrapper } from '../layouts/pages/products/product-details/details-wrapper';
@@ -14,7 +15,7 @@ export const PreviewProductModal = ({
     <div className="flex h-[60vh] w-[600px]  flex-col gap-14 md:flex-row xl:gap-20">
       <DetailsThumbWrapper
         modal
-        imageURLs={product!.imageURLs}
+        imageURLs={product!.imageURLs as unknown as ImageItem[]}
         imgWidth={300}
         imgHeight={200}
       />

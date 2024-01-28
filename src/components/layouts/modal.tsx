@@ -49,7 +49,6 @@ const Container = ({
 
 export const Modal = () => {
   const { isOpen, setIsOpen, children } = useModal();
-  console.log({ isOpen });
   return (
     <Container isOpen={isOpen} setIsOpen={setIsOpen}>
       {children}

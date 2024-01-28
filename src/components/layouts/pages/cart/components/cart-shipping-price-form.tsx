@@ -72,13 +72,13 @@ export function CartShippingPriceForm() {
         <FormField
           control={form.control}
           name="type"
-          render={({ field }) => (
+          render={() => (
             <FormItem className="">
               <FormLabel>Shipping</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={handleShippingMethodChange}
-                  defaultValue={field.value}
+                  defaultValue={shippingMethods[0].label}
                   className="flex flex-col space-y-1"
                 >
                   {shippingMethods.map((shippingMethod) => (
@@ -87,7 +87,10 @@ export function CartShippingPriceForm() {
                       className="flex items-center space-x-3 space-y-0"
                     >
                       <FormControl>
-                        <RadioGroupItem value={shippingMethod.id} />
+                        <RadioGroupItem
+                          id={shippingMethod.id}
+                          value={shippingMethod.label}
+                        />
                       </FormControl>
                       <FormLabel className="flex gap-2 font-normal">
                         {shippingMethod.label}
