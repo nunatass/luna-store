@@ -40,7 +40,7 @@ const animationsProps = {
   initial: 'initial',
   animate: 'initial',
   whileHover: 'animate',
-  whileTap: 'animate',
+  // whileTap: 'animate',
   exit: 'exit',
 };
 
@@ -166,7 +166,7 @@ export const ProductItem = ({
             <motion.div
               variants={tooltipAnimationVariants}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className=" hidden rounded-xl bg-black px-2 py-0.5 text-xs font-medium "
+              className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
             >
               Quick View
             </motion.div>
@@ -210,16 +210,19 @@ export const ProductItem = ({
             <motion.div
               variants={cartAnimationVariants}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="absolute bottom-4 left-0 flex w-full items-center justify-start bg-white py-1"
+              className="absolute bottom-4 right-4 flex w-full items-center justify-end"
             >
               {isAddedToCart ? (
-                <Link href="/cart" className="flex items-center gap-2">
+                <Link
+                  href="/cart"
+                  className="flex items-center gap-2 text-[#be844c]"
+                >
                   <CartIcon /> View Cart
                 </Link>
               ) : (
                 <button
                   onClick={() => handleAddProduct(product)}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 text-[#be844c]"
                 >
                   <CartIcon /> Add to Cart
                 </button>

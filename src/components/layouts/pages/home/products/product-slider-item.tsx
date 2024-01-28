@@ -38,7 +38,6 @@ const animationsProps = {
   initial: 'initial',
   animate: 'initial',
   whileHover: 'animate',
-  whileTap: 'animate',
   exit: 'exit',
 };
 
