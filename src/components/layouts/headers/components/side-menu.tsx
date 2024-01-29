@@ -1,11 +1,5 @@
 import { CloseTwoIcon } from '@/components/icons/close-two';
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuLabel,
@@ -14,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ChevronDown, MenuIcon } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MobileMenus } from './mobile-menu';
@@ -46,18 +40,6 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
         </button>
       </div>
       <div className="flex h-full flex-col">
-        <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger className="flex w-full items-center justify-between bg-blue-500 px-4 py-3 font-normal text-white transition-all duration-500 ease-in-out hover:bg-blue-500/90 hover:no-underline">
-              <MenuIcon aria-label="menu icon" />
-              All Categories
-            </AccordionTrigger>
-            <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-
         <div className="tp-main-menu-mobile fix d-lg-none mb-40 h-full ">
           <MobileMenus />
         </div>

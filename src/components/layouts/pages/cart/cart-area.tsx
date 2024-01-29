@@ -44,9 +44,9 @@ export const CartArea = () => {
     <motion.div
       {...itemProductAnimationProps}
       key={product.id}
-      className="flex w-full items-center justify-between gap-2 py-4"
+      className="flex w-full justify-between gap-2 py-4"
     >
-      <div className="flex w-full items-center justify-center border-[1px] bg-gray-200">
+      <div className="flex items-center justify-center border-[1px]">
         <Link href={`/product/${product.id}`} aria-label="product link">
           <Image
             src={product.img}
@@ -57,8 +57,9 @@ export const CartArea = () => {
           />
         </Link>
       </div>
-      <div className="w-full">
-        <h5 className="text-md font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
+
+      <div className="flex w-full flex-col">
+        <h5 className="w-full text-sm font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
           <Link href={`/products/${product.id}`}>{product.title}</Link>
         </h5>
         <div className="w-full">
@@ -76,21 +77,25 @@ export const CartArea = () => {
             </span>
           )}
           <span className="text-sm font-medium text-gray-600">
+            {' '}
             x{product.orderQuantity}
           </span>
         </div>
+        <div className="mt-2 flex w-full justify-between">
+          <div className="flex w-full items-center justify-center">
+            {' '}
+            <CartProductQuantityCell id={product.id} />
+          </div>
+          <Button
+            onClick={() => handleRemoveProduct(product.id)}
+            variant="link"
+            size="icon"
+            className="mx-4 py-0 text-gray-600 hover:text-red-400"
+          >
+            <TrashIcon />
+          </Button>
+        </div>
       </div>
-      <div className="w-full">
-        <CartProductQuantityCell id={product.id} />
-      </div>
-      <Button
-        onClick={() => handleRemoveProduct(product.id)}
-        variant="link"
-        size="icon"
-        className="mx-4 py-0 text-gray-600 hover:text-red-400"
-      >
-        <TrashIcon />
-      </Button>
     </motion.div>
   );
 

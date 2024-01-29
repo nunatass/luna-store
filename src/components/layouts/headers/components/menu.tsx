@@ -93,7 +93,7 @@ export const Menus = ({ secondary }: MenusProps) => {
             className="group/menu-products"
           >
             <ul className="transform-all invisible absolute left-0 top-14 z-10 flex  h-max justify-between bg-white px-8  py-5 font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/menu-products:visible group-hover/menu-products:-translate-y-3 group-hover/menu-products:opacity-100 xl:w-[80%]">
-              {menu.product_pages.map((product) => (
+              {menu.productPages.map((product) => (
                 <li key={product.title} className="flex flex-col gap-2.5">
                   <Link
                     href={product.link}
@@ -103,7 +103,7 @@ export const Menus = ({ secondary }: MenusProps) => {
                     {product.title}
                   </Link>
                   <ul className="flex flex-col gap-2 text-sm">
-                    {product.mega_menus.map((menu) => (
+                    {product.megaMenus.map((menu) => (
                       <li key={menu.title} className="hover:text-[#be844c]">
                         <Link href={menu.link} aria-label="menu link">
                           {menu.title}
@@ -117,7 +117,7 @@ export const Menus = ({ secondary }: MenusProps) => {
           </MenuItem>
         );
       }
-      if (menu.sub_menu) {
+      if (menu.hasSubMenu) {
         return (
           <MenuItem
             key={menu.title}
@@ -128,7 +128,7 @@ export const Menus = ({ secondary }: MenusProps) => {
             className="group/sub_menu"
           >
             <ul className="transform-all invisible absolute top-14 z-10 flex h-max flex-col justify-between  gap-2.5 bg-white px-8 py-6 text-sm font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/sub_menu:visible group-hover/sub_menu:-translate-y-3 group-hover/sub_menu:opacity-100">
-              {menu.sub_menus.map((subMenu) => (
+              {menu.subMenus.map((subMenu) => (
                 <li key={subMenu.title} className="hover:text-[#be844c]">
                   <Link href={subMenu.link} aria-label="menu link">
                     {subMenu.title}

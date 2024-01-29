@@ -7,6 +7,7 @@ import Link from 'next/link';
 // import { HomeNewArrivalPrdLoader } from "../loader";
 // import { useGetProductTypeQuery } from "@/redux/features/productApi";
 
+import { HomeIcon } from '@/components/icons';
 import {
   Accordion,
   AccordionContent,
@@ -63,7 +64,10 @@ export const MobileMenus = () => {
         <Accordion type="single" collapsible className="h-full w-full px-4">
           <AccordionItem value="item-1" className="border-0">
             <AccordionTrigger className="font-normal hover:text-blue-500">
-              Home
+              <div className="flex gap-2">
+                <HomeIcon />
+                Home
+              </div>
             </AccordionTrigger>
             <AccordionContent className="grid w-full grid-cols-2 gap-2">
               {instagramMenuData.map((item) => (
@@ -77,7 +81,7 @@ export const MobileMenus = () => {
           </AccordionItem>
         </Accordion>
       );
-    } else if (menu?.sub_menu) {
+    } else if (menu?.hasSubMenu) {
       return (
         <Accordion type="single" collapsible className="h-full w-full px-4">
           <AccordionItem
@@ -86,10 +90,13 @@ export const MobileMenus = () => {
             className="border-0"
           >
             <AccordionTrigger className="font-normal hover:text-blue-500">
-              {menu.title}
+              <div className="flex gap-2">
+                {menu.icon}
+                {menu.title}
+              </div>
             </AccordionTrigger>
             <AccordionContent className="flex flex-col gap-4 divide-y font-normal">
-              {menu?.sub_menus?.map((subMenu) => (
+              {menu?.subMenus?.map((subMenu) => (
                 <Link
                   key={subMenu.title}
                   href={subMenu.link}
@@ -105,9 +112,12 @@ export const MobileMenus = () => {
       );
     } else {
       return (
-        <li key={menu?.id} className="px-4 pt-4 hover:text-blue-500">
+        <li key={menu?.id} className="p-4 hover:text-blue-500">
           <Link href={menu?.link} aria-label="menu link">
-            {menu?.title}
+            <div className="flex gap-2">
+              {menu.icon}
+              {menu.title}
+            </div>
           </Link>
         </li>
       );

@@ -1,10 +1,11 @@
 import { Footer } from '@/components/layouts/footer';
+import { Modal } from '@/components/layouts/modal';
 import { BackToTopButton } from '@/components/ui/back-to-top-button';
 import { Metadata } from 'next';
 import { Charm, Jost, Oregano } from 'next/font/google';
 import { Toaster } from 'sonner';
-import { Modal } from '@/components/layouts/modal';
 
+import TanstackQueryProvider from '@/components/prividers/tanstack-query-provider';
 import './globals.css';
 
 const charm = Charm({
@@ -40,17 +41,19 @@ export default function RootLayout({
       <body
         className={`${charm.variable} ${jost.variable} ${oregano.variable} font-jost`}
       >
-        <div className="relative">
-          <Toaster
-            position="top-right"
-            expand={false}
-            toastOptions={{ duration: 1500 }}
-          />
-          <Modal />
-          {children}
-          <BackToTopButton />
-          <Footer />
-        </div>
+        <TanstackQueryProvider>
+          <div className="relative">
+            <Toaster
+              position="top-right"
+              expand={false}
+              toastOptions={{ duration: 1500 }}
+            />
+            <Modal />
+            {children}
+            <BackToTopButton />
+            <Footer />
+          </div>
+        </TanstackQueryProvider>
       </body>
     </html>
   );
