@@ -1,5 +1,6 @@
 'use client';
 import { Collection } from '@/common/types';
+import { PopularProductsLoading } from '@/components/layouts/loadings/pages/home/popular-products-loading';
 import {
   Carousel,
   CarouselContent,
@@ -20,13 +21,10 @@ export const PopularProducts = () => {
   let content = null;
 
   if (isPending) {
-    // content = (
-    //   <HomeTwoPopularPrdLoader loading={isLoading} />
-    // );
-    return null;
+    content = <PopularProductsLoading />;
   }
-  if (!isPending && isError) {
-    // content = <ErrorMsg msg="There was an error" />;
+
+  if (isError) {
     return null;
   }
 
@@ -35,9 +33,9 @@ export const PopularProducts = () => {
   );
 
   if (!isPending && !isError && !popularProductsCollection) {
-    //   content = <ErrorMsg msg="No Products found!" />;
     return null;
   }
+
   if (
     !isPending &&
     !isError &&

@@ -1,5 +1,6 @@
 'use client';
 
+import { formatPrice } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -95,7 +96,7 @@ export function CartShippingPriceForm() {
                       <FormLabel className="flex gap-2 font-normal">
                         {shippingMethod.label}
                         <p className="text-normal text-blue-500">
-                          ${shippingMethod.value.toFixed(2)}
+                          ${formatPrice(shippingMethod.value)}
                         </p>
                       </FormLabel>
                     </FormItem>
@@ -109,7 +110,7 @@ export function CartShippingPriceForm() {
         <div className="flex flex-col gap-2 py-2">
           <div className="flex items-center justify-between text-xl font-medium">
             <span>Total</span>
-            <span>${total.toFixed(2)}</span>
+            <span> ${formatPrice(total)}</span>
           </div>
           <Button className="w-full">
             <Link href="/checkout" className="tp-cart-checkout-btn w-100">

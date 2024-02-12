@@ -1,6 +1,7 @@
 'use client';
 
 import type { CartProduct } from '@/common/types';
+import { formatPrice } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 import { CartProductCell } from './cart-product-cell';
 import { CartProductQuantityCell } from './cart-product-quantity-cell';
@@ -13,7 +14,14 @@ export const columns: ColumnDef<CartProduct>[] = [
   },
   {
     header: 'Price',
-    cell: ({ row }) => <p>${row.original.price.toFixed(2)}</p>,
+    cell: ({ row }) => (
+      <p>
+        $
+        {formatPrice(
+          (row.original.price * (100 - row.original.discount)) / 100
+        )}
+      </p>
+    ),
   },
   {
     header: 'Quantity',

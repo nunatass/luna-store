@@ -91,8 +91,9 @@ export const useCart = create(
       getTotal: () => {
         return get().products.reduce(
           (cartTotal, cartItem) => {
-            const { price, orderQuantity } = cartItem;
-            cartTotal.total += price * orderQuantity;
+            const { price, orderQuantity, discount } = cartItem;
+            cartTotal.total +=
+              (price - (price * discount) / 100) * orderQuantity;
             cartTotal.quantity = get().products.length;
             return cartTotal;
           },

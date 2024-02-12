@@ -8,6 +8,7 @@ import Link from 'next/link';
 
 import { CartProduct } from '@/common/types';
 import { TrashIcon } from '@/components/icons';
+import { formatPrice } from '@/lib/utils';
 import { CartCheckout } from './components/cart-checkout';
 import { CartProductQuantityCell } from './components/cart-table/cart-product-quantity-cell';
 import { columns } from './components/cart-table/columns';
@@ -23,6 +24,8 @@ const itemProductAnimationProps = {
   },
   layout: true,
 };
+
+const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const CartArea = () => {
   const { removeAll, removeProduct, products } = useCart();
@@ -49,7 +52,7 @@ export const CartArea = () => {
       <div className="flex items-center justify-center border-[1px]">
         <Link href={`/product/${product.id}`} aria-label="product link">
           <Image
-            src={product.img}
+            src={`${imageUrlPrefix}/${product.media}`}
             width={100}
             height={100}
             alt="product img"
@@ -65,25 +68,19 @@ export const CartArea = () => {
         <div className="w-full">
           {product.discount > 0 ? (
             <span>
-              $
-              {(
-                Number(product.price) -
-                (Number(product.price) * Number(product.discount)) / 100
-              ).toFixed(2)}
+              ${formatPrice((product.price * (100 - product.discount)) / 100)}
             </span>
           ) : (
             <span className="text-sm font-semibold text-blue-500">
-              ${product.price.toFixed(2)}
+              ${formatPrice(product.price)}
             </span>
           )}
           <span className="text-sm font-medium text-gray-600">
-            {' '}
             x{product.orderQuantity}
           </span>
         </div>
         <div className="mt-2 flex w-full justify-between">
           <div className="flex w-full items-center justify-center">
-            {' '}
             <CartProductQuantityCell id={product.id} />
           </div>
           <Button
@@ -116,7 +113,6 @@ export const CartArea = () => {
       {products.length === 0 && (
         <div className="flex h-[50vh] w-full flex-col items-center justify-center gap-6 text-center">
           <h3 className="text-lg font-bold md:text-3xl">No Cart Items Found</h3>
-
           <Button asChild>
             <Link href="/shop">Continue Shipping</Link>
           </Button>
@@ -129,9 +125,7 @@ export const CartArea = () => {
             <div className="hidden sm:block">
               <CartDataTable columns={columns} data={products} />
             </div>
-
             <div className="sm:hidden">{renderProductItems()}</div>
-
             <div>
               <div className="col-xl-6 col-md-8">
                 {/* <div className="tp-cart-coupon">

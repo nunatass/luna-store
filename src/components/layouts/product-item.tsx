@@ -41,7 +41,6 @@ const animationsProps = {
   initial: 'initial',
   animate: 'initial',
   whileHover: 'animate',
-  // whileTap: 'animate',
   exit: 'exit',
 };
 
@@ -52,13 +51,16 @@ const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const ProductItem = ({ product }: ProductSliderItemProps) => {
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
-  const { addProduct: addWishlistProduct } = useWishlist();
+  const { addProduct: addWishlistProduct, products: wishListProducts } =
+    useWishlist();
   const { setIsOpen: setIsPreviewModalOpen, setChildren } = useModal();
 
   const isAddedToCart = cartProducts.some(
     (cartProduct) => cartProduct.id === product.id
   );
-  // const isAddedToWishlist = wishListProducts.some((product) => product.id === id);
+  const isAddedToWishlist = wishListProducts.some(
+    (wishListProduct) => wishListProduct.id === product.id
+  );
 
   const handleAddProduct = (product: Product) => {
     addCartProduct({
@@ -90,13 +92,21 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
     <div className="relative">
       <motion.div
         {...animationsProps}
-        className="relative flex h-max w-40 max-w-80 flex-col bg-[#f6f6f6] text-center sm:w-full"
+        className="relative flex h-max w-40 max-w-80 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:w-full "
       >
-        <Link href={`/products/${product.id}`}>
+        <Link href={`/products/${product.id}`} className="group relative">
           <Image
             src={`${imageUrlPrefix}/${product.medias[0].url}`}
             alt="product img"
-            className="transition-all duration-300 ease-out hover:scale-110"
+            className="w-full transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
+            width={284}
+            height={352}
+            priority
+          />
+          <Image
+            src={`${imageUrlPrefix}/${product.medias[1].url}`}
+            alt="product img"
+            className="absolute left-0  top-0 w-full scale-95  opacity-0 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100"
             width={284}
             height={352}
             priority
@@ -120,7 +130,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
                   <motion.span
                     variants={tooltipAnimationVariants}
                     transition={{ duration: 0.4, ease: 'easeInOut' }}
-                    className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
+                    className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white "
                   >
                     View Cart
                   </motion.span>
@@ -146,7 +156,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
                 </motion.div>
                 <motion.div
                   variants={tooltipAnimationVariants}
-                  className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
+                  className="rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
                 >
                   Add to Cart
                 </motion.div>
@@ -191,38 +201,32 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
               transition={{ duration: 0.4, ease: 'easeInOut' }}
               className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
             >
-              Add To Wishlist
+              {isAddedToWishlist ? 'Added to Wishlist' : 'Add To Wishlist'}
             </motion.div>
           </motion.button>
         </motion.div>
 
-        <div className="z-10 flex flex-col gap-1 bg-white py-4 text-left font-medium">
-          <h3 className="text-md transition-all duration-300 ease-in-out ">
+        <div className="z-10 flex flex-col gap-1 bg-white py-4 text-center font-medium">
+          <h3 className="px-4 text-center text-sm transition-all duration-300 ease-in-out sm:mb-2 sm:text-base md:px-8">
             <Link href={`/products/${product.id}`}>{product.title}</Link>
           </h3>
-
-          <div className="text-sm font-normal">{/* <p>{tags[0]}</p> */}</div>
-
-          <div className="tp-category-price-wrapper-4 ">
-            <span className="sm:font-base text-sm transition-all duration-300 ease-in-out">
+          <div className="w-full">
+            <span className="sm:font-base w-full text-sm transition-all duration-300 ease-in-out  hover:text-[#be844c] sm:mb-2">
               ${formatPrice(product.prices[0].value)}
             </span>
             <motion.div
               variants={cartAnimationVariants}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="absolute bottom-4 right-4 flex w-full items-center justify-end"
+              className="absolute bottom-4 left-0 flex w-full items-center justify-center bg-white py-1 text-xs text-[#be844c] sm:text-base"
             >
               {isAddedToCart ? (
-                <Link
-                  href="/cart"
-                  className="flex items-center gap-2 text-[#be844c]"
-                >
+                <Link href="/cart" className="flex items-center gap-2">
                   <CartIcon /> View Cart
                 </Link>
               ) : (
                 <button
                   onClick={() => handleAddProduct(product)}
-                  className="flex items-center gap-2 text-[#be844c]"
+                  className="flex items-center gap-2"
                 >
                   <CartIcon /> Add to Cart
                 </button>
@@ -230,6 +234,11 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
             </motion.div>
           </div>
         </div>
+        {product.prices[0].discount > 0 && (
+          <span className="absolute right-2 top-2 bg-black p-1 text-xs text-white">
+            -{product.prices[0].discount}%
+          </span>
+        )}
       </motion.div>
     </div>
   );

@@ -220,6 +220,11 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
             </motion.div>
           </div>
         </div>
+        {product.prices[0].discount > 0 && (
+          <span className="absolute right-2 top-2 bg-black p-1 text-xs text-white">
+            -{product.prices[0].discount}%
+          </span>
+        )}
       </motion.div>
     </>
   );
