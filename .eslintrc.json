@@ -17,7 +17,7 @@
     "check-file/filename-naming-convention": [
       "error",
       {
-        "**/*.*": "KEBAB_CASE"
+        "./src/**/*.*": "KEBAB_CASE"
       }
     ]
   },

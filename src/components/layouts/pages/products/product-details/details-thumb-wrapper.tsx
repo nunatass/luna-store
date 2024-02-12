@@ -1,14 +1,13 @@
 'use client';
+import { Media } from '@/common/types';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
-// import PopupVideo from "../common/popup-video";
 
-type ImageItem = { img: string; size: number; id: string };
 type DetailsThumbWrapperProps = {
-  imageURLs: ImageItem[];
+  imageURLs: Media[];
   imgWidth?: number;
   imgHeight?: number;
   modal?: boolean;
@@ -24,6 +23,8 @@ const imageTransitionAnimation = {
   },
 };
 
+const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
+
 export const DetailsThumbWrapper = ({
   imageURLs,
   imgWidth = 416,
@@ -33,11 +34,11 @@ export const DetailsThumbWrapper = ({
   // status,
 }: DetailsThumbWrapperProps) => {
   // const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const [activeImg, setActiveImg] = useState<ImageItem>(imageURLs[0]);
+  const [activeImg, setActiveImg] = useState<Media>(imageURLs[0]);
 
   // handle image active
   const handleImageActive = useCallback(
-    (item: ImageItem) => {
+    (item: Media) => {
       setActiveImg(item);
     },
     [setActiveImg]
@@ -57,17 +58,18 @@ export const DetailsThumbWrapper = ({
               variant="ghost"
               key={item.id}
               className={cn(
-                'h-[100px] w-[78px] bg-gray-100 p-0',
-                item.img === activeImg.img && 'ring-[1.5px] ring-[#be844c]'
+                'h-[100px] w-[78px] bg-gray-100 p-0 transition-all duration-300 ease-in-out',
+                item.id === activeImg.id && 'ring-[1.5px] ring-[#be844c]'
               )}
               onClick={() => handleImageActive(item)}
             >
               <Image
-                src={item.img}
+                src={`${imageUrlPrefix}/${item.url}`}
                 alt="image"
                 width={78}
                 height={100}
                 style={{ width: '100%', height: '100%' }}
+                priority
               />
             </Button>
           ))}
@@ -80,12 +82,18 @@ export const DetailsThumbWrapper = ({
             modal && 'h-[500px] w-full'
           )}
         >
-          <motion.div key={activeImg.id} {...imageTransitionAnimation}>
+          <motion.div
+            key={activeImg.id}
+            {...imageTransitionAnimation}
+            className="h-full w-full "
+          >
             <Image
-              src={activeImg.img}
+              src={`${imageUrlPrefix}/${activeImg.url}`}
               alt="product img"
               width={imgWidth}
               height={imgHeight}
+              className="h-full w-full object-contain"
+              priority
             />
             {/* <div className="tp-product-badge">
             {status === 'out-of-stock' && (

@@ -1,9 +1,10 @@
 'use client';
-import type { CartProduct } from '@/common/types';
+import type { Product } from '@/common/types';
 import { CartIcon, QuickViewIcon, WishlistIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
 import { useModal } from '@/hooks/use-modal';
 import { useWishlist } from '@/hooks/use-whishlist';
+import { formatPrice } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -45,61 +46,62 @@ const animationsProps = {
 };
 
 type ProductSliderItemProps = {
-  id: string;
-  title: string;
-  price: number;
-  img: string;
-  status: string;
-  tags: string[];
+  product: Product;
 };
+const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
-export const ProductItem = ({
-  id,
-  title,
-  price,
-  img,
-  tags,
-  status,
-}: ProductSliderItemProps) => {
-  const product = { id, title, price, img, discount: 0, orderQuantity: 1 };
+export const ProductItem = ({ product }: ProductSliderItemProps) => {
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
   const { addProduct: addWishlistProduct } = useWishlist();
   const { setIsOpen: setIsPreviewModalOpen, setChildren } = useModal();
 
-  const isAddedToCart = cartProducts.some((product) => product.id === id);
+  const isAddedToCart = cartProducts.some(
+    (cartProduct) => cartProduct.id === product.id
+  );
   // const isAddedToWishlist = wishListProducts.some((product) => product.id === id);
 
-  const handleAddProduct = (product: CartProduct) => {
-    addCartProduct(product);
+  const handleAddProduct = (product: Product) => {
+    addCartProduct({
+      id: product.id,
+      media: product.medias[0].url,
+      price: product.prices[0].value,
+      title: product.title,
+      orderQuantity: 1,
+      discount: product.prices[0].discount,
+    });
   };
 
-  const handleAddWishlistProduct = (product: CartProduct) => {
-    addWishlistProduct(product);
+  const handleAddWishlistProduct = (product: Product) => {
+    addWishlistProduct({
+      id: product.id,
+      media: product.medias[0].url,
+      price: product.prices[0].value,
+      title: product.title,
+      orderQuantity: 1,
+      discount: product.prices[0].discount,
+    });
   };
 
   const handleOpenPreviewModal = useCallback(() => {
-    setChildren(<PreviewProductModal productId={id} />);
+    setChildren(<PreviewProductModal productId={product.id} />);
     setIsPreviewModalOpen(true);
-  }, [setIsPreviewModalOpen, id]);
+  }, [setIsPreviewModalOpen, product.id, setChildren]);
   return (
     <div className="relative">
       <motion.div
         {...animationsProps}
         className="relative flex h-max w-40 max-w-80 flex-col bg-[#f6f6f6] text-center sm:w-full"
       >
-        <Link href={`/products/${id}`}>
+        <Link href={`/products/${product.id}`}>
           <Image
-            src={img}
+            src={`${imageUrlPrefix}/${product.medias[0].url}`}
             alt="product img"
             className="transition-all duration-300 ease-out hover:scale-110"
             width={284}
             height={352}
+            priority
           />
         </Link>
-
-        <div className="tp-product-badge">
-          {status === 'out-of-stock' && <span className="">out-stock</span>}
-        </div>
         <motion.div
           variants={optionsAnimationVariants}
           transition={{ duration: 0.4, ease: 'easeInOut' }}
@@ -196,16 +198,14 @@ export const ProductItem = ({
 
         <div className="z-10 flex flex-col gap-1 bg-white py-4 text-left font-medium">
           <h3 className="text-md transition-all duration-300 ease-in-out ">
-            <Link href={`/products/${id}`}>{title}</Link>
+            <Link href={`/products/${product.id}`}>{product.title}</Link>
           </h3>
 
-          <div className="text-sm font-normal">
-            <p>{tags[0]}</p>
-          </div>
+          <div className="text-sm font-normal">{/* <p>{tags[0]}</p> */}</div>
 
           <div className="tp-category-price-wrapper-4 ">
             <span className="sm:font-base text-sm transition-all duration-300 ease-in-out">
-              ${price.toFixed(2)}
+              ${formatPrice(product.prices[0].value)}
             </span>
             <motion.div
               variants={cartAnimationVariants}

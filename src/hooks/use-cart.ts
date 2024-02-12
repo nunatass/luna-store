@@ -10,7 +10,7 @@ interface CartProduct {
   title: string;
   price: number;
   orderQuantity: number;
-  img: string;
+  media: string;
 }
 
 interface CartStore {

@@ -1,7 +1,7 @@
-import { ImageItem } from '@/common/types';
-import { productData } from '@/data/products-data';
+'use client';
+
+import { useProductById } from '@/hooks/api/use-product';
 import { DetailsThumbWrapper } from '../layouts/pages/products/product-details/details-thumb-wrapper';
-// import { DetailsWrapper } from '../layouts/pages/products/product-details/details-wrapper';
 
 type PreviewProductModalProps = {
   productId: string;
@@ -10,12 +10,25 @@ type PreviewProductModalProps = {
 export const PreviewProductModal = ({
   productId,
 }: PreviewProductModalProps) => {
-  const product = productData.data.find((product) => product.id === productId);
+  const { data: product, isPending, isError } = useProductById(productId);
+
+  if (isPending) {
+    return null;
+  }
+
+  if (!isPending && isError) {
+    return null;
+  }
+
+  if (!isPending && !isError && !product) {
+    return null;
+  }
+
   return (
     <div className="flex h-[60vh] w-[600px]  flex-col gap-14 md:flex-row xl:gap-20">
       <DetailsThumbWrapper
         modal
-        imageURLs={product!.imageURLs as unknown as ImageItem[]}
+        imageURLs={product.medias}
         imgWidth={300}
         imgHeight={200}
       />

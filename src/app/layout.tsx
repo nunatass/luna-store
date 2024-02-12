@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import { Charm, Jost, Oregano } from 'next/font/google';
 import { Toaster } from 'sonner';
 
-import TanstackQueryProvider from '@/components/prividers/tanstack-query-provider';
+import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
 import './globals.css';
 
 const charm = Charm({

@@ -5,7 +5,7 @@ import { CartProduct } from '@/common/types';
 import { CloseTwoIcon, TrashIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/use-cart';
-import { cn } from '@/lib/utils';
+import { cn, formatPrice } from '@/lib/utils';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -37,6 +37,8 @@ const renderEmptyDiv = () => (
   <motion.div {...itemProductAnimationProps} key="empty-div" />
 );
 
+const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
+
 export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const { products, getTotal, removeProduct } = useCart();
 
@@ -59,7 +61,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
       <div className="border-[1px] border-gray-200">
         <Link href={`/products/${product.id}`} aria-label="product link">
           <Image
-            src={product.img}
+            src={`${imageUrlPrefix}/${product.media}`}
             width={70}
             height={60}
             alt="product img"
@@ -74,15 +76,11 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
         <div className="w-full">
           {product.discount > 0 ? (
             <span>
-              $
-              {(
-                Number(product.price) -
-                (Number(product.price) * Number(product.discount)) / 100
-              ).toFixed(2)}
+              ${formatPrice((product.price * (100 - product.discount)) / 100)}
             </span>
           ) : (
             <span className="text-sm font-semibold text-blue-500">
-              ${product.price.toFixed(2)}
+              ${formatPrice(product.price)}
             </span>
           )}
           <span className="text-sm font-medium text-gray-600">
@@ -145,7 +143,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
                 transition={{ duration: 0.6, ease: 'easeInOut' }}
                 className="-mt-56 flex h-full w-full flex-col items-center justify-center gap-2"
               >
-                <Image src={emptyCartImg} alt="empty-cart-img" />
+                <Image src={emptyCartImg} alt="empty-cart-img" priority />
                 <p className="text-base font-normal">Your Cart is empty</p>
                 <Button
                   asChild
@@ -167,7 +165,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
         <div className="flex items-center justify-between">
           <h4 className="text-md font-medium">Subtotal:</h4>
           <span className="text-md font-medium">
-            ${getTotal().total.toFixed(2)}
+            ${formatPrice(getTotal().total)}
           </span>
         </div>
         <div className="flex w-full flex-col gap-2">

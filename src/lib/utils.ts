@@ -12,3 +12,7 @@ export function replaceDashWithSpaces(array: string[]) {
 export function capitalize(word: string) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
+
+export function formatPrice(priceInCents: number): string {
+  return (priceInCents / 100).toFixed(2);
+}

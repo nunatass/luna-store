@@ -11,31 +11,33 @@ import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
 import { Product } from '@/common/types';
 import { useCart } from '@/hooks/use-cart';
 import { useWishlist } from '@/hooks/use-whishlist';
+import { formatPrice } from '@/lib/utils';
 import { CheckCircle } from 'lucide-react';
 
 type DetailsWrapperProps = {
-  productItem: Product;
+  product: Product;
 };
 
-export const DetailsWrapper = ({ productItem }: DetailsWrapperProps) => {
+export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   const { addProduct: addCartProduct } = useCart();
   const { addProduct: addWishlistProduct } = useWishlist();
 
-  const { title, category, description, discount, price, reviews } =
-    productItem;
   const [ratingVal] = useState(0);
   const [showMoreText, setShowMoreText] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
   const renderPrice = useMemo(() => {
-    if (discount > 0) {
+    if (product.prices[0].discount > 0) {
       return (
         <>
-          <span className="text-base	line-through">${price}</span>
+          <span className="text-base	line-through">
+            ${product.prices[0].value}
+          </span>
           <span className="text-2xl font-medium text-black">
             $
-            {(Number(price) - (Number(price) * Number(discount)) / 100).toFixed(
-              2
+            {formatPrice(
+              (product.prices[0].value * (100 - product.prices[0].discount)) /
+                100
             )}
           </span>
         </>
@@ -44,14 +46,21 @@ export const DetailsWrapper = ({ productItem }: DetailsWrapperProps) => {
 
     return (
       <span className="text-2xl font-medium text-black">
-        ${price.toFixed(2)}
+        ${product.prices[0].value}
       </span>
     );
-  }, [price, discount]);
+  }, [product.prices]);
 
   const handleAddProduct = useCallback(() => {
-    addCartProduct({ ...productItem, orderQuantity: quantity });
-  }, [quantity, productItem, addCartProduct]);
+    addCartProduct({
+      id: product.id,
+      discount: product.prices[0].discount,
+      price: product.prices[0].value,
+      media: product.medias[0].url,
+      title: product.title,
+      orderQuantity: quantity,
+    });
+  }, [quantity, product, addCartProduct]);
 
   // useEffect(() => {
   //   if (reviews && reviews.length > 0) {
@@ -66,14 +75,21 @@ export const DetailsWrapper = ({ productItem }: DetailsWrapperProps) => {
 
   // handle wishlist product
   const handleWishlistProduct = useCallback(() => {
-    addWishlistProduct({ ...productItem, orderQuantity: quantity });
-  }, [quantity, productItem, addCartProduct]);
+    addWishlistProduct({
+      id: product.id,
+      discount: product.prices[0].discount,
+      price: product.prices[0].value,
+      media: product.medias[0].url,
+      title: product.title,
+      orderQuantity: quantity,
+    });
+  }, [quantity, product, addWishlistProduct]);
 
   return (
     <div className="flex w-full flex-col gap-4 text-gray-600">
       <div className="">
-        <span className="text-base font-normal ">{category.name}</span>
-        <h3 className="text-3xl font-medium text-black">{title}</h3>
+        <span className="text-base font-normal ">{product.category.name}</span>
+        <h3 className="text-3xl font-medium text-black">{product.title}</h3>
       </div>
 
       <div className="flex items-center gap-2">
@@ -86,12 +102,18 @@ export const DetailsWrapper = ({ productItem }: DetailsWrapperProps) => {
         />
 
         <span className="text-sm">
-          ({reviews && reviews.length > 0 ? reviews.length : 0} Review)
+          (
+          {product.reviews && product.reviews.length > 0
+            ? product.reviews.length
+            : 0}{' '}
+          Review)
         </span>
       </div>
 
       <p className="text-md">
-        {showMoreText ? description : `${description.substring(0, 100)}...`}
+        {showMoreText
+          ? product.description
+          : `${product.description.substring(0, 100)}...`}
         <span
           className="text-[#be844c]"
           onClick={() => setShowMoreText(!showMoreText)}

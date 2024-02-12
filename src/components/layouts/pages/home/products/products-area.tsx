@@ -1,16 +1,12 @@
 'use client';
 
-//import ErrorMsg from '@/components/common/error-msg';
-//import { HomeTwoPrdLoader } from '@/components/loader';
-//import { useGetProductTypeQuery } from '@/redux/features/productApi';
+import { ProductItem } from '@/components/layouts/product-item';
 import { Button } from '@/components/ui/button';
-import { productData } from '@/data/products-data';
+import { useCategories } from '@/hooks/api/use-categories';
+import { useCollections } from '@/hooks/api/use-collections';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
-import { ProductItem } from '../../../product-item';
-// tabs
-const tabs = ['All Collection', 'Bracelets', 'Necklaces', 'Earrings'];
+import { useEffect, useState } from 'react';
 
 const productAnimationProps = {
   initial: { opacity: 0 },
@@ -21,88 +17,89 @@ const productAnimationProps = {
 };
 
 export const ProductsArea = () => {
+  const { data: collections, isPending, isError } = useCollections();
+  const { data: categories } = useCategories();
+  const [tabs, setTabs] = useState(['All Collection']);
   const [activeTab, setActiveTab] = useState(tabs[0]);
-
-  const products = productData;
-  // const {
-  //   data: products,
-  //   isError,
-  //   isLoading,
-  // } = useGetProductTypeQuery({ type: 'jewelry' });
 
   const handleActiveTab = (tab: string) => {
     setActiveTab(tab);
   };
 
-  // decide what to render
+  useEffect(() => {
+    setTabs(['All Collection', ...categories.map((category) => category.name)]);
+    // eslint-disable-next-line
+  }, []);
+
   let content = null;
 
-  // if (isLoading) {
-  //   content = <HomeTwoPrdLoader loading={isLoading} />;
-  // }
-  // if (!isLoading && isError) {
-  //   content = <ErrorMsg msg="There was an error" />;
-  // }
-  // if (!isLoading && !isError && products?.data?.length === 0) {
-  //   content = <ErrorMsg msg="No Products found!" />;
-  // }
-  if (/*!isLoading && !isError &&*/ products?.data?.length > 0) {
-    let product_items = products.data;
-    if (activeTab === 'All Collection') {
-      product_items = products.data;
-    } else if (activeTab === 'Bracelets') {
-      product_items = products.data.filter(
-        (p) => p.category.name === 'Bracelets'
-      );
-    } else if (activeTab === 'Necklaces') {
-      product_items = products.data.filter(
-        (p) => p.category.name === 'Necklaces'
-      );
-    } else if (activeTab === 'Earrings') {
-      product_items = products.data.filter(
-        (p) => p.category.name === 'Earrings'
-      );
-    } else {
-      product_items = products.data;
-    }
-    content = (
-      <div className="flex w-full flex-col items-center lg:items-start">
-        <span className="text-lg text-[#bd844c]">Product Collection</span>
-        <div className="flex w-full flex-col items-center justify-center gap-2 lg:flex-row lg:items-end lg:justify-between lg:gap-0">
-          <h3 className="text-center text-3xl font-medium sm:text-5xl">
-            Discover our Products
-          </h3>
-          <div className="flex w-full max-w-sm flex-col lg:mr-10">
-            <nav className="flex w-full" id="nav-tab" role="tablist">
-              {tabs.map((tab, i) => (
-                <Button
-                  variant="ghost"
-                  key={i}
-                  onClick={() => handleActiveTab(tab)}
-                  className={cn(
-                    'rounded-none text-gray-400 transition-all duration-300 ease-in-out hover:bg-white',
-                    activeTab === tab && 'text-black'
-                  )}
-                >
-                  {tab}
-                </Button>
-              ))}
-            </nav>
-          </div>
-        </div>
+  if (isPending || isError) {
+    return null;
+  }
 
-        <div className="mt-6 flex w-full flex-wrap justify-center justify-items-center gap-4 sm:grid sm:grid-cols-2 md:mt-12 md:grid-cols-3 lg:grid-cols-4 lg:justify-items-start">
-          <AnimatePresence>
-            {product_items.map((product) => (
-              <motion.div key={product.id} {...productAnimationProps}>
-                <ProductItem {...product} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-      </div>
+  const trendsProductsCollection = collections.find(
+    (collection) => collection.title === 'Trending Products'
+  );
+
+  if (
+    !trendsProductsCollection ||
+    trendsProductsCollection.products.length === 0
+  ) {
+    return null;
+  }
+
+  let productItems = trendsProductsCollection.products;
+
+  if (activeTab !== 'All Collection') {
+    productItems = trendsProductsCollection.products.filter(
+      (product) => product.category.name === activeTab
     );
   }
+
+  content = (
+    <div className="flex w-full flex-col items-center lg:items-start">
+      <span className="text-lg text-[#bd844c]">Shop by Category</span>
+      <div className="flex w-full flex-col items-center justify-center gap-2 lg:flex-row lg:items-end lg:justify-between lg:gap-0">
+        <h3 className="text-center text-3xl font-medium sm:text-5xl">
+          Discover our Products
+        </h3>
+        <div className="flex w-full max-w-sm flex-col lg:mr-10">
+          <nav className="flex w-full gap-5" id="nav-tab" role="tablist">
+            {tabs.map((tab, i) => (
+              <Button
+                variant="ghost"
+                key={i}
+                onClick={() => handleActiveTab(tab)}
+                className={cn(
+                  'relative rounded-none px-0 text-gray-400 transition-all duration-300 ease-in-out hover:bg-white',
+                  activeTab === tab && 'text-black'
+                )}
+              >
+                {tab}
+                {activeTab === tab && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-[3px] w-full rounded-full bg-gray-200"
+                    layout
+                    layoutId="tab-selected"
+                  />
+                )}
+              </Button>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      <div className="mt-6 flex w-full flex-wrap justify-center justify-items-center gap-4 sm:grid sm:grid-cols-2 md:mt-12 md:grid-cols-3 lg:grid-cols-4 lg:justify-items-start">
+        <AnimatePresence>
+          {productItems.map((product) => (
+            <motion.div key={product.id} {...productAnimationProps}>
+              <ProductItem product={product} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
 
   return (
     <section className="my-20 flex w-full items-center justify-center md:my-28">

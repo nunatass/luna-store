@@ -5,7 +5,7 @@ import { CartProduct } from '@/common/types';
 import { CloseTwoIcon, TrashIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useWishlist } from '@/hooks/use-whishlist';
-import { cn } from '@/lib/utils';
+import { cn, formatPrice } from '@/lib/utils';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -37,6 +37,8 @@ const renderEmptyDiv = () => (
   <motion.div {...itemProductAnimationProps} key="empty-div" />
 );
 
+const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
+
 export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
   const { products, removeProduct } = useWishlist();
 
@@ -59,11 +61,12 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
       <div className="border-[1px] border-gray-200">
         <Link href={`/products/${product.id}`} aria-label="product link">
           <Image
-            src={product.img}
+            src={`${imageUrlPrefix}/${product.media}`}
             width={70}
             height={60}
             alt="product img"
             className="h-20 w-24"
+            priority
           />
         </Link>
       </div>
@@ -74,15 +77,11 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
         <div className="w-full">
           {product.discount > 0 ? (
             <span>
-              $
-              {(
-                Number(product.price) -
-                (Number(product.price) * Number(product.discount)) / 100
-              ).toFixed(2)}
+              ${formatPrice((product.price * (100 - product.discount)) / 100)}
             </span>
           ) : (
             <span className="text-sm font-semibold text-blue-500">
-              ${product.price.toFixed(2)}
+              ${formatPrice(product.price)}
             </span>
           )}
           <span className="text-sm font-medium text-gray-600">

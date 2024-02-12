@@ -3,6 +3,13 @@ export type Category = {
   id: string;
 };
 
+export type Price = {
+  id: string;
+  value: number;
+  discount: number;
+  label: string;
+};
+
 export type Review = {
   id: string;
   productId: string;
@@ -13,23 +20,42 @@ export type Review = {
 
 export type ImageItem = { img: string; size: number; id: string };
 
+export type Media = {
+  id: string;
+  url: string;
+  ownerId: string;
+};
+
 export type CartProduct = {
   id: string;
   title: string;
   price: number;
-  img: string;
+  media: string;
   discount: number;
   orderQuantity: number;
 };
 
 export type Product = {
-  category: Category;
   id: string;
-  img: string;
   title: string;
-  discount: number;
-  reviews: Review[];
   description: string;
-  imageURLs: ImageItem[];
-  price: number;
+  category: Category;
+  reviews: Review[];
+  prices: Price[];
+  medias: Media[];
+};
+
+export type Collection = {
+  id: string;
+  title: string;
+  subtitle: string;
+  medias: Media[];
+  products: Product[];
+};
+
+export type ResponseData<T> = {
+  totalItems: number;
+  data: T;
+  totalPages: number;
+  currentPage: number;
 };

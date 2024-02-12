@@ -1,20 +1,13 @@
 export const productData = {
   data: [
     {
-      brand: {
-        name: 'Louis Vuitton',
-        id: '643134d4e2c1bd22cebb2130',
-      },
       category: {
         name: 'Bracelets',
         id: '64312cd3e2c1bd22cebb2129',
       },
       id: '643249b49814bb139594c454',
-      sku: 'BAD7SDVX55',
       img: 'https://i.ibb.co/SvdvsxT/bracelet-8.png',
       title: 'Asiyah Bangle Bracelet',
-      slug: 'asiyah-bangle-bracelet',
-      unit: '10 kt',
       imageURLs: [
         {
           img: 'https://i.ibb.co/SvdvsxT/bracelet-8.png',
@@ -32,35 +25,26 @@ export const productData = {
           id: '6589599c7dd65f9441d61e95',
         },
       ],
-      parent: 'Bracelets',
-      children: 'Silver',
       price: 118,
       discount: 0,
-      quantity: 15,
-      status: 'in-stock',
-      reviews: [],
-      productType: 'jewelry',
-      description:
-        'Achieve that sun-kissed glow with the Baked Mineral Bronzer from INIKA. Perfect for contouring, the loose powder adds a subtle and natural tanned tone to skin, perfectly complementing fair to medium complexions. Lightweight and non-cakey, it effortlessly sculpts and defines cheekbones to leave skin looking healthy and radiant. Certified Vegan. Cruelty free.',
-      additionalInformation: [
+      reviews: [
         {
-          key: 'GREAT FOR LAYERING',
-          value: 'Mini waffle fabric construction',
-        },
-        {
-          key: 'LEGENDARY STYLING',
-          value: 'Cute keyhole notch neck with custom',
-        },
-        {
-          key: 'CUFF DETAILS',
-          value: 'Velvet details with lace trim on the cuffs',
+          id: '6468636b4edd5c527109318f',
+          productId: '6431364df5a812bd37e765ac',
+          rating: 4,
+          comment: 'Good product',
+          createdAt: '2023-12-25T10:29:51.373Z',
+          updatedAt: '2023-12-25T10:29:51.373Z',
         },
       ],
-      tags: ['bracelets', 'silver'],
-      sizes: [],
-      featured: true,
-      sellCount: 0,
-      __v: 0,
+      description:
+        'Achieve that sun-kissed glow with the Baked Mineral Bronzer from INIKA. Perfect for contouring, the loose powder adds a subtle and natural tanned tone to skin, perfectly complementing fair to medium complexions. Lightweight and non-cakey, it effortlessly sculpts and defines cheekbones to leave skin looking healthy and radiant. Certified Vegan. Cruelty free.',
+      sizes: [
+        {
+          id: '6468636b4edd5c527109318f',
+          value: 'Xl',
+        },
+      ],
       createdAt: '2023-12-25T10:29:48.509Z',
       updatedAt: '2023-12-25T10:29:48.509Z',
     },

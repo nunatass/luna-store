@@ -1,10 +1,11 @@
 'use client';
-import type { CartProduct } from '@/common/types';
+import type { Product } from '@/common/types';
 import { CartIcon, QuickViewIcon, WishlistIcon } from '@/components/icons';
 import { PreviewProductModal } from '@/components/modals/preview-product-modal';
 import { useCart } from '@/hooks/use-cart';
 import { useModal } from '@/hooks/use-modal';
 import { useWishlist } from '@/hooks/use-whishlist';
+import { formatPrice } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useCallback } from 'react';
@@ -42,48 +43,59 @@ const animationsProps = {
 };
 
 type ProductSliderItemProps = {
-  id: string;
-  title: string;
-  price: number;
-  img: string;
+  product: Product;
 };
 
-export const ProductSliderItem = ({
-  id,
-  title,
-  price,
-  img,
-}: ProductSliderItemProps) => {
-  const product = { id, title, price, img, discount: 0, orderQuantity: 1 };
+const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
+
+export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
   const { setIsOpen: setIsPreviewModalOpen, setChildren } = useModal();
 
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
   const { addProduct: addWishlistProduct } = useWishlist();
 
-  const isAddedToCart = cartProducts.some((product) => product.id === id);
+  const isAddedToCart = cartProducts.some(
+    (cardProduct) => cardProduct.id === product.id
+  );
 
-  const handleAddProduct = (product: CartProduct) => {
-    addCartProduct(product);
+  const handleAddProduct = (product: Product) => {
+    addCartProduct({
+      id: product.id,
+      media: product.medias[0].url,
+      price: product.prices[0].value,
+      title: product.title,
+      orderQuantity: 1,
+      discount: product.prices[0].discount,
+    });
   };
 
-  const handleWishlistProduct = (product: CartProduct) => {
-    addWishlistProduct(product);
+  const handleWishlistProduct = (product: Product) => {
+    addWishlistProduct({
+      id: product.id,
+      media: product.medias[0].url,
+      price: product.prices[0].value,
+      title: product.title,
+      orderQuantity: 1,
+      discount: product.prices[0].discount,
+    });
   };
 
   const handleOpenPreviewModal = useCallback(() => {
-    setChildren(<PreviewProductModal productId={id} />);
+    setChildren(<PreviewProductModal productId={product.id} />);
     setIsPreviewModalOpen(true);
-  }, [setIsPreviewModalOpen, id]);
+  }, [setIsPreviewModalOpen, product.id, setChildren]);
   return (
     <>
       <motion.div
         {...animationsProps}
-        className="relative flex h-96 w-full min-w-72 max-w-sm flex-col overflow-hidden bg-white px-8 pb-8 text-center"
+        className="relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-white px-8 pb-8 text-center sm:w-80"
       >
-        <Link className="h-full w-full" href={`/products/${id}`}>
+        <Link className="h-full w-full" href={`/products/${product.id}`}>
           <div
-            className="z-0 h-full w-full scale-125 bg-white bg-contain bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${img})` }}
+            className="z-0 h-full w-full scale-110 bg-white bg-contain bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${imageUrlPrefix}/${product.medias[0].url})`,
+            }}
           />
         </Link>
         <motion.div
@@ -181,12 +193,12 @@ export const ProductSliderItem = ({
         </motion.div>
 
         <div className="z-10 flex flex-col gap-1 font-medium">
-          <h3 className="text-xl transition-all  duration-300 ease-in-out hover:text-[#be844c]">
-            <Link href={`/products/${id}`}>{title}</Link>
+          <h3 className="text-md transition-all  duration-300 ease-in-out hover:text-[#be844c]">
+            <Link href={`/products/${product.id}`}>{product.title}</Link>
           </h3>
           <div className="tp-category-price-wrapper-4 ">
             <span className="font-base transition-all duration-300 ease-in-out hover:text-[#be844c]">
-              ${price.toFixed(2)}
+              ${formatPrice(product.prices[0].value)}
             </span>
             <motion.div
               variants={cartAnimationVariants}

@@ -16,11 +16,11 @@ export const ProductDetailsArea = ({
     <section className="container pb-20 pt-8">
       <div className="flex flex-col gap-14 md:flex-row xl:gap-20">
         <DetailsThumbWrapper
-          imageURLs={productItem.imageURLs}
+          imageURLs={productItem.medias}
           imgWidth={580}
           imgHeight={670}
         />
-        <DetailsWrapper productItem={productItem} />
+        <DetailsWrapper product={productItem} />
       </div>
       <DetailsTabNav product={productItem} />
     </section>

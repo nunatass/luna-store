@@ -1,29 +1,29 @@
-import { Product } from '@/common/types';
+'use client';
+
 import { Header } from '@/components/layouts/headers/header';
 import { ProductDetailsArea } from '@/components/layouts/pages/products/product-details/product-details-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 import { SEO } from '@/components/seo';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
-import { productData } from '@/data/products-data';
+import { useProductById } from '@/hooks/api/use-product';
 
 type ProductPageProps = {
   params: { id: string };
 };
 
 export default function ProductPage({ params }: ProductPageProps) {
-  const product = productData.data.find(
-    (product) => product.id === params.id
-  ) as unknown as Product;
-  // const { data: product, isLoading, isError } = useGetProductQuery(query.id);
-  // decide what to render
+  const { data: product, isPending, isError } = useProductById(params.id);
+
   let content = null;
-  // if (isLoading) {
-  //   content = <PrdDetailsLoader loading={isLoading}/>;
-  // }
-  // if (!isLoading && isError) {
-  //   content = <ErrorMsg msg="There was an error" />;
-  // }
-  if (/*!isLoading && !isError &&*/ product) {
+  if (isPending) {
+    //   content = <PrdDetailsLoader loading={isLoading}/>;
+    return null;
+  }
+  if (!isPending && isError) {
+    // content = <ErrorMsg msg="There was an error" />;
+    return null;
+  }
+  if (!isPending && !isError && product) {
     content = <ProductDetailsArea productItem={product} />;
   }
   return (
@@ -31,7 +31,7 @@ export default function ProductPage({ params }: ProductPageProps) {
       <SEO pageTitle="Product details" />
       <Header secondary />
       <div className="mt-32">
-        <Breadcrumb title={product?.title} label={product?.category.name} />
+        <Breadcrumb title={product.title} label={product?.category.name} />
       </div>
       {content}
     </Wrapper>

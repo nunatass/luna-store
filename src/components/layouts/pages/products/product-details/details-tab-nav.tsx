@@ -9,11 +9,11 @@ type DetailsTabNavProps = {
 };
 
 export const DetailsTabNav = ({ product }: DetailsTabNavProps) => {
-  const { id, description, reviews } = product;
-
   const renderReviews = useMemo(() => {
-    if (reviews.length > 0) {
-      return reviews.map((item) => <ReviewItem key={item.id} review={item} />);
+    if (product?.reviews?.length > 0) {
+      return product?.reviews?.map((item) => (
+        <ReviewItem key={item.id} review={item} />
+      ));
     }
 
     return (
@@ -21,7 +21,7 @@ export const DetailsTabNav = ({ product }: DetailsTabNavProps) => {
         There are no reviews yet.
       </h3>
     );
-  }, [reviews]);
+  }, [product?.reviews]);
 
   return (
     <Tabs
@@ -31,10 +31,12 @@ export const DetailsTabNav = ({ product }: DetailsTabNavProps) => {
       <TabsList className="my-8 rounded-none bg-gray-300 text-gray-600">
         <TabsTrigger value="description">Description</TabsTrigger>
         <TabsTrigger value="information">Additional information</TabsTrigger>
-        <TabsTrigger value="reviews">Reviews ({reviews.length})</TabsTrigger>
+        <TabsTrigger value="reviews">
+          Reviews ({product?.reviews?.length})
+        </TabsTrigger>
       </TabsList>
       <TabsContent value="description" className="text-base text-gray-700">
-        {description}
+        {product.description}
       </TabsContent>
       <TabsContent value="information">Change your password here.</TabsContent>
       <TabsContent value="reviews" className="w-full">
@@ -56,7 +58,7 @@ export const DetailsTabNav = ({ product }: DetailsTabNavProps) => {
             <p className="font-gray-600 text-base">
               Your email address will not be published.
             </p>
-            <ReviewForm id={id} />
+            <ReviewForm id={product.id} />
           </div>
         </div>
       </TabsContent>

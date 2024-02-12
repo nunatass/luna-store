@@ -1,9 +1,3 @@
-// import OfferCouponArea from "@/components/offerHeader/OfferCouponArea";
-// import { useGetProductTypeQuery } from "@/redux/features/productApi";
-// import { HomeNewArrivalPrdLoader } from "@/components/loader";
-// import ErrorMsg from "@/components/common/error-msg";
-// import ProductItem from "@/components/products/electronics/product-item";
-
 import { InstagramImageCard } from '@/components/ui/instagram-image-card';
 import { instagramMenuData } from '@/data/instagram-data';
 import { menuData } from '@/data/menu-data';
@@ -17,45 +11,6 @@ type MenusProps = {
 };
 
 export const Menus = ({ secondary }: MenusProps) => {
-  // const { data: products, isError, isLoading } = useGetProductTypeQuery({
-  //   type: 'electronics',
-  //   query: 'new=true'
-  // });
-
-  // decide what to render
-  // let content = null;
-
-  // if (isLoading) {
-  //   content = (
-  //     <HomeNewArrivalPrdLoader loading={isLoading} />
-  //   );
-  // }
-
-  // if (!isLoading && isError) {
-  //   content = <ErrorMsg msg="There was an error" />;
-  // }
-
-  // if (!isLoading && !isError && products?.data?.length === 0) {
-  //   content = <ErrorMsg msg="No Products found!" />;
-  // }
-
-  // if (!isLoading && !isError && products?.data?.length > 0) {
-  //   const product_items = products.data;
-
-  //   content = (
-  //     <div className="row">
-  //       {product_items.slice(0, 4).map((item) => (
-  //         <div key={item.id} className="col-md-3">
-  //           <ProductItem product={item} />
-  //         </div>
-  //       ))}
-  //     </div>
-  //   );
-  // } else {
-  //   // If there are no products or an error occurs, set content to an empty array
-  //   content = [];
-  // }
-
   const renderMenu = useMemo(() => {
     return menuData.map((menu) => {
       if (menu.homes) {

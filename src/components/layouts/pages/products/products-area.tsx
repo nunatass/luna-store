@@ -3,11 +3,11 @@
 import { CloseTwoIcon } from '@/components/icons';
 import { SidePanel } from '@/components/layouts/side-panel';
 import { Button } from '@/components/ui/button';
+import { useProducts } from '@/hooks/api/use-product';
 import { useFilter } from '@/hooks/use-filter';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useMemo } from 'react';
-import { productData } from '../../../../data/products-data';
 import { ProductItem } from '../../product-item';
 import { ProductAreaHeader } from './components/product-area-header';
 import { ProductFilterArea } from './product-details/product-filter-area';
@@ -20,8 +20,7 @@ const productAnimationProps = {
 };
 
 export function ProductsArea() {
-  const products = productData;
-  // const { data: products, isError, isLoading } = useGetAllProductsQuery();
+  const { data: products, isPending, isError } = useProducts();
   const {
     isFilterPanelOpen,
     setIsFilterPanelOpen,
@@ -37,13 +36,13 @@ export function ProductsArea() {
 
   const productItems = useMemo(
     () =>
-      products.data.filter(
+      products.filter(
         (product) =>
           (product.category.name === filterCategory ||
             filterCategory === null) &&
-          product.price <= filterPrice
+          product.prices[0].value <= filterPrice
       ),
-    [filterCategory, filterPrice, products.data]
+    [filterCategory, filterPrice, products]
   );
 
   // Load the maximum price once the products have been loaded
@@ -80,16 +79,19 @@ export function ProductsArea() {
   // decide what to render
   // const content = null;
 
-  // if (isLoading) {
-  //   content = <ShopLoader loading={isLoading}/>;
-  // }
-  // if (!isLoading && isError) {
-  //   content = <div className="pb-80 text-center"><ErrorMsg msg="There was an error" /></div>;
-  // }
-  // if (!isLoading && !isError && products?.data?.length === 0) {
-  //   content = <ErrorMsg msg="No Products found!" />;
-  // }
-  if (/*!isLoading && !isError &&*/ products?.data?.length > 0) {
+  if (isPending) {
+    //content = <ShopLoader loading={isLoading}/>;
+    return null;
+  }
+  if (!isPending && isError) {
+    // content = <div className="pb-80 text-center"><ErrorMsg msg="There was an error" /></div>;
+    return null;
+  }
+  if (!isPending && !isError && products?.length === 0) {
+    //content = <ErrorMsg msg="No Products found!" />;
+    return null;
+  }
+  if (!isPending && !isError && products?.length > 0) {
     // products
     // const product_items = products.data;
     // select short filtering
@@ -218,7 +220,7 @@ export function ProductsArea() {
                 {productItems.length > 0 &&
                   productItems.map((product) => (
                     <motion.div key={product.id} {...productAnimationProps}>
-                      <ProductItem {...product} />
+                      <ProductItem product={product} />
                     </motion.div>
                   ))}
                 {productItems.length === 0 && (
