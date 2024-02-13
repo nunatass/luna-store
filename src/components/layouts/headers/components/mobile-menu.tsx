@@ -1,11 +1,6 @@
 import { instagramMenuData } from '@/data/instagram-data';
-import { MobileMenu, mobileMenuData } from '@/data/menu-data';
 
 import Link from 'next/link';
-// import ProductItem from "../products/electronics/product-item";
-// import ErrorMsg from "./error-msg";
-// import { HomeNewArrivalPrdLoader } from "../loader";
-// import { useGetProductTypeQuery } from "@/redux/features/productApi";
 
 import { HomeIcon } from '@/components/icons';
 import {
@@ -15,50 +10,12 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { InstagramImageCard } from '@/components/ui/instagram-image-card';
+import { MenuItem, useMenuData } from '@/hooks/use-menu-data';
 
 export const MobileMenus = () => {
-  //const [isActiveMenu, setIsActiveMenu] = useState('');
+  const { mobileMenuData } = useMenuData();
 
-  // const { data: products, isError, isLoading } = useGetProductTypeQuery({
-  //   type: 'electronics',
-  //   query: 'new=true'
-  // });
-
-  // decide what to render
-  // const content = null;
-
-  // if (isLoading) {
-  //   content = (
-  //     <HomeNewArrivalPrdLoader loading={isLoading} />
-  //   );
-  // }
-
-  // if (!isLoading && isError) {
-  //   content = <ErrorMsg msg="There was an error" />;
-  // }
-
-  // if (!isLoading && !isError && products?.data?.length === 0) {
-  //   content = <ErrorMsg msg="No Products found!" />;
-  // }
-
-  // if (!isLoading && !isError && products?.data?.length > 0) {
-  //   const product_items = products.data;
-
-  //   content = (
-  //     <div className="row">
-  //       {product_items.slice(0, 4).map((item) => (
-  //         <div key={item.id} className="col-md-3">
-  //           <ProductItem product={item} />
-  //         </div>
-  //       ))}
-  //     </div>
-  //   );
-  // } else {
-  //   // If there are no products or an error occurs, set content to an empty array
-  //   content = [];
-  // }
-
-  const renderMenu = (menu: MobileMenu) => {
+  const renderMenu = (menu: MenuItem) => {
     if (menu?.homes) {
       return (
         <Accordion type="single" collapsible className="h-full w-full px-4">
@@ -126,8 +83,8 @@ export const MobileMenus = () => {
 
   return (
     <nav className="tp-main-menu-content">
-      {mobileMenuData.map((menu) => (
-        <ul key={menu?.id}>{renderMenu(menu)}</ul>
+      {mobileMenuData?.map((menu) => (
+        <ul key={menu?.id}>{renderMenu(menu!)}</ul>
       ))}
     </nav>
   );
