@@ -39,7 +39,7 @@ export function SliderNav({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ ease: 'easeInOut', duration: 0.6 }}
-      className="hidden sm:block absolute bottom-40 left-10 sm:left-20 lg:left-60 xl:left-96 h-32 w-40 "
+      className="absolute bottom-40 left-10 hidden h-32 w-40 sm:left-20 sm:block lg:left-60 xl:left-96 "
     >
       <Slider
         {...navSliderSetting}
@@ -52,7 +52,7 @@ export function SliderNav({
           <div key={index}>
             <div
               className={cn(
-                'tp-slider-nav-icon flex gap-5 items-center justify-center text-white font-medium text-xl cursor-pointer transition-all duration-200 ease-in-out',
+                'tp-slider-nav-icon flex cursor-pointer items-center justify-center gap-5 text-xl font-medium text-white transition-all duration-200 ease-in-out',
                 index !== currentSlide && 'opacity-60'
               )}
             >

@@ -14,16 +14,16 @@ export function InstagramImageCard({
   className,
 }: InstagramImageCardProps) {
   return (
-    <div className={cn('relative group', className)}>
+    <div className={cn('group relative', className)}>
       <Image
         src={image}
         alt="instagram img"
-        className="max-w h-full relative "
+        className="max-w relative h-full "
       />
-      <div className="w-full h-full bg-black absolute top-0 right-0 opacity-0 group-hover:opacity-25 ease-in-out transition-all duration-300" />
-      <div className="absolute z-20 top-1/2 left-1/2 bg-white w-14 h-14 -translate-x-1/2 -translate-y-[calc(50% - 40px)] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300 shadow-sm transform-all ease-in-out hover:bg-[#821f40] hover:text-white text-black group-hover:-translate-y-[20px] ">
+      <div className="absolute right-0 top-0 h-full w-full bg-black opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-25" />
+      <div className="-translate-y-[calc(50% - 40px)] transform-all absolute left-1/2 top-1/2 z-20 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-white text-black opacity-0 shadow-sm duration-300 ease-in-out hover:bg-[#821f40] hover:text-white group-hover:-translate-y-[20px] group-hover:opacity-100 ">
         <a href={link} target="_blank" aria-label="instagram link">
-          <InstagramIcon className="w-4 h-4" aria-label="instagram icon" />
+          <InstagramIcon className="h-4 w-4" aria-label="instagram icon" />
         </a>
       </div>
     </div>

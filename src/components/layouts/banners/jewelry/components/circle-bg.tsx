@@ -30,12 +30,12 @@ export function CircleBG({ index, currentSlide }: CircleBGProps) {
       <motion.div
         {...getCirclesAnimationProps(index, currentSlide)}
         key={`${index} dot-full`}
-        className="absolute -bottom-[20%] left-1/2 h-[500px] w-[500px] rounded-full bg-[#ae9b79] sm:h-[800px] sm:w-[800px] scale-0"
+        className="absolute -bottom-[20%] left-1/2 h-[500px] w-[500px] scale-0 rounded-full bg-[#ae9b79] sm:h-[800px] sm:w-[800px]"
       />
       <motion.div
         {...getCirclesAnimationProps(index, currentSlide)}
         key={`${index} dot-border`}
-        className="absolute -bottom-[25%] left-[48%] h-[500px] w-[500px] rounded-full border-2 border-[#b7a687] sm:h-[800px] sm:w-[800px] scale-0"
+        className="absolute -bottom-[25%] left-[48%] h-[500px] w-[500px] scale-0 rounded-full border-2 border-[#b7a687] sm:h-[800px] sm:w-[800px]"
       />
     </>
   );

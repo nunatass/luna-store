@@ -94,7 +94,7 @@ export function Slider({
             key={index}
             {...getImageAnimationProps(index, currentSlide)}
             className={cn(
-              'absolute bottom-0 z-30 aspect-auto h-screen w-full object-contain flex justify-center items-end sm:translate-y-0 md:translate-y-16 sm:pl-56',
+              'absolute bottom-0 z-30 flex aspect-auto h-screen w-full items-end justify-center object-contain sm:translate-y-0 sm:pl-56 md:translate-y-16',
               width > 400 && 'translate-y-10',
               width > 480 && 'translate-y-40',
               width > 580 && 'translate-y-56'
@@ -104,24 +104,24 @@ export function Slider({
           </motion.div>
           <CircleBG index={index} currentSlide={currentSlide} />
 
-          <div className="absolute left-0 top-[55%] sm:top-[35%] md:top-[30%] z-40 p-8 md:left-10 lg:left-[12%] lg:w-[700px] md:w-[500px]">
+          <div className="absolute left-0 top-[55%] z-40 p-8 sm:top-[35%] md:left-10 md:top-[30%] md:w-[500px] lg:left-[12%] lg:w-[700px]">
             <div className="flex flex-col text-white">
               <motion.span
                 {...getTextAnimationProps(index, currentSlide, 0.3)}
-                className="text-3xl sm:text-5xl  font-charm"
+                className="font-charm text-3xl  sm:text-5xl"
                 key={`${index} subtitle`}
               >
                 {item.subtitle}
               </motion.span>
               <motion.h3
-                className="text-5xl sm:text-7xl md:text-[72px] lg:text-[96px] text-wrap"
+                className="text-wrap text-5xl sm:text-7xl md:text-[72px] lg:text-[96px]"
                 {...getTextAnimationProps(index, currentSlide)}
                 key={`${index} title`}
               >
                 {item.title}
               </motion.h3>
               <motion.div
-                className="mt-8 sm:mt-4 w-max border-2 border-[#b7a687] px-6 py-3 transition-colors ease-in-out duration-300 hover:border-white hover:bg-white hover:text-black md:mt-8"
+                className="mt-8 w-max border-2 border-[#b7a687] px-6 py-3 transition-colors duration-300 ease-in-out hover:border-white hover:bg-white hover:text-black sm:mt-4 md:mt-8"
                 {...getTextAnimationProps(index, currentSlide, 0.8)}
                 key="shop-btn"
               >
