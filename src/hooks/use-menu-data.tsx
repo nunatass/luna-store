@@ -55,7 +55,7 @@ export function useMenuData() {
             ? [{ title: 'loading...', link: '' }]
             : categories?.slice(0, 4).map((category: Category) => ({
                 title: category.name,
-                link: '/',
+                link: `/products?category=${category.name.toLocaleLowerCase()}`,
               })),
         },
         {

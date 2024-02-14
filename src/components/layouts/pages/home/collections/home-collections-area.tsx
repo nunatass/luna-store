@@ -27,10 +27,19 @@ export const HomeCollectionsArea = () => {
   );
 
   const piercingCollection = collections.find(
-    (collection) => collection.title === 'PIERCINGS & HUGGIES'
+    (collection) => collection.title === 'Piercings & Huggies'
   );
 
-  if (!initialCollection || !romanceCollection || !piercingCollection) {
+  const bestSellers = collections.find(
+    (collection) => collection.title === 'Best Sellers'
+  );
+
+  if (
+    !initialCollection ||
+    !romanceCollection ||
+    !piercingCollection ||
+    !bestSellers
+  ) {
     return null;
   }
 
@@ -40,8 +49,8 @@ export const HomeCollectionsArea = () => {
         <div className="sm:col-span-2 md:row-start-1">
           <HomeCollectionsItem
             className="md:h-full"
-            image={initialCollection.medias[0].url}
-            title={initialCollection.title}
+            image={bestSellers.medias[0].url}
+            title={bestSellers.title}
             link=""
           />
         </div>

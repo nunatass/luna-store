@@ -18,7 +18,11 @@ interface CartStore {
   addProduct: (product: CartProduct) => void;
   removeProduct: (id: string) => void;
   removeAll: () => void;
-  getTotal: () => { total: number; quantity: number };
+  getTotal: () => {
+    total: number;
+    quantity: number;
+    totalWithDiscount: number;
+  };
   getQuantity: (id: string) => number;
   addQuantity: (id: string) => void;
   removeQuantity: (id: string) => void;
@@ -34,11 +38,18 @@ export const useCart = create(
           (currentProduct) => currentProduct.id === product.id
         );
 
-        if (existingProduct) {
+        if (existingProduct && existingProduct.price === product.price) {
           return toast('Item already in cart.');
         }
 
-        set({ products: [...get().products, product] });
+        set({
+          products: [
+            ...get().products.filter(
+              (currentProduct) => currentProduct.id !== product.id
+            ),
+            product,
+          ],
+        });
         toast('Item added to cart.');
       },
       removeProduct: (id: string) => {
@@ -91,13 +102,14 @@ export const useCart = create(
       getTotal: () => {
         return get().products.reduce(
           (cartTotal, cartItem) => {
-            const { price, orderQuantity, discount } = cartItem;
-            cartTotal.total +=
-              (price - (price * discount) / 100) * orderQuantity;
+            const { price, orderQuantity } = cartItem;
+            cartTotal.total += price * orderQuantity;
+            cartTotal.totalWithDiscount +=
+              (price - (price * cartItem.discount) / 100) * orderQuantity;
             cartTotal.quantity = get().products.length;
             return cartTotal;
           },
-          { total: 0, quantity: 0 }
+          { total: 0, totalWithDiscount: 0, quantity: 0 }
         );
       },
     }),

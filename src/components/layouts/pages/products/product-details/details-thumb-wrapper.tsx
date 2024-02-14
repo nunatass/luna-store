@@ -31,7 +31,6 @@ export const DetailsThumbWrapper = ({
   imgHeight = 480,
   modal,
   // videoId = false,
-  // status,
 }: DetailsThumbWrapperProps) => {
   // const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [activeImg, setActiveImg] = useState<Media>(imageURLs[0]);
@@ -95,21 +94,6 @@ export const DetailsThumbWrapper = ({
               className="h-full w-full object-contain"
               priority
             />
-            {/* <div className="tp-product-badge">
-            {status === 'out-of-stock' && (
-              <span className="product-hot">out-stock</span>
-            )}
-          </div> */}
-            {/* {videoId && (
-            <div
-               onClick={() => setIsVideoOpen(true)}
-              className="tp-product-details-thumb-video"
-            >
-              <a className="tp-product-details-thumb-video-btn popup-video cursor-pointer">
-                <i className="fas fa-play"></i>
-              </a>
-            </div>
-          )} */}
           </motion.div>
         </div>
       </div>

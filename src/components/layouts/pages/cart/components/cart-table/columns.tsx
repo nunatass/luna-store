@@ -1,7 +1,7 @@
 'use client';
 
 import type { CartProduct } from '@/common/types';
-import { formatPrice } from '@/lib/utils';
+import { formatPriceWithDiscount } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 import { CartProductCell } from './cart-product-cell';
 import { CartProductQuantityCell } from './cart-product-quantity-cell';
@@ -17,9 +17,10 @@ export const columns: ColumnDef<CartProduct>[] = [
     cell: ({ row }) => (
       <p>
         $
-        {formatPrice(
-          (row.original.price * (100 - row.original.discount)) / 100
-        )}
+        {
+          formatPriceWithDiscount(row.original.price, row.original.discount)
+            .price
+        }
       </p>
     ),
   },

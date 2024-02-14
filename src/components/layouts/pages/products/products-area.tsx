@@ -13,7 +13,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { ProductsAreaLoading } from '../../loadings/pages/products/products-area-loading';
 import { ProductItem } from '../../product-item';
 import { ProductAreaHeader } from './components/product-area-header';
-import { ProductFilterArea } from './product-details/product-filter-area';
+import { ProductFilterArea } from './components/product-filter-area';
 
 const productAnimationProps = {
   initial: { opacity: 0 },
@@ -38,7 +38,6 @@ export function ProductsArea() {
     filterPrice,
     resetFilter,
   } = useFilter();
-
   // handle close cart sidebar
   const handleCloseSideFilter = useCallback(() => {
     setIsFilterPanelOpen(false);
@@ -117,12 +116,13 @@ export function ProductsArea() {
               <ProductFilterArea className="mt-24 block w-full" />
             </div>
           </SidePanel>
-          <div className="w-full">
+          <div className="w-full" id="products">
             <ProductAreaHeader />
             <InfiniteScroll
               dataLength={productItems.length}
               next={fetchNextPage}
               hasMore={hasNextPage && productItems.length > 0}
+              scrollableTarget="products"
               loader={
                 <Skeleton className="h-96 w-40 max-w-80 rounded-none sm:w-full" />
               }

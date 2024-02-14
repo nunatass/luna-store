@@ -16,3 +16,15 @@ export function capitalize(word: string) {
 export function formatPrice(priceInCents: number): string {
   return (priceInCents / 100).toFixed(2);
 }
+
+export function formatPriceWithDiscount(
+  priceInCents: number,
+  discount: number
+): { price: string; diference: string } {
+  return {
+    price: formatPrice((priceInCents * (100 - discount)) / 100),
+    diference: formatPrice(
+      priceInCents - (priceInCents * (100 - discount)) / 100
+    ),
+  };
+}

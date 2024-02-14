@@ -1,9 +1,11 @@
 'use client';
 
+import { useFilter } from '@/hooks/use-filter';
 import { capitalize, cn, replaceDashWithSpaces } from '@/lib/utils';
 import { ChevronRightIcon } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { HomeIcon } from '../icons';
 
 type BreadcrumbProps = {
@@ -11,8 +13,12 @@ type BreadcrumbProps = {
   label?: string;
 };
 
-export function Breadcrumb({ title, label }: BreadcrumbProps) {
+export function Breadcrumb({ title: initialTitle, label }: BreadcrumbProps) {
+  const [title, setTitle] = useState(initialTitle);
+  const { setCategory } = useFilter();
   const pathname = usePathname();
+
+  const searchParams = useSearchParams();
 
   const pathSegments = pathname.split('/').filter((segment) => segment);
 
@@ -23,6 +29,16 @@ export function Breadcrumb({ title, label }: BreadcrumbProps) {
     const pathName = routeNames[index];
     return { pathName, pathLink };
   });
+
+  useEffect(() => {
+    const category = searchParams.get('category');
+    if (!category) {
+      return setTitle(initialTitle);
+    }
+    setCategory(capitalize(category));
+
+    setTitle(pathname === '/products' ? capitalize(category) : title);
+  }, [searchParams, title, pathname, setCategory, setTitle, initialTitle]);
 
   return (
     <nav

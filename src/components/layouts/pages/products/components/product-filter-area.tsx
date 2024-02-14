@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { useFilter } from '@/hooks/use-filter';
 import { cn } from '@/lib/utils';
 import { useCallback } from 'react';
-import { CategoryFilter } from '../components/category-filter';
-import { PriceFilter } from '../components/price-filter';
+import { CategoryFilter } from './category-filter';
+import { PriceFilter } from './price-filter';
 
 type ProductFilterAreaProps = {
   className?: string;
@@ -15,6 +15,7 @@ export function ProductFilterArea({ className }: ProductFilterAreaProps) {
   const { setPrice, resetFilter } = useFilter();
 
   const handleClearFilter = useCallback(() => {
+    window.history.replaceState(null, '', '/products');
     resetFilter();
     setPrice(1199);
   }, [resetFilter]);

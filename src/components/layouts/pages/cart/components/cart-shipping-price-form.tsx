@@ -1,10 +1,3 @@
-'use client';
-
-import { formatPrice } from '@/lib/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -16,26 +9,32 @@ import {
 } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCart } from '@/hooks/use-cart';
+import { formatPrice } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-const shippingMethods = [
-  {
+type ShippingMethodsType = 'free' | 'standard' | 'fast';
+
+const shippingMethods = {
+  free: {
     id: 'free',
     label: 'Free shipping',
     value: 0,
   },
-  {
+  standard: {
     id: 'standard',
     label: 'Standard shipping',
-    value: 2.99,
+    value: 299,
   },
-  {
+  fast: {
     id: 'fast',
     label: 'Fast shipping',
-    value: 5.0,
+    value: 500,
   },
-];
+};
 
 const FormSchema = z.object({
   type: z.enum(['free', 'standard', 'fast'], {
@@ -44,24 +43,21 @@ const FormSchema = z.object({
 });
 
 export function CartShippingPriceForm() {
-  const [shipCost, setShipCost] = useState(0);
+  const [shipCost, setShipCost] = useState(shippingMethods.standard.value);
 
   const { getTotal } = useCart();
-
-  const total = getTotal().total + shipCost;
+  const { total, totalWithDiscount } = getTotal();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
   function onSubmit() {
-    // TODO: hanle submitted
+    // TODO: handle submitted
   }
 
-  function handleShippingMethodChange(value: string) {
-    setShipCost(() => {
-      return shippingMethods.filter((method) => method.id === value)[0].value;
-    });
+  function handleShippingMethodChange(method: ShippingMethodsType) {
+    setShipCost(shippingMethods[method]?.value);
   }
 
   return (
@@ -79,28 +75,27 @@ export function CartShippingPriceForm() {
               <FormControl>
                 <RadioGroup
                   onValueChange={handleShippingMethodChange}
-                  defaultValue={shippingMethods[0].label}
+                  defaultValue={'standard'}
                   className="flex flex-col space-y-1"
                 >
-                  {shippingMethods.map((shippingMethod) => (
-                    <FormItem
-                      key={shippingMethod.id}
-                      className="flex items-center space-x-3 space-y-0"
-                    >
-                      <FormControl>
-                        <RadioGroupItem
-                          id={shippingMethod.id}
-                          value={shippingMethod.label}
-                        />
-                      </FormControl>
-                      <FormLabel className="flex gap-2 font-normal">
-                        {shippingMethod.label}
-                        <p className="text-normal text-blue-500">
-                          ${formatPrice(shippingMethod.value)}
-                        </p>
-                      </FormLabel>
-                    </FormItem>
-                  ))}
+                  {Object.entries(shippingMethods).map(
+                    ([method, { label, value, id }]) => (
+                      <FormItem
+                        key={method}
+                        className="flex items-center space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <RadioGroupItem id={method} value={id} />
+                        </FormControl>
+                        <FormLabel className="flex gap-2 font-normal">
+                          {label}
+                          <p className="text-normal text-blue-500">
+                            ${formatPrice(value)}
+                          </p>
+                        </FormLabel>
+                      </FormItem>
+                    )
+                  )}
                 </RadioGroup>
               </FormControl>
               <FormMessage />
@@ -110,7 +105,12 @@ export function CartShippingPriceForm() {
         <div className="flex flex-col gap-2 py-2">
           <div className="flex items-center justify-between text-xl font-medium">
             <span>Total</span>
-            <span> ${formatPrice(total)}</span>
+            <div className="flex flex-col items-center justify-center">
+              <span> ${formatPrice(totalWithDiscount + shipCost)}</span>
+              <span className="text-sm font-normal line-through">
+                ${formatPrice(total + shipCost)}
+              </span>
+            </div>
           </div>
           <Button className="w-full">
             <Link href="/checkout" className="tp-cart-checkout-btn w-100">

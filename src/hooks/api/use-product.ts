@@ -64,7 +64,7 @@ export function useProducts() {
       if (
         !lastPage ||
         lastPage.totalPages === 0 ||
-        lastPage.currentPage === lastPage.totalPages
+        lastPage.currentPage + 1 === lastPage.totalPages
       ) {
         return undefined;
       }
@@ -80,8 +80,8 @@ export function useProducts() {
   });
 
   return {
-    data: data?.pages.flatMap((page) => page.data) || [],
     ...other,
+    data: data?.pages.flatMap((page) => page.data) || [],
   };
 }
 

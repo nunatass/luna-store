@@ -5,7 +5,7 @@ import { CartProduct } from '@/common/types';
 import { CloseTwoIcon, TrashIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useWishlist } from '@/hooks/use-whishlist';
-import { cn, formatPrice } from '@/lib/utils';
+import { cn, formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -77,7 +77,7 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
         <div className="w-full">
           {product.discount > 0 ? (
             <span>
-              ${formatPrice((product.price * (100 - product.discount)) / 100)}
+              ${formatPriceWithDiscount(product.price, product.discount).price}
             </span>
           ) : (
             <span className="text-sm font-semibold text-blue-500">

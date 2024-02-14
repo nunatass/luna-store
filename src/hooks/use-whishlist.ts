@@ -22,11 +22,18 @@ export const useWishlist = create(
           (currentProduct) => currentProduct.id === product.id
         );
 
-        if (existingProduct) {
+        if (existingProduct && existingProduct.price === product.price) {
           return toast('Item already in wishlist.');
         }
 
-        set({ products: [...get().products, product] });
+        set({
+          products: [
+            ...get().products.filter(
+              (currentProduct) => currentProduct.id !== product.id
+            ),
+            product,
+          ],
+        });
         toast('Item added to wishlist.');
       },
       removeProduct: (id: string) => {

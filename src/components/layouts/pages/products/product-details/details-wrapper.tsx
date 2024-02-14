@@ -3,16 +3,16 @@ import { AskQuestionIcon, WishlistIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
 import { ProductQuantity } from './product-quantity';
 
 import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
-import { Product } from '@/common/types';
+import { Price, Product } from '@/common/types';
 import { useCart } from '@/hooks/use-cart';
 import { useWishlist } from '@/hooks/use-whishlist';
-import { formatPrice } from '@/lib/utils';
 import { CheckCircle } from 'lucide-react';
+import { PriceBundle } from './price-bundle';
 
 type DetailsWrapperProps = {
   product: Product;
@@ -23,44 +23,27 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   const { addProduct: addWishlistProduct } = useWishlist();
 
   const [ratingVal] = useState(0);
-  const [showMoreText, setShowMoreText] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-
-  const renderPrice = useMemo(() => {
-    if (product.prices[0].discount > 0) {
-      return (
-        <>
-          <span className="text-base	line-through">
-            ${product.prices[0].value}
-          </span>
-          <span className="text-2xl font-medium text-black">
-            $
-            {formatPrice(
-              (product.prices[0].value * (100 - product.prices[0].discount)) /
-                100
-            )}
-          </span>
-        </>
-      );
-    }
-
-    return (
-      <span className="text-2xl font-medium text-black">
-        ${product.prices[0].value}
-      </span>
-    );
-  }, [product.prices]);
+  const [showMoreText, setShowMoreText] = useState<boolean>(false);
+  const [quantity, setQuantity] = useState<number>(1);
+  const [price, setPrice] = useState<Price>(product.prices[0]);
 
   const handleAddProduct = useCallback(() => {
     addCartProduct({
       id: product.id,
-      discount: product.prices[0].discount,
-      price: product.prices[0].value,
+      discount: price.discount,
+      price: price.value,
       media: product.medias[0].url,
       title: product.title,
       orderQuantity: quantity,
     });
-  }, [quantity, product, addCartProduct]);
+  }, [quantity, product, addCartProduct, price]);
+
+  const handleSelectPrice = useCallback(
+    (price: Price) => {
+      setPrice(price);
+    },
+    [setPrice]
+  );
 
   // useEffect(() => {
   //   if (reviews && reviews.length > 0) {
@@ -77,13 +60,13 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   const handleWishlistProduct = useCallback(() => {
     addWishlistProduct({
       id: product.id,
-      discount: product.prices[0].discount,
-      price: product.prices[0].value,
+      discount: price.discount,
+      price: price.value,
       media: product.medias[0].url,
       title: product.title,
       orderQuantity: quantity,
     });
-  }, [quantity, product, addWishlistProduct]);
+  }, [quantity, product, addWishlistProduct, price]);
 
   return (
     <div className="flex w-full flex-col gap-4 text-gray-600">
@@ -122,7 +105,11 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         </span>
       </p>
 
-      <div className="flex items-center gap-2">{renderPrice}</div>
+      <PriceBundle
+        prices={product.prices}
+        onSelectChange={handleSelectPrice}
+        selectedPrice={price}
+      />
 
       {/* variations */}
       {/* {imageURLs.some((item) => item?.color && item?.color?.name) && (
@@ -171,28 +158,25 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
           </Button>
         </div>
         <Button asChild size="lg" className="w-full">
-          <Link
-            href="/cart"
-            //  onClick={() => dispatch(handleModalClose())}
-          >
-            Buy Now
-          </Link>
+          <Link href="/cart">Buy Now</Link>
         </Button>
       </div>
 
       <div className="flex border-b-[1px] pb-2">
         <Button
           variant="ghost"
-          onClick={() => handleWishlistProduct}
+          onClick={handleWishlistProduct}
           type="button"
           className="flex gap-2"
         >
           <WishlistIcon />
           Add Wishlist
         </Button>
-        <Button variant="ghost" type="button" className="flex gap-2">
-          <AskQuestionIcon />
-          Ask a question
+        <Button variant="ghost" type="button" asChild>
+          <Link href="/contact" className="flex gap-2">
+            <AskQuestionIcon />
+            Ask a question
+          </Link>
         </Button>
       </div>
 
