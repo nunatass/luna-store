@@ -34,7 +34,7 @@ export const HomeCollectionsItem = ({
       />
       <div className="gpa-2 z-10 flex flex-col justify-end text-black">
         <span className="text-base">Collection</span>
-        <h3 className="bg-[#be844c]/20 text-xl uppercase">{title}</h3>
+        <h3 className="text-xl uppercase">{title}</h3>
       </div>
     </Link>
   );
