@@ -96,7 +96,7 @@ export const ReviewForm = ({ id }: ReviewFormProp) => {
               <FormControl>
                 <Textarea
                   placeholder="write your review here..."
-                  className="resize-none rounded-none"
+                  className="max-h-72 rounded-none"
                   {...field}
                 />
               </FormControl>

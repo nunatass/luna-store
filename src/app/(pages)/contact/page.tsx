@@ -11,7 +11,7 @@ export default function ContactPage() {
       <SEO pageTitle="Contact US" />
       <Header secondary />
       <div className="mt-32">
-        <Breadcrumb title="Keep In Touch with Us" label="Contact Us" />
+        <Breadcrumb title="Keep In Touch With Us" label="Contact Us" />
       </div>
       <ContactArea />
       <ContactMap />

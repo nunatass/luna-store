@@ -180,29 +180,29 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         </Button>
       </div>
 
-      <div className="">
-        <ul>
-          <li className="flex items-center gap-2 ">
+      <div className="hidden w-full flex-col gap-2 lg:flex">
+        <div className="">
+          <div className="flex items-center gap-2 ">
             <CheckCircle className="h-4 w-4 text-gray-400" /> 30 days easy
             returns
-          </li>
-          <li className="flex items-center gap-2">
+          </div>
+          <div className="flex items-center gap-2">
             <CheckCircle className="h-4 w-4 text-gray-400" />
             Order yours before 2.30pm for same day dispatch
-          </li>
-        </ul>
-      </div>
-
-      <div className="flex w-full flex-wrap items-center justify-center gap-4 bg-gray-200 p-3">
-        <div className="flex gap-2 sm:flex-col sm:gap-0 md:flex-row md:gap-2 xl:flex-col xl:gap-0">
-          <span>Guaranteed safe </span>
-          <span>& secure checkout</span>
+          </div>
         </div>
-        <Image
-          src={paymentOptionImg}
-          alt="payment_option_img"
-          className="h-8 w-max"
-        />
+
+        <div className="flex w-full flex-wrap items-center justify-center gap-4 bg-gray-200 p-3">
+          <div className="flex gap-2 sm:flex-col sm:gap-0 md:flex-row md:gap-2 xl:flex-col xl:gap-0">
+            <span>Guaranteed safe </span>
+            <span>& secure checkout</span>
+          </div>
+          <Image
+            src={paymentOptionImg}
+            alt="payment_option_img"
+            className="h-8 w-max"
+          />
+        </div>
       </div>
     </div>
   );

@@ -15,12 +15,11 @@ export default function ProductPage({ params }: ProductPageProps) {
   const { data: product, isPending, isError } = useProductById(params.id);
 
   let content = null;
+
   if (isPending) {
-    //   content = <PrdDetailsLoader loading={isLoading}/>;
     return null;
   }
   if (!isPending && isError) {
-    // content = <ErrorMsg msg="There was an error" />;
     return null;
   }
   if (!isPending && !isError && product) {
