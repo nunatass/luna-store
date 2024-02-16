@@ -3,11 +3,13 @@
 import { ProductAreaLoading } from '@/components/layouts/loadings/pages/home/product-area-loading';
 import { ProductItem } from '@/components/layouts/product-item';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useCategories } from '@/hooks/api/use-categories';
-import { useCollections } from '@/hooks/api/use-collections';
+import { useProducts } from '@/hooks/api/use-product';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const productAnimationProps = {
   initial: { opacity: 0 },
@@ -18,7 +20,13 @@ const productAnimationProps = {
 };
 
 export const ProductsArea = () => {
-  const { data: collections, isPending, isError } = useCollections();
+  const {
+    data: products,
+    isPending: isProductsPending,
+    isError: isProductsError,
+    hasNextPage,
+    fetchNextPage,
+  } = useProducts();
   const { data: categories, isPending: isPendingCategories } = useCategories();
   const [tabs, setTabs] = useState([
     'All Collection',
@@ -42,40 +50,42 @@ export const ProductsArea = () => {
 
   let content = null;
 
-  if (isPending) {
+  if (isProductsPending) {
     content = <ProductAreaLoading />;
   }
 
-  if (isError) {
+  if (isProductsError) {
     return null;
   }
 
-  const trendsProductsCollection = collections.find(
-    (collection) => collection.title === 'Trending Products'
-  );
-
-  if (
-    trendsProductsCollection &&
-    trendsProductsCollection.products.length > 0
-  ) {
-    let productItems = trendsProductsCollection.products;
+  if (products.length > 0) {
+    let productItems = products;
 
     if (activeTab !== 'All Collection') {
-      productItems = trendsProductsCollection.products.filter(
+      productItems = products.filter(
         (product) => product.category.name === activeTab
       );
     }
 
     content = (
-      <div className="mt-6 flex w-full flex-wrap justify-center justify-items-center gap-4 sm:grid sm:grid-cols-2 md:mt-12 md:grid-cols-3 lg:grid-cols-4 lg:justify-items-start">
-        <AnimatePresence>
-          {productItems.map((product) => (
-            <motion.div key={product.id} {...productAnimationProps}>
-              <ProductItem product={product} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
+      <InfiniteScroll
+        dataLength={productItems.length}
+        next={fetchNextPage}
+        hasMore={hasNextPage && productItems.length > 0}
+        loader={
+          <Skeleton className="h-96 w-40 max-w-80 rounded-none sm:w-full" />
+        }
+      >
+        <div className="mt-6 flex w-full flex-wrap justify-center justify-items-center gap-4 sm:grid sm:grid-cols-2 md:mt-12 md:grid-cols-3 lg:grid-cols-4 lg:justify-items-start">
+          <AnimatePresence>
+            {productItems.map((product) => (
+              <motion.div key={product.id} {...productAnimationProps}>
+                <ProductItem product={product} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </InfiniteScroll>
     );
   }
 

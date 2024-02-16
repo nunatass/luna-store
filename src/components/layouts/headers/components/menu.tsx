@@ -51,7 +51,7 @@ export const Menus = ({ secondary }: MenusProps) => {
             secondary={secondary}
             className="group/menu-products"
           >
-            <ul className="transform-all invisible absolute left-0 top-14 z-10 flex  h-max justify-between bg-white px-8  py-5 font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/menu-products:visible group-hover/menu-products:-translate-y-3 group-hover/menu-products:opacity-100 xl:w-[80%]">
+            <ul className="transform-all invisible absolute left-0 top-14 z-10 flex  h-max justify-between bg-white px-8  py-5 font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/menu-products:visible group-hover/menu-products:-translate-y-3 group-hover/menu-products:opacity-100 lg:w-[80%]">
               {menu?.productPages?.map((product) => (
                 <li key={product.title} className="flex flex-col gap-2.5">
                   <Link
