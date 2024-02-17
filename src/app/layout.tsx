@@ -7,6 +7,7 @@ import { Toaster } from 'sonner';
 
 import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
 import './globals.css';
+import { HydrationZustand } from '@/components/hydration-zustand';
 
 const charm = Charm({
   subsets: ['latin'],
@@ -42,17 +43,19 @@ export default function RootLayout({
         className={`${charm.variable} ${jost.variable} ${oregano.variable} font-jost`}
       >
         <TanstackQueryProvider>
-          <div className="relative">
-            <Toaster
-              position="top-right"
-              expand={false}
-              toastOptions={{ duration: 1500 }}
-            />
-            <Modal />
-            {children}
-            <BackToTopButton />
-            <Footer />
-          </div>
+          <HydrationZustand>
+            <div className="relative">
+              <Toaster
+                position="top-right"
+                expand={false}
+                toastOptions={{ duration: 1500 }}
+              />
+              <Modal />
+              {children}
+              <BackToTopButton />
+              <Footer />
+            </div>
+          </HydrationZustand>
         </TanstackQueryProvider>
       </body>
     </html>

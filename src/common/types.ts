@@ -10,12 +10,19 @@ export type Price = {
   label: string;
 };
 
+export type User = {
+  id: string;
+  name: string;
+};
+
 export type Review = {
   id: string;
-  productId: string;
-  comment: string;
+  email: string;
+  name: string;
   rating: number;
+  comment: string;
   createdAt: string;
+  user: User;
 };
 
 export type ImageItem = { img: string; size: number; id: string };
@@ -40,7 +47,6 @@ export type Product = {
   title: string;
   description: string;
   category: Category;
-  reviews: Review[];
   prices: Price[];
   medias: Media[];
 };

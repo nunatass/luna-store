@@ -1,7 +1,7 @@
 import { Category, Collection } from '@/common/types';
 import { CartIcon, CartTwoIcon, EmailIcon } from '@/components/icons';
 import { Newspaper, TicketIcon, TruckIcon } from 'lucide-react';
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import { useCategories } from './api/use-categories';
 import { useCollections } from './api/use-collections';
 
@@ -40,6 +40,20 @@ export function useMenuData() {
     isPending: isCollectionsPending,
     isError: isCollectionsError,
   } = useCollections();
+
+  const mappedCategories = useMemo(() => {
+    if (isCategoriesPending) {
+      return [{ title: 'loading...', link: '' }];
+    } else {
+      return [
+        { title: 'All Products', link: '/products' },
+        ...categories.map((category) => ({
+          title: category.name,
+          link: '/',
+        })),
+      ];
+    }
+  }, [categories, isCategoriesPending]);
 
   const productMenuData = useCallback(
     () => ({
@@ -128,12 +142,7 @@ export function useMenuData() {
       title: 'Products',
       link: '/products',
       icon: <CartTwoIcon />,
-      subMenus: isCategoriesPending
-        ? [{ title: 'loading...', link: '' }]
-        : categories?.map((category: Category) => ({
-            title: category.name,
-            link: '/',
-          })),
+      subMenus: mappedCategories,
     },
     {
       id: 3,

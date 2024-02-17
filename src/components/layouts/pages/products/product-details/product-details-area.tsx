@@ -37,10 +37,7 @@ export const ProductDetailsArea = ({
           </div>
         </div>
 
-        <div
-          className="flex w-full flex-col items-center justify-between gap-4 bg-gray-200 p-3 sm:flex-row sm:justify-between"
-          border-2
-        >
+        <div className="flex w-full flex-col items-center justify-between gap-4 bg-gray-200 p-3 sm:flex-row sm:justify-between">
           <div className="flex flex-col gap-0 text-sm sm:text-base">
             <span>Guaranteed safe </span>
             <span>& secure checkout</span>
@@ -53,7 +50,7 @@ export const ProductDetailsArea = ({
         </div>
       </div>
       <div className="my-8">
-        <ProductReviewsArea product={productItem} />
+        <ProductReviewsArea productId={productItem.id} />
       </div>
     </section>
   );

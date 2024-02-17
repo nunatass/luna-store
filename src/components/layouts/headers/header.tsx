@@ -16,6 +16,7 @@ import { useSticky } from '@/hooks/use-sticky';
 import { useWishlist } from '@/hooks/use-whishlist';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { SidePanel } from '../side-panel';
 import { Menus } from './components/menu';
@@ -34,6 +35,7 @@ type HeaderProps = {
 };
 
 export const Header = ({ secondary }: HeaderProps) => {
+  const pathname = usePathname();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isSideCartOpen, setIsSideCartOpen] = useState(false);
@@ -45,7 +47,12 @@ export const Header = ({ secondary }: HeaderProps) => {
 
   return (
     <>
-      <div className="flex items-center justify-center bg-white py-2 text-lg  text-[#bd844c]">
+      <div
+        className={cn(
+          'flex items-center justify-center bg-primary py-2 text-lg  text-white',
+          pathname === '/' && 'bg-white text-[#be844c]'
+        )}
+      >
         Free stander delivery on purchases of +$99
       </div>
       <div className="relative z-20">

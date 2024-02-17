@@ -6,13 +6,16 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useCreateReview } from '@/hooks/api/use-reviews';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Rating } from 'react-simple-star-rating';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 // schema
@@ -28,48 +31,47 @@ const FormSchema = z.object({
     .min(1, { message: 'Required' })
     .max(200, { message: `Can't have more than 200 characters` })
     .trim(),
+  rating: z
+    .number()
+    .min(0.5, { message: 'Give a minimum rating of 0.5 start' }),
 });
 
 type ReviewFormProp = {
-  id: string;
+  productId: string;
 };
 
-export const ReviewForm = ({ id }: ReviewFormProp) => {
-  // const { user } = useSelector((state) => state.auth);
-  const [rating, setRating] = useState(0);
-  // const [addReview, {}] = useAddReviewMutation();
-
-  const handleRating = (rate: number) => {
-    setRating(rate);
-  };
-
+export const ReviewForm = ({ productId }: ReviewFormProp) => {
+  const { mutate: createReview, isPending, isSuccess } = useCreateReview();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: { comment: '', email: '', name: '', rating: 0 },
   });
 
-  // on submit
-  const onSubmit = (data: { name: string; email: string; comment: string }) => {
-    console.log(data, id);
+  useEffect(() => {
+    form.reset({ comment: '', name: '', email: '', rating: 0 });
+    toast.success('Your review has sent with success, Thank You!', {
+      duration: 2,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
-    //TODO:
-    // if (!user) {
-    //   notifyError('Please login first');
-    //   return;
-    // } else {
-    //   addReview({
-    //     userId: user?._id,
-    //     productId: product_id,
-    //     rating: rating,
-    //     comment: data.comment,
-    //   }).then((result) => {
-    //     if (result?.error) {
-    //       notifyError(result?.error?.data?.message);
-    //     } else {
-    //       notifySuccess(result?.data?.message);
-    //     }
-    //   });
-    // }
-    // reset();
+  const handleRating = (rate: number) => {
+    form.setValue('rating', rate);
+  };
+
+  const onSubmit = (data: {
+    name: string;
+    email: string;
+    comment: string;
+    rating: number;
+  }) => {
+    createReview({
+      comment: data.comment,
+      email: data.email,
+      name: data.name,
+      rating: data.rating,
+      productId,
+    });
   };
 
   return (
@@ -78,15 +80,30 @@ export const ReviewForm = ({ id }: ReviewFormProp) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-4"
       >
-        <div className="mt-4">
-          <FormLabel>Your Rating :</FormLabel>
-          <Rating
-            onClick={handleRating}
-            allowFraction
-            size={24}
-            initialValue={rating}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="rating"
+          render={() => (
+            <FormItem className="flex w-full flex-col">
+              <FormLabel>Your Rating :</FormLabel>
+              <FormControl>
+                <div className="mt-4">
+                  <Rating
+                    onClick={handleRating}
+                    allowFraction
+                    size={24}
+                    initialValue={form.getValues().rating}
+                  />
+                </div>
+              </FormControl>
+              <FormMessage>
+                {form.formState.errors.rating &&
+                  `${form.formState.errors.rating}`}
+              </FormMessage>
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="comment"
@@ -100,6 +117,10 @@ export const ReviewForm = ({ id }: ReviewFormProp) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage>
+                {form.formState.errors.comment &&
+                  `${form.formState.errors.comment}`}
+              </FormMessage>
             </FormItem>
           )}
         />
@@ -116,6 +137,9 @@ export const ReviewForm = ({ id }: ReviewFormProp) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage>
+                {form.formState.errors.name && `${form.formState.errors.name}`}
+              </FormMessage>
             </FormItem>
           )}
         />
@@ -133,11 +157,15 @@ export const ReviewForm = ({ id }: ReviewFormProp) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage>
+                {form.formState.errors.email &&
+                  `${form.formState?.errors?.email}`}
+              </FormMessage>
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="px-14">
+        <Button type="submit" className="px-14" isLoading={isPending}>
           Submit
         </Button>
       </form>

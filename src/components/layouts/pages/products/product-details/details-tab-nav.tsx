@@ -20,7 +20,7 @@ export const DetailsTabNav = ({ product }: DetailsTabNavProps) => {
           </TabsTrigger>
           <TabsTrigger value="information">Additional information</TabsTrigger>
           <TabsTrigger value="reviews">
-            Reviews ({product?.reviews?.length})
+            {/* Reviews ({product?.reviews?.length}) */}
           </TabsTrigger>
         </TabsList>
         <motion.div className="w-full" layout layoutId="tabLayout">
@@ -33,7 +33,7 @@ export const DetailsTabNav = ({ product }: DetailsTabNavProps) => {
         </motion.div>
         <motion.div className="w-full" layout layoutId="tabLayout">
           <TabsContent value="reviews" className="w-full">
-            <ProductReviewsArea product={product} />
+            <ProductReviewsArea productId={product.id} />
           </TabsContent>
         </motion.div>
       </Tabs>
