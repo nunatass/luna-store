@@ -41,7 +41,7 @@ type ReviewFormProp = {
 };
 
 export const ReviewForm = ({ productId }: ReviewFormProp) => {
-  const { mutate: createReview, isPending, isSuccess } = useCreateReview();
+  const { mutate: createReview, isSuccess } = useCreateReview();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: { comment: '', email: '', name: '', rating: 0 },
@@ -165,7 +165,7 @@ export const ReviewForm = ({ productId }: ReviewFormProp) => {
           )}
         />
 
-        <Button type="submit" className="px-14" isLoading={isPending}>
+        <Button type="submit" className="px-14">
           Submit
         </Button>
       </form>

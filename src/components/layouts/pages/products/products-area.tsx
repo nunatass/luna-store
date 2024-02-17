@@ -11,9 +11,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode, useCallback, useMemo } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ProductsAreaLoading } from '../../loadings/pages/products/products-area-loading';
-import { ProductItem } from '../../product-item';
 import { ProductAreaHeader } from './components/product-area-header';
 import { ProductFilterArea } from './components/product-filter-area';
+import { ProductItem } from '@/components/layouts/product-item';
 
 const productAnimationProps = {
   initial: { opacity: 0 },
@@ -75,7 +75,6 @@ export function ProductsArea() {
         </div>
       );
     }
-    return content;
   };
 
   if (!isPending && !isError && products?.length > 0) {
@@ -122,7 +121,6 @@ export function ProductsArea() {
               dataLength={productItems.length}
               next={fetchNextPage}
               hasMore={hasNextPage && productItems.length > 0}
-              scrollableTarget="products"
               loader={
                 <Skeleton className="h-96 w-40 max-w-80 rounded-none sm:w-full" />
               }

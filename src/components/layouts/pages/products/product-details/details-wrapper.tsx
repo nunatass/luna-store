@@ -85,11 +85,11 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         />
 
         <span className="text-sm">
-          (
+          {/* (
           {product.reviews && product.reviews.length > 0
             ? product.reviews.length
             : 0}{' '}
-          Review)
+          Review) */}
         </span>
       </div>
 
@@ -157,6 +157,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
             Add To Cart
           </Button>
         </div>
+
         <Button asChild size="lg" className="w-full">
           <Link href="/cart">Buy Now</Link>
         </Button>

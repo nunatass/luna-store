@@ -1,5 +1,6 @@
 'use client';
 
+import { Skeleton } from '@/components/ui/skeleton';
 import { useReviewsByProduct } from '@/hooks/api/use-reviews';
 import { AnimatePresence } from 'framer-motion';
 import { useCallback, useMemo, useState } from 'react';
@@ -16,6 +17,7 @@ export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
     data: reviews,
     fetchNextPage,
     fetchPreviousPage,
+    isPending,
   } = useReviewsByProduct(productId);
 
   const [page, setPage] = useState(0);
@@ -31,17 +33,24 @@ export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
   }, [fetchPreviousPage, setPage]);
 
   const renderReviews = useMemo(() => {
+    if (isPending) {
+      return Array.from({ length: 5 }, (_, index) => (
+        <div className="flex items-center gap-2" key={index}>
+          <Skeleton className="h-10 w-10 rounded-full" />
+          <div className="flex flex-col gap-1">
+            <Skeleton className="h-4 w-40" />
+            <Skeleton className="h-4 w-28" />
+          </div>
+        </div>
+      ));
+    }
     return (
       reviews &&
       reviews?.pages[page]?.data?.map((review) => (
         <ReviewItem key={review.id} review={review} />
       ))
     );
-  }, [reviews, page]);
-
-  // if(isPending) {
-  //   return
-  // }
+  }, [reviews, page, isPending]);
 
   return (
     <AnimatePresence>
@@ -66,7 +75,7 @@ export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
                   currentPage={page + 1}
                 />
               )}
-              {!reviews && <span>No Review Yet</span>}
+              {!isPending && !reviews && <span>No Review Yet</span>}
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { Header } from '@/components/layouts/headers/header';
+import { ProductDetailsAreaLoading } from '@/components/layouts/loadings/pages/products/product-details-area-loading';
 import { ProductDetailsArea } from '@/components/layouts/pages/products/product-details/product-details-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 import { SEO } from '@/components/seo';
@@ -17,7 +18,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   let content = null;
 
   if (isPending) {
-    return null;
+    content = <ProductDetailsAreaLoading />;
   }
   if (!isPending && isError) {
     return null;
@@ -30,7 +31,10 @@ export default function ProductPage({ params }: ProductPageProps) {
       <SEO pageTitle="Product details" />
       <Header secondary />
       <div className="mt-32">
-        <Breadcrumb title={product.title} label={product?.category.name} />
+        <Breadcrumb
+          title={product?.title}
+          label={product?.category.name || ' '}
+        />
       </div>
       {content}
     </Wrapper>

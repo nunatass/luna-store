@@ -49,7 +49,7 @@ export const Header = ({ secondary }: HeaderProps) => {
     <>
       <div
         className={cn(
-          'flex items-center justify-center bg-primary py-2 text-lg  text-white',
+          'flex items-center justify-center bg-black py-2 text-lg  text-white',
           pathname === '/' && 'bg-white text-[#be844c]'
         )}
       >
