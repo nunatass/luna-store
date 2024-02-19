@@ -15,14 +15,8 @@ export const SearchBar = ({
   isSearchOpen,
   setIsSearchOpen,
 }: SearchBarProps) => {
-  const { setSearchText, setCategory, handleSubmit, searchText } =
-    useSearchFormSubmit();
+  const { setSearchText, handleSubmit, searchText } = useSearchFormSubmit();
 
-  const handleCategory = (value: string) => {
-    setCategory(value);
-  };
-
-  const categories = ['electronics', 'fashion', 'beauty', 'jewelry'];
   const searchBarAnimation = {
     initial: { y: '-100%' },
     animate: { y: '0' },
@@ -55,20 +49,6 @@ export const SearchBar = ({
                   >
                     <SearchIcon aria-label="search icon" />
                   </button>
-                </div>
-                <div className="mt-4 text-sm">
-                  <span>Search by : </span>
-                  {categories.map((category, i) => (
-                    <a
-                      key={category}
-                      onClick={() => handleCategory(category)}
-                      className="cursor-pointer text-gray-700 transition-all hover:text-[#be844c]"
-                      aria-label="category"
-                    >
-                      {category}
-                      {i < categories.length - 1 && ', '}
-                    </a>
-                  ))}
                 </div>
               </form>
             </div>

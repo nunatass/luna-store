@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
 import logo from '@/assets/img/logo/logo.svg';
-import { EmailIcon, LocationIcon } from '@/components/icons';
+import { EmailIcon } from '@/components/icons';
 import { footerData } from '@/data/footer-data';
 import { socialData } from '@/data/social-data';
 
@@ -32,7 +32,7 @@ export const Footer = () => {
                     <a href="support:luna@support.com">luna.store@gmail.com</a>
                   </p>
                 </div>
-                <div className="tp-footer-contact-item d-flex align-items-start">
+                {/* <div className="">
                   <div className="flex items-start gap-2">
                     <LocationIcon />
 
@@ -45,7 +45,7 @@ export const Footer = () => {
                       </a>
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -70,9 +70,9 @@ export const Footer = () => {
             <h4 className="text-xl font-medium">Subscribe.</h4>
             <div className="flex flex-col gap-2">
               <p className="text-sm text-gray-600">
-                Sign up for 10% OFF your first order. Plus, get exclusive early
-                access to amazing sales, special discounts and the chance to win
-                free jewelry!
+                🌟 COMING SOON! 🌟Sign up for 10% OFF your first order. Plus,
+                get exclusive early access to amazing sales, special discounts
+                and the chance to win free jewelry!
               </p>
             </div>
 

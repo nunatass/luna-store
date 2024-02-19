@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { Facebook, Instagram } from 'lucide-react';
 
 export const socialData = [
   {
@@ -7,12 +7,12 @@ export const socialData = [
     icon: Facebook,
     title: 'Facebook',
   },
-  {
-    id: 2,
-    link: 'https://twitter.com/HamedHasan75',
-    icon: Twitter,
-    title: 'Twitter',
-  },
+  // {
+  //   id: 2,
+  //   link: 'https://twitter.com/HamedHasan75',
+  //   icon: Twitter,
+  //   title: 'Twitter',
+  // },
 
   {
     id: 3,

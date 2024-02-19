@@ -1,6 +1,6 @@
 import { Category, Collection } from '@/common/types';
 import { CartIcon, CartTwoIcon, EmailIcon } from '@/components/icons';
-import { Newspaper, TicketIcon, TruckIcon } from 'lucide-react';
+import { TruckIcon } from 'lucide-react';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { useCategories } from './api/use-categories';
 import { useCollections } from './api/use-collections';
@@ -55,6 +55,17 @@ export function useMenuData() {
     }
   }, [categories, isCategoriesPending]);
 
+  const mappedCollections = useMemo(() => {
+    if (isCollectionsPending) {
+      return [{ title: 'loading...', link: '' }];
+    } else {
+      return collections?.slice(0, 4).map((collection: Collection) => ({
+        title: collection.title,
+        link: `/collections/${collection.id}`,
+      }));
+    }
+  }, [collections, isCollectionsPending]);
+
   const productMenuData = useCallback(
     () => ({
       id: 2,
@@ -102,28 +113,9 @@ export function useMenuData() {
     },
     productMenuData(),
     {
-      id: 4,
-      isSingleLink: true,
-      title: 'Coupons',
-      link: '/coupon',
-    },
-    {
-      id: 5,
-      hasSubMenu: true,
-      title: 'Blog',
-      link: '/blog',
-      subMenus: [
-        { title: 'Blog Standard', link: '/' },
-        { title: 'Blog Grid', link: '/' },
-        { title: 'Blog List', link: '/' },
-        { title: 'Blog Details', link: '/' },
-        { title: 'Blog Details Full Width', link: '/' },
-      ],
-    },
-    {
       id: 6,
       isSingleLink: true,
-      title: 'Contact',
+      title: 'Contact Us',
       link: '/contact',
     },
   ];
@@ -144,33 +136,22 @@ export function useMenuData() {
       icon: <CartTwoIcon />,
       subMenus: mappedCategories,
     },
+
     {
       id: 3,
       hasSubMenu: true,
-      title: 'Blog',
-      link: '/blog',
-      icon: <Newspaper strokeWidth="1.5px" />,
-      subMenus: [
-        { title: 'Blog Standard', link: '/' },
-        { title: 'Blog Grid', link: '/' },
-        { title: 'Blog List', link: '/' },
-        { title: 'Blog Details', link: '/' },
-        { title: 'Blog Details Full Width', link: '/' },
-      ],
+      title: 'Collections',
+      link: '/products',
+      icon: <CartTwoIcon />,
+      subMenus: mappedCollections,
     },
+
     {
       id: 4,
       isSingleLink: true,
       title: 'Shopping Cart',
       link: '/cart',
       icon: <CartIcon />,
-    },
-    {
-      id: 5,
-      isSingleLink: true,
-      title: 'Coupons',
-      link: '/coupon',
-      icon: <TicketIcon strokeWidth="1.5px" />,
     },
     {
       id: 6,
@@ -182,7 +163,7 @@ export function useMenuData() {
     {
       id: 7,
       isSingleLink: true,
-      title: 'Contact',
+      title: 'Contact Us',
       link: '/contact',
       icon: <EmailIcon />,
     },
