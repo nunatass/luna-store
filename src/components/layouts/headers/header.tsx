@@ -58,7 +58,9 @@ export const Header = ({ secondary }: HeaderProps) => {
           aria-hidden="true"
         >
           <li />
-          <li>Free stander delivery on purchases of +$99</li>
+          <li className="shink-0 whitespace-nowrap">
+            Free stander delivery on purchases of +$99
+          </li>
         </ul>
       </div>
 
