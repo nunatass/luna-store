@@ -28,7 +28,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
   return (
     <Wrapper>
-      <SEO pageTitle="Product details" />
+      <SEO pageTitle="Product Details" />
       <Header secondary />
       <div className="mt-32">
         <Breadcrumb

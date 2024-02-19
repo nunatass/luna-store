@@ -18,7 +18,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        jost: 'var(--font-jost)',
+        inter: 'var(--font-inter)',
         charm: 'var(--font-charm)',
         oregano: 'var(--font-oregano)',
       },

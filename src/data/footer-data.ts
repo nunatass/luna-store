@@ -11,10 +11,6 @@ export const footerData = [
         link: '/track-order',
       },
       {
-        label: 'Shipping & Delivery',
-        link: '/shipping',
-      },
-      {
         label: 'Return & Refound',
         link: '/return-and-refound',
       },
@@ -34,10 +30,6 @@ export const footerData = [
       {
         label: 'Terms & Conditions',
         link: '/terms-and-conditions',
-      },
-      {
-        label: 'Latest News',
-        link: '/latest-news',
       },
     ],
   },

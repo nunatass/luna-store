@@ -84,7 +84,7 @@ export function useMenuData() {
             ? [{ title: 'loading...', link: '' }]
             : collections?.slice(0, 4).map((collection: Collection) => ({
                 title: collection.title,
-                link: '/',
+                link: `/collections/${collection.id}`,
               })),
         },
       ],

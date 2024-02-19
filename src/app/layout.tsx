@@ -2,12 +2,12 @@ import { Footer } from '@/components/layouts/footer';
 import { Modal } from '@/components/layouts/modal';
 import { BackToTopButton } from '@/components/ui/back-to-top-button';
 import { Metadata } from 'next';
-import { Charm, Jost, Oregano } from 'next/font/google';
+import { Charm, Inter, Oregano } from 'next/font/google';
 import { Toaster } from 'sonner';
 
+import { HydrationZustand } from '@/components/hydration-zustand';
 import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
 import './globals.css';
-import { HydrationZustand } from '@/components/hydration-zustand';
 
 const charm = Charm({
   subsets: ['latin'],
@@ -15,10 +15,10 @@ const charm = Charm({
   variable: '--font-charm',
 });
 
-const jost = Jost({
+const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-jost',
+  variable: '--font-inter',
 });
 
 const oregano = Oregano({
@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${charm.variable} ${jost.variable} ${oregano.variable} font-jost`}
+        className={`${charm.variable} ${inter.variable} ${oregano.variable} font-inter`}
       >
         <TanstackQueryProvider>
           <HydrationZustand>

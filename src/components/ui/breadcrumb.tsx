@@ -11,9 +11,14 @@ import { HomeIcon } from '../icons';
 type BreadcrumbProps = {
   title?: string;
   label?: string;
+  disableSecondary?: boolean;
 };
 
-export function Breadcrumb({ title: initialTitle, label }: BreadcrumbProps) {
+export function Breadcrumb({
+  title: initialTitle,
+  label,
+  disableSecondary = false,
+}: BreadcrumbProps) {
   const [title, setTitle] = useState(initialTitle);
   const { setCategory } = useFilter();
   const pathname = usePathname();
@@ -55,29 +60,54 @@ export function Breadcrumb({ title: initialTitle, label }: BreadcrumbProps) {
             </a>
           </div>
         </li>
-        {breadcrumbItems.map((item) => (
-          <li key={item.pathName}>
+        {disableSecondary && (
+          <li key={breadcrumbItems[0].pathName}>
             <div className="flex items-center">
               <ChevronRightIcon
                 className="h-5 w-5 flex-shrink-0 text-gray-400"
                 aria-hidden="true"
               />
-              <Link
-                href={item.pathLink}
+              <span
                 className={cn(
                   'ml-4 text-sm font-medium text-gray-500 hover:text-gray-700',
-                  pathname === item.pathLink &&
+                  pathname === breadcrumbItems[0].pathLink &&
                     'pointer-events-none text-gray-700 '
                 )}
-                aria-current={pathname === item.pathLink ? 'page' : undefined}
+                aria-current={
+                  pathname === breadcrumbItems[0].pathLink ? 'page' : undefined
+                }
               >
-                {pathname === item.pathLink
-                  ? label || capitalize(item.pathName)
-                  : capitalize(item.pathName)}
-              </Link>
+                {pathname === breadcrumbItems[0].pathLink
+                  ? label || capitalize(breadcrumbItems[0].pathName)
+                  : capitalize(breadcrumbItems[0].pathName)}
+              </span>
             </div>
           </li>
-        ))}
+        )}
+        {!disableSecondary &&
+          breadcrumbItems.map((item) => (
+            <li key={item.pathName}>
+              <div className="flex items-center">
+                <ChevronRightIcon
+                  className="h-5 w-5 flex-shrink-0 text-gray-400"
+                  aria-hidden="true"
+                />
+                <Link
+                  href={item.pathLink}
+                  className={cn(
+                    'ml-4 text-sm font-medium text-gray-500 hover:text-gray-700',
+                    pathname === item.pathLink &&
+                      'pointer-events-none text-gray-700 '
+                  )}
+                  aria-current={pathname === item.pathLink ? 'page' : undefined}
+                >
+                  {pathname === item.pathLink
+                    ? label || capitalize(item.pathName)
+                    : capitalize(item.pathName)}
+                </Link>
+              </div>
+            </li>
+          ))}
       </ol>
     </nav>
   );

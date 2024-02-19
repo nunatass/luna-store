@@ -1,16 +1,16 @@
 export const faqsData = [
-  {
-    question: 'Where Are You Based?',
-    answer: '', //answer here
-  },
+  // {
+  //   question: 'Where Are You Based?',
+  //   answer: '', //answer here
+  // },
   {
     question: 'How Long Does Delivery Take?',
     answer: `On average it takes 5-10 working days for your order to arrive from dispatch. However, in some cases, it may take up to 3 weeks for your jewelry to arrive depending on the country. \nIf your order hasn't arrived in the estimated delivery times, please send us an email at support@luna.com or send us a message.`,
   },
-  {
-    question: 'How Secure Is My Personal Information?',
-    answer: '', //answer here
-  },
+  // {
+  //   question: 'How Secure Is My Personal Information?',
+  //   answer: '', //answer here
+  // },
   {
     question: 'Can I Amend My Order?',
     answer:

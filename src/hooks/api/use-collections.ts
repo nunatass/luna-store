@@ -4,6 +4,7 @@ import { API } from '@/lib/axios';
 import {
   useInfiniteQuery,
   useMutation,
+  useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
@@ -11,6 +12,7 @@ const BASE_PATH = '/collections';
 
 const keys = {
   all: ['collections'],
+  byId: (id: string) => [...keys.all, 'byId', id],
 };
 
 type CreateCollectionRequest = {
@@ -109,6 +111,16 @@ export function useUpdateCollection() {
       queryClient.invalidateQueries({
         queryKey: keys.all,
       });
+    },
+  });
+}
+
+export function useCollectionById(id: string) {
+  return useQuery<Collection>({
+    queryKey: keys.byId(id),
+    queryFn: async () => {
+      const res = await API.get(`${BASE_PATH}/${id}`);
+      return res.data;
     },
   });
 }

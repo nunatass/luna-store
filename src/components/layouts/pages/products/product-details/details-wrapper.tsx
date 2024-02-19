@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
-import { Rating } from 'react-simple-star-rating';
 import { ProductQuantity } from './product-quantity';
 
 import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
@@ -22,7 +21,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   const { addProduct: addCartProduct } = useCart();
   const { addProduct: addWishlistProduct } = useWishlist();
 
-  const [ratingVal] = useState(0);
+  // const [ratingVal] = useState(0);
   const [showMoreText, setShowMoreText] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [price, setPrice] = useState<Price>(product.prices[0]);
@@ -72,10 +71,12 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
     <div className="flex w-full flex-col gap-4 text-gray-600">
       <div className="">
         <span className="text-base font-normal ">{product.category.name}</span>
-        <h3 className="text-3xl font-medium text-black">{product.title}</h3>
+        <h3 className="text-2xl font-medium uppercase text-black">
+          {product.title}
+        </h3>
       </div>
 
-      <div className="flex items-center gap-2">
+      {/* <div className="flex items-center gap-2">
         <Rating
           allowFraction
           size={16}
@@ -85,20 +86,20 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         />
 
         <span className="text-sm">
-          {/* (
+          (
           {product.reviews && product.reviews.length > 0
             ? product.reviews.length
             : 0}{' '}
-          Review) */}
+          Review)
         </span>
-      </div>
+      </div> */}
 
       <p className="text-md">
         {showMoreText
           ? product.description
           : `${product.description.substring(0, 100)}...`}
         <span
-          className="text-[#be844c]"
+          className="ml-2 cursor-pointer text-primary"
           onClick={() => setShowMoreText(!showMoreText)}
         >
           {showMoreText ? 'See less' : 'See more'}

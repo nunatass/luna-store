@@ -1,6 +1,7 @@
 export type Category = {
   name: string;
   id: string;
+  total: number;
 };
 
 export type Price = {
