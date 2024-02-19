@@ -40,11 +40,15 @@ const renderEmptyDiv = () => (
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
-  const { products, removeProduct } = useWishlist();
+  const { products, removeProduct, removeAll } = useWishlist();
 
   // handle remove product
   const handleRemoveProduct = (productId: string) => {
     removeProduct(productId);
+  };
+
+  const handleClearProduct = () => {
+    removeAll();
   };
 
   // handle close cart sidebar
@@ -71,8 +75,10 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
         </Link>
       </div>
       <div className="w-full">
-        <h5 className="text-md font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
-          <Link href={`/products/${product.id}`}>{product.title}</Link>
+        <h5 className="font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
+          <Link className="text-sm" href={`/products/${product.id}`}>
+            {product.title}
+          </Link>
         </h5>
         <div className="w-full">
           {product.discount > 0 ? (
@@ -162,26 +168,13 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
           </AnimatePresence>
         </div>
       </div>
-      {/* <div className="absolute bottom-0 left-0 right-0 flex h-72 w-full flex-col gap-4 border-t-[0.5px] bg-white p-8 pt-4 sm:h-auto">
-        <div className="flex items-center justify-between">
-          <h4 className="text-md font-medium">Subtotal:</h4>
-          <span className="text-md font-medium">
-            ${getTotal().total.toFixed(2)}
-          </span>
-        </div>
+      <div className="absolute bottom-0 left-0 right-0 flex h-72 w-full flex-col gap-4 border-t-[0.5px] bg-white p-8 pt-4 sm:h-auto">
         <div className="flex w-full flex-col gap-2">
-          <Button asChild className="w-full" size="lg">
-            <Link href="/cart" onClick={handleCloseSideCart}>
-              view cart
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="w-full" size="lg">
-            <Link href="/checkout" onClick={handleCloseSideCart}>
-              checkout
-            </Link>
+          <Button className="w-full" size="lg" onClick={handleClearProduct}>
+            Clear Wishlist
           </Button>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

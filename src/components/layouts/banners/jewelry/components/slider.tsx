@@ -125,7 +125,7 @@ export function Slider({
                 {...getTextAnimationProps(index, currentSlide, 0.8)}
                 key="shop-btn"
               >
-                <Link href="/shop">Discover Now</Link>
+                <Link href="/products">Discover Now</Link>
               </motion.div>
             </div>
           </div>

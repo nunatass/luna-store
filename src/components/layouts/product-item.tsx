@@ -4,18 +4,18 @@ import { CartIcon, QuickViewIcon, WishlistIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
 import { useModal } from '@/hooks/use-modal';
 import { useWishlist } from '@/hooks/use-whishlist';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback } from 'react';
 import { PreviewProductModal } from '../modals/preview-product-modal';
 
-const cartAnimationVariants = {
-  initial: { y: 10, opacity: 0 },
-  animate: { y: 0, opacity: 1 },
-  exit: { y: 10, opacity: 0 },
-};
+// const cartAnimationVariants = {
+//   initial: { y: 10, opacity: 0 },
+//   animate: { y: 0, opacity: 1 },
+//   exit: { y: 10, opacity: 0 },
+// };
 
 const optionsAnimationVariants = {
   initial: { x: -10, opacity: 0 },
@@ -206,37 +206,57 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           </motion.button>
         </motion.div>
 
-        <div className="z-10 flex flex-col gap-1 bg-white py-4 text-center font-medium">
-          <h3 className="px-4 text-center text-sm transition-all duration-300 ease-in-out sm:mb-2 sm:text-base md:px-8">
-            <Link href={`/products/${product.id}`}>{product.title}</Link>
+        <div className="z-10 flex flex-col gap-1 bg-white px-2 py-4 font-medium">
+          <h3 className="text-left transition-all duration-300 ease-in-out sm:mb-2">
+            <Link
+              className="text-xs sm:text-sm"
+              href={`/products/${product.id}`}
+            >
+              {product.title}
+            </Link>
           </h3>
           <div className="w-full">
-            <span className="sm:font-base w-full text-sm transition-all duration-300 ease-in-out  hover:text-[#be844c] sm:mb-2">
-              ${formatPrice(product.prices[0].value)}
-            </span>
-            <motion.div
+            <div className="flex w-full items-center justify-between">
+              <span className="sm:font-base w-full text-left text-sm transition-all duration-300  ease-in-out sm:mb-2">
+                $
+                {
+                  formatPriceWithDiscount(
+                    product.prices[0].value,
+                    product.prices[0].discount
+                  ).price
+                }
+              </span>
+
+              <span className="sm:font-base w-full text-right text-sm text-xs text-gray-600  line-through transition-all duration-300 ease-in-out sm:mb-2">
+                ${formatPrice(product.prices[0].value)}
+              </span>
+            </div>
+            {/* <motion.div
               variants={cartAnimationVariants}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="absolute bottom-4 left-0 flex w-full items-center justify-center bg-white py-1 text-xs text-[#be844c] sm:text-base"
+              className="absolute bottom-4 left-0 flex w-full items-center justify-end  px-2 py-1  text-xs sm:text-base"
             >
               {isAddedToCart ? (
-                <Link href="/cart" className="flex items-center gap-2">
+                <Link
+                  href="/cart"
+                  className="flex items-center gap-2 bg-white text-sm"
+                >
                   <CartIcon /> View Cart
                 </Link>
               ) : (
                 <button
                   onClick={() => handleAddProduct(product)}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 bg-white text-sm"
                 >
                   <CartIcon /> Add to Cart
                 </button>
               )}
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
         {product.prices[0].discount > 0 && (
           <span className="absolute right-2 top-2 bg-black p-1 text-xs text-white">
-            -{product.prices[0].discount}%
+            {product.prices[0].discount}% OFF
           </span>
         )}
       </motion.div>

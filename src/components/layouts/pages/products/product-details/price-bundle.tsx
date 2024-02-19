@@ -17,12 +17,12 @@ export function PriceBundle({
     if (prices[0].discount > 0) {
       return (
         <>
-          <span className="text-base	line-through">
-            ${formatPrice(prices[0].value)}
-          </span>
           <span className="text-2xl font-medium text-black">
             $
             {formatPriceWithDiscount(prices[0].value, prices[0].discount).price}
+          </span>
+          <span className="text-base	line-through">
+            ${formatPrice(prices[0].value)}
           </span>
         </>
       );
@@ -35,9 +35,12 @@ export function PriceBundle({
     );
   }, [prices]);
 
-  const handleSelectPrice = useCallback((price: Price) => {
-    onSelectChange(price);
-  }, []);
+  const handleSelectPrice = useCallback(
+    (price: Price) => {
+      onSelectChange(price);
+    },
+    [onSelectChange]
+  );
 
   if (prices.length > 1) {
     return (

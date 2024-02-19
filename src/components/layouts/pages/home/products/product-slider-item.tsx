@@ -5,15 +5,15 @@ import { PreviewProductModal } from '@/components/modals/preview-product-modal';
 import { useCart } from '@/hooks/use-cart';
 import { useModal } from '@/hooks/use-modal';
 import { useWishlist } from '@/hooks/use-whishlist';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useCallback } from 'react';
-const cartAnimationVariants = {
-  initial: { y: 10, opacity: 0, color: 'black' },
-  animate: { y: 0, opacity: 1, color: '#be844c' },
-  exit: { y: 10, opacity: 0, color: 'black' },
-};
+// const cartAnimationVariants = {
+//   initial: { y: 10, opacity: 0 },
+//   animate: { y: 0, opacity: 1 },
+//   exit: { y: 10, opacity: 0 },
+// };
 
 const optionsAnimationVariants = {
   initial: { x: -10, opacity: 0 },
@@ -88,7 +88,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
     <>
       <motion.div
         {...animationsProps}
-        className="relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-white px-8 pb-8 text-center sm:w-80"
+        className="relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-white text-center sm:w-80"
       >
         <Link className="h-full w-full" href={`/products/${product.id}`}>
           <div
@@ -192,37 +192,54 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
           </motion.button>
         </motion.div>
 
-        <div className="z-10 flex flex-col gap-1 font-medium">
-          <h3 className="text-md transition-all  duration-300 ease-in-out hover:text-[#be844c]">
-            <Link href={`/products/${product.id}`}>{product.title}</Link>
+        <div className="z-10 flex flex-col gap-2 px-2 py-2 font-medium">
+          <h3 className="text-left transition-all duration-300 ease-in-out">
+            <Link className="text-sm" href={`/products/${product.id}`}>
+              {product.title}
+            </Link>
           </h3>
-          <div className="tp-category-price-wrapper-4 ">
-            <span className="font-base transition-all duration-300 ease-in-out hover:text-[#be844c]">
-              ${formatPrice(product.prices[0].value)}
-            </span>
-            <motion.div
+          <div className="w-full">
+            <div className="flex w-full items-center justify-between">
+              <span className="sm:font-base w-full text-left text-sm transition-all duration-300  ease-in-out sm:mb-2">
+                $
+                {
+                  formatPriceWithDiscount(
+                    product.prices[0].value,
+                    product.prices[0].discount
+                  ).price
+                }
+              </span>
+
+              <span className="sm:font-base w-full text-right text-sm text-xs text-gray-600  line-through transition-all duration-300 ease-in-out sm:mb-2">
+                ${formatPrice(product.prices[0].value)}
+              </span>
+            </div>
+            {/* <motion.div
               variants={cartAnimationVariants}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="absolute bottom-6 left-0 flex w-full items-center justify-center bg-white py-1"
+              className="absolute bottom-2 left-0 flex w-full items-center justify-end  px-2 py-1"
             >
               {isAddedToCart ? (
-                <Link href="/cart" className="flex items-center gap-2">
+                <Link
+                  href="/cart"
+                  className="flex items-center gap-2 bg-white text-sm"
+                >
                   <CartIcon /> View Cart
                 </Link>
               ) : (
                 <button
                   onClick={() => handleAddProduct(product)}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 bg-white text-sm"
                 >
                   <CartIcon /> Add to Cart
                 </button>
               )}
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
         {product.prices[0].discount > 0 && (
           <span className="absolute right-2 top-2 bg-black p-1 text-xs text-white">
-            -{product.prices[0].discount}%
+            {product.prices[0].discount}% OFF
           </span>
         )}
       </motion.div>

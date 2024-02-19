@@ -12,7 +12,7 @@ type PriceFilterProps = {
 
 export const PriceFilter = ({
   handleChanges,
-  maxValue = 100,
+  maxValue = 200,
   minValue = 0,
   step = 1,
 }: PriceFilterProps) => {

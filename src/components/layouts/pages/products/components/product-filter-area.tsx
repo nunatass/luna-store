@@ -18,7 +18,7 @@ export function ProductFilterArea({ className }: ProductFilterAreaProps) {
     window.history.replaceState(null, '', '/products');
     resetFilter();
     setPrice(1199);
-  }, [resetFilter]);
+  }, [resetFilter, setPrice]);
   return (
     <section>
       <div className={cn('hidden w-72 lg:block', className)}>
@@ -26,7 +26,7 @@ export function ProductFilterArea({ className }: ProductFilterAreaProps) {
           <PriceFilter
             handleChanges={setPrice}
             step={1}
-            maxValue={1199}
+            maxValue={200}
             minValue={40}
           />
           <CategoryFilter />

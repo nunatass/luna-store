@@ -1,7 +1,5 @@
 'use client';
-import { ArrowRightLongIcon } from '@/components/icons';
 import CollectionsLoading from '@/components/layouts/loadings/pages/home/collections-loading';
-import { Button } from '@/components/ui/button';
 import { useCollections } from '@/hooks/api/use-collections';
 import Link from 'next/link';
 import { HomeCollectionsItem } from './components/home-collections-item';
@@ -85,14 +83,6 @@ export const HomeCollectionsArea = () => {
             <h3 className="text-4xl uppercase">
               <Link href="/shop">{romanceCollection.title}</Link>
             </h3>
-            <Button className="mt-2" asChild>
-              <Link
-                href={`/collections/${romanceCollection.id}`}
-                className="flex items-center justify-center gap-2"
-              >
-                Shop Now <ArrowRightLongIcon />
-              </Link>
-            </Button>
           </div>
         </Link>
       </div>

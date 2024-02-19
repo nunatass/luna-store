@@ -70,8 +70,10 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
         </Link>
       </div>
       <div className="w-full">
-        <h5 className="text-md font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
-          <Link href={`/products/${product.id}`}>{product.title}</Link>
+        <h5 className="font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
+          <Link className="text-sm" href={`/products/${product.id}`}>
+            {product.title}
+          </Link>
         </h5>
         <div className="w-full">
           {product.discount > 0 ? (

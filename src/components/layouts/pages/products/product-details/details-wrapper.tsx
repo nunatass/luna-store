@@ -70,10 +70,8 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   return (
     <div className="flex w-full flex-col gap-4 text-gray-600">
       <div className="">
-        <span className="text-base font-normal ">{product.category.name}</span>
-        <h3 className="text-2xl font-medium uppercase text-black">
-          {product.title}
-        </h3>
+        <span className="text-base font-normal">{product.category.name}</span>
+        <h3 className="text-2xl font-medium  text-black">{product.title}</h3>
       </div>
 
       {/* <div className="flex items-center gap-2">
@@ -182,18 +180,17 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         </Button>
       </div>
 
-      <div className="hidden w-full flex-col gap-2 lg:flex">
-        <div className="">
-          <div className="flex items-center gap-2 ">
-            <CheckCircle className="h-4 w-4 text-gray-400" /> 30 days easy
-            returns
-          </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle className="h-4 w-4 text-gray-400" />
-            Order yours before 2.30pm for same day dispatch
-          </div>
+      <div className="">
+        <div className="flex items-center gap-2 ">
+          <CheckCircle className="h-4 w-4 text-gray-400" /> 30 days easy returns
         </div>
+        <div className="flex items-center gap-2">
+          <CheckCircle className="h-4 w-4 text-gray-400" />
+          Order yours before 2.30pm for same day dispatch
+        </div>
+      </div>
 
+      <div className="hidden w-full flex-col gap-2 lg:flex">
         <div className="flex w-full flex-wrap items-center justify-center gap-4 bg-gray-200 p-3">
           <div className="flex gap-2 sm:flex-col sm:gap-0 md:flex-row md:gap-2 xl:flex-col xl:gap-0">
             <span>Guaranteed safe </span>
