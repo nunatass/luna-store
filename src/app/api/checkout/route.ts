@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     };
   });
 
-  await API.post('/orders', {
+  const res = await API.post('/orders', {
     status: 'CHECKOUT',
     phone: '',
     address: '',
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
       mode: 'payment',
       billing_address_collection: 'required',
       invoice_creation: { enabled: true },
-      success_url: successUrl,
+      success_url: `${successUrl}&order=${res.data.id}`,
       cancel_url: failUrl,
     });
     return NextResponse.json({ sessionId: session.id });

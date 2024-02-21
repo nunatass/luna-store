@@ -7,7 +7,7 @@ import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { redirect, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
@@ -19,9 +19,13 @@ export function SuccessSection() {
   const [productData] = useState(products);
   const [total] = useState(totalWithDiscount);
 
+  const searchParams = useSearchParams();
+
+  const orderId = searchParams.get('order');
+
   useEffect(() => {
     if (isInitialRender) {
-      if (products.length === 0) {
+      if (products.length === 0 || !orderId) {
         redirect('/order');
       }
       setIsInitialRender(false);
@@ -37,7 +41,9 @@ export function SuccessSection() {
           <div className="mt-10 flex items-center gap-2">
             <CheckCircle2 className="h-12 w-12 text-gray-800" />
             <div className="flex flex-col">
-              <span>Order:</span>
+              <div>
+                Order: #<span className="uppercase">{orderId}</span>
+              </div>
               <span className="text-lg font-semibold">Thank You</span>
             </div>
           </div>
