@@ -33,16 +33,6 @@ export type Media = {
   url: string;
   ownerId: string;
 };
-
-export type CartProduct = {
-  id: string;
-  title: string;
-  price: number;
-  media: string;
-  discount: number;
-  orderQuantity: number;
-};
-
 export type Product = {
   id: string;
   title: string;
@@ -66,3 +56,14 @@ export type ResponseData<T> = {
   totalPages: number;
   currentPage: number;
 };
+
+export type CartProduct = {
+  id: string;
+  discount: number;
+  title: string;
+  price: number;
+  orderQuantity: number;
+  media: string;
+};
+
+export type ShippingMethod = 'free' | 'standard' | 'fast';

@@ -1,3 +1,5 @@
+'use client';
+import { ShippingMethod } from '@/common/types';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -8,24 +10,23 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { useOrderCheckout } from '@/hooks/api/use-orders';
 import { useCart } from '@/hooks/use-cart';
 import { formatPrice } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { loadStripe } from '@stripe/stripe-js';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
-type shippingMethodsType = 'free' | 'standard' | 'fast';
-
-interface ShippingMethod {
-  id: string;
-  label: string;
-  value: number;
-}
-
-interface ShippingMethods {
-  [key: string]: ShippingMethod;
-}
+type ShippingMethods = {
+  [key: string]: {
+    id: string;
+    label: string;
+    value: number;
+  };
+};
 
 const shippingMethods: ShippingMethods = {
   free: {
@@ -50,8 +51,9 @@ const FormSchema = z.object({
 });
 
 export function CartShippingPriceForm() {
-  const { getTotal } = useCart();
+  const { getTotal, products } = useCart();
   const { total, totalWithDiscount } = getTotal();
+  const { mutate: handleOrderCheckout } = useOrderCheckout();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -67,9 +69,28 @@ export function CartShippingPriceForm() {
     }
   }, [form, totalWithDiscount]);
 
-  function onSubmit() {
-    // TODO: handle submitted
-    //console.log(data);
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+    );
+
+    if (!stripe) throw new Error('Stripe failed to initialize.');
+
+    handleOrderCheckout(
+      {
+        items: products,
+        shippingMethod: data.shippingMethod,
+      },
+      {
+        onSuccess: async ({ sessionId }) => {
+          const stripeError = await stripe.redirectToCheckout({ sessionId });
+
+          if (stripeError) {
+            toast.error('Problem redirecting to checkout');
+          }
+        },
+      }
+    );
   }
 
   return (
@@ -93,7 +114,7 @@ export function CartShippingPriceForm() {
                 >
                   {Object.keys(shippingMethods).map(
                     (methodKey: keyof typeof shippingMethods) => {
-                      const method = methodKey as shippingMethodsType;
+                      const method = methodKey as ShippingMethod;
                       return (
                         <FormItem
                           key={method}
@@ -138,11 +159,7 @@ export function CartShippingPriceForm() {
               </span>
             </div>
           </div>
-          <Button className="w-full">
-            {/* <Link href="/checkout" className="tp-cart-checkout-btn w-100"> */}
-            Proceed to Checkout
-            {/* </Link> */}
-          </Button>
+          <Button className="w-full">Proceed to Checkout</Button>
         </div>
       </form>
     </Form>

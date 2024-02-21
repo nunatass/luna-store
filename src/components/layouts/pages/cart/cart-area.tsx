@@ -46,17 +46,20 @@ export const CartArea = () => {
   const renderProductItem = (product: CartProduct) => (
     <motion.div
       {...itemProductAnimationProps}
-      key={product.id}
+      key={`product-${product.id}`}
       className="flex w-full justify-between gap-2 py-4"
     >
       <div className="flex items-center justify-center border-[1px]">
-        <Link href={`/product/${product.id}`} aria-label="product link">
+        <Link
+          href={`/product/${product.id}`}
+          key={`product/${product.id}`}
+          aria-label="product link"
+        >
           <Image
             src={`${imageUrlPrefix}/${product.media}`}
             width={100}
             height={100}
             alt="product img"
-            className=""
           />
         </Link>
       </div>
@@ -99,7 +102,7 @@ export const CartArea = () => {
   const renderProductItems = () => (
     <div className="flex w-full flex-col divide-y-[1px]">
       {products.map((product, index) => (
-        <AnimatePresence key={index} initial>
+        <AnimatePresence key={`${product.id}-${index}`} initial>
           {index === products.length
             ? renderEmptyDiv()
             : renderProductItem(product)}

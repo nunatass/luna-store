@@ -1,17 +1,9 @@
 'use client';
 
+import { CartProduct } from '@/common/types';
 import { toast } from 'sonner';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-
-interface CartProduct {
-  id: string;
-  discount: number;
-  title: string;
-  price: number;
-  orderQuantity: number;
-  media: string;
-}
 
 interface CartStore {
   products: CartProduct[];
