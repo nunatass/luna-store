@@ -2,7 +2,7 @@ import { CartProduct, ShippingMethod } from '@/common/types';
 import { API } from '@/lib/axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-// const BASE_PATH = '/orders';
+const BASE_PATH = '/orders';
 
 const keys = {
   all: ['orders'],
@@ -12,6 +12,20 @@ const keys = {
 type OrderCheckoutRequest = {
   items: CartProduct[];
   shippingMethod: ShippingMethod;
+};
+
+type createOrderRequest = {
+  status: 'CHECKOUT' | 'PAYED' | 'SENT' | 'DONE';
+  phone: string;
+  address: string;
+  email: string;
+  total: number;
+  products: [
+    {
+      productId: string;
+      quantity: number;
+    },
+  ];
 };
 
 export function useOrderCheckout() {
@@ -32,6 +46,21 @@ export function useOrderCheckout() {
 
     onError: (err) => {
       console.log(err);
+    },
+  });
+}
+
+export function useUpdateOrder() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (cresteOrderRequest: createOrderRequest) => {
+      const res = await API.put(`${BASE_PATH}/`, cresteOrderRequest);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: keys.all,
+      });
     },
   });
 }

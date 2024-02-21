@@ -115,7 +115,7 @@ export const CartArea = () => {
     <section className="container min-h-[70vh] items-center justify-center pb-20 pt-8">
       {products.length === 0 && (
         <div className="flex h-[50vh] w-full flex-col items-center justify-center gap-6 text-center">
-          <h3 className="text-lg font-bold md:text-3xl">No Cart Items Found</h3>
+          <h3 className="text-lg font-bold md:text-3xl">Your cart is empty</h3>
           <Button asChild>
             <Link href="/shop">Continue Shipping</Link>
           </Button>

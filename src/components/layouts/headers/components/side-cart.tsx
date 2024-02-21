@@ -1,15 +1,19 @@
 'use client';
-// import RenderCartProgress from './render-cart-progress';
+
 import emptyCartImg from '@/assets/img/product/side-cart/empty-cart.png';
 import { CartProduct } from '@/common/types';
 import { CloseTwoIcon, TrashIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/use-cart';
 import { cn, formatPrice, formatPriceWithDiscount } from '@/lib/utils';
-
+import { loadStripe } from '@stripe/stripe-js';
+import { usePathname } from 'next/navigation';
+import { useOrderCheckout } from '@/hooks/api/use-orders';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { toast } from 'sonner';
+
 import { useCallback } from 'react';
 
 const emptyCartAnimationVariants = {
@@ -40,17 +44,42 @@ const renderEmptyDiv = () => (
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const SideCart = ({ setIsOpen }: SideMenuProps) => {
+  const pathname = usePathname();
   const { products, getTotal, removeProduct } = useCart();
+  const { mutate: handleOrderCheckout } = useOrderCheckout();
 
-  // handle remove product
   const handleRemoveProduct = (productId: string) => {
     removeProduct(productId);
   };
 
-  // handle close cart sidebar
   const handleCloseSideCart = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);
+
+  const handleCheckout = async () => {
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+    );
+
+    if (!stripe) throw new Error('Stripe failed to initialize.');
+
+    handleOrderCheckout(
+      {
+        items: products,
+        shippingMethod: 'standard',
+      },
+      {
+        onSuccess: async ({ sessionId }) => {
+          const stripeError = await stripe.redirectToCheckout({ sessionId });
+          handleCloseSideCart();
+
+          if (stripeError) {
+            toast.error('Problem redirecting to checkout');
+          }
+        },
+      }
+    );
+  };
 
   const renderProductItem = (product: CartProduct) => (
     <motion.div
@@ -147,17 +176,19 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
               >
                 <Image src={emptyCartImg} alt="empty-cart-img" priority />
                 <p className="text-base font-normal">Your Cart is empty</p>
-                <Button
-                  asChild
-                  aria-label="button go to shop"
-                  variant="outline"
-                  size="lg"
-                  className="hover:border-black hover:bg-black hover:text-white"
-                >
-                  <Link href="/shop" aria-label="go to shop">
-                    Go to Shop
-                  </Link>
-                </Button>
+                {pathname !== '/products' && (
+                  <Button
+                    asChild
+                    aria-label="button go to shop"
+                    variant="outline"
+                    size="lg"
+                    className="hover:border-black hover:bg-black hover:text-white"
+                  >
+                    <Link href="/products" aria-label="go to shop">
+                      Go to products
+                    </Link>
+                  </Button>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
@@ -171,15 +202,21 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
           </span>
         </div>
         <div className="flex w-full flex-col gap-2">
-          <Button asChild className="w-full" size="lg">
-            <Link href="/cart" onClick={handleCloseSideCart}>
-              view cart
-            </Link>
+          <Button
+            asChild
+            className="w-full"
+            size="lg"
+            onClick={handleCloseSideCart}
+          >
+            <Link href="/cart">View cart</Link>
           </Button>
-          <Button asChild variant="outline" className="w-full" size="lg">
-            <Link href="/checkout" onClick={handleCloseSideCart}>
-              checkout
-            </Link>
+          <Button
+            size="lg"
+            variant="outline"
+            className="w-full"
+            onClick={handleCheckout}
+          >
+            Checkout
           </Button>
         </div>
       </div>

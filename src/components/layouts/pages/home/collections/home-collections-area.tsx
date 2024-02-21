@@ -80,9 +80,7 @@ export const HomeCollectionsArea = () => {
           />
           <div className="z-10 flex w-max flex-col justify-end text-black">
             <span className="text-base">Collection</span>
-            <h3 className="text-4xl uppercase">
-              <Link href="/shop">{romanceCollection.title}</Link>
-            </h3>
+            <h3 className="text-4xl uppercase">{romanceCollection.title}</h3>
           </div>
         </Link>
       </div>
