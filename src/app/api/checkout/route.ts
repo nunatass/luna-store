@@ -1,11 +1,10 @@
 import { CartProduct } from '@/common/types';
-import { stripe, determineShippingOptions } from '@/lib/stripe';
+import { determineShippingOptions, stripe } from '@/lib/stripe';
 import { NextRequest, NextResponse } from 'next/server';
 
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 const successUrl = process.env.NEXT_PUBLIC_STRIPE_SUCCESS_REDIRECT;
 const failUrl = process.env.NEXT_PUBLIC_STRIPE_FAIL_REDIRECT;
-
 export async function POST(req: NextRequest) {
   const order = await req.json();
   let total = 0;
