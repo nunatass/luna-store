@@ -84,7 +84,6 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const renderProductItem = (product: CartProduct) => (
     <motion.div
       {...itemProductAnimationProps}
-      key={product.id}
       className="flex w-full items-start gap-2 py-4"
     >
       <div className="border-[1px] border-gray-200">

@@ -42,12 +42,22 @@ export async function POST(req: NextRequest) {
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
-      shipping_options: determineShippingOptions(total, order.shippingMethod),
+      shipping_options: determineShippingOptions(
+        total / 100,
+        order.shippingMethod
+      ),
       mode: 'payment',
+      payment_method_types: ['card', 'paypal'],
       billing_address_collection: 'required',
+      phone_number_collection: {
+        enabled: true,
+      },
       invoice_creation: { enabled: true },
-      success_url: `${successUrl}&order=${res.data.id}`,
+      success_url: `${successUrl}&orderId=${res.data.id}`,
       cancel_url: failUrl,
+      metadata: {
+        id: res.data.id,
+      },
     });
     return NextResponse.json({ sessionId: session.id });
   } catch (err) {

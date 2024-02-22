@@ -21,7 +21,7 @@ export function SuccessSection() {
 
   const searchParams = useSearchParams();
 
-  const orderId = searchParams.get('order');
+  const orderId = searchParams.get('orderId');
 
   useEffect(() => {
     if (isInitialRender) {
@@ -31,7 +31,7 @@ export function SuccessSection() {
       setIsInitialRender(false);
       removeAll();
     }
-  }, [isInitialRender, removeAll]);
+  }, [isInitialRender, removeAll, products.length]);
 
   return (
     <section className="container flex h-full flex-col justify-center gap-y-8 divide-x md:flex-row">
@@ -57,22 +57,22 @@ export function SuccessSection() {
             </span>
           </div>
 
-          <div className="flex w-full flex-col border">
+          {/* <div className="flex w-full flex-col border">
             <div className="flex gap-8 border-b p-6">
-              <span className="font-medium text-gray-600">Contact</span>
-              <span className="text-sm font-bold">teste2gmail.com</span>
+              <span className="font-medium text-gray-600">Contact:</span>
+              <span className="text-sm font-bold">{contact}</span>
             </div>
             <div className="flex gap-8 border-b p-6">
-              <span className="font-medium text-gray-600">Address</span>
-              <span className="text-sm font-bold">
-                Rua teste 1000-555, Porhjd
+              <span className="font-medium text-gray-600">
+                Shipping Address:
               </span>
+              <span className="text-sm font-bold">{shippingAddress}</span>
             </div>
             <div className="flex gap-8 p-6">
-              <span className="font-medium text-gray-600">Payment</span>
+              <span className="font-medium text-gray-600">Payment Method:</span>
               <span className="text-sm font-bold">Stripe</span>
             </div>
-          </div>
+          </div> */}
 
           <div className="flex w-full flex-wrap items-center justify-between gap-y-2">
             <div className="flex items-center gap-1 text-sm text-gray-500">

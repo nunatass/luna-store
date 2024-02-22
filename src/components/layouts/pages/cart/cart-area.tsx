@@ -46,7 +46,6 @@ export const CartArea = () => {
   const renderProductItem = (product: CartProduct) => (
     <motion.div
       {...itemProductAnimationProps}
-      key={`product-${product.id}`}
       className="flex w-full justify-between gap-2 py-4"
     >
       <div className="flex items-center justify-center border-[1px]">
