@@ -75,7 +75,7 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
         </Link>
       </div>
       <div className="w-full">
-        <h5 className="font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
+        <h5 className="font-semibold transition-all duration-300 ease-in-out hover:text-[#be844c]">
           <Link className="text-sm" href={`/products/${product.id}`}>
             {product.title}
           </Link>
@@ -86,7 +86,7 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
               ${formatPriceWithDiscount(product.price, product.discount).price}
             </span>
           ) : (
-            <span className="text-sm font-semibold text-blue-500">
+            <span className="text-sm font-semibold hover:text-[#be844c]">
               ${formatPrice(product.price)}
             </span>
           )}

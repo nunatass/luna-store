@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 import { CartProduct } from '@/common/types';
 import { TrashIcon } from '@/components/icons';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { CartCheckout } from './components/cart-checkout';
 import { CartProductQuantityCell } from './components/cart-table/cart-product-quantity-cell';
 import { columns } from './components/cart-table/columns';
@@ -64,17 +64,24 @@ export const CartArea = () => {
         </Link>
       </div>
 
-      <div className="flex w-full flex-col">
-        <h5 className="w-full text-sm font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
+      <div className="flex w-full flex-col justify-between">
+        <h5 className="w-full text-sm font-semibold transition-all duration-300 ease-in-out hover:text-[#be844c]">
           <Link href={`/products/${product.id}`}>{product.title}</Link>
         </h5>
         <div className="w-full">
           {product.discount > 0 ? (
-            <span>
-              ${formatPrice((product.price * (100 - product.discount)) / 100)}
-            </span>
+            <div className="flex w-full items-center gap-2">
+              <span className="text-left text-sm">
+                $
+                {formatPriceWithDiscount(product.price, product.discount).price}
+              </span>
+
+              <span className="text-right text-sm text-gray-600  line-through">
+                ${formatPrice(product.price)}
+              </span>
+            </div>
           ) : (
-            <span className="text-sm font-semibold text-blue-500">
+            <span className="text-sm font-semibold">
               ${formatPrice(product.price)}
             </span>
           )}
@@ -82,10 +89,9 @@ export const CartArea = () => {
             x{product.orderQuantity}
           </span>
         </div>
-        <div className="mt-2 flex w-full justify-between">
-          <div className="flex w-full items-center justify-center">
-            <CartProductQuantityCell id={product.id} />
-          </div>
+        <div className="flex w-full justify-between">
+          {' '}
+          <CartProductQuantityCell id={product.id} />
           <Button
             onClick={() => handleRemoveProduct(product.id)}
             variant="link"

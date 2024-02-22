@@ -23,11 +23,14 @@ export const CartProductQuantityCell = ({
   }
 
   return (
-    <div className="flex w-max items-center justify-center gap-2 overflow-hidden rounded-full ring-[1.5px] ring-gray-300">
+    <div className="flex w-max items-center justify-center gap-2 overflow-hidden ring-[1px] ring-gray-300">
       <Button
         variant="ghost"
         size="sm"
-        className={cn('hover:text-blue-500', quantity === 1 && 'text-gray-400')}
+        className={cn(
+          'hover:text-[#be844c]',
+          quantity === 1 && 'text-gray-400'
+        )}
         disabled={quantity === 1}
         onClick={() => handleRemoveQuantity(id)}
       >
@@ -40,7 +43,7 @@ export const CartProductQuantityCell = ({
         variant="ghost"
         size="sm"
         className={cn(
-          'hover:text-blue-500',
+          'hover:text-[#be844c]',
           quantity === 20 && 'text-gray-400'
         )}
         disabled={quantity === 20}

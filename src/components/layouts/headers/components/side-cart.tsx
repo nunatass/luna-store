@@ -99,24 +99,29 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
         </Link>
       </div>
       <div className="w-full">
-        <h5 className="font-semibold transition-all duration-300 ease-in-out hover:text-blue-500">
+        <h5 className="font-semibold transition-all duration-300 ease-in-out ">
           <Link className="text-sm" href={`/products/${product.id}`}>
             {product.title}
           </Link>
         </h5>
         <div className="w-full">
           {product.discount > 0 ? (
-            <span>
-              ${formatPriceWithDiscount(product.price, product.discount).price}
-            </span>
+            <div className="flex w-full items-center gap-2">
+              <span className="text-left text-sm">
+                $
+                {formatPriceWithDiscount(product.price, product.discount).price}
+              </span>
+
+              <span className="text-right text-sm text-gray-600  line-through">
+                ${formatPrice(product.price)}
+              </span>
+            </div>
           ) : (
-            <span className="text-sm font-semibold text-blue-500">
+            <span className="text-sm font-semibold">
               ${formatPrice(product.price)}
             </span>
           )}
-          <span className="text-sm font-medium text-gray-600">
-            x{product.orderQuantity}
-          </span>
+          <span className="text-sm font-medium">x{product.orderQuantity}</span>
         </div>
       </div>
       <Button

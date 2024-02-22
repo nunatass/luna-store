@@ -20,7 +20,7 @@ export const MobileMenus = () => {
       return (
         <Accordion type="single" collapsible className="h-full w-full px-4">
           <AccordionItem value="item-1" className="border-0">
-            <AccordionTrigger className="font-normal hover:text-blue-500">
+            <AccordionTrigger className="font-normal hover:text-[#be844c]">
               <div className="flex gap-2">
                 <HomeIcon />
                 Home
@@ -46,7 +46,7 @@ export const MobileMenus = () => {
             value={menu.title}
             className="border-0"
           >
-            <AccordionTrigger className="font-normal hover:text-blue-500">
+            <AccordionTrigger className="font-normal hover:text-[#be844c]">
               <div className="flex gap-2">
                 {menu.icon}
                 {menu.title}
@@ -57,7 +57,7 @@ export const MobileMenus = () => {
                 <Link
                   key={subMenu.title}
                   href={subMenu.link}
-                  className="pt-4 hover:text-blue-500"
+                  className="pt-4 hover:text-[#be844c]"
                   aria-label="menu link"
                 >
                   {subMenu.title}
@@ -69,7 +69,7 @@ export const MobileMenus = () => {
       );
     } else {
       return (
-        <li key={menu?.id} className="p-4 hover:text-blue-500">
+        <li key={menu?.id} className="p-4 hover:text-[#be844c]">
           <Link href={menu?.link} aria-label="menu link">
             <div className="flex gap-2">
               {menu.icon}
