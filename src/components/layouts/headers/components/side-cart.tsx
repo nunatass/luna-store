@@ -4,14 +4,14 @@ import emptyCartImg from '@/assets/img/product/side-cart/empty-cart.png';
 import { CartProduct } from '@/common/types';
 import { CloseTwoIcon, TrashIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
+import { useOrderCheckout } from '@/hooks/api/use-orders';
 import { useCart } from '@/hooks/use-cart';
 import { cn, formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { loadStripe } from '@stripe/stripe-js';
-import { usePathname } from 'next/navigation';
-import { useOrderCheckout } from '@/hooks/api/use-orders';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { toast } from 'sonner';
 
 import { useCallback } from 'react';
@@ -198,7 +198,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
         <div className="flex items-center justify-between">
           <h4 className="text-md font-medium">Subtotal:</h4>
           <span className="text-md font-medium">
-            ${formatPrice(getTotal().total)}
+            ${formatPrice(getTotal().totalWithDiscount)}
           </span>
         </div>
         <div className="flex w-full flex-col gap-2">

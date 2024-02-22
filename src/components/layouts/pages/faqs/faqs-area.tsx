@@ -16,8 +16,8 @@ export const FAQsArea = () => {
         </p>
         <p>
           Not finding the answer you need? Don&apos;t worry, simply send us a
-          message at support@luna.com and we will get back to you within 24
-          hours.
+          message at support@stellastone.store and we will get back to you
+          within 24 hours.
         </p>
         <div className="mt-4 w-full">
           <Accordion type="single" collapsible className="w-full">

@@ -30,6 +30,13 @@ const oregano = Oregano({
 export const metadata: Metadata = {
   title: 'Stella Store',
   description: 'jewelry store',
+  icons: {
+    icon: {
+      url: '/favicon.png',
+      type: 'image/png',
+    },
+    shortcut: { url: '/favicon.png', type: 'image/png' },
+  },
   keywords: [
     'jewelry store',
     'jewelry',

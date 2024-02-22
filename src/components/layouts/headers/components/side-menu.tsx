@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MobileMenus } from './mobile-menu';
 
-import logo from '@/assets/img/logo/logo.svg';
+import logo from '@/assets/img/logo/logo-dark.webp';
 
 type SideMenuProps = {
   isOpen: boolean;
@@ -15,7 +15,7 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
     <div className="flex h-full w-full flex-col justify-between gap-8 p-6">
       <div className="flex items-center justify-between">
         <Link href="/" aria-label="home">
-          <Image src={logo} alt="logo" />
+          <Image src={logo} alt="logo" className="w-44" />
         </Link>
 
         <button
@@ -33,7 +33,9 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
           <MobileMenus />
         </div>
         <span className="item-center flex justify-center text-sm">
-          <p>© {new Date().getFullYear()} Luna. All Rights Reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Stella Stone. All Rights Reserved.
+          </p>
         </span>
       </div>
     </div>

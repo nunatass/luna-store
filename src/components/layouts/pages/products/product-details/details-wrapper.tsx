@@ -157,7 +157,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
           </Button>
         </div>
 
-        <Button asChild size="lg" className="w-full">
+        <Button asChild size="lg" className="w-full" onClick={handleAddProduct}>
           <Link href="/cart">Buy Now</Link>
         </Button>
       </div>

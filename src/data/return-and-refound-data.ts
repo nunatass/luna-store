@@ -2,7 +2,7 @@ export const returnAndRefundData = [
   {
     title: '',
     content: [
-      "We hope you love your new Luna Jewelry! However, if you're not completely happy with it or you simply changed your mind, we are more than happy to exchange it or give you a refund.",
+      "We hope you love your new Stella Stone Jewelry! However, if you're not completely happy with it or you simply changed your mind, we are more than happy to exchange it or give you a refund.",
 
       'We truly want to provide the best experience to our customers so our number one priority is to make sure you are happy and completely satisfied with your purchase and shopping experience.',
     ],
@@ -20,7 +20,7 @@ export const returnAndRefundData = [
     ],
   },
   {
-    title: 'Luna Guarantee:',
+    title: 'Stela Stone Guarantee:',
     content: [
       'We are fully committed to creating and providing good quality jewelry at affordable prices, which is why we offer a 6-month guarantee on all our jewelry. If your product breaks or has a manufacturing defect within 6 months of your purchase, our guarantee entitles you to a one-time replacement of the piece - free of charge. This warranty is voided under any user damage issues (scratches and accidental breakage) or if the jewelry is lost.',
     ],
@@ -28,14 +28,14 @@ export const returnAndRefundData = [
   {
     title: 'How do I return my item(s)?',
     content: [
-      "To start a return, please contact us at support@luna.com or contact us and we'll send you instructions on how to return your item(s) and get a refund (or exchange - whatever you prefer). Please kindly do not return the jewelry back to us without first contacting us.",
+      "To start a return, please contact us at support@stellastone.store or contact us and we'll send you instructions on how to return your item(s) and get a refund (or exchange - whatever you prefer). Please kindly do not return the jewelry back to us without first contacting us.",
       'If your product breaks or has a manufacturing defect within 6 months of your purchase, our guarantee entitles you to a one-time replacement of the piece - free of charge. This warranty is voided under any user damage issues (scratches and accidental breakage) or if the jewelry is lost.',
     ],
   },
   {
     title: 'When will I receive my refund?',
     content: [
-      "To start a return, please contact us at support@luna.com or contact us  and we'll send you instructions on how to return your item(s) and get a refund (or exchange - whatever you prefer). Please kindly do not return the jewelry back to us without first contacting us.",
+      "To start a return, please contact us at support@stellastone.store or contact us  and we'll send you instructions on how to return your item(s) and get a refund (or exchange - whatever you prefer). Please kindly do not return the jewelry back to us without first contacting us.",
 
       "You'll be automatically refunded on your original payment method. Please remember it can take some time (5-10 business days) for your bank or credit card company to process the refund.",
     ],

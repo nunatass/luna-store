@@ -3,7 +3,7 @@ import { Facebook, Instagram } from 'lucide-react';
 export const socialData = [
   {
     id: 1,
-    link: 'https://www.facebook.com/hamed.y.hasan0',
+    link: 'https://www.facebook.com/stellastone.store/',
     icon: Facebook,
     title: 'Facebook',
   },
@@ -16,7 +16,7 @@ export const socialData = [
 
   {
     id: 3,
-    link: 'https://www.instagram.com/',
+    link: 'https://www.instagram.com/stellastone.store/',
     icon: Instagram,
     title: 'instagram',
   },

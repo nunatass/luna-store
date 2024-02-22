@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
-import logo from '@/assets/img/logo/logo.svg';
+import logo from '@/assets/img/logo/logo-dark.webp';
 import { EmailIcon } from '@/components/icons';
 import { footerData } from '@/data/footer-data';
 import { socialData } from '@/data/social-data';
@@ -14,7 +14,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 justify-between gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:flex">
           <div className="flex flex-col gap-4">
             <Link href="/">
-              <Image src={logo} alt="logo" />
+              <Image src={logo} alt="logo" className="w-44" />
             </Link>
 
             <div className="flex flex-col gap-6">
@@ -29,7 +29,9 @@ export const Footer = () => {
                 <div className="flex items-center gap-2">
                   <EmailIcon />
                   <p className="transition-all duration-300 ease-in-out hover:text-[#be844c]">
-                    <a href="support:luna@support.com">luna.store@gmail.com</a>
+                    <a href="support@stellastone.store">
+                      support@stellastone.store
+                    </a>
                   </p>
                 </div>
                 {/* <div className="">
@@ -94,7 +96,9 @@ export const Footer = () => {
         <div className="container border-t-[1px] border-gray-200 py-4">
           <div className="flex flex-col items-center gap-y-8 lg:flex-row lg:justify-between ">
             <div className="font-md text-center text-gray-700 lg:text-left">
-              <p>© {new Date().getFullYear()} Luna. All Rights Reserved.</p>
+              <p>
+                © {new Date().getFullYear()} Stella Stone. All Rights Reserved.
+              </p>
             </div>
             <Image src={paymentOptionImg} alt="pay" className="w-96" />
           </div>

@@ -2,7 +2,7 @@ export const privacyAndPolicyData = [
   {
     title: '',
     content: [
-      ' This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from luna.com (the “Site”).',
+      ' This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from stellastone.store (the “Site”).',
     ],
   },
   {
@@ -52,8 +52,7 @@ export const privacyAndPolicyData = [
   {
     title: 'Contact us',
     content: [
-      'For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e‑mail at support@luna.com or by mail using the details provided below: ',
-      'Luna, Rua Rua Manuel da Fonseca 8.Évora, Portugal',
+      'For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e‑mail at support@stellastone.store.',
     ],
   },
 ];
