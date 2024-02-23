@@ -80,13 +80,16 @@ export function SuccessSection() {
               <span>Need help?</span>
               <Link
                 href="/contact"
+                aria-label="contact us"
                 className="font-semibold text-black hover:underline"
               >
                 Contact Us
               </Link>
             </div>
             <Button asChild size="sm">
-              <Link href="/products">Continue Shipping</Link>
+              <Link href="/products" aria-label="continue shipping">
+                Continue Shipping
+              </Link>
             </Button>
           </div>
         </div>
@@ -100,7 +103,7 @@ export function SuccessSection() {
         <div className="flex flex-col justify-center gap-10 divide-y">
           {productData.map((product) => (
             <div className="flex items-center gap-2 pt-8" key={product.id}>
-              <Link href={`/product/${product.id}`}>
+              <Link href={`/product/${product.id}`} aria-label="product item">
                 <div className="item-center flex h-20 w-20 justify-center bg-gray-200">
                   <Image
                     src={`${imageUrlPrefix}/${product.media}`}
@@ -115,6 +118,7 @@ export function SuccessSection() {
               <div className="ml-2 flex flex-col gap-2">
                 <Link
                   href={`/products/${product.id}`}
+                  aria-label="product item"
                   className=" text-center text-base font-medium"
                 >
                   {product.title}

@@ -104,6 +104,10 @@ export const ProductsArea = () => {
                   <Button
                     variant="ghost"
                     key={i}
+                    role="tab"
+                    aria-selected={activeTab === tab ? 'true' : 'false'}
+                    aria-controls={`tab-${i}`}
+                    id={`tab-${i}`}
                     onClick={() => handleActiveTab(tab)}
                     className={cn(
                       'relative rounded-none px-0 text-gray-400 transition-all duration-300 ease-in-out hover:bg-white',

@@ -58,7 +58,7 @@ export const MobileMenus = () => {
                   key={subMenu.title}
                   href={subMenu.link}
                   className="pt-4 hover:text-[#be844c]"
-                  aria-label="menu link"
+                  aria-label={subMenu.title}
                 >
                   {subMenu.title}
                 </Link>
@@ -70,7 +70,7 @@ export const MobileMenus = () => {
     } else {
       return (
         <li key={menu?.id} className="p-4 hover:text-[#be844c]">
-          <Link href={menu?.link} aria-label="menu link">
+          <Link href={menu?.link} aria-label={menu.title}>
             <div className="flex gap-2">
               {menu.icon}
               {menu.title}

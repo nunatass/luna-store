@@ -152,6 +152,7 @@ export default function SuccessOrderEmail({
                     >
                       <Link
                         href={`https://stellastone.store/products/${product.id}`}
+                        aria-label="product item"
                       >
                         <div className="item-center flex h-20 w-20 justify-center bg-gray-200">
                           <Img

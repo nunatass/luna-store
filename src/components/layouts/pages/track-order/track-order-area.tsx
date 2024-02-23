@@ -74,7 +74,11 @@ export function TrackOrderArea() {
               free to reach out to our dedicated customer support team.
               <br />
               Should you not have a tracking code, simply get in{' '}
-              <Link className="text-black underline" href="/contact">
+              <Link
+                className="text-black underline"
+                href="/contact"
+                aria-label="contact"
+              >
                 touch with us
               </Link>
               , including your order number, and we&apos;ll promptly resend it

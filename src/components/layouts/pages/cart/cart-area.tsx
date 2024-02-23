@@ -65,7 +65,9 @@ export const CartArea = () => {
 
       <div className="flex w-full flex-col justify-between">
         <h5 className="w-full text-sm font-semibold transition-all duration-300 ease-in-out hover:text-[#be844c]">
-          <Link href={`/products/${product.id}`}>{product.title}</Link>
+          <Link href={`/products/${product.id}`} aria-label="product item">
+            {product.title}
+          </Link>
         </h5>
         <div className="w-full">
           {product.discount > 0 ? (
@@ -122,7 +124,9 @@ export const CartArea = () => {
         <div className="flex h-[50vh] w-full flex-col items-center justify-center gap-6 text-center">
           <h3 className="text-lg font-bold md:text-3xl">Your cart is empty</h3>
           <Button asChild>
-            <Link href="/shop">Continue Shipping</Link>
+            <Link href="/shop" aria-label="shop">
+              Continue Shipping
+            </Link>
           </Button>
         </div>
       )}

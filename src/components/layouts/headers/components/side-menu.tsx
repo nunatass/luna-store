@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MobileMenus } from './mobile-menu';
 
-import logo from '@/assets/img/logo/logo-dark.webp';
+import logo from '@/assets/img/logo/logo-dark.svg';
 
 type SideMenuProps = {
   isOpen: boolean;

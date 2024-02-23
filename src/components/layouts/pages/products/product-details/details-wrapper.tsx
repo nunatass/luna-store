@@ -158,7 +158,9 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         </div>
 
         <Button asChild size="lg" className="w-full" onClick={handleAddProduct}>
-          <Link href="/cart">Buy Now</Link>
+          <Link href="/cart" aria-label="cart">
+            Buy Now
+          </Link>
         </Button>
       </div>
 
@@ -173,7 +175,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
           Add Wishlist
         </Button>
         <Button variant="ghost" type="button" asChild>
-          <Link href="/contact" className="flex gap-2">
+          <Link href="/contact" className="flex gap-2" aria-label="contact">
             <AskQuestionIcon />
             Ask a question
           </Link>

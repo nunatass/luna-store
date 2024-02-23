@@ -20,7 +20,7 @@ export const CartProductCell = ({
 }: CartProductCellProps) => {
   return (
     <div className="flex items-center gap-2">
-      <Link href={`/product/${id}`}>
+      <Link href={`/product/${id}`} aria-label="product item">
         <div className="bg-gray-200">
           <Image
             src={`${imageUrlPrefix}/${media}`}
@@ -32,7 +32,11 @@ export const CartProductCell = ({
         </div>
       </Link>
       <div className="ml-2 flex flex-col gap-2">
-        <Link href={`/products/${id}`} className=" text-center text-base">
+        <Link
+          href={`/products/${id}`}
+          aria-label={title}
+          className=" text-center text-base"
+        >
           {title}
         </Link>
         <div className="flex items-center gap-2 ">

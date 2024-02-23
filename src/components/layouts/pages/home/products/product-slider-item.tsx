@@ -90,7 +90,11 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
         {...animationsProps}
         className="relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-white text-center sm:w-80"
       >
-        <Link className="h-full w-full" href={`/products/${product.id}`}>
+        <Link
+          className="h-full w-full"
+          href={`/products/${product.id}`}
+          aria-label="product-item"
+        >
           <div
             className="z-0 h-full w-full scale-110 bg-white bg-contain bg-center bg-no-repeat"
             style={{
@@ -101,7 +105,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
         <motion.div
           variants={optionsAnimationVariants}
           transition={{ duration: 0.4, ease: 'easeInOut' }}
-          className="absolute left-4 top-4 z-10 flex flex-col gap-2"
+          className="absolute left-4 top-4 z-10 hidden flex-col gap-2 sm:flex"
         >
           <AnimatePresence>
             {isAddedToCart ? (
@@ -194,7 +198,11 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
 
         <div className="z-10 flex flex-col gap-2 px-2 py-2 font-medium">
           <h3 className="text-left transition-all duration-300 ease-in-out">
-            <Link className="text-sm" href={`/products/${product.id}`}>
+            <Link
+              className="text-sm"
+              href={`/products/${product.id}`}
+              aria-label={product.title}
+            >
               {product.title}
             </Link>
           </h3>

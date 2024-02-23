@@ -34,6 +34,7 @@ export const CategoryFilter = () => {
           {categories.map((category) => (
             <li key={category.id} className="group">
               <Link
+                aria-label={category.name}
                 href={`/products?category=${category.name.toLocaleLowerCase()}`}
               >
                 <Button

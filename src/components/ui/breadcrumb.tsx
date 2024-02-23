@@ -94,6 +94,7 @@ export function Breadcrumb({
                 />
                 <Link
                   href={item.pathLink}
+                  aria-label={item.pathLink}
                   className={cn(
                     'ml-4 text-sm font-medium text-gray-500 hover:text-gray-700',
                     pathname === item.pathLink &&

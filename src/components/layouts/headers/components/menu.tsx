@@ -58,7 +58,7 @@ export const Menus = ({ secondary }: MenusProps) => {
                   <ul className="flex flex-col gap-2 text-sm">
                     {product.megaMenus.map((menu) => (
                       <li key={menu.title} className="hover:text-[#be844c]">
-                        <Link href={menu.link} aria-label="menu link">
+                        <Link href={menu.link} aria-label={menu.title}>
                           {menu.title}
                         </Link>
                       </li>
@@ -83,7 +83,7 @@ export const Menus = ({ secondary }: MenusProps) => {
             <ul className="transform-all invisible absolute top-14 z-10 flex h-max flex-col justify-between  gap-2.5 bg-white px-8 py-6 text-sm font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/sub_menu:visible group-hover/sub_menu:-translate-y-3 group-hover/sub_menu:opacity-100">
               {menu?.subMenus?.map((subMenu) => (
                 <li key={subMenu.title} className="hover:text-[#be844c]">
-                  <Link href={subMenu.link} aria-label="menu link">
+                  <Link href={subMenu.link} aria-label={subMenu.title}>
                     {subMenu.title}
                   </Link>
                 </li>

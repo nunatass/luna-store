@@ -94,7 +94,11 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
         {...animationsProps}
         className="relative flex h-max w-40 max-w-80 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:w-full "
       >
-        <Link href={`/products/${product.id}`} className="group relative">
+        <Link
+          href={`/products/${product.id}`}
+          aria-label="product item"
+          className="group relative"
+        >
           <Image
             src={`${imageUrlPrefix}/${product.medias[0].url}`}
             alt="product img"
@@ -120,7 +124,11 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           <AnimatePresence>
             {isAddedToCart ? (
               <motion.div {...animationsProps}>
-                <Link href="/cart" className="flex items-center gap-2">
+                <Link
+                  href="/cart"
+                  aria-label="cart"
+                  className="flex items-center gap-2"
+                >
                   <motion.div
                     {...optionHoverAnimation}
                     className="text-gray-4 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-sm"
@@ -210,6 +218,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           <h3 className="text-left transition-all duration-300 ease-in-out sm:mb-2">
             <Link
               className="text-xs sm:text-sm"
+              aria-label={product.title}
               href={`/products/${product.id}`}
             >
               {product.title}

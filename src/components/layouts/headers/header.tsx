@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import logoDark from '@/assets/img/logo/logo-dark.webp';
+import logoDark from '@/assets/img/logo/logo-dark.svg';
 import logoLight from '@/assets/img/logo/logo.webp';
 import {
   CartTwoIcon,
@@ -75,7 +75,7 @@ export const Header = ({ secondary }: HeaderProps) => {
             )}
           >
             <div className="w-44">
-              <Link href="/">
+              <Link href="/" aria-label="home">
                 <Image
                   className={cn('block', (sticky || secondary) && 'hidden')}
                   src={logoLight}

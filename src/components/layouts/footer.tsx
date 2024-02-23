@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
-import logo from '@/assets/img/logo/logo-dark.webp';
+import logo from '@/assets/img/logo/logo-dark.svg';
 import { EmailIcon } from '@/components/icons';
 import { footerData } from '@/data/footer-data';
 import { socialData } from '@/data/social-data';
@@ -13,14 +13,14 @@ export const Footer = () => {
       <div className="container flex flex-col gap-8 px-12 py-10 md:py-20">
         <div className="grid grid-cols-1 justify-between gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:flex">
           <div className="flex flex-col gap-4">
-            <Link href="/">
+            <Link href="/" aria-label="logo">
               <Image src={logo} alt="logo" className="w-44" />
             </Link>
 
             <div className="flex flex-col gap-6">
               <div>
                 <span className="text-sm">Got Questions? Call us</span>
-                <h4 className="text-2xl font-medium transition-all duration-300 ease-in-out hover:text-[#be844c]">
+                <h4 className="text-2xl font-medium transition-all duration-300 ease-in-out hover:text-[#62605d]">
                   <a href="tel:670-413-90-762">+251 926 313 652</a>
                 </h4>
               </div>
@@ -61,7 +61,9 @@ export const Footer = () => {
                     key={item.label}
                     className="transition-all duration-300 ease-in-out hover:text-black"
                   >
-                    <Link href={item.link}>{item.label}</Link>
+                    <Link href={item.link} aria-label={item.label}>
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -82,7 +84,7 @@ export const Footer = () => {
               <h4 className="font-base font-medium">Follow Us On</h4>
               <div className="flex gap-2">
                 {socialData.map(({ link, id, icon: Icon }) => (
-                  <a href={link} key={id} target="_blank">
+                  <a href={link} key={id} target="_blank" aria-label={link}>
                     <div className="bg-white p-2 transition-all duration-300 ease-in-out hover:bg-black hover:text-white">
                       <Icon className="h-4 w-4" />
                     </div>

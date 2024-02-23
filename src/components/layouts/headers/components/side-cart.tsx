@@ -99,7 +99,11 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
       </div>
       <div className="w-full">
         <h5 className="font-semibold transition-all duration-300 ease-in-out ">
-          <Link className="text-sm" href={`/products/${product.id}`}>
+          <Link
+            className="text-sm"
+            href={`/products/${product.id}`}
+            aria-label={product.title}
+          >
             {product.title}
           </Link>
         </h5>
@@ -212,7 +216,9 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
             size="lg"
             onClick={handleCloseSideCart}
           >
-            <Link href="/cart">View cart</Link>
+            <Link href="/cart" aria-label="cart">
+              View cart
+            </Link>
           </Button>
           <Button
             size="lg"

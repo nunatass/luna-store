@@ -70,6 +70,7 @@ export const HomeCollectionsArea = () => {
         </div>
         <Link
           className="relative mt-6 flex h-[470px] w-full justify-between overflow-hidden bg-black px-14 py-14 sm:col-span-2 sm:h-[494px] md:col-span-2 md:row-span-2 md:row-start-1 md:mr-6 md:mt-0 md:h-[600px]"
+          aria-label="collection"
           href={`/collections/${romanceCollection.id}`}
         >
           <div
