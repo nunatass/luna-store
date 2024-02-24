@@ -11,9 +11,9 @@ export async function POST(req: NextRequest) {
   const order = await req.json();
   let total = 0;
   const lineItems = order.items.map((item: CartProduct) => {
-    total += item.price * (100 - item.discount) * item.orderQuantity;
-    console.log(Math.round((item.price * (100 - item.discount)) / 100));
-
+    total +=
+      Math.round((item.price * (100 - item.discount)) / 100) *
+      item.orderQuantity;
     return {
       price_data: {
         currency: 'USD',

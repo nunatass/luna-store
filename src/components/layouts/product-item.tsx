@@ -8,6 +8,7 @@ import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { useCallback } from 'react';
 import { PreviewProductModal } from '../modals/preview-product-modal';
 
@@ -124,8 +125,8 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           <AnimatePresence>
             {isAddedToCart ? (
               <motion.div {...animationsProps}>
-                <Link
-                  href="/cart"
+                <div
+                  onClick={() => redirect('/cart')}
                   aria-label="cart"
                   className="flex items-center gap-2"
                 >
@@ -142,7 +143,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
                   >
                     View Cart
                   </motion.span>
-                </Link>
+                </div>
               </motion.div>
             ) : (
               <motion.button

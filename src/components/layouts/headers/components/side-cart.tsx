@@ -13,6 +13,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { toast } from 'sonner';
+import { Loader } from 'lucide-react';
 
 import { useCallback } from 'react';
 
@@ -46,7 +47,7 @@ const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const pathname = usePathname();
   const { products, getTotal, removeProduct } = useCart();
-  const { mutate: handleOrderCheckout } = useOrderCheckout();
+  const { mutate: handleOrderCheckout, isPending } = useOrderCheckout();
 
   const handleRemoveProduct = (productId: string) => {
     removeProduct(productId);
@@ -222,10 +223,11 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
           <Button
             size="lg"
             variant="outline"
-            className="w-full"
+            className="flex w-full items-center gap-4"
             onClick={handleCheckout}
           >
             Checkout
+            {isPending && <Loader className="h-5 w-5 animate-spin" />}
           </Button>
         </div>
       </div>

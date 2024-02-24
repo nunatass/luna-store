@@ -1,6 +1,7 @@
 'use client';
 import { ShippingMethod } from '@/common/types';
 import { Button } from '@/components/ui/button';
+
 import {
   Form,
   FormControl,
@@ -15,6 +16,7 @@ import { useCart } from '@/hooks/use-cart';
 import { formatPrice } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loadStripe } from '@stripe/stripe-js';
+import { Loader } from 'lucide-react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -53,7 +55,7 @@ const FormSchema = z.object({
 export function CartShippingPriceForm() {
   const { getTotal, products } = useCart();
   const { total, totalWithDiscount } = getTotal();
-  const { mutate: handleOrderCheckout } = useOrderCheckout();
+  const { mutate: handleOrderCheckout, isPending } = useOrderCheckout();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -159,7 +161,10 @@ export function CartShippingPriceForm() {
               </span>
             </div>
           </div>
-          <Button className="w-full">Proceed to Checkout</Button>
+          <Button className="flex w-full items-center  gap-4">
+            Proceed to Checkout
+            {isPending && <Loader className="h-5 w-5 animate-spin" />}
+          </Button>
         </div>
       </form>
     </Form>
