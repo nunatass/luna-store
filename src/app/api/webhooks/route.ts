@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
-  } catch (error: { message: string }) {
+  } catch (error) {
     return new NextResponse(`Webhook Error: ${error.message}`, { status: 400 });
   }
 
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
           discount: product.prices[0].discount,
           title: product.title,
           orderQuantity: 1,
-          media: '',
+          media: product.medias[0].url,
         })),
       },
     });

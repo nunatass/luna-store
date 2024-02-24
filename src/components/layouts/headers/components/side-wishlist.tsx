@@ -159,8 +159,8 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
                   size="lg"
                   className="hover:border-black hover:bg-black hover:text-white"
                 >
-                  <Link href="/shop" aria-label="go to shop">
-                    Go to Shop
+                  <Link href="/products" aria-label="go to shop">
+                    Go to products
                   </Link>
                 </Button>
               </motion.div>

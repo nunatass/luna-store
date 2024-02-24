@@ -1,5 +1,5 @@
 import { CartProduct } from '@/common/types';
-import SuccessOrderEmail from '@/emails/success-order-email';
+import { SuccessOrderEmail } from '@/components/emails-templates/success-order-email';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);

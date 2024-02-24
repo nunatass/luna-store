@@ -124,7 +124,7 @@ export const CartArea = () => {
         <div className="flex h-[50vh] w-full flex-col items-center justify-center gap-6 text-center">
           <h3 className="text-lg font-bold md:text-3xl">Your cart is empty</h3>
           <Button asChild>
-            <Link href="/shop" aria-label="shop">
+            <Link href="/products" aria-label="shop">
               Continue Shipping
             </Link>
           </Button>
