@@ -33,9 +33,9 @@ export const ContactArea = () => {
                       support@stellastone.store
                     </a>
                   </p>
-                  <p data-info="phone" className="text-md font-medium">
+                  {/* <p data-info="phone" className="text-md font-medium">
                     <a href="tel:670-413-90-762">+251 926 313 652</a>
-                  </p>
+                  </p> */}
                 </div>
               </div>
 

@@ -18,12 +18,12 @@ export const Footer = () => {
             </Link>
 
             <div className="flex flex-col gap-6">
-              <div>
+              {/* <div>
                 <span className="text-sm">Got Questions? Call us</span>
                 <h4 className="text-2xl font-medium transition-all duration-300 ease-in-out hover:text-[#62605d]">
                   <a href="tel:670-413-90-762">+251 926 313 652</a>
                 </h4>
-              </div>
+              </div>  */}
 
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
