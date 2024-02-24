@@ -4,7 +4,6 @@ import { BackToTopButton } from '@/components/ui/back-to-top-button';
 import { Metadata } from 'next';
 import { Charm, Inter, Oregano } from 'next/font/google';
 import { Toaster } from 'sonner';
-import { DiscountBanner } from '@/components/layouts/headers/discount-banner';
 
 import { HydrationZustand } from '@/components/hydration-zustand';
 import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
@@ -78,7 +77,6 @@ export default function RootLayout({
               className=""
             />
             <div className="relative">
-              <DiscountBanner />
               <Modal />
               {children}
               <BackToTopButton />

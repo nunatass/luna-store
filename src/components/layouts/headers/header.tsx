@@ -23,6 +23,7 @@ import { SearchBar } from './components/search-bar';
 import { SideCart } from './components/side-cart';
 import { SideMenu } from './components/side-menu';
 import { SideWishlist } from './components/side-wishlist';
+import { DiscountBanner } from './discount-banner';
 
 const quantityAnimationVariants = {
   hide: { opacity: 0, scale: 0 },
@@ -45,6 +46,7 @@ export const Header = ({ secondary }: HeaderProps) => {
 
   return (
     <>
+      <DiscountBanner />
       <div className="relative z-20">
         <header className="absolute left-0 right-0 top-0">
           <div
