@@ -29,8 +29,8 @@ export function MenuItem({
         href={link}
         className={cn(
           'flex items-center justify-center',
-          'hover:text-white',
-          (sticky || secondary) && 'hover:text-[#be844c]'
+          'md:hover:text-white',
+          (sticky || secondary) && 'md:hover:text-[#be844c]'
         )}
         aria-label={`${title}`}
       >

@@ -1,5 +1,4 @@
 'use client';
-// import RenderCartProgress from './render-cart-progress';
 import emptyCartImg from '@/assets/img/product/side-cart/empty-cart.png';
 import { CartProduct } from '@/common/types';
 import { CloseTwoIcon, TrashIcon } from '@/components/icons';
@@ -86,7 +85,7 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
               ${formatPriceWithDiscount(product.price, product.discount).price}
             </span>
           ) : (
-            <span className="text-sm font-semibold hover:text-[#be844c]">
+            <span className="text-sm font-semibold md:hover:text-[#be844c]">
               ${formatPrice(product.price)}
             </span>
           )}
@@ -99,7 +98,7 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
         onClick={() => handleRemoveProduct(product.id)}
         variant="link"
         size="icon"
-        className="py-0 text-gray-600 hover:text-red-400"
+        className="py-0 text-gray-600 md:hover:text-red-400"
       >
         <TrashIcon />
       </Button>
@@ -114,9 +113,9 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
           <Button
             onClick={handleCloseSideCart}
             aria-label="button close cart"
-            className="z-50 flex h-12 w-12  items-center justify-center bg-gray-200 text-black hover:bg-gray-200 md:h-8 md:w-8"
+            className="z-50 flex h-12 w-12  items-center justify-center bg-gray-200 text-black md:h-8 md:w-8 md:hover:bg-gray-200"
           >
-            <div className="transition-all duration-300 ease-in-out hover:rotate-90">
+            <div className="transition-all duration-300 ease-in-out md:hover:rotate-90">
               <CloseTwoIcon aria-label="close icon" />
             </div>
           </Button>
@@ -156,7 +155,7 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
                   aria-label="button go to shop"
                   variant="outline"
                   size="lg"
-                  className="hover:border-black hover:bg-black hover:text-white"
+                  className="md:hover:border-black md:hover:bg-black md:hover:text-white"
                 >
                   <Link href="/products" aria-label="go to shop">
                     Go to products

@@ -29,7 +29,7 @@ export const SidePanel = ({
         {isOpen && (
           <motion.div
             className={cn(
-              'scrollbar-hide scrollbar-hide fixed right-0  top-0 z-[9999] h-full min-h-screen w-full max-w-[400px] overflow-scroll bg-white shadow-sm',
+              'scrollbar-hide scrollbar-hide fixed right-0  top-0 z-[9999999] h-full min-h-screen w-full max-w-[400px] overflow-scroll bg-white shadow-sm',
               className
             )}
             {...sidebarPanelAnimation}

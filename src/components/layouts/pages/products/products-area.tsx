@@ -107,7 +107,7 @@ export function ProductsArea() {
                   aria-label="button close cart"
                   className="z-50 flex h-8 w-8 items-center justify-center bg-gray-200"
                 >
-                  <div className="transition-all duration-300 ease-in-out hover:rotate-90">
+                  <div className="transition-all duration-300 ease-in-out md:hover:rotate-90">
                     <CloseTwoIcon aria-label="close icon" />
                   </div>
                 </button>

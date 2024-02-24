@@ -81,7 +81,7 @@ export function SuccessSection() {
               <Link
                 href="/contact"
                 aria-label="contact us"
-                className="font-semibold text-black hover:underline"
+                className="font-semibold text-black md:hover:underline"
               >
                 Contact Us
               </Link>

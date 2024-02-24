@@ -28,7 +28,7 @@ export const Footer = () => {
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
                   <EmailIcon />
-                  <p className="transition-all duration-300 ease-in-out hover:text-[#be844c]">
+                  <p className="transition-all duration-300 ease-in-out md:hover:text-[#be844c]">
                     <a href="support@stellastone.store">
                       support@stellastone.store
                     </a>
@@ -59,7 +59,7 @@ export const Footer = () => {
                 {data.menu.map((item) => (
                   <li
                     key={item.label}
-                    className="transition-all duration-300 ease-in-out hover:text-black"
+                    className="transition-all duration-300 ease-in-out md:hover:text-black"
                   >
                     <Link href={item.link} aria-label={item.label}>
                       {item.label}
@@ -85,7 +85,7 @@ export const Footer = () => {
               <div className="flex gap-2">
                 {socialData.map(({ link, id, icon: Icon }) => (
                   <a href={link} key={id} target="_blank" aria-label={link}>
-                    <div className="bg-white p-2 transition-all duration-300 ease-in-out hover:bg-black hover:text-white">
+                    <div className="bg-white p-2 transition-all duration-300 ease-in-out md:hover:bg-black md:hover:text-white">
                       <Icon className="h-4 w-4" />
                     </div>
                   </a>

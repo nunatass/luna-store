@@ -4,6 +4,7 @@ import { BackToTopButton } from '@/components/ui/back-to-top-button';
 import { Metadata } from 'next';
 import { Charm, Inter, Oregano } from 'next/font/google';
 import { Toaster } from 'sonner';
+import { DiscountBanner } from '@/components/layouts/headers/discount-banner';
 
 import { HydrationZustand } from '@/components/hydration-zustand';
 import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
@@ -70,12 +71,14 @@ export default function RootLayout({
       >
         <TanstackQueryProvider>
           <HydrationZustand>
+            <Toaster
+              position="bottom-right"
+              expand={false}
+              toastOptions={{ duration: 1500 }}
+              className=""
+            />
             <div className="relative">
-              <Toaster
-                position="top-right"
-                expand={false}
-                toastOptions={{ duration: 1500 }}
-              />
+              <DiscountBanner />
               <Modal />
               {children}
               <BackToTopButton />

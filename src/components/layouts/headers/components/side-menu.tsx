@@ -22,9 +22,9 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
         <Button
           aria-label="close button"
           onClick={() => setIsOpen(false)}
-          className="z-50 flex h-12 w-12  items-center justify-center bg-gray-200 text-black hover:bg-gray-200 md:h-8 md:w-8"
+          className="z-50 flex h-12 w-12  items-center justify-center bg-gray-200 text-black md:h-8 md:w-8 md:hover:bg-gray-200"
         >
-          <div className="transition-all duration-300 ease-in-out hover:rotate-90">
+          <div className="transition-all duration-300 ease-in-out md:hover:rotate-90">
             <CloseTwoIcon aria-label="close icon" />
           </div>
         </Button>

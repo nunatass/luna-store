@@ -62,7 +62,7 @@ export const ContactArea = () => {
                       target="_blank"
                       className="ring-[1px] ring-black"
                     >
-                      <div className="bg-white p-2 transition-all duration-300 ease-in-out hover:bg-black hover:text-white">
+                      <div className="bg-white p-2 transition-all duration-300 ease-in-out md:hover:bg-black md:hover:text-white">
                         <Icon className="h-4 w-4" />
                       </div>
                     </a>
