@@ -89,16 +89,16 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
     setIsPreviewModalOpen(true);
   }, [setIsPreviewModalOpen, product.id, setChildren]);
   return (
-    <div className="relative">
+    <Link
+      className="relative"
+      href={`/products/${product.id}`}
+      aria-label="product item"
+    >
       <motion.div
         {...animationsProps}
         className="relative flex h-max w-40 max-w-80 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:w-full "
       >
-        <Link
-          href={`/products/${product.id}`}
-          aria-label="product item"
-          className="group relative"
-        >
+        <div className="group relative">
           <Image
             src={`${imageUrlPrefix}/${product.medias[0].url}`}
             alt="product img"
@@ -115,7 +115,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
             height={352}
             priority
           />
-        </Link>
+        </div>
         <motion.div
           variants={optionsAnimationVariants}
           transition={{ duration: 0.4, ease: 'easeInOut' }}
@@ -216,13 +216,13 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
 
         <div className="z-10 flex flex-col gap-1 bg-white px-2 py-4 font-medium">
           <h3 className="text-left transition-all duration-300 ease-in-out sm:mb-2">
-            <Link
+            <span
               className="text-xs sm:text-sm"
               aria-label={product.title}
-              href={`/products/${product.id}`}
+              // href={`/products/${product.id}`}
             >
               {product.title}
-            </Link>
+            </span>
           </h3>
           <div className="w-full">
             <div className="flex w-full items-center justify-between">
@@ -269,6 +269,6 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           </span>
         )}
       </motion.div>
-    </div>
+    </Link>
   );
 };
