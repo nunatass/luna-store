@@ -72,7 +72,7 @@ export default function RootLayout({
         <TanstackQueryProvider>
           <HydrationZustand>
             <Toaster
-              position="bottom-right"
+              position="bottom-center"
               expand={false}
               toastOptions={{ duration: 1500 }}
               className=""
