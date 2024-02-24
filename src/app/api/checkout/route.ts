@@ -1,6 +1,6 @@
 import { CartProduct } from '@/common/types';
 import { API } from '@/lib/axios';
-import { determineShippingOptions, stripe } from '@/lib/stripe';
+import { stripe } from '@/lib/stripe';
 import { NextRequest, NextResponse } from 'next/server';
 
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
@@ -40,12 +40,138 @@ export async function POST(req: NextRequest) {
   });
 
   try {
+    const freeShippingThreshold = 9900;
     const session = await stripe.checkout.sessions.create({
+      shipping_options:
+        total / 100 >= freeShippingThreshold
+          ? [
+              {
+                shipping_rate_data: {
+                  type: 'fixed_amount',
+                  fixed_amount: {
+                    amount: 0,
+                    currency: 'usd',
+                  },
+                  display_name: 'Free shipping',
+                  delivery_estimate: {
+                    minimum: {
+                      unit: 'business_day',
+                      value: 5,
+                    },
+                    maximum: {
+                      unit: 'business_day',
+                      value: 10,
+                    },
+                  },
+                },
+              },
+              {
+                shipping_rate_data: {
+                  type: 'fixed_amount',
+                  fixed_amount: {
+                    amount: 500,
+                    currency: 'usd',
+                  },
+                  display_name: 'Fast shipping',
+                  delivery_estimate: {
+                    minimum: {
+                      unit: 'business_day',
+                      value: 3,
+                    },
+                    maximum: {
+                      unit: 'business_day',
+                      value: 5,
+                    },
+                  },
+                },
+              },
+            ]
+          : order.shippingMethod === 'fast'
+            ? [
+                {
+                  shipping_rate_data: {
+                    type: 'fixed_amount',
+                    fixed_amount: {
+                      amount: 500,
+                      currency: 'usd',
+                    },
+                    display_name: 'Fast shipping',
+                    delivery_estimate: {
+                      minimum: {
+                        unit: 'business_day',
+                        value: 3,
+                      },
+                      maximum: {
+                        unit: 'business_day',
+                        value: 5,
+                      },
+                    },
+                  },
+                },
+                {
+                  shipping_rate_data: {
+                    type: 'fixed_amount',
+                    fixed_amount: {
+                      amount: 0,
+                      currency: 'usd',
+                    },
+                    display_name: 'Free shipping',
+                    delivery_estimate: {
+                      minimum: {
+                        unit: 'business_day',
+                        value: 5,
+                      },
+                      maximum: {
+                        unit: 'business_day',
+                        value: 10,
+                      },
+                    },
+                  },
+                },
+              ]
+            : [
+                {
+                  shipping_rate_data: {
+                    type: 'fixed_amount',
+                    fixed_amount: {
+                      amount: 299,
+                      currency: 'usd',
+                    },
+                    display_name: 'Standard shipping',
+                    delivery_estimate: {
+                      minimum: {
+                        unit: 'business_day',
+                        value: 5,
+                      },
+                      maximum: {
+                        unit: 'business_day',
+                        value: 10,
+                      },
+                    },
+                  },
+                },
+                {
+                  shipping_rate_data: {
+                    type: 'fixed_amount',
+                    fixed_amount: {
+                      amount: 500,
+                      currency: 'usd',
+                    },
+                    display_name: 'Fast shipping',
+                    delivery_estimate: {
+                      minimum: {
+                        unit: 'business_day',
+                        value: 3,
+                      },
+                      maximum: {
+                        unit: 'business_day',
+                        value: 5,
+                      },
+                    },
+                  },
+                },
+              ],
       line_items: lineItems,
-      shipping_options: determineShippingOptions(
-        total / 100,
-        order.shippingMethod
-      ),
       mode: 'payment',
       payment_method_types: ['card', 'paypal'],
       billing_address_collection: 'required',

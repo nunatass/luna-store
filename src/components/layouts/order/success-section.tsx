@@ -31,7 +31,7 @@ export function SuccessSection() {
       setIsInitialRender(false);
       removeAll();
     }
-  }, [isInitialRender, removeAll, products.length]);
+  }, [isInitialRender, removeAll, products.length, orderId]);
 
   return (
     <section className="container flex h-full flex-col justify-center gap-y-8 divide-x md:flex-row">
