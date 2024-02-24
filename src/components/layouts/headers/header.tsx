@@ -101,7 +101,7 @@ export const Header = ({ secondary }: HeaderProps) => {
               </div>
               <div
                 className={cn(
-                  'flex h-full items-center justify-end gap-5 text-white',
+                  'flex h-full items-center justify-end  text-white lg:gap-5',
                   (sticky || secondary) && 'text-black'
                 )}
               >
@@ -110,6 +110,7 @@ export const Header = ({ secondary }: HeaderProps) => {
                     onClick={() => setIsSearchOpen(true)}
                     type="button"
                     aria-label="search button"
+                    className="h-12 w-12 bg-transparent md:h-8 md:w-8"
                   >
                     <SearchIcon />
                   </button>
@@ -117,6 +118,7 @@ export const Header = ({ secondary }: HeaderProps) => {
                 <div className="relative">
                   <button
                     aria-label="wishlist"
+                    className="h-12 w-12 bg-transparent md:h-8 md:w-8"
                     onClick={() => setIsSideWishlistOpen(true)}
                   >
                     <WishlistIcon aria-label="wishlist icon" />
@@ -138,6 +140,7 @@ export const Header = ({ secondary }: HeaderProps) => {
                   <button
                     onClick={() => setIsSideCartOpen(true)}
                     type="button"
+                    className="h-12 w-12 bg-transparent md:h-8 md:w-8"
                     aria-label="cart button"
                   >
                     <CartTwoIcon aria-label="cart icon" />
@@ -157,6 +160,7 @@ export const Header = ({ secondary }: HeaderProps) => {
                 </div>
                 <div className="block lg:hidden">
                   <button
+                    className="h-12 w-12 bg-transparent"
                     onClick={() => setIsSideMenuOpen(true)}
                     type="button"
                     aria-label="menu button"

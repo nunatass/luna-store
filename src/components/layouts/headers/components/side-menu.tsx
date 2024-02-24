@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { MobileMenus } from './mobile-menu';
 
 import logo from '@/assets/img/logo/logo-dark.svg';
+import { Button } from '@/components/ui/button';
 
 type SideMenuProps = {
   isOpen: boolean;
@@ -18,15 +19,15 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
           <Image src={logo} alt="logo" className="w-44" />
         </Link>
 
-        <button
+        <Button
           aria-label="close button"
           onClick={() => setIsOpen(false)}
-          className="z-50 flex h-8 w-8 items-center justify-center bg-gray-200"
+          className="z-50 flex h-12 w-12  items-center justify-center bg-gray-200 text-black hover:bg-gray-200 md:h-8 md:w-8"
         >
           <div className="transition-all duration-300 ease-in-out hover:rotate-90">
             <CloseTwoIcon aria-label="close icon" />
           </div>
-        </button>
+        </Button>
       </div>
       <div className="flex h-full flex-col">
         <div className="tp-main-menu-mobile fix d-lg-none mb-40 h-full ">

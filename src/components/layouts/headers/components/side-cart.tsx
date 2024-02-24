@@ -143,16 +143,15 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
       <div className="scrollbar-hide h-full w-full overflow-x-hidden overflow-y-scroll">
         <div className="absolute left-0 right-0 top-0 flex w-full items-center justify-between border-b-[0.5px] bg-white p-8 pb-4">
           <h4 className="text-base font-semibold">Shopping cart</h4>
-          <button
+          <Button
             onClick={handleCloseSideCart}
-            type="button"
             aria-label="button close cart"
-            className="z-50 flex h-8 w-8 items-center justify-center bg-gray-200"
+            className="z-50 flex h-12 w-12  items-center justify-center bg-gray-200 text-black hover:bg-gray-200 md:h-8 md:w-8"
           >
             <div className="transition-all duration-300 ease-in-out hover:rotate-90">
               <CloseTwoIcon aria-label="close icon" />
             </div>
-          </button>
+          </Button>
         </div>
         <div
           className={cn(
