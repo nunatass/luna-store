@@ -9,11 +9,11 @@ import { useCart } from '@/hooks/use-cart';
 import { cn, formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { loadStripe } from '@stripe/stripe-js';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Loader } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { toast } from 'sonner';
-import { Loader } from 'lucide-react';
 
 import { useCallback } from 'react';
 
@@ -212,7 +212,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
         <div className="flex w-full flex-col gap-2">
           <Button
             asChild
-            className="w-full"
+            className="w-full flex items-center"
             size="lg"
             onClick={handleCloseSideCart}
           >
