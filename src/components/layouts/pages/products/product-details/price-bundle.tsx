@@ -49,7 +49,7 @@ export function PriceBundle({
           <Button
             variant="ghost"
             className={cn(
-              'relative flex h-16 w-full items-center px-4 ring-2 ring-primary/60',
+              'relative flex h-16 w-full items-center px-4 ring-2 ring-black/60',
               price.id === selectedPrice.id && 'ring-[3px] ring-[#bd844c]'
             )}
             key={price.id}

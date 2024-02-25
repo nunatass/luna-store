@@ -49,7 +49,7 @@ export function useMenuData() {
         { title: 'All Products', link: '/products' },
         ...categories.map((category) => ({
           title: category.name,
-          link: '/',
+          link: `/products?category=${category.name.toLocaleLowerCase()}`,
         })),
       ];
     }

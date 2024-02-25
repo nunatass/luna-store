@@ -6,17 +6,17 @@ import insta_5 from '@/assets/img/instagram/4/instagram-5.jpg';
 import insta_6 from '@/assets/img/instagram/4/instagram-6.jpg';
 
 export const instagramMenuData = [
-  { id: 1, link: 'https://www.instagram.com/', img: insta_1 },
-  { id: 2, link: 'https://www.instagram.com/', img: insta_3 },
-  { id: 3, link: 'https://www.instagram.com/', img: insta_4 },
-  { id: 4, link: 'https://www.instagram.com/', img: insta_6 },
+  { id: 1, link: 'https://www.instagram.com/stellastone.store/', img: insta_1 },
+  { id: 2, link: 'https://www.instagram.com/stellastone.store/', img: insta_3 },
+  { id: 3, link: 'https://www.instagram.com/stellastone.store/', img: insta_4 },
+  { id: 4, link: 'https://www.instagram.com/stellastone.store/', img: insta_6 },
 ];
 
 export const instagramAreaData = [
-  { id: 1, link: 'https://www.instagram.com/', img: insta_1 },
-  { id: 2, link: 'https://www.instagram.com/', img: insta_2 },
-  { id: 3, link: 'https://www.instagram.com/', img: insta_3 },
-  { id: 4, link: 'https://www.instagram.com/', img: insta_4 },
-  { id: 5, link: 'https://www.instagram.com/', img: insta_5 },
-  { id: 6, link: 'https://www.instagram.com/', img: insta_6 },
+  { id: 1, link: 'https://www.instagram.com/stellastone.store/', img: insta_1 },
+  { id: 2, link: 'https://www.instagram.com/stellastone.store/', img: insta_2 },
+  { id: 3, link: 'https://www.instagram.com/stellastone.store/', img: insta_3 },
+  { id: 4, link: 'https://www.instagram.com/stellastone.store/', img: insta_4 },
+  { id: 5, link: 'https://www.instagram.com/stellastone.store/', img: insta_5 },
+  { id: 6, link: 'https://www.instagram.com/stellastone.store/', img: insta_6 },
 ];

@@ -41,17 +41,16 @@ export const CategoryFilter = () => {
                   variant="ghost"
                   onClick={() => handleSelectCategory(category.name)}
                   className={cn(
-                    'flex w-full items-center justify-between px-1.5 text-sm  text-gray-500 transition-all duration-100 ease-in-out group-hover:bg-white group-hover:text-primary',
-                    filterCategory === category.name &&
-                      'font-medium text-primary'
+                    'flex w-full items-center justify-between px-1.5 text-sm  text-gray-500 transition-all duration-100 ease-in-out group-hover:bg-white group-hover:text-black',
+                    filterCategory === category.name && 'font-medium text-black'
                   )}
                 >
                   {category.name}
                   <span
                     className={cn(
-                      'rounded-2 flex h-5 min-w-5 items-center justify-center rounded-lg p-1 ring-1 ring-gray-200 transition-all duration-100 ease-in-out group-hover:bg-primary group-hover:text-white group-hover:ring-primary',
+                      'rounded-2 flex h-5 min-w-5 items-center justify-center rounded-lg p-1 ring-1 ring-gray-200 transition-all duration-100 ease-in-out group-hover:bg-black group-hover:text-white group-hover:ring-black',
                       filterCategory === category.name &&
-                        'bg-primary text-white ring-primary'
+                        'bg-black text-white ring-black'
                     )}
                   >
                     {category.total}

@@ -97,7 +97,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
           ? product.description
           : `${product.description.substring(0, 100)}...`}
         <span
-          className="ml-2 cursor-pointer text-primary"
+          className="ml-2 cursor-pointer text-black"
           onClick={() => setShowMoreText(!showMoreText)}
         >
           {showMoreText ? 'See less' : 'See more'}

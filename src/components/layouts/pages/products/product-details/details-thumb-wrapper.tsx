@@ -84,16 +84,22 @@ export const DetailsThumbWrapper = ({
           <motion.div
             key={activeImg.id}
             {...imageTransitionAnimation}
-            className="h-full w-full "
+            className="relative h-full w-full"
           >
-            <Image
-              src={`${imageUrlPrefix}/${activeImg.url}`}
-              alt="product img"
-              width={imgWidth}
-              height={imgHeight}
-              className="h-full w-full object-contain"
-              priority
-            />
+            {imageURLs?.map((item) => (
+              <Image
+                src={`${imageUrlPrefix}/${item.url}`}
+                key={item.id}
+                alt="product img"
+                width={imgWidth}
+                height={imgHeight}
+                className={cn(
+                  'absolute left-0 top-0 h-full w-full object-contain',
+                  item.url !== activeImg.url && 'hidden'
+                )}
+                priority
+              />
+            ))}
           </motion.div>
         </div>
       </div>
