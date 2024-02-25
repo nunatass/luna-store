@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     address: '',
     email: '',
     name: '',
-    total: total / 100,
+    total: total,
     products: order.items.map((item: CartProduct) => ({
       productId: item.id,
       quantity: item.orderQuantity,
