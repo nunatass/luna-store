@@ -33,7 +33,7 @@ export const HomeCollectionsArea = () => {
     <section className="container">
       <div className="grid grid-cols-1 gap-6 py-16 md:grid-cols-2">
         <Link
-          className="relative mt-6 flex h-[360px] w-full justify-between overflow-hidden bg-black px-14 py-14 md:h-[500px]"
+          className="relative mt-6 flex h-[360px] w-full justify-between overflow-hidden bg-gray-400/20 px-14 py-14 md:h-[500px]"
           aria-label="collection"
           href={`/collections/${collectionOne.id}`}
         >
@@ -51,7 +51,7 @@ export const HomeCollectionsArea = () => {
           </div>
         </Link>
         <Link
-          className="relative mt-6 flex h-[360px] w-full justify-between overflow-hidden bg-black px-14 py-14 md:h-[500px]"
+          className="relative mt-6 flex h-[360px] w-full justify-between overflow-hidden bg-gray-400/20 px-14 py-14 md:h-[500px]"
           aria-label="collection"
           href={`/collections/${collectionTow.id}`}
         >

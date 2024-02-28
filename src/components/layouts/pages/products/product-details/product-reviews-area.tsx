@@ -35,11 +35,11 @@ export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
   const renderReviews = useMemo(() => {
     if (isPending) {
       return Array.from({ length: 5 }, (_, index) => (
-        <div className="flex items-center gap-2" key={index}>
+        <div className="mt-4 flex items-center gap-2" key={index}>
           <Skeleton className="h-10 w-10 rounded-full" />
           <div className="flex flex-col gap-1">
-            <Skeleton className="h-4 w-40" />
-            <Skeleton className="h-4 w-28" />
+            <Skeleton className="h-[10px] w-40" />
+            <Skeleton className="h-[10px] w-28" />
           </div>
         </div>
       ));
