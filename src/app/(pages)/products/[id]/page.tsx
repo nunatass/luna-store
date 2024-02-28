@@ -36,7 +36,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           label={product?.category.name || ' '}
         />
       </div>
-      {content}
+      <div className="min-h-[60vh]">{content}</div>
     </Wrapper>
   );
 }

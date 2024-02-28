@@ -77,14 +77,14 @@ export const DetailsThumbWrapper = ({
           className={cn(
             'flex items-center justify-center bg-gray-100',
             !modal &&
-              'w-full sm:h-[500px] sm:w-[85%] md:w-[50vw] lg:h-[600px] lg:w-[500px] xl:w-[580px]',
+              'h-[400px] w-full sm:h-[500px] sm:w-[85%] md:w-[50vw] lg:h-[600px] lg:w-[500px] xl:w-[580px]',
             modal && 'h-[500px] w-full'
           )}
         >
           <motion.div
             key={activeImg.id}
             {...imageTransitionAnimation}
-            className="relative h-full w-full"
+            className="relative h-full w-full "
           >
             {imageURLs?.map((item) => (
               <Image
