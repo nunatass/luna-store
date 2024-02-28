@@ -12,14 +12,14 @@ interface FilterStore {
 
 export const useFilter = create<FilterStore>()((set) => ({
   isFilterPanelOpen: false,
-  filterPrice: 11999,
+  filterPrice: 200,
   filterCategory: null,
   setIsFilterPanelOpen: (value) => set(() => ({ isFilterPanelOpen: value })),
   setPrice: (price) => set(() => ({ filterPrice: price })),
   setCategory: (category) => set(() => ({ filterCategory: category })),
   resetFilter: () => {
     set(() => ({
-      filterPrice: 11999,
+      filterPrice: 200,
       filterCategory: null,
     }));
   },
