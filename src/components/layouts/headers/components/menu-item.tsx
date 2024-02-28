@@ -29,7 +29,7 @@ export function MenuItem({
         href={link}
         className={cn(
           'flex items-center justify-center',
-          'md:hover:text-white',
+          'transition-all duration-300 ease-in-out md:hover:text-white/80',
           (sticky || secondary) && 'md:hover:text-[#be844c]'
         )}
         aria-label={`${title}`}

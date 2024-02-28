@@ -1,5 +1,5 @@
 'use client';
-import emptyCartImg from '@/assets/img/product/side-cart/empty-cart.png';
+import emptyCartImg from '@/assets/img/side-cart/empty-cart.png';
 import { CartProduct } from '@/common/types';
 import { CloseTwoIcon, TrashIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';

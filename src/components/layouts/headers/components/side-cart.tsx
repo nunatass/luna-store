@@ -1,6 +1,6 @@
 'use client';
 
-import emptyCartImg from '@/assets/img/product/side-cart/empty-cart.png';
+import emptyCartImg from '@/assets/img/side-cart/empty-cart.png';
 import { CartProduct } from '@/common/types';
 import { CloseTwoIcon, TrashIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
@@ -212,7 +212,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
         <div className="flex w-full flex-col gap-2">
           <Button
             asChild
-            className="w-full flex items-center"
+            className="flex w-full items-center"
             size="lg"
             onClick={handleCloseSideCart}
           >

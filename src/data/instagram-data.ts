@@ -1,9 +1,9 @@
-import insta_1 from '@/assets/img/instagram/4/instagram-1.jpg';
-import insta_2 from '@/assets/img/instagram/4/instagram-2.jpg';
-import insta_3 from '@/assets/img/instagram/4/instagram-3.jpg';
-import insta_4 from '@/assets/img/instagram/4/instagram-4.jpg';
-import insta_5 from '@/assets/img/instagram/4/instagram-5.jpg';
-import insta_6 from '@/assets/img/instagram/4/instagram-6.jpg';
+import insta_1 from '@/assets/img/instagram/instagram-1.jpg';
+import insta_2 from '@/assets/img/instagram/instagram-2.jpg';
+import insta_3 from '@/assets/img/instagram/instagram-3.jpg';
+import insta_4 from '@/assets/img/instagram/instagram-4.jpg';
+import insta_5 from '@/assets/img/instagram/instagram-5.jpg';
+import insta_6 from '@/assets/img/instagram/instagram-6.jpg';
 
 export const instagramMenuData = [
   { id: 1, link: 'https://www.instagram.com/stellastone.store/', img: insta_1 },
