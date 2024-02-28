@@ -45,7 +45,9 @@ export const HomeCollectionsArea = () => {
           />
           <div className="z-10 flex w-max flex-col justify-end text-black">
             <span className="text-base">Collection</span>
-            <h3 className="text-4xl uppercase">{collectionOne.title}</h3>
+            <h3 className="text-2xl md:text-4xl md:uppercase ">
+              {collectionOne.title}
+            </h3>
           </div>
         </Link>
         <Link
@@ -61,7 +63,9 @@ export const HomeCollectionsArea = () => {
           />
           <div className="z-10 flex w-max flex-col justify-end text-black">
             <span className="text-base">Collection</span>
-            <h3 className="text-4xl uppercase">{collectionTow.title}</h3>
+            <h3 className="text-2xl md:text-4xl md:uppercase ">
+              {collectionTow.title}
+            </h3>
           </div>
         </Link>
       </div>
