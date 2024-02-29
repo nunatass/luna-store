@@ -1,6 +1,7 @@
 'use client';
 
 import { CloseTwoIcon } from '@/components/icons';
+import { ProductItem } from '@/components/layouts/product-item';
 import { SidePanel } from '@/components/layouts/side-panel';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -8,12 +9,12 @@ import { useProducts } from '@/hooks/api/use-product';
 import { useFilter } from '@/hooks/use-filter';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
 import { ReactNode, useCallback, useMemo } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ProductsAreaLoading } from '../../loadings/pages/products/products-area-loading';
 import { ProductAreaHeader } from './components/product-area-header';
 import { ProductFilterArea } from './components/product-filter-area';
-import { ProductItem } from '@/components/layouts/product-item';
 
 const productAnimationProps = {
   initial: { opacity: 0 },
@@ -24,13 +25,16 @@ const productAnimationProps = {
 };
 
 export function ProductsArea() {
+  const searchParams = useSearchParams();
+
+  const searchTerm = searchParams.get('searchTerm') || '';
   const {
     data: products,
     isPending,
     isError,
     fetchNextPage,
     hasNextPage,
-  } = useProducts();
+  } = useProducts(searchTerm);
   const {
     isFilterPanelOpen,
     setIsFilterPanelOpen,

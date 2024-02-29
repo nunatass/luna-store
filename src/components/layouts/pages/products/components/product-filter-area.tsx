@@ -1,8 +1,11 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { keys } from '@/hooks/api/use-product';
 import { useFilter } from '@/hooks/use-filter';
 import { cn } from '@/lib/utils';
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import { CategoryFilter } from './category-filter';
 import { PriceFilter } from './price-filter';
@@ -13,12 +16,18 @@ type ProductFilterAreaProps = {
 
 export function ProductFilterArea({ className }: ProductFilterAreaProps) {
   const { setPrice, resetFilter } = useFilter();
+  const queryClient = useQueryClient();
+  const router = useRouter();
 
   const handleClearFilter = useCallback(() => {
-    window.history.replaceState(null, '', '/products');
+    router.replace('/products?searchTerm=');
+    queryClient.invalidateQueries({
+      queryKey: keys.all,
+    });
+
     resetFilter();
-    setPrice(1199);
-  }, [resetFilter, setPrice]);
+    setPrice(200);
+  }, [resetFilter, setPrice, queryClient, router]);
   return (
     <section>
       <div className={cn('hidden w-72 lg:block', className)}>

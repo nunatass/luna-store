@@ -10,8 +10,9 @@ import {
 
 const BASE_PATH = '/products';
 
-const keys = {
+export const keys = {
   all: ['products'],
+  bySearchTerm: (searchTerm: string) => [...keys.all, 'searchTerm', searchTerm],
   byId: (id: string) => [...keys.all, 'byId', id],
 };
 
@@ -48,7 +49,7 @@ export function useCreateProduct() {
   });
 }
 
-export function useProducts() {
+export function useProducts(searchTerm = '') {
   const { data, ...other } = useInfiniteQuery<ResponseData<Product[]>>({
     queryKey: keys.all,
     queryFn: async ({ pageParam: page = 0 }) => {
@@ -56,6 +57,7 @@ export function useProducts() {
         params: {
           page,
           limit: config.pageLimit,
+          searchTerm,
         },
       });
       return res.data;
