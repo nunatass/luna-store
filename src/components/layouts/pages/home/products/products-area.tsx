@@ -110,7 +110,7 @@ export const ProductsArea = () => {
                     id={`tab-${i}`}
                     onClick={() => handleActiveTab(tab)}
                     className={cn(
-                      'relative rounded-none px-0 text-gray-400 transition-all duration-300 ease-in-out md:hover:bg-white',
+                      'relative rounded-none px-1 text-[11px] text-gray-400 transition-all duration-300 ease-in-out sm:text-[14px] md:hover:bg-white ',
                       activeTab === tab && 'text-black'
                     )}
                   >
