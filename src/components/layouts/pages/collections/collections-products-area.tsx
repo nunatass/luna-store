@@ -124,7 +124,7 @@ export function CollectionsProductsArea({
             <ProductAreaHeader />
             <div
               className={cn(
-                'flex w-full flex-wrap justify-center justify-items-center gap-4 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:justify-items-start'
+                'flex w-full flex-wrap justify-center justify-items-center gap-4'
               )}
             >
               {content}
