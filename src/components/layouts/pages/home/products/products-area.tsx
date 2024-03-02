@@ -76,7 +76,7 @@ export const ProductsArea = () => {
           <Skeleton className="h-96 w-40 max-w-80 rounded-none sm:w-full" />
         }
       >
-        <div className="mt-6 flex w-full flex-wrap justify-center justify-items-center gap-4 sm:grid sm:grid-cols-2 md:mt-12 md:grid-cols-3 lg:grid-cols-4 lg:justify-items-start">
+        <div className="mt-6 flex w-full flex-wrap justify-center justify-items-center gap-4">
           <AnimatePresence>
             {productItems.map((product) => (
               <motion.div key={product.id} {...productAnimationProps}>

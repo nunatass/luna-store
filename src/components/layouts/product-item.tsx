@@ -97,23 +97,25 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
     >
       <motion.div
         {...animationsProps}
-        className="relative flex h-max w-40 max-w-80 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:w-full "
+        className="lg:h-[400px]t relative flex h-60 w-40 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80"
       >
-        <div className="group relative">
+        <div className="group relative h-[70%] sm:h-[80%]">
           <Image
             src={`${imageUrlPrefix}/${product.medias[0].url}`}
             alt="product img"
             className="w-full transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
-            width={284}
-            height={352}
+            fill
+            // width={284}
+            //height={352}
             priority
           />
           <Image
             src={`${imageUrlPrefix}/${product.medias[1].url}`}
             alt="product img"
             className="absolute left-0  top-0 w-full scale-95  opacity-0 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100"
-            width={284}
-            height={352}
+            // width={284}
+            // height={352}
+            fill
             priority
           />
         </div>
@@ -215,7 +217,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           </motion.button>
         </motion.div>
 
-        <div className="z-10 flex flex-col gap-1 bg-white px-2 py-4 font-medium">
+        <div className="z-10 flex h-[30%] flex-col gap-1 bg-white px-2 py-4 font-medium sm:h-[20%]">
           <h3 className="text-left transition-all duration-300 ease-in-out sm:mb-2">
             <span
               className="text-xs sm:text-sm"
