@@ -7,6 +7,7 @@ import { useModal } from '@/hooks/use-modal';
 import { useWishlist } from '@/hooks/use-whishlist';
 import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback } from 'react';
 // const cartAnimationVariants = {
@@ -91,15 +92,15 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
         className="relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-white text-center sm:w-80"
       >
         <Link
-          className="h-full w-full"
+          className="h-full w-full relative"
           href={`/products/${product.id}`}
           aria-label="product-item"
         >
-          <div
-            className="z-0 h-full w-full scale-110 bg-white bg-contain bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(${imageUrlPrefix}/${product.medias[0].url})`,
-            }}
+          <Image
+            fill
+            alt="product image"
+             className="object-cover"
+            src={`${imageUrlPrefix}/${product.medias[0].url}`}
           />
         </Link>
         <motion.div
@@ -113,7 +114,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
                 <Link href="/cart" className="flex items-center gap-2">
                   <motion.div
                     {...optionHoverAnimation}
-                    className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-gray-400 md:flex md:h-11 md:w-11 "
+                    className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11 "
                   >
                     <CartIcon />
                   </motion.div>
@@ -140,7 +141,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
               >
                 <motion.div
                   {...optionHoverAnimation}
-                  className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-gray-400 md:flex md:h-11 md:w-11"
+                  className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11"
                 >
                   <CartIcon />
                 </motion.div>
@@ -161,7 +162,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
           >
             <motion.div
               {...optionHoverAnimation}
-              className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-gray-400 md:flex md:h-11 md:w-11"
+              className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11"
             >
               <QuickViewIcon />
             </motion.div>
@@ -181,7 +182,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
           >
             <motion.div
               {...optionHoverAnimation}
-              className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-gray-400 md:flex md:h-11 md:w-11"
+              className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11"
             >
               <WishlistIcon />
             </motion.div>

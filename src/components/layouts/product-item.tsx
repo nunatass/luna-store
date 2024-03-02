@@ -97,13 +97,13 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
     >
       <motion.div
         {...animationsProps}
-        className="lg:h-[400px]t relative flex h-60 w-40 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80"
+        className="lg:h-[400px] relative flex h-60 w-40 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80"
       >
         <div className="group relative h-[70%] sm:h-[80%]">
           <Image
             src={`${imageUrlPrefix}/${product.medias[0].url}`}
             alt="product img"
-            className="w-full transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
+            className="w-full object-cover transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
             fill
             // width={284}
             //height={352}
@@ -112,7 +112,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           <Image
             src={`${imageUrlPrefix}/${product.medias[1].url}`}
             alt="product img"
-            className="absolute left-0  top-0 w-full scale-95  opacity-0 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100"
+            className="absolute left-0  top-0 w-full scale-95  object-cover opacity-0 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100"
             // width={284}
             // height={352}
             fill

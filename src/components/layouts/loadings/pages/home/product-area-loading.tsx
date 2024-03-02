@@ -5,7 +5,7 @@ export function ProductAreaLoading() {
     <div className="mt-12 flex w-full flex-wrap gap-8">
       {Array.from({ length: 8 }, (_, i) => (
         <Skeleton
-          className="h-60 sm:h-[400px] md:h-96 lg:h-[400px] w-40 sm:w-64 md:w-80 flex-col rounded-none"
+          className="lg:h-[400px]  h-60 w-40 sm:h-[400px] sm:w-64 md:h-96 md:w-80 rounded-none"
           key={i}
         />
       ))}
