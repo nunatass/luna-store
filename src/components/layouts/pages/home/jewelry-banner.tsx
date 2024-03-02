@@ -2,6 +2,7 @@
 import banner2 from '@/assets/img/home/banner-2.png';
 import banner3 from '@/assets/img/home/banner-3.png';
 import banner from '@/assets/img/home/banner.jpeg';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image, { StaticImageData } from 'next/image';
@@ -9,7 +10,11 @@ import { useCallback, useState } from 'react';
 const animationVariants = {
   initial: { scale: 1.2, opacity: 0.45 },
   animate: { scale: 1, opacity: 1 },
-  exit: { scale: 1, opacity: 0.5,  transition:{ duration: 0.3, ease: 'easeInOut' }}
+  exit: {
+    scale: 1,
+    opacity: 0.5,
+    transition: { duration: 0.3, ease: 'easeInOut' },
+  },
 };
 export const JewelryBanner = () => {
   const [currentBanner, setCurrentBanner] = useState({
@@ -56,30 +61,34 @@ export const JewelryBanner = () => {
           </div>
         </motion.section>
       </AnimatePresence>
-      <div className="absolute bottom-20 left-1/2 z-10 flex h-4 w-20 -translate-x-1/2 gap-4  ">
-        <span
-          className={cn(
-            'h-2 w-2 cursor-pointer rounded-full bg-transparent ring-2 ring-white',
-            currentBanner.key === 'banner 1' && 'bg-white'
-          )}
-          onClick={() => handleChangeBanner('banner 1', banner)}
-        />
-
-        <span
-          className={cn(
-            'h-2 w-2 cursor-pointer rounded-full bg-transparent ring-2 ring-white',
-            currentBanner.key === 'banner 2' && 'bg-white'
-          )}
-          onClick={() => handleChangeBanner('banner 2', banner2)}
-        />
-
-        <span
-          className={cn(
-            'h-2 w-2 cursor-pointer rounded-full bg-transparent ring-2 ring-white',
-            currentBanner.key === 'banner 3' && 'bg-white'
-          )}
-          onClick={() => handleChangeBanner('banner 3', banner3)}
-        />
+      <div className="absolute bottom-20 left-8 z-10 flex h-4 w-20  gap-4  ">
+        <Button className="bg-transparent px-1.5 hover:bg-transparent">
+          <span
+            className={cn(
+              'h-2 w-2 cursor-pointer rounded-full bg-transparent ring-2 ring-white',
+              currentBanner.key === 'banner 1' && 'bg-white'
+            )}
+            onClick={() => handleChangeBanner('banner 1', banner)}
+          />
+        </Button>
+        <Button className="bg-transparent px-1.5 hover:bg-transparent">
+          <span
+            className={cn(
+              'h-2 w-2 cursor-pointer rounded-full bg-transparent ring-2 ring-white',
+              currentBanner.key === 'banner 2' && 'bg-white'
+            )}
+            onClick={() => handleChangeBanner('banner 2', banner2)}
+          />
+        </Button>
+        <Button className="bg-transparent px-1.5 hover:bg-transparent">
+          <span
+            className={cn(
+              'h-2 w-2 cursor-pointer rounded-full bg-transparent ring-2 ring-white',
+              currentBanner.key === 'banner 3' && 'bg-white'
+            )}
+            onClick={() => handleChangeBanner('banner 3', banner3)}
+          />
+        </Button>
       </div>
     </div>
   );
