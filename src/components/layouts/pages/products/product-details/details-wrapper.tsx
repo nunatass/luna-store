@@ -1,5 +1,5 @@
 'use client';
-import { AskQuestionIcon, WishlistIcon } from '@/components/icons';
+import { AskQuestionIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ import { ProductQuantity } from './product-quantity';
 import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
 import { Price, Product } from '@/common/types';
 import { useCart } from '@/hooks/use-cart';
-import { useWishlist } from '@/hooks/use-whishlist';
+// import { useWishlist } from '@/hooks/use-whishlist';
 import { CheckCircle } from 'lucide-react';
 import { PriceBundle } from './price-bundle';
 
@@ -19,7 +19,7 @@ type DetailsWrapperProps = {
 
 export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   const { addProduct: addCartProduct } = useCart();
-  const { addProduct: addWishlistProduct } = useWishlist();
+  // const { addProduct: addWishlistProduct } = useWishlist();
 
   // const [ratingVal] = useState(0);
   const [showMoreText, setShowMoreText] = useState<boolean>(false);
@@ -56,16 +56,16 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   // }, [reviews]);
 
   // handle wishlist product
-  const handleWishlistProduct = useCallback(() => {
-    addWishlistProduct({
-      id: product.id,
-      discount: price.discount,
-      price: price.value,
-      media: product.medias[0].url,
-      title: product.title,
-      orderQuantity: quantity,
-    });
-  }, [quantity, product, addWishlistProduct, price]);
+  // const handleWishlistProduct = useCallback(() => {
+  //   addWishlistProduct({
+  //     id: product.id,
+  //     discount: price.discount,
+  //     price: price.value,
+  //     media: product.medias[0].url,
+  //     title: product.title,
+  //     orderQuantity: quantity,
+  //   });
+  // }, [quantity, product, addWishlistProduct, price]);
 
   return (
     <div className="flex w-full flex-col gap-4 text-gray-600">
@@ -165,7 +165,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
       </div>
 
       <div className="flex border-b-[1px] pb-2">
-        <Button
+        {/* <Button
           variant="ghost"
           onClick={handleWishlistProduct}
           type="button"
@@ -173,7 +173,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         >
           <WishlistIcon />
           Add Wishlist
-        </Button>
+        </Button> */}
         <Button variant="ghost" type="button" asChild>
           <Link href="/contact" className="flex gap-2" aria-label="contact">
             <AskQuestionIcon />
