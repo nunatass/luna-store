@@ -126,7 +126,7 @@ export function ProductsArea() {
               next={fetchNextPage}
               hasMore={hasNextPage && productItems.length > 0}
               loader={
-                <Skeleton className="lg:h-[400px] h-60 w-40  sm:h-[400px] sm:w-64 md:h-96 md:w-80 rounded-none" />
+                <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
               }
               endMessage={renderNotFound()}
               className={cn(

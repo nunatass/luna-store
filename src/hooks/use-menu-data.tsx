@@ -1,5 +1,10 @@
 import { Category, Collection } from '@/common/types';
-import { CartIcon, CartTwoIcon, EmailIcon, CollectionIcon } from '@/components/icons';
+import {
+  CartIcon,
+  CartTwoIcon,
+  EmailIcon,
+  CollectionIcon,
+} from '@/components/icons';
 import { TruckIcon } from 'lucide-react';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { useCategories } from './api/use-categories';
