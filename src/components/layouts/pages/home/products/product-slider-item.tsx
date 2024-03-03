@@ -1,15 +1,12 @@
 'use client';
 import type { Product } from '@/common/types';
-import { CartIcon, QuickViewIcon, WishlistIcon } from '@/components/icons';
-import { PreviewProductModal } from '@/components/modals/preview-product-modal';
+import { CartIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
-import { useModal } from '@/hooks/use-modal';
-import { useWishlist } from '@/hooks/use-whishlist';
+// import { useWishlist } from '@/hooks/use-whishlist';
 import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback } from 'react';
 // const cartAnimationVariants = {
 //   initial: { y: 10, opacity: 0 },
 //   animate: { y: 0, opacity: 1 },
@@ -50,10 +47,10 @@ type ProductSliderItemProps = {
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
-  const { setIsOpen: setIsPreviewModalOpen, setChildren } = useModal();
+  // const { setIsOpen: setIsPreviewModalOpen, setChildren } = useModal();
 
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
-  const { addProduct: addWishlistProduct } = useWishlist();
+  // const { addProduct: addWishlistProduct } = useWishlist();
 
   const isAddedToCart = cartProducts.some(
     (cardProduct) => cardProduct.id === product.id
@@ -70,21 +67,21 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
     });
   };
 
-  const handleWishlistProduct = (product: Product) => {
-    addWishlistProduct({
-      id: product.id,
-      media: product.medias[0].url,
-      price: product.prices[0].value,
-      title: product.title,
-      orderQuantity: 1,
-      discount: product.prices[0].discount,
-    });
-  };
+  // const handleWishlistProduct = (product: Product) => {
+  //   addWishlistProduct({
+  //     id: product.id,
+  //     media: product.medias[0].url,
+  //     price: product.prices[0].value,
+  //     title: product.title,
+  //     orderQuantity: 1,
+  //     discount: product.prices[0].discount,
+  //   });
+  // };
 
-  const handleOpenPreviewModal = useCallback(() => {
-    setChildren(<PreviewProductModal productId={product.id} />);
-    setIsPreviewModalOpen(true);
-  }, [setIsPreviewModalOpen, product.id, setChildren]);
+  // const handleOpenPreviewModal = useCallback(() => {
+  //   setChildren(<PreviewProductModal productId={product.id} />);
+  //   setIsPreviewModalOpen(true);
+  // }, [setIsPreviewModalOpen, product.id, setChildren]);
   return (
     <>
       <motion.div
@@ -92,14 +89,14 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
         className="relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-white text-center sm:w-80"
       >
         <Link
-          className="h-full w-full relative"
+          className="relative h-full w-full"
           href={`/products/${product.id}`}
           aria-label="product-item"
         >
           <Image
             fill
             alt="product image"
-             className="object-cover"
+            className="object-cover"
             src={`${imageUrlPrefix}/${product.medias[0].url}`}
           />
         </Link>
@@ -154,7 +151,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
               </motion.button>
             )}
           </AnimatePresence>
-          <motion.button
+          {/* <motion.button
             type="button"
             {...animationsProps}
             className="flex items-center gap-2"
@@ -194,7 +191,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
             >
               Add To Wishlist
             </motion.div>
-          </motion.button>
+          </motion.button> */}
         </motion.div>
 
         <div className="z-10 flex flex-col gap-2 px-2 py-2 font-medium">

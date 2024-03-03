@@ -23,3 +23,5 @@ export * from './spinner-cion';
 export * from './support';
 export * from './trash';
 export * from './wishlist';
+export * from './collection';
+

@@ -5,15 +5,10 @@ import Link from 'next/link';
 
 import logoDark from '@/assets/img/logo/logo-dark.svg';
 import logoLight from '@/assets/img/logo/logo.webp';
-import {
-  CartTwoIcon,
-  MenuIcon,
-  SearchIcon,
-  WishlistIcon,
-} from '@/components/icons';
+import { CartTwoIcon, MenuIcon, SearchIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
 import { useSticky } from '@/hooks/use-sticky';
-import { useWishlist } from '@/hooks/use-whishlist';
+// import { useWishlist } from '@/hooks/use-whishlist';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -22,7 +17,6 @@ import { Menus } from './components/menu';
 import { SearchBar } from './components/search-bar';
 import { SideCart } from './components/side-cart';
 import { SideMenu } from './components/side-menu';
-import { SideWishlist } from './components/side-wishlist';
 import { DiscountBanner } from './discount-banner';
 
 const quantityAnimationVariants = {
@@ -38,9 +32,9 @@ export const Header = ({ secondary }: HeaderProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isSideCartOpen, setIsSideCartOpen] = useState(false);
-  const [isSideWishlistOpen, setIsSideWishlistOpen] = useState(false);
+  // const [isSideWishlistOpen, setIsSideWishlistOpen] = useState(false);
   const { getTotal } = useCart();
-  const { products } = useWishlist();
+  // const { products } = useWishlist();
   const { sticky } = useSticky();
   const { quantity } = getTotal();
 
@@ -98,7 +92,7 @@ export const Header = ({ secondary }: HeaderProps) => {
                     <SearchIcon />
                   </button>
                 </div>
-                <div className="relative">
+                {/* <div className="relative">
                   <button
                     aria-label="wishlist"
                     className="h-12 w-12 bg-transparent lg:h-8 lg:w-8"
@@ -118,7 +112,7 @@ export const Header = ({ secondary }: HeaderProps) => {
                       {products.length}
                     </motion.div>
                   </button>
-                </div>
+                </div> */}
                 <div className="relative">
                   <button
                     onClick={() => setIsSideCartOpen(true)}
@@ -169,7 +163,7 @@ export const Header = ({ secondary }: HeaderProps) => {
           <SideMenu isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen} />
         </SidePanel>
 
-        <SidePanel
+        {/* <SidePanel
           isOpen={isSideWishlistOpen}
           setIsOpen={setIsSideWishlistOpen}
         >
@@ -177,7 +171,7 @@ export const Header = ({ secondary }: HeaderProps) => {
             isOpen={isSideWishlistOpen}
             setIsOpen={setIsSideWishlistOpen}
           />
-        </SidePanel>
+        </SidePanel> */}
       </div>
     </>
   );

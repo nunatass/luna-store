@@ -1,16 +1,12 @@
 'use client';
 import type { Product } from '@/common/types';
-import { CartIcon, QuickViewIcon, WishlistIcon } from '@/components/icons';
+import { CartIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
-import { useModal } from '@/hooks/use-modal';
-import { useWishlist } from '@/hooks/use-whishlist';
 import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { useCallback } from 'react';
-import { PreviewProductModal } from '../modals/preview-product-modal';
 
 // const cartAnimationVariants = {
 //   initial: { y: 10, opacity: 0 },
@@ -52,16 +48,16 @@ const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const ProductItem = ({ product }: ProductSliderItemProps) => {
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
-  const { addProduct: addWishlistProduct, products: wishListProducts } =
-    useWishlist();
-  const { setIsOpen: setIsPreviewModalOpen, setChildren } = useModal();
+  // const { addProduct: addWishlistProduct, products: wishListProducts } =
+  //   useWishlist();
+  // const { setIsOpen: setIsPreviewModalOpen, setChildren } = useModal();
 
   const isAddedToCart = cartProducts.some(
     (cartProduct) => cartProduct.id === product.id
   );
-  const isAddedToWishlist = wishListProducts.some(
-    (wishListProduct) => wishListProduct.id === product.id
-  );
+  // const isAddedToWishlist = wishListProducts.some(
+  //   (wishListProduct) => wishListProduct.id === product.id
+  // );
 
   const handleAddProduct = (product: Product) => {
     addCartProduct({
@@ -74,21 +70,21 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
     });
   };
 
-  const handleAddWishlistProduct = (product: Product) => {
-    addWishlistProduct({
-      id: product.id,
-      media: product.medias[0].url,
-      price: product.prices[0].value,
-      title: product.title,
-      orderQuantity: 1,
-      discount: product.prices[0].discount,
-    });
-  };
+  // const handleAddWishlistProduct = (product: Product) => {
+  //   addWishlistProduct({
+  //     id: product.id,
+  //     media: product.medias[0].url,
+  //     price: product.prices[0].value,
+  //     title: product.title,
+  //     orderQuantity: 1,
+  //     discount: product.prices[0].discount,
+  //   });
+  // };
 
-  const handleOpenPreviewModal = useCallback(() => {
-    setChildren(<PreviewProductModal productId={product.id} />);
-    setIsPreviewModalOpen(true);
-  }, [setIsPreviewModalOpen, product.id, setChildren]);
+  // const handleOpenPreviewModal = useCallback(() => {
+  //   setChildren(<PreviewProductModal productId={product.id} />);
+  //   setIsPreviewModalOpen(true);
+  // }, [setIsPreviewModalOpen, product.id, setChildren]);
   return (
     <Link
       className="relative"
@@ -97,7 +93,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
     >
       <motion.div
         {...animationsProps}
-        className="lg:h-[400px] relative flex h-60 w-40 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80"
+        className="relative flex h-60 w-40 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]"
       >
         <div className="group relative h-[70%] sm:h-[80%]">
           <Image
@@ -174,7 +170,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
               </motion.button>
             )}
           </AnimatePresence>
-          <motion.button
+          {/* <motion.button
             type="button"
             {...animationsProps}
             onClick={handleOpenPreviewModal}
@@ -193,8 +189,8 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
             >
               Quick View
             </motion.div>
-          </motion.button>
-          <motion.button
+          </motion.button> */}
+          {/* <motion.button
             type="button"
             {...animationsProps}
             onClick={() => handleAddWishlistProduct(product)}
@@ -214,7 +210,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
             >
               {isAddedToWishlist ? 'Added to Wishlist' : 'Add To Wishlist'}
             </motion.div>
-          </motion.button>
+          </motion.button> */}
         </motion.div>
 
         <div className="z-10 flex h-[30%] flex-col gap-1 bg-white px-2 py-4 font-medium sm:h-[20%]">
