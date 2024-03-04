@@ -126,7 +126,16 @@ export function ProductsArea() {
               next={fetchNextPage}
               hasMore={hasNextPage && productItems.length > 0}
               loader={
-                <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
+                <div className="flex flex-col gap-4">
+                  <div className="flax-wrap flex gap-4">
+                    <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
+                    <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
+                    <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
+                  </div>
+                  <span className="text-center">
+                    keep scrolling to load more products
+                  </span>
+                </div>
               }
               endMessage={renderNotFound()}
               className={cn(
