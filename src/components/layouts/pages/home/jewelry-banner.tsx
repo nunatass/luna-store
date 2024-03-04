@@ -63,13 +63,13 @@ export const JewelryBanner = () => {
       </AnimatePresence>
       <div className="absolute bottom-20 left-8 z-10 flex h-4 w-20  gap-4  ">
         <Button className="bg-transparent px-1.5 hover:bg-transparent"
-          onClick={() => handleChangeBanner('banner 2', banner2)}>
+          onClick={() => handleChangeBanner('banner 1', banner)}>
           <span
             className={cn(
               'h-2 w-2 cursor-pointer rounded-full bg-transparent ring-2 ring-white',
               currentBanner.key === 'banner 1' && 'bg-white'
             )}
-            onClick={() => handleChangeBanner('banner 1', banner)}
+            
           />
         </Button>
         <Button className="bg-transparent px-1.5 hover:bg-transparent"
