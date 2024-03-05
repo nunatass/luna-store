@@ -1,5 +1,6 @@
 'use client';
 
+import { Category } from '@/common/types';
 import { ProductAreaLoading } from '@/components/layouts/loadings/pages/home/product-area-loading';
 import { ProductItem } from '@/components/layouts/product-item';
 import { Button } from '@/components/ui/button';
@@ -20,31 +21,26 @@ const productAnimationProps = {
 };
 
 export const ProductsArea = () => {
+  const { data: categories, isPending: isPendingCategories } = useCategories();
+  const [tabs, setTabs] = useState<Category[] | null>(categories);
+  const [activeTab, setActiveTab] = useState<Category | null>(
+    tabs?.[0] ?? null
+  );
   const {
     data: products,
     isPending: isProductsPending,
     isError: isProductsError,
     hasNextPage,
     fetchNextPage,
-  } = useProducts();
-  const { data: categories, isPending: isPendingCategories } = useCategories();
-  const [tabs, setTabs] = useState([
-    'All Collection',
-    ...categories.map((category) => category.name),
-  ]);
+  } = useProducts('', activeTab?.id);
 
   useEffect(() => {
     if (!isPendingCategories) {
-      setTabs([
-        'All Collection',
-        ...categories.map((category) => category.name),
-      ]);
+      setTabs(categories);
     }
   }, [setTabs, isPendingCategories]);
 
-  const [activeTab, setActiveTab] = useState(tabs[0]);
-
-  const handleActiveTab = (tab: string) => {
+  const handleActiveTab = (tab: Category | null) => {
     setActiveTab(tab);
   };
 
@@ -59,19 +55,19 @@ export const ProductsArea = () => {
   }
 
   if (products.length > 0) {
-    let productItems = products;
+    // const productItems = products;
 
-    if (activeTab !== 'All Collection') {
-      productItems = products.filter(
-        (product) => product.category.name === activeTab
-      );
-    }
+    // if (activeTab !== null) {
+    //   productItems = products.filter(
+    //     (product) => product.category.id === activeTab?.id
+    //   );
+    // }
 
     content = (
       <InfiniteScroll
-        dataLength={productItems.length}
+        dataLength={products.length}
         next={fetchNextPage}
-        hasMore={hasNextPage && productItems.length > 0}
+        hasMore={hasNextPage && products.length > 0}
         loader={
           <div className="flex flex-col gap-4">
             <div className="flax-wrap flex gap-4">
@@ -87,7 +83,7 @@ export const ProductsArea = () => {
       >
         <div className="mt-6 flex w-full flex-wrap justify-center justify-items-center gap-4">
           <AnimatePresence>
-            {productItems.map((product) => (
+            {products.map((product) => (
               <motion.div key={product.id} {...productAnimationProps}>
                 <ProductItem product={product} />
               </motion.div>
@@ -109,7 +105,28 @@ export const ProductsArea = () => {
             </h3>
             <div className="flex w-full max-w-sm flex-col lg:mr-10">
               <nav className="flex w-full gap-5" id="nav-tab" role="tablist">
-                {tabs.map((tab, i) => (
+                <Button
+                  variant="ghost"
+                  role="tab"
+                  aria-selected={activeTab === null ? 'true' : 'false'}
+                  aria-controls={`tab-all`}
+                  id={`tab-all`}
+                  onClick={() => handleActiveTab(null)}
+                  className={cn(
+                    'relative rounded-none px-1 text-[11px] text-gray-400 transition-all duration-300 ease-in-out sm:text-[14px] md:hover:bg-white ',
+                    activeTab === null && 'text-black'
+                  )}
+                >
+                  All Categories
+                  {activeTab === null && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 h-[3px] w-full rounded-full bg-gray-200"
+                      layout
+                      layoutId="tab-selected"
+                    />
+                  )}
+                </Button>
+                {tabs?.map((tab, i) => (
                   <Button
                     variant="ghost"
                     key={i}
@@ -123,7 +140,7 @@ export const ProductsArea = () => {
                       activeTab === tab && 'text-black'
                     )}
                   >
-                    {tab}
+                    {tab?.name}
                     {activeTab === tab && (
                       <motion.div
                         className="absolute bottom-0 left-0 h-[3px] w-full rounded-full bg-gray-200"

@@ -1,12 +1,13 @@
+import { Category } from '@/common/types';
 import { create } from 'zustand';
 
 interface FilterStore {
   isFilterPanelOpen: boolean;
   filterPrice: number;
-  filterCategory: string | null;
+  filterCategory: Category | null;
   setIsFilterPanelOpen: (value: boolean) => void;
   setPrice: (value: number) => void;
-  setCategory: (category: string) => void;
+  setCategory: (category: Category | null) => void;
   resetFilter: () => void;
 }
 
@@ -16,7 +17,8 @@ export const useFilter = create<FilterStore>()((set) => ({
   filterCategory: null,
   setIsFilterPanelOpen: (value) => set(() => ({ isFilterPanelOpen: value })),
   setPrice: (price) => set(() => ({ filterPrice: price })),
-  setCategory: (category) => set(() => ({ filterCategory: category })),
+  setCategory: (category: Category | null) =>
+    set(() => ({ filterCategory: category })),
   resetFilter: () => {
     set(() => ({
       filterPrice: 200,

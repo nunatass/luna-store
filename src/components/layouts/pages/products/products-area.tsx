@@ -26,15 +26,7 @@ const productAnimationProps = {
 
 export function ProductsArea() {
   const searchParams = useSearchParams();
-
   const searchTerm = searchParams.get('searchTerm') || '';
-  const {
-    data: products,
-    isPending,
-    isError,
-    fetchNextPage,
-    hasNextPage,
-  } = useProducts(searchTerm);
   const {
     isFilterPanelOpen,
     setIsFilterPanelOpen,
@@ -42,20 +34,29 @@ export function ProductsArea() {
     filterPrice,
     resetFilter,
   } = useFilter();
+
+  const {
+    data: products,
+    isPending,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+  } = useProducts(searchTerm, filterCategory?.id);
+
   // handle close cart sidebar
   const handleCloseSideFilter = useCallback(() => {
     setIsFilterPanelOpen(false);
   }, [setIsFilterPanelOpen]);
 
+  console.log(filterCategory);
+
   const productItems = useMemo(
     () =>
       products.filter((product) => {
-        const categoryMatches =
-          filterCategory === null || product.category?.name === filterCategory;
         const priceMatches =
           product.prices.length > 0 &&
           product.prices[0].value <= filterPrice * 100;
-        return categoryMatches && priceMatches;
+        return priceMatches;
       }),
     [filterCategory, filterPrice, products]
   );

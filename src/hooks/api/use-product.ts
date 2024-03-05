@@ -13,6 +13,7 @@ const BASE_PATH = '/products';
 export const keys = {
   all: ['products'],
   bySearchTerm: (searchTerm: string) => [...keys.all, 'searchTerm', searchTerm],
+  byCategory: (category: string) => [...keys.all, 'category', category],
   byId: (id: string) => [...keys.all, 'byId', id],
 };
 
@@ -49,15 +50,19 @@ export function useCreateProduct() {
   });
 }
 
-export function useProducts(searchTerm = '') {
+export function useProducts(searchTerm = '', categoryId = '') {
   const { data, ...other } = useInfiniteQuery<ResponseData<Product[]>>({
-    queryKey: keys.all,
+    queryKey:
+      (searchTerm && keys.bySearchTerm(searchTerm)) ||
+      (categoryId && keys.byCategory(categoryId)) ||
+      keys.all,
     queryFn: async ({ pageParam: page = 0 }) => {
       const res = await API.get(BASE_PATH, {
         params: {
           page,
           limit: config.pageLimit,
           searchTerm,
+          categoryId,
         },
       });
       return res.data;

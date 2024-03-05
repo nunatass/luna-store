@@ -21,6 +21,7 @@ export function Breadcrumb({
 }: BreadcrumbProps) {
   const [title, setTitle] = useState(initialTitle);
   const { setCategory } = useFilter();
+
   const pathname = usePathname();
 
   const searchParams = useSearchParams();
@@ -40,7 +41,7 @@ export function Breadcrumb({
     if (!category) {
       return setTitle(initialTitle);
     }
-    setCategory(capitalize(category));
+    // setCategory(categories.find((c) => c.name === category) ?? null);
 
     setTitle(pathname === '/products' ? capitalize(category) : title);
   }, [searchParams, title, pathname, setCategory, setTitle, initialTitle]);

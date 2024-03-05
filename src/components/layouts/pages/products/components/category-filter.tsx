@@ -1,5 +1,6 @@
 'use client';
 
+import { Category } from '@/common/types';
 import { Button } from '@/components/ui/button';
 import { useCategories } from '@/hooks/api/use-categories';
 import { useFilter } from '@/hooks/use-filter';
@@ -13,8 +14,8 @@ export const CategoryFilter = () => {
   const { data: categories, isLoading, isError } = useCategories();
 
   const handleSelectCategory = useCallback(
-    (name: string) => {
-      setCategory(name);
+    (category: Category) => {
+      setCategory(category);
     },
     [setCategory]
   );
@@ -39,17 +40,18 @@ export const CategoryFilter = () => {
               >
                 <Button
                   variant="ghost"
-                  onClick={() => handleSelectCategory(category.name)}
+                  onClick={() => handleSelectCategory(category)}
                   className={cn(
                     'flex w-full items-center justify-between px-1.5 text-sm  text-gray-500 transition-all duration-100 ease-in-out group-hover:bg-white group-hover:text-black',
-                    filterCategory === category.name && 'font-medium text-black'
+                    filterCategory?.name === category.name &&
+                      'font-medium text-black'
                   )}
                 >
                   {category.name}
                   <span
                     className={cn(
                       'rounded-2 flex h-5 min-w-5 items-center justify-center rounded-lg p-1 ring-1 ring-gray-200 transition-all duration-100 ease-in-out group-hover:bg-black group-hover:text-white group-hover:ring-black',
-                      filterCategory === category.name &&
+                      filterCategory?.name === category.name &&
                         'bg-black text-white ring-black'
                     )}
                   >
