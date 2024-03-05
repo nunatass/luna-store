@@ -61,7 +61,7 @@ export const ProductsArea = () => {
         next={fetchNextPage}
         hasMore={hasNextPage && products.length > 0}
         loader={
-          <div className="mt-2 flex flex-col gap-4">
+          <div className="mt-4 flex flex-col gap-4">
             <div className="flex w-full flex-wrap justify-center justify-items-center gap-4 ">
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
