@@ -48,8 +48,6 @@ export function ProductsArea() {
     setIsFilterPanelOpen(false);
   }, [setIsFilterPanelOpen]);
 
-  console.log(filterCategory);
-
   const productItems = useMemo(
     () =>
       products.filter((product) => {
@@ -127,8 +125,8 @@ export function ProductsArea() {
               next={fetchNextPage}
               hasMore={hasNextPage && productItems.length > 0}
               loader={
-                <div className="flex flex-col gap-4">
-                  <div className="flax-wrap flex gap-4">
+                <div className="flex flex-col gap-4 overflow-hidden">
+                  <div className="flex w-full flex-wrap justify-center justify-items-center gap-4 ">
                     <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
                     <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
                     <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />

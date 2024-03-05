@@ -1,6 +1,5 @@
 import { Header } from '@/components/layouts/headers/header';
 import { ContactArea } from '@/components/layouts/pages/contact/contact-area';
-import { ContactMap } from '@/components/layouts/pages/contact/contact-map';
 import { Wrapper } from '@/components/layouts/wrapper';
 import { SEO } from '@/components/seo';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
@@ -14,7 +13,7 @@ export default function ContactPage() {
         <Breadcrumb title="Keep In Touch With Us" label="Contact Us" />
       </div>
       <ContactArea />
-      <ContactMap />
+      {/* <ContactMap /> */}
     </Wrapper>
   );
 }

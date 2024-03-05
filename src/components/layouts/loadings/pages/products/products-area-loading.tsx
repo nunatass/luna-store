@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export function ProductsAreaLoading() {
   return (
-    <div className="flax-wrap flex gap-4">
+    <div className="flex w-full flex-wrap justify-center justify-items-center gap-4 ">
       {Array.from({ length: 8 }, (_, i) => (
         <Skeleton
           key={i}

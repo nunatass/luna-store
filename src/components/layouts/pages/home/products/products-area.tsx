@@ -38,7 +38,7 @@ export const ProductsArea = () => {
     if (!isPendingCategories) {
       setTabs(categories);
     }
-  }, [setTabs, isPendingCategories, categories]);
+  }, [setTabs, isPendingCategories]);
 
   const handleActiveTab = (tab: Category | null) => {
     setActiveTab(tab);
@@ -70,7 +70,7 @@ export const ProductsArea = () => {
         hasMore={hasNextPage && products.length > 0}
         loader={
           <div className="flex flex-col gap-4">
-            <div className="flax-wrap flex gap-4">
+            <div className="flex w-full flex-wrap justify-center justify-items-center gap-4 ">
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
