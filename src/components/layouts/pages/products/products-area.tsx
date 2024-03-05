@@ -58,7 +58,7 @@ export function ProductsArea() {
           product.prices[0].value <= filterPrice * 100;
         return priceMatches;
       }),
-    [filterCategory, filterPrice, products]
+    [filterPrice, products]
   );
 
   let content: ReactNode | null = null;

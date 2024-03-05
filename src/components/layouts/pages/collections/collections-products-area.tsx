@@ -52,7 +52,8 @@ export function CollectionsProductsArea({
       collection &&
       collection.products.filter((product) => {
         const categoryMatches =
-          filterCategory === null || product.category?.name === filterCategory;
+          filterCategory === null ||
+          product.category?.name === filterCategory?.name;
         const priceMatches =
           product.prices.length > 0 &&
           product.prices[0].value <= filterPrice * 100;

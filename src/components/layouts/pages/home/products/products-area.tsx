@@ -38,7 +38,7 @@ export const ProductsArea = () => {
     if (!isPendingCategories) {
       setTabs(categories);
     }
-  }, [setTabs, isPendingCategories]);
+  }, [setTabs, isPendingCategories, categories]);
 
   const handleActiveTab = (tab: Category | null) => {
     setActiveTab(tab);
