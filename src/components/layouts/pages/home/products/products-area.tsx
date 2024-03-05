@@ -55,21 +55,13 @@ export const ProductsArea = () => {
   }
 
   if (products.length > 0) {
-    // const productItems = products;
-
-    // if (activeTab !== null) {
-    //   productItems = products.filter(
-    //     (product) => product.category.id === activeTab?.id
-    //   );
-    // }
-
     content = (
       <InfiniteScroll
         dataLength={products.length}
         next={fetchNextPage}
         hasMore={hasNextPage && products.length > 0}
         loader={
-          <div className="flex flex-col gap-4">
+          <div className="mt-2 flex flex-col gap-4">
             <div className="flex w-full flex-wrap justify-center justify-items-center gap-4 ">
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
@@ -113,7 +105,7 @@ export const ProductsArea = () => {
                   id={`tab-all`}
                   onClick={() => handleActiveTab(null)}
                   className={cn(
-                    'relative rounded-none px-1 text-[11px] text-gray-400 transition-all duration-300 ease-in-out sm:text-[14px] md:hover:bg-white ',
+                    'relative rounded-none px-1 text-[11px] text-gray-400 transition-all duration-300 ease-in-out hover:bg-white sm:text-[14px] ',
                     activeTab === null && 'text-black'
                   )}
                 >
