@@ -8,7 +8,7 @@ import { useCollectionById } from '@/hooks/api/use-collections';
 import { useFilter } from '@/hooks/use-filter';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ReactNode, useCallback, useMemo } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { ProductsAreaLoading } from '../../loadings/pages/products/products-area-loading';
 import { ProductAreaHeader } from '../products/components/product-area-header';
 import { ProductFilterArea } from '../products/components/product-filter-area';
@@ -46,6 +46,10 @@ export function CollectionsProductsArea({
   const handleCloseSideFilter = useCallback(() => {
     setIsFilterPanelOpen(false);
   }, [setIsFilterPanelOpen]);
+
+  useEffect(() => {
+    resetFilter();
+  }, []);
 
   const productItems = useMemo(
     () =>

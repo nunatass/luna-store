@@ -23,9 +23,7 @@ const productAnimationProps = {
 export const ProductsArea = () => {
   const { data: categories, isPending: isPendingCategories } = useCategories();
   const [tabs, setTabs] = useState<Category[] | null>(categories);
-  const [activeTab, setActiveTab] = useState<Category | null>(
-    tabs?.[0] ?? null
-  );
+  const [activeTab, setActiveTab] = useState<Category | null>(null);
   const {
     data: products,
     isPending: isProductsPending,

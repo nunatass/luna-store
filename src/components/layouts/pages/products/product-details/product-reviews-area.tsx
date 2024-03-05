@@ -75,7 +75,9 @@ export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
                   currentPage={page + 1}
                 />
               )}
-              {!isPending && !reviews && <span>No Review Yet</span>}
+              {!isPending && !reviews && (
+                <span>Be the first to write a review</span>
+              )}
             </div>
           </div>
         </div>
