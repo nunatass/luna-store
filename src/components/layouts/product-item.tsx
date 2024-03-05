@@ -102,7 +102,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
             className="w-full object-cover transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
             fill
             // width={284}
-            //height={352}
+            // height={352}
             priority
           />
           <Image
