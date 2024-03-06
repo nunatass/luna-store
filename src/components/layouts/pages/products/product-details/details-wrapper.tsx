@@ -92,7 +92,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         </span>
       </div> */}
 
-      <pre className="text-md font-inter text-wrap">
+      <pre className="text-md text-wrap font-inter">
         {showMoreText
           ? product.description
           : `${product.description.substring(0, 100)}...`}

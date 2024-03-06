@@ -165,9 +165,11 @@ export const ReviewForm = ({ productId }: ReviewFormProp) => {
           )}
         />
 
-        <Button type="submit" className="px-14">
-          Submit
-        </Button>
+        <div className="flex w-full justify-end">
+          <Button type="submit" className="px-14">
+            Submit
+          </Button>
+        </div>
       </form>
     </Form>
   );
