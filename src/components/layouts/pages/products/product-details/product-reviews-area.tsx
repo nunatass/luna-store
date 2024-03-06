@@ -35,7 +35,7 @@ export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
       reviews &&
       reviews?.pages[page]?.data?.map((review) => (
         <CarouselItem
-          className="basis-1/1 w-md md:basis-1/2 lg:basis-1/3"
+          className="basis-1/1 md:w-md w-full md:basis-1/2 lg:w-full lg:basis-1/3"
           key={review.id}
         >
           <ReviewItem review={review} />
