@@ -59,10 +59,12 @@ export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
           </p>
           <ReviewForm productId={productId} />
         </div>
-        <Carousel className="w-full">
-          <CarouselContent className="mx-2">{renderReviews}</CarouselContent>
-          <CarouselPrevious className="ml-8" />
-          <CarouselNext className="mr-4" />
+        <Carousel className="w-full" opts={{ loop: true }}>
+          <CarouselContent>{renderReviews}</CarouselContent>
+          <div className="relative mt-8 hidden w-full md:block">
+            <CarouselPrevious className="absolute right-0 ml-12" />
+            <CarouselNext className="right-0" />
+          </div>
         </Carousel>
       </div>
     </AnimatePresence>
