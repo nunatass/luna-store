@@ -45,7 +45,7 @@ export function ProductFilterArea({ className }: ProductFilterAreaProps) {
             </h3>
             <span className="mb-4 mt-2 h-[1.5] w-full bg-gray-300" />
             <Button size="lg" className="" onClick={handleClearFilter}>
-              Reset Filters
+              Reset
             </Button>
           </div>
         </div>

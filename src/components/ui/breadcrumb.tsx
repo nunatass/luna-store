@@ -38,12 +38,20 @@ export function Breadcrumb({
 
   useEffect(() => {
     const category = searchParams.get('category');
+    const searchTerm = searchParams.get('searchTerm');
+
+    if (pathname === '/products' && searchTerm) {
+      return setTitle(`Search: ${searchTerm}`);
+    }
+
     if (!category) {
       return setTitle(initialTitle);
     }
     // setCategory(categories.find((c) => c.name === category) ?? null);
 
     setTitle(pathname === '/products' ? capitalize(category) : title);
+
+    console.log(searchTerm);
   }, [searchParams, title, pathname, setCategory, setTitle, initialTitle]);
 
   return (

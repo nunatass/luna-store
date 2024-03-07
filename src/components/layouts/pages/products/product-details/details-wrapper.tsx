@@ -92,18 +92,19 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
           Review)
         </span>
       </div> */}
-
-      <pre className="text-md text-wrap font-inter">
-        {showMoreText
-          ? product.description
-          : `${product.description.substring(0, 100)}...`}
-        <span
-          className="ml-2 cursor-pointer text-black"
-          onClick={() => setShowMoreText(!showMoreText)}
-        >
-          {showMoreText ? 'See less' : 'See more'}
-        </span>
-      </pre>
+      <p>
+        <pre className="text-md w-full text-wrap font-inter">
+          {showMoreText
+            ? product.description
+            : `${product.description.substring(0, 100)}...`}
+          <span
+            className="ml-2 cursor-pointer text-black"
+            onClick={() => setShowMoreText(!showMoreText)}
+          >
+            {showMoreText ? 'See less' : 'See more'}
+          </span>
+        </pre>
+      </p>
 
       <PriceBundle
         prices={product.prices}

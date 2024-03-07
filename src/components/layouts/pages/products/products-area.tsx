@@ -5,11 +5,12 @@ import { ProductItem } from '@/components/layouts/product-item';
 import { SidePanel } from '@/components/layouts/side-panel';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useProducts } from '@/hooks/api/use-product';
+import { keys, useProducts } from '@/hooks/api/use-product';
 import { useFilter } from '@/hooks/use-filter';
 import { cn } from '@/lib/utils';
+import { useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ReactNode, useCallback, useMemo } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ProductsAreaLoading } from '../../loadings/pages/products/products-area-loading';
@@ -26,6 +27,10 @@ const productAnimationProps = {
 
 export function ProductsArea() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const queryClient = useQueryClient();
+
   const searchTerm = searchParams.get('searchTerm') || '';
   const {
     isFilterPanelOpen,
@@ -59,6 +64,15 @@ export function ProductsArea() {
     [filterPrice, products]
   );
 
+  const handleClearFilter = useCallback(() => {
+    router.replace('/products?searchTerm=');
+    queryClient.invalidateQueries({
+      queryKey: keys.all,
+    });
+
+    resetFilter();
+  }, [resetFilter, queryClient, router]);
+
   let content: ReactNode | null = null;
 
   if (isPending) {
@@ -74,7 +88,7 @@ export function ProductsArea() {
       return (
         <div className="absolute left-1/2 top-[20%] flex -translate-x-1/2 flex-col gap-4 sm:top-[30%] lg:left-[60%]">
           <p>No item found</p>
-          <Button onClick={resetFilter}>Reset filters</Button>
+          <Button onClick={handleClearFilter}>Reset</Button>
         </div>
       );
     }
