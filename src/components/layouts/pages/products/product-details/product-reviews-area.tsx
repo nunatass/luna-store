@@ -19,7 +19,7 @@ type ProductReviewsAreaProps = {
 };
 
 export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
-  const { data: reviews, isPending } = useReviewsByProduct(productId);
+  const { data: reviews, isPending, isError } = useReviewsByProduct(productId);
 
   const [page] = useState(0);
 
@@ -61,10 +61,12 @@ export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
         </div>
         <Carousel className="w-full" opts={{ loop: true }}>
           <CarouselContent>{renderReviews}</CarouselContent>
-          <div className="relative mt-8 hidden w-full md:block">
-            <CarouselPrevious className="absolute right-0 ml-12" />
-            <CarouselNext className="right-0" />
-          </div>
+          {!isPending && !isError && reviews?.pages[0].data.length > 0 && (
+            <div className="relative mt-8 hidden w-full md:block">
+              <CarouselPrevious className="absolute right-0 ml-12" />
+              <CarouselNext className="right-0" />
+            </div>
+          )}
         </Carousel>
       </div>
     </AnimatePresence>

@@ -65,7 +65,7 @@ export const ProductsArea = () => {
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
             </div>
-            <span className="text-center">
+            <span className="text-center text-sm text-gray-500">
               keep scrolling to load more products
             </span>
           </div>

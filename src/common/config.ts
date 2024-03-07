@@ -1,4 +1,4 @@
 export const config = {
   pageLimit: 10,
-  reviewPageLimit: 5,
+  reviewPageLimit: 10,
 };

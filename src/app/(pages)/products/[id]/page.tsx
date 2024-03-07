@@ -30,9 +30,9 @@ export default function ProductPage({ params }: ProductPageProps) {
     <Wrapper>
       <SEO pageTitle="Product Details" />
       <Header secondary />
-      <div className="mt-32">
+      <div className="mt-20">
         <Breadcrumb
-          title={product?.title}
+          // title={product?.title}
           label={product?.category.name || ' '}
         />
       </div>

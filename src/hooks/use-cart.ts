@@ -1,6 +1,6 @@
 'use client';
 
-import { CartProduct } from '@/common/types';
+import { CartProduct, Variant } from '@/common/types';
 import { toast } from 'sonner';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
@@ -18,6 +18,7 @@ interface CartStore {
   getQuantity: (id: string) => number;
   addQuantity: (id: string) => void;
   removeQuantity: (id: string) => void;
+  selectVariant: (id: string, variant: Variant) => void;
 }
 
 export const useCart = create(
@@ -85,6 +86,18 @@ export const useCart = create(
                   return product;
                 }
                 product.orderQuantity--;
+              }
+              return product;
+            }),
+          ],
+        });
+      },
+      selectVariant: (id: string, variant: Variant) => {
+        set({
+          products: [
+            ...get().products.map((product) => {
+              if (product.id === id) {
+                product.variant = variant;
               }
               return product;
             }),

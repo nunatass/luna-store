@@ -1,16 +1,19 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { MinusIcon, PlusIcon } from 'lucide-react';
 
 type ProductQuantityProps = {
   quantity: number;
   setQuantity: (value: number) => void;
+  className?: string;
 };
 
 export const ProductQuantity = ({
   quantity,
   setQuantity,
+  className,
 }: ProductQuantityProps) => {
   // handleIncrease
   const handleIncrease = () => {
@@ -22,7 +25,12 @@ export const ProductQuantity = ({
     setQuantity(quantity > 1 ? quantity - 1 : 1);
   };
   return (
-    <div className="flex h-11 w-28 items-center justify-between gap-1.5 bg-gray-200 px-2">
+    <div
+      className={cn(
+        'flex h-11 w-28 items-center justify-between gap-1.5 bg-gray-200 px-2',
+        className
+      )}
+    >
       <Button
         variant="ghost"
         size="sm"

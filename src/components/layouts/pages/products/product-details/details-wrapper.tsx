@@ -1,13 +1,14 @@
 'use client';
-import { AskQuestionIcon } from '@/components/icons';
+import { AskQuestionIcon, CartIcon, RulerIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
 import { ProductQuantity } from './product-quantity';
+import { ProductVariantSelect } from './product-variant-select';
 
 import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
-import { Price, Product } from '@/common/types';
+import { Price, Product, Variant } from '@/common/types';
 import { useCart } from '@/hooks/use-cart';
 // import { useWishlist } from '@/hooks/use-whishlist';
 import { CheckCircle } from 'lucide-react';
@@ -19,12 +20,11 @@ type DetailsWrapperProps = {
 
 export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   const { addProduct: addCartProduct } = useCart();
-  // const { addProduct: addWishlistProduct } = useWishlist();
 
-  // const [ratingVal] = useState(0);
   const [showMoreText, setShowMoreText] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [price, setPrice] = useState<Price>(product.prices[0]);
+  const [variant, setVariant] = useState<Variant>(product.variants[0]);
 
   const handleAddProduct = useCallback(() => {
     addCartProduct({
@@ -34,6 +34,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
       media: product.medias[0].url,
       title: product.title,
       orderQuantity: quantity,
+      variant,
     });
   }, [quantity, product, addCartProduct, price]);
 
@@ -70,7 +71,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   return (
     <div className="flex w-full flex-col gap-4 text-gray-600">
       <div className="">
-        <span className="text-base font-normal">{product.category.name}</span>
+        {/* <span className="text-base font-normal">{product.category.name}</span> */}
         <h3 className="text-2xl font-medium  text-black">{product.title}</h3>
       </div>
 
@@ -143,25 +144,36 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
       )} */}
       {/* if ProductDetailsCountdown true end */}
 
-      <div className="flex flex-col gap-4">
-        <h3 className="text-base text-black">Quantity</h3>
-        <div className="flex gap-4">
-          <ProductQuantity setQuantity={setQuantity} quantity={quantity} />
+      <div className="flex flex-col gap-2">
+        <div className="flex w-full items-end justify-between">
+          <h3 className="text-base text-black">Quantity</h3>
           <Button
-            variant="outline"
-            onClick={handleAddProduct}
-            size="lg"
-            className="w-full"
+            variant="ghost"
+            className="flex h-auto items-end gap-2 p-1 text-base text-black"
           >
-            Add To Cart
+            <RulerIcon />
+            Size guide
           </Button>
         </div>
+        <div className="flex gap-4">
+          <ProductQuantity setQuantity={setQuantity} quantity={quantity} />
+          <ProductVariantSelect onSelectChange={(value) => setVariant(value)} />
+        </div>
 
-        <Button asChild size="lg" className="w-full" onClick={handleAddProduct}>
+        <Button
+          variant="outline"
+          onClick={handleAddProduct}
+          size="lg"
+          className="flex w-full gap-2"
+        >
+          <CartIcon /> Add To Cart
+        </Button>
+
+        {/* <Button asChild size="lg" className="w-full" onClick={handleAddProduct}>
           <Link href="/cart" aria-label="cart">
             Buy Now
           </Link>
-        </Button>
+        </Button> */}
       </div>
 
       <div className="flex border-b-[1px] pb-2">

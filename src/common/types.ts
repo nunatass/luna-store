@@ -40,6 +40,7 @@ export type Product = {
   category: Category;
   prices: Price[];
   medias: Media[];
+  variants: Variant[];
 };
 
 export type Collection = {
@@ -64,6 +65,12 @@ export type CartProduct = {
   price: number;
   orderQuantity: number;
   media: string;
+  variant?: Variant;
+};
+
+export type Variant = {
+  id: string;
+  label: string;
 };
 
 export type ShippingMethod = 'free' | 'standard' | 'fast';

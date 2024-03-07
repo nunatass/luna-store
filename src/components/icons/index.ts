@@ -24,3 +24,4 @@ export * from './support';
 export * from './trash';
 export * from './wishlist';
 export * from './collection';
+export * from './ruler';

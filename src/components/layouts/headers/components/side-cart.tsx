@@ -2,7 +2,7 @@
 
 import emptyCartImg from '@/assets/img/side-cart/empty-cart.png';
 import { CartProduct } from '@/common/types';
-import { CloseTwoIcon, TrashIcon } from '@/components/icons';
+import { CloseTwoIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useOrderCheckout } from '@/hooks/api/use-orders';
 import { useCart } from '@/hooks/use-cart';
@@ -16,6 +16,7 @@ import { usePathname } from 'next/navigation';
 import { toast } from 'sonner';
 
 import { useCallback } from 'react';
+import { ProductQuantity } from '../../pages/products/product-details/product-quantity';
 
 const emptyCartAnimationVariants = {
   show: { opacity: 1 },
@@ -46,7 +47,8 @@ const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const pathname = usePathname();
-  const { products, getTotal, removeProduct } = useCart();
+  const { products, getTotal, removeProduct, addQuantity, removeQuantity } =
+    useCart();
   const { mutate: handleOrderCheckout, isPending } = useOrderCheckout();
 
   const handleRemoveProduct = (productId: string) => {
@@ -125,16 +127,28 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
               ${formatPrice(product.price)}
             </span>
           )}
-          <span className="text-sm font-medium">x{product.orderQuantity}</span>
+
+          <ProductQuantity
+            className="mt-1.5 h-8 w-20"
+            setQuantity={(value) => {
+              if (value > product.orderQuantity) {
+                addQuantity(product.id);
+              } else {
+                removeQuantity(product.id);
+              }
+            }}
+            quantity={product.orderQuantity}
+          />
+          {/* <span className="text-sm font-medium">x{product.orderQuantity}</span> */}
         </div>
       </div>
       <Button
         onClick={() => handleRemoveProduct(product.id)}
         variant="link"
         size="icon"
-        className="py-0 text-gray-600 md:hover:text-red-400"
+        className="py-0 text-gray-600 "
       >
-        <TrashIcon />
+        <CloseTwoIcon />
       </Button>
     </motion.div>
   );
