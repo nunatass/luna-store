@@ -148,27 +148,45 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
       <div className="flex flex-col gap-2">
         <div className="flex w-full items-end justify-between">
           <h3 className="text-base text-black">Quantity</h3>
-          <Button
-            variant="ghost"
-            className="flex h-auto items-end gap-2 p-1 text-base text-black"
-          >
-            <RulerIcon />
-            Size guide
-          </Button>
+          {product?.variants.length > 0 && (
+            <Button
+              variant="ghost"
+              className="flex h-auto items-end gap-2 p-1 text-base text-black"
+            >
+              <RulerIcon />
+              Size guide
+            </Button>
+          )}
         </div>
         <div className="flex gap-4">
           <ProductQuantity setQuantity={setQuantity} quantity={quantity} />
-          <ProductVariantSelect onSelectChange={(value) => setVariant(value)} />
+          {product?.variants.length > 0 && (
+            <ProductVariantSelect
+              onSelectChange={(value) => setVariant(value)}
+              variants={product?.variants}
+            />
+          )}
+          {product?.variants.length === 0 && (
+            <Button
+              variant="outline"
+              onClick={handleAddProduct}
+              size="lg"
+              className="flex w-full gap-2"
+            >
+              <CartIcon /> Add To Cart
+            </Button>
+          )}
         </div>
-
-        <Button
-          variant="outline"
-          onClick={handleAddProduct}
-          size="lg"
-          className="flex w-full gap-2"
-        >
-          <CartIcon /> Add To Cart
-        </Button>
+        {product?.variants.length > 0 && (
+          <Button
+            variant="outline"
+            onClick={handleAddProduct}
+            size="lg"
+            className="flex w-full gap-2"
+          >
+            <CartIcon /> Add To Cart
+          </Button>
+        )}
 
         {/* <Button asChild size="lg" className="w-full" onClick={handleAddProduct}>
           <Link href="/cart" aria-label="cart">

@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/select';
 
 type ProductVariantSelectProps = {
-  variants?: Variant[];
+  variants: Variant[];
   onSelectChange: (value: Variant) => void;
 };
 
