@@ -57,15 +57,17 @@ export function CartShippingPriceForm() {
   const { total, totalWithDiscount } = getTotal();
   const { mutate: handleOrderCheckout, isPending } = useOrderCheckout();
 
+  const freeShippingTrashHolder = 9900
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      shippingMethod: totalWithDiscount > 9900 ? 'free' : 'standard',
+      shippingMethod: totalWithDiscount > freeShippingTrashHolder ? 'free' : 'standard',
     },
   });
 
   useEffect(() => {
-    const method = totalWithDiscount > 9900 ? 'free' : 'standard';
+    const method = totalWithDiscount > freeShippingTrashHolder ? 'free' : 'standard';
     if (form.getValues().shippingMethod !== 'fast') {
       form.setValue('shippingMethod', method);
     }
@@ -123,9 +125,9 @@ export function CartShippingPriceForm() {
                           className="flex items-center space-x-3 space-y-0"
                         >
                           <FormControl>
-                            <RadioGroupItem value={method} />
+                            <RadioGroupItem value={method} disabled={method === "free" && totalWithDiscount < freeShippingTrashHolder} />
                           </FormControl>
-                          <FormLabel className="flex gap-2 font-normal">
+                          <FormLabel className="flex gap-2 font-normal" >
                             {shippingMethods[method].label}
                             <p className="font-semibold">
                               ${formatPrice(shippingMethods[method].value)}
