@@ -1,6 +1,8 @@
 'use client';
+
 import { Media } from '@/common/types';
 import { Button } from '@/components/ui/button';
+import { useWindowSize } from '@/hooks/use-window-size';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -33,6 +35,7 @@ export const DetailsThumbWrapper = ({
   // videoId = false,
 }: DetailsThumbWrapperProps) => {
   const [activeImg, setActiveImg] = useState<Media>(imageURLs[0]);
+  const { width } = useWindowSize();
 
   const handleImageActive = useCallback(
     (item: Media) => {
@@ -50,26 +53,35 @@ export const DetailsThumbWrapper = ({
         )}
       >
         <nav className={cn('flex gap-2 lg:flex-col', modal && 'flex flex-col')}>
-          {imageURLs?.map((item) => (
-            <Button
-              variant="ghost"
-              key={item.id}
-              className={cn(
-                'h-[100px] w-[78px] bg-gray-100 p-0 transition-all duration-300 ease-in-out',
-                item.id === activeImg.id && 'ring-[1.5px] ring-[#be844c]'
-              )}
-              onClick={() => handleImageActive(item)}
-            >
-              <Image
-                src={`${imageUrlPrefix}/${item.url}`}
-                alt="image"
-                width={78}
-                height={100}
-                style={{ width: '100%', height: '100%' }}
-                priority
-              />
-            </Button>
-          ))}
+          {imageURLs
+            ?.slice(
+              0,
+              width > 750
+                ? imageURLs?.length
+                : imageURLs?.length > 4
+                  ? 4
+                  : imageURLs?.length
+            )
+            .map((item) => (
+              <Button
+                variant="ghost"
+                key={item.id}
+                className={cn(
+                  'h-[100px] w-[78px] bg-gray-100 p-0 transition-all duration-300 ease-in-out',
+                  item.id === activeImg.id && 'ring-[1.5px] ring-[#be844c]'
+                )}
+                onClick={() => handleImageActive(item)}
+              >
+                <Image
+                  src={`${imageUrlPrefix}/${item.url}`}
+                  alt="image"
+                  width={78}
+                  height={100}
+                  style={{ width: '100%', height: '100%' }}
+                  priority
+                />
+              </Button>
+            ))}
         </nav>
         <div
           className={cn(
