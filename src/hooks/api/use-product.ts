@@ -50,7 +50,18 @@ export function useCreateProduct() {
   });
 }
 
-export function useProducts(searchTerm = '', categoryId = '') {
+export function useProducts(searchTerm = '', categoryId = '', discount = 0) {
+  const params =
+    (searchTerm && {
+      searchTerm,
+    }) ||
+    (categoryId && {
+      categoryId,
+    }) ||
+    (discount && {
+      discount,
+    });
+
   const { data, ...other } = useInfiniteQuery<ResponseData<Product[]>>({
     queryKey:
       (searchTerm && keys.bySearchTerm(searchTerm)) ||
@@ -61,8 +72,7 @@ export function useProducts(searchTerm = '', categoryId = '') {
         params: {
           page,
           limit: config.pageLimit,
-          searchTerm,
-          categoryId,
+          ...params,
         },
       });
       return res.data;

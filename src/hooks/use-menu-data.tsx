@@ -91,7 +91,7 @@ export function useMenuData() {
         {
           title: 'Discounted Products',
           link: '/',
-          megaMenus: [{ title: '30% Off', link: '/product-details' }],
+          megaMenus: [{ title: '30% Off', link: '/discounts' }],
         },
         {
           title: 'Collections',
