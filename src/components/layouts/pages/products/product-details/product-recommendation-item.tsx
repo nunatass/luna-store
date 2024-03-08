@@ -67,15 +67,22 @@ export const ProductRecommendationItem = ({
         className="relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-[#f6f6f6] text-center sm:w-80"
       >
         <Link
-          className="relative h-full w-full"
+          className="group relative h-full w-full transition-all duration-300 ease-in-out"
           href={`/products/${product.id}`}
           aria-label="product-item"
         >
           <Image
             fill
             alt="product image"
-            className="object-cover"
+            className="object-cover transition-all duration-300 ease-in-out group-hover:opacity-0"
             src={`${imageUrlPrefix}/${product.medias[0].url}`}
+          />
+          <Image
+            src={`${imageUrlPrefix}/${product.medias[1].url}`}
+            alt="product img"
+            className="absolute left-0  top-0 w-full  object-cover opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100"
+            fill
+            priority
           />
         </Link>
         <motion.div
