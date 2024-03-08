@@ -35,7 +35,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
       orderQuantity: quantity,
       variant,
     });
-  }, [quantity, product, addCartProduct, price]);
+  }, [quantity, product, addCartProduct, price, variant]);
 
   const handleSelectPrice = useCallback(
     (price: Price) => {
