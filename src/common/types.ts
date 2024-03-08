@@ -41,6 +41,14 @@ export type Product = {
   prices: Price[];
   medias: Media[];
   variants: Variant[];
+  recommendations?: Recommendation[];
+};
+
+export type Recommendation = {
+  id: string;
+  title: string;
+  prices: Price[];
+  medias: Media[];
 };
 
 export type Collection = {

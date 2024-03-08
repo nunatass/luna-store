@@ -19,9 +19,7 @@ export const DetailsTabNav = ({ product }: DetailsTabNavProps) => {
             Description
           </TabsTrigger>
           <TabsTrigger value="information">Additional information</TabsTrigger>
-          <TabsTrigger value="reviews">
-            {/* Reviews ({product?.reviews?.length}) */}
-          </TabsTrigger>
+          <TabsTrigger value="reviews"></TabsTrigger>
         </TabsList>
         <motion.div className="w-full" layout layoutId="tabLayout">
           <TabsContent value="description" className="text-base text-gray-700">

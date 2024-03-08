@@ -32,10 +32,8 @@ export const DetailsThumbWrapper = ({
   modal,
   // videoId = false,
 }: DetailsThumbWrapperProps) => {
-  // const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [activeImg, setActiveImg] = useState<Media>(imageURLs[0]);
 
-  // handle image active
   const handleImageActive = useCallback(
     (item: Media) => {
       setActiveImg(item);
@@ -103,15 +101,6 @@ export const DetailsThumbWrapper = ({
           </motion.div>
         </div>
       </div>
-      {/* modal popup start */}
-      {/* {videoId && (
-        <PopupVideo
-          isVideoOpen={isVideoOpen}
-          setIsVideoOpen={setIsVideoOpen}
-          videoId={videoId}
-        />
-      )} */}
-      {/* modal popup end */}
     </>
   );
 };

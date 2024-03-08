@@ -1,5 +1,4 @@
 import { Header } from '@/components/layouts/headers/header';
-import { HomeCollectionsArea } from '@/components/layouts/pages/home/collections/home-collections-area';
 import { FeatureArea } from '@/components/layouts/pages/home/feature-area';
 import { JewelryBanner } from '@/components/layouts/pages/home/jewelry-banner';
 import { PopularProducts } from '@/components/layouts/pages/home/products/popular-products';
@@ -15,7 +14,7 @@ export default function HomePage() {
       <Header />
       <JewelryBanner />
       <FeatureArea />
-      <HomeCollectionsArea />
+      {/* <HomeCollectionsArea /> */}
       <PopularProducts />
       <ProductsArea />
       {/* <InstagramArea /> */}

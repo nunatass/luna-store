@@ -9,8 +9,9 @@ import {
 } from '@/components/ui/carousel';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useReviewsByProduct } from '@/hooks/api/use-reviews';
+import Autoplay from 'embla-carousel-autoplay';
 import { AnimatePresence } from 'framer-motion';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { ReviewForm } from './review-form';
 import { ReviewItem } from './review-item';
 
@@ -19,6 +20,9 @@ type ProductReviewsAreaProps = {
 };
 
 export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
+  const carouselPlugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
   const { data: reviews, isPending, isError } = useReviewsByProduct(productId);
 
   const [page] = useState(0);
@@ -59,7 +63,13 @@ export const ProductReviewsArea = ({ productId }: ProductReviewsAreaProps) => {
           </p>
           <ReviewForm productId={productId} />
         </div>
-        <Carousel className="w-full" opts={{ loop: true }}>
+        <Carousel
+          className="w-full"
+          opts={{ loop: true }}
+          plugins={[carouselPlugin.current]}
+          onMouseEnter={carouselPlugin.current.stop}
+          onMouseLeave={carouselPlugin.current.reset}
+        >
           <CarouselContent>{renderReviews}</CarouselContent>
           {!isPending && !isError && reviews?.pages[0].data.length > 0 && (
             <div className="relative mt-8 hidden w-full md:block">

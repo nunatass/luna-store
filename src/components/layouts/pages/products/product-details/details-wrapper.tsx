@@ -10,7 +10,6 @@ import { ProductVariantSelect } from './product-variant-select';
 import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
 import { Price, Product, Variant } from '@/common/types';
 import { useCart } from '@/hooks/use-cart';
-// import { useWishlist } from '@/hooks/use-whishlist';
 import { CheckCircle } from 'lucide-react';
 import { PriceBundle } from './price-bundle';
 
@@ -45,105 +44,29 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
     [setPrice]
   );
 
-  // useEffect(() => {
-  //   if (reviews && reviews.length > 0) {
-  //     const rating =
-  //       reviews.reduce((acc, review) => acc + review.rating, 0) /
-  //       reviews.length;
-  //     setRatingVal(rating);
-  //   } else {
-  //     setRatingVal(0);
-  //   }
-  // }, [reviews]);
-
-  // handle wishlist product
-  // const handleWishlistProduct = useCallback(() => {
-  //   addWishlistProduct({
-  //     id: product.id,
-  //     discount: price.discount,
-  //     price: price.value,
-  //     media: product.medias[0].url,
-  //     title: product.title,
-  //     orderQuantity: quantity,
-  //   });
-  // }, [quantity, product, addWishlistProduct, price]);
-
   return (
     <div className="flex w-full flex-col gap-4 text-gray-600">
       <div className="">
-        {/* <span className="text-base font-normal">{product.category.name}</span> */}
         <h3 className="text-2xl font-medium  text-black">{product.title}</h3>
       </div>
 
-      {/* <div className="flex items-center gap-2">
-        <Rating
-          allowFraction
-          size={16}
-          initialValue={ratingVal}
-          readonly={true}
-          className="flex"
-        />
-
-        <span className="text-sm">
-          (
-          {product.reviews && product.reviews.length > 0
-            ? product.reviews.length
-            : 0}{' '}
-          Review)
+      <pre className="text-md w-full text-wrap font-inter">
+        {showMoreText
+          ? product.description
+          : `${product.description.substring(0, 100)}...`}
+        <span
+          className="ml-2 cursor-pointer text-black"
+          onClick={() => setShowMoreText(!showMoreText)}
+        >
+          {showMoreText ? 'See less' : 'See more'}
         </span>
-      </div> */}
-      <p>
-        <pre className="text-md w-full text-wrap font-inter">
-          {showMoreText
-            ? product.description
-            : `${product.description.substring(0, 100)}...`}
-          <span
-            className="ml-2 cursor-pointer text-black"
-            onClick={() => setShowMoreText(!showMoreText)}
-          >
-            {showMoreText ? 'See less' : 'See more'}
-          </span>
-        </pre>
-      </p>
+      </pre>
 
       <PriceBundle
         prices={product.prices}
         onSelectChange={handleSelectPrice}
         selectedPrice={price}
       />
-
-      {/* variations */}
-      {/* {imageURLs.some((item) => item?.color && item?.color?.name) && (
-        <div className="tp-product-details-variation">
-          <h4 className="tp-product-details-variation-title">Color :</h4>
-          <div className="tp-product-details-variation-list">
-            {imageURLs.map((item, i) => (
-              <button
-                // onClick={() => handleImageActive(item)}
-                key={i}
-                type="button"
-                className={''}
-              >
-                <span
-                  data-bg-color={`${item?.color.clrCode}`}
-                  style={{ backgroundColor: `${item?.color.clrCode}` }}
-                ></span>
-                {item?.color && item?.color.name && (
-                  <span className="tp-color-variation-tootltip">
-                    {item?.color.name}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-        </div>
-      )} */}
-
-      {/* if ProductDetailsCountdown true start */}
-      {/* {offerDate?.endDate && (
-        // <ProductDetailsCountdown offerExpiryTime={offerDate?.endDate} />
-      )} */}
-      {/* if ProductDetailsCountdown true end */}
 
       <div className="flex flex-col gap-2">
         <div className="flex w-full items-end justify-between">
@@ -187,24 +110,9 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
             <CartIcon /> Add To Cart
           </Button>
         )}
-
-        {/* <Button asChild size="lg" className="w-full" onClick={handleAddProduct}>
-          <Link href="/cart" aria-label="cart">
-            Buy Now
-          </Link>
-        </Button> */}
       </div>
 
       <div className="flex border-b-[1px] pb-2">
-        {/* <Button
-          variant="ghost"
-          onClick={handleWishlistProduct}
-          type="button"
-          className="flex gap-2"
-        >
-          <WishlistIcon />
-          Add Wishlist
-        </Button> */}
         <Button variant="ghost" type="button" asChild>
           <Link href="/contact" className="flex gap-2" aria-label="contact">
             <AskQuestionIcon />
