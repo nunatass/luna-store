@@ -7,6 +7,7 @@ import { Toaster } from 'sonner';
 
 import { HydrationZustand } from '@/components/hydration-zustand';
 import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
+import { ToasterProvider } from '@/components/providers/toater-provider';
 import './globals.css';
 
 const charm = Charm({
@@ -70,12 +71,14 @@ export default function RootLayout({
       >
         <TanstackQueryProvider>
           <HydrationZustand>
-            <Toaster
-              position="bottom-center"
-              expand={false}
-              toastOptions={{ duration: 1500 }}
-              className=""
-            />
+            <ToasterProvider>
+              <Toaster
+                position="bottom-center"
+                expand={false}
+                toastOptions={{ duration: 1500 }}
+                className=""
+              />
+            </ToasterProvider>
             <div className="relative">
               <Modal />
               {children}
