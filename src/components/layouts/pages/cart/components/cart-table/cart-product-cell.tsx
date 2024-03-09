@@ -40,7 +40,7 @@ export const CartProductCell = ({
         <Link
           href={`/products/${id}`}
           aria-label={title}
-          className=" text-center text-base"
+          className=" text-left text-base"
         >
           {title}
         </Link>

@@ -133,6 +133,9 @@ export function SuccessSection() {
                     ) * product.orderQuantity}
                   </span>
                 </div>
+                <span className="-mt-2 text-[12px] text-gray-700">
+                  {product?.variant?.label}
+                </span>
               </div>
             </div>
           ))}

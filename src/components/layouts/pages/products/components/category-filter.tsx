@@ -55,7 +55,7 @@ export const CategoryFilter = () => {
                         'bg-black text-white ring-black'
                     )}
                   >
-                    {category.total}
+                    {/* {category.total} */}
                   </span>
                 </Button>
               </Link>

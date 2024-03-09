@@ -154,6 +154,11 @@ export const SuccessOrderEmail = ({
                               ) * product?.orderQuantity}
                             </span>
                           </Text>
+                          <Text>
+                            <span className="text-sm">
+                              {product?.variant?.label}
+                            </span>
+                          </Text>
                         </Column>
                       </Row>
                     </Section>
