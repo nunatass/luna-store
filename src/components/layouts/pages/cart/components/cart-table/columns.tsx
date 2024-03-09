@@ -18,8 +18,10 @@ export const columns: ColumnDef<CartProduct>[] = [
       <p>
         $
         {
-          formatPriceWithDiscount(row.original.price, row.original.discount)
-            .price
+          formatPriceWithDiscount(
+            row.original.price * row.original.orderQuantity,
+            row.original.discount
+          ).price
         }
       </p>
     ),

@@ -87,7 +87,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const renderProductItem = (product: CartProduct) => (
     <motion.div
       {...itemProductAnimationProps}
-      className="flex w-full items-start gap-2 py-4"
+      className="relative flex w-full items-start gap-2 py-4"
     >
       <div className="border-[1px] border-gray-200">
         <Link href={`/products/${product.id}`} aria-label="product link">
@@ -115,38 +115,46 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
             <div className="flex w-full items-center gap-2">
               <span className="text-left text-sm">
                 $
-                {formatPriceWithDiscount(product.price, product.discount).price}
+                {
+                  formatPriceWithDiscount(
+                    product.price * product.orderQuantity,
+                    product.discount
+                  ).price
+                }
               </span>
 
               <span className="text-right text-sm text-gray-600  line-through">
-                ${formatPrice(product.price)}
+                ${formatPrice(product.price * product.orderQuantity)}
               </span>
             </div>
           ) : (
             <span className="text-sm font-semibold">
-              ${formatPrice(product.price)}
+              ${formatPrice(product.price * product.orderQuantity)}
             </span>
           )}
-
-          <ProductQuantity
-            className="mt-1.5 h-8 w-20"
-            setQuantity={(value) => {
-              if (value > product.orderQuantity) {
-                addQuantity(product.id);
-              } else {
-                removeQuantity(product.id);
-              }
-            }}
-            quantity={product.orderQuantity}
-          />
-          {/* <span className="text-sm font-medium">x{product.orderQuantity}</span> */}
+          <div className="flex w-full items-end justify-between">
+            <span className="-mt-2 text-[12px] text-gray-700">
+              {product?.variant?.label}
+            </span>
+            <ProductQuantity
+              className="mt-1.5 h-8 w-20"
+              setQuantity={(value) => {
+                if (value > product.orderQuantity) {
+                  addQuantity(product.id);
+                } else {
+                  removeQuantity(product.id);
+                }
+              }}
+              quantity={product.orderQuantity}
+            />
+          </div>
         </div>
       </div>
       <Button
         onClick={() => handleRemoveProduct(product.id)}
         variant="link"
         size="icon"
-        className="py-0 text-gray-600 "
+        className="absolute right-0 top-2 py-0 text-gray-600"
       >
         <CloseTwoIcon />
       </Button>
@@ -185,8 +193,6 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
               ))}
             </div>
           )}
-
-          {/* if no item in cart */}
           <AnimatePresence>
             {products.length === 0 && (
               <motion.div

@@ -1,5 +1,5 @@
 'use client';
-import { TrashIcon } from '@/components/icons/trash';
+import { CloseTwoIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/use-cart';
 
@@ -20,7 +20,7 @@ export const CartRemoveProductCell = ({ id }: CartRemoveProductCellProps) => {
       className="flex items-center gap-2 hover:text-red-400"
       onClick={() => handelRemoveProduct(id)}
     >
-      <TrashIcon /> remove
+      <CloseTwoIcon /> remove
     </Button>
   );
 };

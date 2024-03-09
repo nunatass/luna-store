@@ -6,10 +6,12 @@ import { MinusIcon, PlusIcon } from 'lucide-react';
 
 type CartProductQuantityCellProps = {
   id: string;
+  className?: string;
 };
 
 export const CartProductQuantityCell = ({
   id,
+  className,
 }: CartProductQuantityCellProps) => {
   const { getQuantity, addQuantity, removeQuantity } = useCart();
   const quantity = getQuantity(id);
@@ -23,14 +25,16 @@ export const CartProductQuantityCell = ({
   }
 
   return (
-    <div className="flex w-max items-center justify-center gap-2 overflow-hidden ring-[1px] ring-gray-300">
+    <div
+      className={cn(
+        'flex w-max items-center justify-center gap-2 overflow-hidden ring-[1px] ring-gray-300',
+        className
+      )}
+    >
       <Button
         variant="ghost"
         size="sm"
-        className={cn(
-          'hover:text-[#be844c]',
-          quantity === 1 && 'text-gray-400'
-        )}
+        className={cn('hover:text-black', quantity === 1 && 'text-gray-400')}
         disabled={quantity === 1}
         onClick={() => handleRemoveQuantity(id)}
       >
@@ -42,10 +46,7 @@ export const CartProductQuantityCell = ({
       <Button
         variant="ghost"
         size="sm"
-        className={cn(
-          'hover:text-[#be844c]',
-          quantity === 20 && 'text-gray-400'
-        )}
+        className={cn('hover:text-black', quantity === 20 && 'text-gray-400')}
         disabled={quantity === 20}
         onClick={() => handleAddQuantity(id)}
       >

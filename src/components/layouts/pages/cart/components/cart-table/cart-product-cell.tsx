@@ -1,3 +1,4 @@
+import { Variant } from '@/common/types';
 import { formatPrice } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,6 +9,8 @@ type CartProductCellProps = {
   id: string;
   price: number;
   discount: number;
+  orderQuantity: number;
+  variant?: Variant;
 };
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
@@ -17,6 +20,8 @@ export const CartProductCell = ({
   title,
   price,
   discount,
+  variant,
+  orderQuantity,
 }: CartProductCellProps) => {
   return (
     <div className="flex items-center gap-2">
@@ -40,11 +45,16 @@ export const CartProductCell = ({
           {title}
         </Link>
         <div className="flex items-center gap-2 ">
-          <span className="line-through">${formatPrice(price)}</span>
+          <span className="line-through">
+            ${formatPrice(price * orderQuantity)}
+          </span>
           <span className="bg-black p-1 text-sm text-white">
             {discount}% OFF
           </span>
         </div>
+        <span className="-mt-2 text-[12px] text-gray-700">
+          {variant?.label}
+        </span>
       </div>
     </div>
   );

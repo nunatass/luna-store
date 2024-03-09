@@ -7,10 +7,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { CartProduct } from '@/common/types';
-import { TrashIcon } from '@/components/icons';
+import { CloseTwoIcon } from '@/components/icons';
 import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
+import { ProductQuantity } from '../products/product-details/product-quantity';
 import { CartCheckout } from './components/cart-checkout';
-import { CartProductQuantityCell } from './components/cart-table/cart-product-quantity-cell';
 import { columns } from './components/cart-table/columns';
 import { CartDataTable } from './components/cart-table/data-table';
 
@@ -28,7 +28,8 @@ const itemProductAnimationProps = {
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const CartArea = () => {
-  const { removeAll, removeProduct, products } = useCart();
+  const { removeAll, removeProduct, products, addQuantity, removeQuantity } =
+    useCart();
 
   // handle remove all products
   const handleClearProducts = () => {
@@ -46,26 +47,26 @@ export const CartArea = () => {
   const renderProductItem = (product: CartProduct) => (
     <motion.div
       {...itemProductAnimationProps}
-      className="flex w-full justify-between gap-2 py-4"
+      className="relative flex w-full items-start gap-2 py-4"
     >
-      <div className="flex items-center justify-center border-[1px]">
-        <Link
-          href={`/product/${product.id}`}
-          key={`product/${product.id}`}
-          aria-label="product link"
-        >
+      <div className="border-[1px] border-gray-200">
+        <Link href={`/products/${product.id}`} aria-label="product link">
           <Image
             src={`${imageUrlPrefix}/${product.media}`}
-            width={100}
-            height={100}
+            width={70}
+            height={60}
             alt="product img"
+            className="h-20 w-24"
           />
         </Link>
       </div>
-
-      <div className="flex w-full flex-col justify-between">
-        <h5 className="w-full text-sm font-semibold transition-all duration-300 ease-in-out hover:text-[#be844c]">
-          <Link href={`/products/${product.id}`} aria-label="product item">
+      <div className="w-full">
+        <h5 className="font-semibold transition-all duration-300 ease-in-out ">
+          <Link
+            className="text-sm"
+            href={`/products/${product.id}`}
+            aria-label={product.title}
+          >
             {product.title}
           </Link>
         </h5>
@@ -74,35 +75,49 @@ export const CartArea = () => {
             <div className="flex w-full items-center gap-2">
               <span className="text-left text-sm">
                 $
-                {formatPriceWithDiscount(product.price, product.discount).price}
+                {
+                  formatPriceWithDiscount(
+                    product.price * product.orderQuantity,
+                    product.discount
+                  ).price
+                }
               </span>
 
               <span className="text-right text-sm text-gray-600  line-through">
-                ${formatPrice(product.price)}
+                ${formatPrice(product.price * product.orderQuantity)}
               </span>
             </div>
           ) : (
             <span className="text-sm font-semibold">
-              ${formatPrice(product.price)}
+              ${formatPrice(product.price * product.orderQuantity)}
             </span>
           )}
-          <span className="text-sm font-medium text-gray-600">
-            x{product.orderQuantity}
-          </span>
-        </div>
-        <div className="flex w-full justify-between">
-          {' '}
-          <CartProductQuantityCell id={product.id} />
-          <Button
-            onClick={() => handleRemoveProduct(product.id)}
-            variant="link"
-            size="icon"
-            className="mx-4 py-0 text-gray-600 hover:text-red-400"
-          >
-            <TrashIcon />
-          </Button>
+          <div className="flex w-full items-end justify-between">
+            <span className="-mt-2 text-[12px] text-gray-700">
+              {product?.variant?.label}
+            </span>
+            <ProductQuantity
+              className="mt-1.5 h-8 w-20"
+              setQuantity={(value) => {
+                if (value > product.orderQuantity) {
+                  addQuantity(product.id);
+                } else {
+                  removeQuantity(product.id);
+                }
+              }}
+              quantity={product.orderQuantity}
+            />
+          </div>
         </div>
       </div>
+      <Button
+        onClick={() => handleRemoveProduct(product.id)}
+        variant="link"
+        size="icon"
+        className="absolute right-0 top-2 py-0 text-gray-600"
+      >
+        <CloseTwoIcon />
+      </Button>
     </motion.div>
   );
 
@@ -115,6 +130,7 @@ export const CartArea = () => {
             : renderProductItem(product)}
         </AnimatePresence>
       ))}
+      <div />
     </div>
   );
 
@@ -139,19 +155,7 @@ export const CartArea = () => {
             </div>
             <div className="sm:hidden">{renderProductItems()}</div>
             <div>
-              <div className="col-xl-6 col-md-8">
-                {/* <div className="tp-cart-coupon">
-                        <form action="#">
-                          <div className="tp-cart-coupon-input-box">
-                            <label>Coupon Code:</label>
-                            <div className="tp-cart-coupon-input d-flex align-items-center">
-                              <input type="text" placeholder="Enter Coupon Code" />
-                              <button type="submit">Apply</button>
-                            </div>
-                          </div>
-                        </form>
-                      </div> */}
-              </div>
+              <div className="col-xl-6 col-md-8"></div>
               <div className="flex w-full justify-end">
                 <Button
                   variant="outline"
