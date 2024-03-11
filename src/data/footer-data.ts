@@ -18,6 +18,10 @@ export const footerData = [
         label: 'Contact Us',
         link: '/contact',
       },
+      {
+        label: 'Size Guide',
+        link: '/size-guide',
+      },
     ],
   },
   {

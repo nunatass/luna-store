@@ -72,12 +72,14 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         <div className="flex w-full items-end justify-between">
           <h3 className="text-base text-black">Quantity</h3>
           {product?.variants.length > 0 && (
-            <Button
-              variant="ghost"
-              className="flex h-auto items-end gap-2 p-1 text-base text-black"
-            >
-              <RulerIcon />
-              Size guide
+            <Button variant="ghost" className="h-auto items-end p-1" asChild>
+              <Link
+                href="/size-guide"
+                className="flex h-auto items-end gap-2 p-1 text-base text-black"
+              >
+                <RulerIcon />
+                Size guide
+              </Link>
             </Button>
           )}
         </div>
