@@ -103,7 +103,7 @@ export function SuccessSection() {
         <div className="flex flex-col justify-center gap-10 divide-y">
           {productData.map((product) => (
             <div className="flex items-center gap-2 pt-8" key={product.id}>
-              <Link href={`/product/${product.id}`} aria-label="product item">
+              <Link href={`/products/${product.id}`} aria-label="product item">
                 <div className="item-center flex h-20 w-20 justify-center bg-gray-200">
                   <Image
                     src={`${imageUrlPrefix}/${product.media}`}
