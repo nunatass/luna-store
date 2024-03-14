@@ -50,7 +50,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         <h3 className="text-2xl font-medium  text-black">{product.title}</h3>
       </div>
 
-      <pre className="text-md w-full text-wrap font-inter">
+      <p className="text-md w-full whitespace-pre-line text-wrap break-words font-inter">
         {showMoreText
           ? product.description
           : `${product.description.substring(0, 100)}...`}
@@ -60,7 +60,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         >
           {showMoreText ? 'See less' : 'See more'}
         </span>
-      </pre>
+      </p>
 
       <PriceBundle
         prices={product.prices}

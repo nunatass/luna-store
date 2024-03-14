@@ -18,36 +18,13 @@ export const Footer = () => {
             </Link>
 
             <div className="flex flex-col gap-6">
-              {/* <div>
-                <span className="text-sm">Got Questions? Call us</span>
-                <h4 className="text-2xl font-medium transition-all duration-300 ease-in-out hover:text-[#62605d]">
-                  <a href="tel:670-413-90-762">+251 926 313 652</a>
-                </h4>
-              </div>  */}
-
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
                   <EmailIcon />
                   <p className="transition-all duration-300 ease-in-out md:hover:text-[#be844c]">
-                    <a href="support@stellastone.store">
-                      support@stellastone.store
-                    </a>
+                    <Link href="/contact">support@stellastone.store</Link>
                   </p>
                 </div>
-                {/* <div className="">
-                  <div className="flex items-start gap-2">
-                    <LocationIcon />
-
-                    <p className="transition-all duration-300 ease-in-out hover:text-[#be844c]">
-                      <a
-                        href="https://www.google.com/maps/place/Sleepy+Hollow+Rd,+Gouverneur,+NY+13642,+USA/@44.3304966,-75.4552367,17z/data=!3m1!4b1!4m6!3m5!1s0x4cccddac8972c5eb:0x56286024afff537a!8m2!3d44.3304928!4d-75.453048!16s%2Fg%2F1tdsjdj4"
-                        target="_blank"
-                      >
-                        Rua Manuel da Fonseca 8. <br /> Évora, Portugal
-                      </a>
-                    </p>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>

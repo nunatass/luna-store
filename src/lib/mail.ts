@@ -30,3 +30,28 @@ export const sendSuccessOrderEmail = async ({
 
   return { data, error };
 };
+
+type SendContactUsEmailProps = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+export const sendContactUsEmail = async ({
+  name,
+  email,
+  message,
+}: SendContactUsEmailProps) => {
+  const { data, error } = await resend.emails.send({
+    from: 'Costumer Contact <support@stellastone.store>',
+    to: ['support@stellastone.store'],
+    subject: `Costumer Contact - ${name}`,
+    text: `Costumer Contact - ${email}
+        Costumer name - ${name}
+        
+        ${message}
+    `,
+  });
+
+  return { data, error };
+};

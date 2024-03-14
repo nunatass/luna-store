@@ -29,29 +29,10 @@ export const ContactArea = () => {
                 <EmailIcon />
                 <div className="">
                   <p data-info="mail" className="text-md text-gray-600">
-                    <a href="support@stellastone.store">
-                      support@stellastone.store
-                    </a>
+                    support@stellastone.store
                   </p>
-                  {/* <p data-info="phone" className="text-md font-medium">
-                    <a href="tel:670-413-90-762">+251 926 313 652</a>
-                  </p> */}
                 </div>
               </div>
-
-              {/* <div className="flex items-center gap-4">
-                <LocationIcon />
-                <div className="tp-contact-info-content">
-                  <p className="text-md">
-                    <a
-                      href="https://www.google.com/maps/place/New+York,+NY,+USA/@40.6976637,-74.1197638,11z/data=!3m1!4b1!4m6!3m5!1s0x89c24fa5d33f083b:0xc80b8f06e177fe62!8m2!3d40.7127753!4d-74.0059728!16zL20vMDJfMjg2"
-                      target="_blank"
-                    >
-                      Rua Manual Fonseca 08. <br /> Évora Portugal
-                    </a>
-                  </p>
-                </div>
-              </div> */}
 
               <div className="flex flex-col gap-4">
                 <div className="flex gap-2 p-2">

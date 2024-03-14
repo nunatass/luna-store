@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -9,7 +11,11 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import { Loader } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 // schema
@@ -19,18 +25,44 @@ const FormSchema = z.object({
     .min(1, { message: 'Required' })
     .max(20, { message: `Name can't have more then 20 characters` })
     .trim(),
-  email: z.string().email({ message: 'Email is required' }).trim(),
+  email: z.string().trim().email({ message: 'Email is required' }),
   message: z.string().min(1, { message: 'Required' }).trim(),
 });
 
 export const ContactForm = () => {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const {
+    isPending,
+    isError,
+    mutate: sendMail,
+  } = useMutation({
+    mutationFn: async (data: {
+      name: string;
+      email: string;
+      message: string;
+    }) => {
+      await axios.post('http://localhost:3000/api/contact-us', data);
+    },
   });
 
-  // on submit
-  const onSubmit = (data: { name: string; email: string; message: string }) => {
-    console.log(data);
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: { name: '', email: '', message: '' },
+  });
+
+  const onSubmit = async (data: {
+    name: string;
+    email: string;
+    message: string;
+  }) => {
+    sendMail(data);
+    if (isError) {
+      toast.error('Error sending contact email');
+    } else {
+      form.resetField('email');
+      form.resetField('name');
+      form.resetField('message');
+      toast.success('Email sent successfully');
+    }
   };
 
   return (
@@ -64,7 +96,7 @@ export const ContactForm = () => {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="exemple@email.com"
+                  placeholder="your-email@mail.com"
                   className="rounded-none"
                   {...field}
                 />
@@ -90,8 +122,12 @@ export const ContactForm = () => {
           )}
         />
 
-        <Button type="submit" className="w-full px-14 md:w-max">
+        <Button
+          type="submit"
+          className="flex w-full items-center  gap-4 px-14 md:w-max"
+        >
           Send Message
+          {isPending && <Loader className="h-5 w-5 animate-spin" />}
         </Button>
       </form>
     </Form>
