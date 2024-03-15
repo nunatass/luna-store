@@ -103,14 +103,14 @@ export const ProductsArea = () => {
                   id={`tab-all`}
                   onClick={() => handleActiveTab(null)}
                   className={cn(
-                    'relative rounded-none px-1 text-[11px] text-gray-400 transition-all duration-300 ease-in-out hover:bg-white sm:text-[14px] ',
+                    'relative rounded-none px-1 text-[11px] text-gray-600 transition-all duration-300 ease-in-out hover:bg-white sm:text-[14px] ',
                     activeTab === null && 'text-black'
                   )}
                 >
                   All Categories
                   {activeTab === null && (
                     <motion.div
-                      className="absolute bottom-0 left-0 h-[3px] w-full rounded-full bg-gray-200"
+                      className="absolute bottom-0 left-0 h-[3px] w-full rounded-full bg-gray-100"
                       layout
                       layoutId="tab-selected"
                     />

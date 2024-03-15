@@ -216,7 +216,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
         <div className="z-10 flex h-[30%] flex-col gap-1 bg-white px-2 py-4 font-medium sm:h-[20%]">
           <h3 className="text-left transition-all duration-300 ease-in-out sm:mb-2">
             <span
-              className="text-xs sm:text-sm"
+              className="line-clamp-1 text-xs sm:text-sm"
               aria-label={product.title}
               // href={`/products/${product.id}`}
             >
