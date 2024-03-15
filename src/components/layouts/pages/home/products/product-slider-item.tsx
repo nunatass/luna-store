@@ -216,9 +216,11 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
                 }
               </span>
 
-              <span className="sm:font-base w-full text-right text-sm text-xs text-gray-600  line-through transition-all duration-300 ease-in-out sm:mb-2">
-                ${formatPrice(product.prices[0].value)}
-              </span>
+              {product.prices[0].discount > 0 && (
+                <span className="sm:font-base w-full text-right text-sm text-xs text-gray-600  line-through transition-all duration-300 ease-in-out sm:mb-2">
+                  ${formatPrice(product.prices[0].value)}
+                </span>
+              )}
             </div>
             {/* <motion.div
               variants={cartAnimationVariants}
