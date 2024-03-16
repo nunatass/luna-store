@@ -3,6 +3,8 @@ import { TrackOrderArea } from '@/components/layouts/pages/track-order/track-ord
 import { Wrapper } from '@/components/layouts/wrapper';
 import { SEO } from '@/components/seo';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
+import bannerTop from '@/assets/img/banner-top.webp';
+import Image from 'next/image'
 
 export default function FAQsPage() {
   return (
@@ -13,6 +15,9 @@ export default function FAQsPage() {
         <Breadcrumb title="Track Your Order" />
       </div>
       <TrackOrderArea />
+      <div className="relative w-full h-80">
+       <Image src={bannerTop} fill alt="banner top" className="object-cover"/>
+      </div>
     </Wrapper>
   );
 }

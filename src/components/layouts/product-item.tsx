@@ -97,7 +97,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
       >
         <div className="group relative h-[70%] sm:h-[80%]">
           <Image
-            src={`${imageUrlPrefix}/${product.medias[0].url}`}
+            src={`${imageUrlPrefix}/${product.medias[1].url}`}
             alt="product img"
             className="w-full object-cover transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
             fill
@@ -106,7 +106,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
             priority
           />
           <Image
-            src={`${imageUrlPrefix}/${product.medias[1].url}`}
+            src={`${imageUrlPrefix}/${product.medias[0].url}`}
             alt="product img"
             className="absolute left-0  top-0 w-full scale-95  object-cover opacity-0 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100"
             // width={284}

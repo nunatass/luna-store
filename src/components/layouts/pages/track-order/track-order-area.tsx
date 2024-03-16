@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+
 import {
   Form,
   FormControl,
@@ -32,7 +33,7 @@ export function TrackOrderArea() {
   };
 
   return (
-    <section className="container flex h-[70vh] items-center justify-center pb-20 pt-8">
+    <section className="container mt-8 flex h-[70vh] flex-col items-center justify-center gap-12 md:mt-0">
       <div className="flex flex-row bg-white px-10 py-12 drop-shadow-md">
         <div className="flex flex-col gap-4">
           <p className="text-sm">

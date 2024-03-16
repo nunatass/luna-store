@@ -93,12 +93,21 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
           href={`/products/${product.id}`}
           aria-label="product-item"
         >
-          <Image
-            fill
-            alt="product image"
-            className="object-cover"
-            src={`${imageUrlPrefix}/${product.medias[1].url}`}
-          />
+          <div className="group relative h-full overflow-hidden">
+            <Image
+              fill
+              alt="product image"
+              className="object-cover transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
+              src={`${imageUrlPrefix}/${product.medias[1].url}`}
+            />
+            <Image
+              src={`${imageUrlPrefix}/${product.medias[0].url}`}
+              alt="product img"
+              className="absolute left-0 top-0 w-full  object-cover opacity-0 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100"
+              fill
+              priority
+            />
+          </div>
         </Link>
         <motion.div
           variants={optionsAnimationVariants}

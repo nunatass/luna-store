@@ -1,3 +1,4 @@
+import faqImg from '@/assets/img/faq.webp';
 import {
   Accordion,
   AccordionContent,
@@ -5,6 +6,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { faqsData } from '@/data/faqs-data';
+import Image from 'next/image';
 
 export const FAQsArea = () => {
   return (
@@ -19,7 +21,16 @@ export const FAQsArea = () => {
           message at support@stellastone.store and we will get back to you
           within 24 hours.
         </p>
-        <div className="mt-4 w-full">
+        <div className="mt-8 flex w-full flex-col justify-between md:flex-row">
+          <div className="h-full w-full">
+            <Image
+              src={faqImg}
+              alt="faq img"
+              width={600}
+              height={600}
+              className="h-[200px] w-full object-cover md:h-[600px] md:w-[600px]"
+            />
+          </div>
           <Accordion type="single" collapsible className="w-full">
             {faqsData.map((faq, index) => (
               <AccordionItem key={faq.question} value={`item-${index + 1}`}>
