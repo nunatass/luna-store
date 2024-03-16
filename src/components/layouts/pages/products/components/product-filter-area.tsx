@@ -29,14 +29,14 @@ export function ProductFilterArea({ className }: ProductFilterAreaProps) {
     setPrice(200);
   }, [resetFilter, setPrice, queryClient, router]);
   return (
-    <section>
+    <section className="">
       <div className={cn('hidden w-72 lg:block', className)}>
         <div className="flex flex-col gap-4">
           <PriceFilter
             handleChanges={setPrice}
             step={1}
             maxValue={200}
-            minValue={40}
+            minValue={10}
           />
           <CategoryFilter />
           <div className="divide flex flex-col items-end divide-y-[1.5px]">

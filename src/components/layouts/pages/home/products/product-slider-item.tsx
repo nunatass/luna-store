@@ -97,7 +97,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
             fill
             alt="product image"
             className="object-cover"
-            src={`${imageUrlPrefix}/${product.medias[0].url}`}
+            src={`${imageUrlPrefix}/${product.medias[1].url}`}
           />
         </Link>
         <motion.div
