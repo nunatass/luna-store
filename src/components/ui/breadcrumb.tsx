@@ -1,5 +1,6 @@
 'use client';
 
+import { useCategories } from '@/hooks/api/use-categories';
 import { useFilter } from '@/hooks/use-filter';
 import { capitalize, cn, replaceDashWithSpaces } from '@/lib/utils';
 import { ChevronRightIcon } from 'lucide-react';
@@ -19,6 +20,7 @@ export function Breadcrumb({
   label,
   disableSecondary = false,
 }: BreadcrumbProps) {
+  const { data: categories, isPending } = useCategories();
   const [title, setTitle] = useState(initialTitle);
   const { setCategory } = useFilter();
 
@@ -47,12 +49,25 @@ export function Breadcrumb({
     if (!category) {
       return setTitle(initialTitle);
     }
-    // setCategory(categories.find((c) => c.name === category) ?? null);
+
+    if (!isPending) {
+      setCategory(
+        categories.find(
+          (c) => c.name.toLocaleLowerCase() === category.toLocaleLowerCase()
+        ) ?? null
+      );
+    }
 
     setTitle(pathname === '/products' ? capitalize(category) : title);
-
-    console.log(searchTerm);
-  }, [searchParams, title, pathname, setCategory, setTitle, initialTitle]);
+  }, [
+    searchParams,
+    title,
+    pathname,
+    setCategory,
+    setTitle,
+    initialTitle,
+    isPending,
+  ]);
 
   return (
     <nav
