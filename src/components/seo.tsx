@@ -12,7 +12,7 @@ export async function generateMetadata({
   image,
 }: SEOProps): Promise<Metadata> {
   return {
-    title: pageTitle ?? 'Stella Store Jewelry',
+    title: pageTitle ?? 'Stella Stone Jewelry',
     description:
       description ??
       'Discover exquisite craftsmanship and timeless elegance at our online jewelry store. Explore our stunning pieces, meticulously designed to complement every occasion and elevate your unique sense of beauty. Shop now and indulge in luxury that lasts a lifetime.',
