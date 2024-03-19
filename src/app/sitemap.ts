@@ -1,3 +1,4 @@
+import { Collection, Product } from '@/common/types';
 import { API } from '@/lib/axios';
 
 export default async function sitemap() {
@@ -15,7 +16,7 @@ export default async function sitemap() {
     }
   );
 
-  const products = productsResponse.data.data.map((product) => {
+  const products = productsResponse.data.data.map((product: Product) => {
     return {
       url: `https://www.stellastone.store/products/${product.id}`,
       lastModified: new Date(),
@@ -24,14 +25,16 @@ export default async function sitemap() {
     };
   });
 
-  const collections = collectionsResponse.data.data.map((collection) => {
-    return {
-      url: `https://www.stellastone.store/collections/${collection.id}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    };
-  });
+  const collections = collectionsResponse.data.data.map(
+    (collection: Collection) => {
+      return {
+        url: `https://www.stellastone.store/collections/${collection.id}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+      };
+    }
+  );
 
   return [
     {
