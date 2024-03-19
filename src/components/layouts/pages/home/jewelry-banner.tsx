@@ -78,6 +78,7 @@ export const JewelryBanner = () => {
         <Button
           className="bg-transparent px-1.5 hover:bg-transparent"
           onClick={() => handleChangeBanner('banner 1')}
+          aria-label="banner 1 button"
         >
           <span
             className={cn(
@@ -89,6 +90,7 @@ export const JewelryBanner = () => {
         <Button
           className="bg-transparent px-1.5 hover:bg-transparent"
           onClick={() => handleChangeBanner('banner 2')}
+          aria-label="banner 2 button"
         >
           <span
             className={cn(
@@ -100,6 +102,7 @@ export const JewelryBanner = () => {
         <Button
           className="bg-transparent px-1.5 hover:bg-transparent"
           onClick={() => handleChangeBanner('banner 3')}
+          aria-label="banner 3 button"
         >
           <span
             className={cn(
