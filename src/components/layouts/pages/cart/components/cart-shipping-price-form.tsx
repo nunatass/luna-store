@@ -162,13 +162,22 @@ export function CartShippingPriceForm() {
                     shippingMethods[form.getValues('shippingMethod')].value
                 )}
               </span>
-              <span className="text-sm font-normal line-through">
-                $
-                {formatPrice(
+              {formatPrice(
+                totalWithDiscount +
+                  shippingMethods[form.getValues('shippingMethod')].value
+              ) !==
+                formatPrice(
                   total +
                     shippingMethods[form.getValues('shippingMethod')].value
-                )}
-              </span>
+                ) && (
+                <span className="text-sm font-normal line-through">
+                  $
+                  {formatPrice(
+                    total +
+                      shippingMethods[form.getValues('shippingMethod')].value
+                  )}
+                </span>
+              )}
             </div>
           </div>
           <Button className="flex w-full items-center  gap-4">

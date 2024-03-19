@@ -6,7 +6,6 @@ import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 
 // const cartAnimationVariants = {
 //   initial: { y: 10, opacity: 0 },
@@ -86,91 +85,92 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
   //   setIsPreviewModalOpen(true);
   // }, [setIsPreviewModalOpen, product.id, setChildren]);
   return (
-    <Link
-      className="relative"
-      href={`/products/${product.id}`}
-      aria-label="product item"
+    <motion.div
+      {...animationsProps}
+      className="relative flex h-60 w-40 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]"
     >
-      <motion.div
-        {...animationsProps}
-        className="relative flex h-60 w-40 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]"
+      <Link
+        href={`/products/${product.id}`}
+        aria-label="product item"
+        className=" group relative h-[70%] w-full sm:h-[80%]"
       >
-        <div className="group relative h-[70%] sm:h-[80%]">
-          <Image
-            src={`${imageUrlPrefix}/${product.medias[1].url}`}
-            alt="product img"
-            className="w-full object-cover transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
-            fill
-            // width={284}
-            // height={352}
-            priority
-          />
-          <Image
-            src={`${imageUrlPrefix}/${product.medias[0].url}`}
-            alt="product img"
-            className="absolute left-0  top-0 w-full scale-95  object-cover opacity-0 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100"
-            // width={284}
-            // height={352}
-            fill
-            priority
-          />
-        </div>
-        <motion.div
-          variants={optionsAnimationVariants}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
-          className="absolute left-4 top-4 z-10 hidden flex-col gap-2 sm:flex"
-        >
-          <AnimatePresence>
-            {isAddedToCart ? (
-              <motion.div {...animationsProps}>
-                <div
-                  onClick={() => redirect('/cart')}
-                  aria-label="cart"
-                  className="flex items-center gap-2"
-                >
-                  <motion.div
-                    {...optionHoverAnimation}
-                    className="text-gray-4 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-sm"
-                  >
-                    <CartIcon />
-                  </motion.div>
-                  <motion.span
-                    variants={tooltipAnimationVariants}
-                    transition={{ duration: 0.4, ease: 'easeInOut' }}
-                    className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white "
-                  >
-                    View Cart
-                  </motion.span>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.button
-                {...animationsProps}
-                transition={{
-                  duration: 5,
-                  stiffness: 100,
-                  type: 'spring',
-                }}
-                type="button"
-                onClick={() => handleAddProduct(product)}
-                className="flex items-center gap-2"
+        <Image
+          src={`${imageUrlPrefix}/${product.medias[1].url}`}
+          alt="product img"
+          className="w-full object-cover transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
+          fill
+          // width={284}
+          // height={352}
+          priority
+        />
+        <Image
+          src={`${imageUrlPrefix}/${product.medias[0].url}`}
+          alt="product img"
+          className="absolute left-0  top-0 w-full scale-95  object-cover opacity-0 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100"
+          // width={284}
+          // height={352}
+          fill
+          priority
+        />
+      </Link>
+
+      <motion.div
+        variants={optionsAnimationVariants}
+        transition={{ duration: 0.4, ease: 'easeInOut' }}
+        className="absolute left-4 top-4 z-10 hidden flex-col gap-2 sm:flex"
+      >
+        <AnimatePresence>
+          {isAddedToCart ? (
+            <motion.button {...animationsProps}>
+              <Link
+                // onClick={() => redirect('/cart')}
+                href="/cart"
+                aria-label="cart"
+                className="flex cursor-pointer items-center gap-2"
               >
                 <motion.div
                   {...optionHoverAnimation}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm md:flex md:h-11 md:w-11"
+                  className="text-gray-4 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-sm"
                 >
                   <CartIcon />
                 </motion.div>
-                <motion.div
+                <motion.span
                   variants={tooltipAnimationVariants}
-                  className="rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white "
                 >
-                  Add to Cart
-                </motion.div>
-              </motion.button>
-            )}
-          </AnimatePresence>
-          {/* <motion.button
+                  View Cart
+                </motion.span>
+              </Link>
+            </motion.button>
+          ) : (
+            <motion.button
+              {...animationsProps}
+              transition={{
+                duration: 5,
+                stiffness: 100,
+                type: 'spring',
+              }}
+              type="button"
+              onClick={() => handleAddProduct(product)}
+              className="flex items-center gap-2"
+            >
+              <motion.div
+                {...optionHoverAnimation}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm md:flex md:h-11 md:w-11"
+              >
+                <CartIcon />
+              </motion.div>
+              <motion.div
+                variants={tooltipAnimationVariants}
+                className="rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
+              >
+                Add to Cart
+              </motion.div>
+            </motion.button>
+          )}
+        </AnimatePresence>
+        {/* <motion.button
             type="button"
             {...animationsProps}
             onClick={handleOpenPreviewModal}
@@ -190,7 +190,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
               Quick View
             </motion.div>
           </motion.button> */}
-          {/* <motion.button
+        {/* <motion.button
             type="button"
             {...animationsProps}
             onClick={() => handleAddWishlistProduct(product)}
@@ -211,37 +211,37 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
               {isAddedToWishlist ? 'Added to Wishlist' : 'Add To Wishlist'}
             </motion.div>
           </motion.button> */}
-        </motion.div>
+      </motion.div>
 
-        <div className="z-10 flex h-[30%] flex-col gap-1 bg-white px-2 py-4 font-medium sm:h-[20%]">
-          <h3 className="text-left transition-all duration-300 ease-in-out sm:mb-2">
-            <span
-              className="line-clamp-1 text-xs sm:text-sm"
-              aria-label={product.title}
-              // href={`/products/${product.id}`}
-            >
-              {product.title}
+      <div className="z-10 flex h-[30%] flex-col gap-1 bg-white px-2 py-4 font-medium sm:h-[20%]">
+        <h3 className="text-left transition-all duration-300 ease-in-out sm:mb-2">
+          <span
+            className="line-clamp-1 text-xs sm:text-sm"
+            aria-label={product.title}
+            // href={`/products/${product.id}`}
+          >
+            {product.title}
+          </span>
+        </h3>
+        <div className="w-full">
+          <div className="flex w-full items-center justify-between">
+            <span className="sm:font-base w-full text-left text-sm transition-all duration-300  ease-in-out sm:mb-2">
+              $
+              {
+                formatPriceWithDiscount(
+                  product.prices[0].value,
+                  product.prices[0].discount
+                ).price
+              }
             </span>
-          </h3>
-          <div className="w-full">
-            <div className="flex w-full items-center justify-between">
-              <span className="sm:font-base w-full text-left text-sm transition-all duration-300  ease-in-out sm:mb-2">
-                $
-                {
-                  formatPriceWithDiscount(
-                    product.prices[0].value,
-                    product.prices[0].discount
-                  ).price
-                }
-              </span>
 
-              {product.prices[0].discount > 0 && (
-                <span className="sm:font-base w-full text-right text-sm text-xs text-gray-600  line-through transition-all duration-300 ease-in-out sm:mb-2">
-                  ${formatPrice(product.prices[0].value)}
-                </span>
-              )}
-            </div>
-            {/* <motion.div
+            {product.prices[0].discount > 0 && (
+              <span className="sm:font-base w-full text-right text-sm text-xs text-gray-600  line-through transition-all duration-300 ease-in-out sm:mb-2">
+                ${formatPrice(product.prices[0].value)}
+              </span>
+            )}
+          </div>
+          {/* <motion.div
               variants={cartAnimationVariants}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
               className="absolute bottom-4 left-0 flex w-full items-center justify-end  px-2 py-1  text-xs sm:text-base"
@@ -262,14 +262,13 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
                 </button>
               )}
             </motion.div> */}
-          </div>
         </div>
-        {product.prices[0].discount > 0 && (
-          <span className="absolute right-2 top-2 bg-black p-1 text-xs text-white">
-            {product.prices[0].discount}% OFF
-          </span>
-        )}
-      </motion.div>
-    </Link>
+      </div>
+      {product.prices[0].discount > 0 && (
+        <span className="absolute right-2 top-2 bg-black p-1 text-xs text-white">
+          {product.prices[0].discount}% OFF
+        </span>
+      )}
+    </motion.div>
   );
 };

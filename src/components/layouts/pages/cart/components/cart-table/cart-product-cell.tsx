@@ -44,14 +44,17 @@ export const CartProductCell = ({
         >
           {title}
         </Link>
-        <div className="flex items-center gap-2 ">
-          <span className="line-through">
-            ${formatPrice(price * orderQuantity)}
-          </span>
-          <span className="bg-black p-1 text-sm text-white">
-            {discount}% OFF
-          </span>
-        </div>
+        {discount > 0 && (
+          <div className="flex items-center gap-2 ">
+            <span className="line-through">
+              ${formatPrice(price * orderQuantity)}
+            </span>
+
+            <span className="bg-black p-1 text-sm text-white">
+              {discount}% OFF
+            </span>
+          </div>
+        )}
         <span className="-mt-2 text-[12px] text-gray-700">
           {variant?.label}
         </span>

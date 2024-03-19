@@ -74,7 +74,7 @@ export function Breadcrumb({
       className="container flex flex-col gap-4 sm:flex"
       aria-label="Breadcrumb"
     >
-      <h3 className="text-3xl font-medium sm:text-5xl">{title}</h3>
+      <h1 className="text-3xl font-medium sm:text-5xl">{title}</h1>
       <ol role="list" className="hidden items-center space-x-4 sm:flex">
         <li>
           <div>
