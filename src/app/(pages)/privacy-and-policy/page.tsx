@@ -8,7 +8,10 @@ import { Breadcrumb } from '@/components/ui/breadcrumb';
 export default function PolicyAndPrivacy() {
   return (
     <Wrapper>
-      <SEO pageTitle="Policy and Privacy" />
+      <SEO
+        pageTitle="Policy and Privacy"
+        description="Discover our Policy and Privacy page, your gateway to understanding our commitment to your security and rights. Uncover how we safeguard your information and ensure a trusted experience"
+      />
       <Header secondary />
       <div className="mt-32">
         <Breadcrumb title="Policy And Privacy" label="Policy And Privacy" />

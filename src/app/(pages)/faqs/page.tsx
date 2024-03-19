@@ -7,7 +7,10 @@ import { Breadcrumb } from '@/components/ui/breadcrumb';
 export default function FAQsPage() {
   return (
     <Wrapper>
-      <SEO pageTitle="FAQs US" />
+      <SEO
+        pageTitle="FAQs US"
+        description="Explore our FAQ page for quick answers to all your questions. From shipping queries to product details, find clarity and guidance effortlessly."
+      />
       <Header secondary />
       <div className="mt-32">
         <Breadcrumb

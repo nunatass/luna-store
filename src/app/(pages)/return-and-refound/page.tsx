@@ -7,7 +7,10 @@ import { Breadcrumb } from '@/components/ui/breadcrumb';
 export default function ReturnAndRefoundPage() {
   return (
     <Wrapper>
-      <SEO pageTitle="Return and Refound" />
+      <SEO
+        pageTitle="Return and Refound"
+        description="Ease your mind with our hassle-free return and refund page. Enjoy seamless processes and transparent policies, ensuring satisfaction with every purchase."
+      />
       <Header secondary />
       <div className="mt-32">
         <Breadcrumb title="Return & Refound" label="Return and Refound" />

@@ -16,7 +16,11 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   return (
     <Wrapper className="bg-white">
-      <SEO pageTitle="Product Details" />
+      <SEO
+        pageTitle={collection?.title}
+        description="Elevate your style with our stunning jewelry collection. Discover elegance and sophistication in every piece."
+        image="1bc5650f-8e12-4aad-9095-6e9397a26d99"
+      />
       <Header secondary />
       <div className="mt-32">
         <Breadcrumb title={collection?.title} disableSecondary />
