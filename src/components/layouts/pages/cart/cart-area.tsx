@@ -61,7 +61,7 @@ export const CartArea = () => {
         </Link>
       </div>
       <div className="w-full">
-        <h5 className="font-semibold transition-all duration-300 ease-in-out ">
+        <h2 className="font-semibold transition-all duration-300 ease-in-out ">
           <Link
             className="text-sm"
             href={`/products/${product.id}`}
@@ -69,7 +69,7 @@ export const CartArea = () => {
           >
             {product.title}
           </Link>
-        </h5>
+        </h2>
         <div className="w-full">
           {product.discount > 0 ? (
             <div className="flex w-full items-center gap-2">

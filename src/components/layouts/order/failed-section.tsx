@@ -5,7 +5,7 @@ import Link from 'next/link';
 export function FailedSection() {
   return (
     <section className="container flex h-screen flex-col justify-center">
-      <h3 className="text-2xl font-semibold">Order Failed</h3>
+      <h1 className="text-2xl font-semibold">Order Failed</h1>
       <div className="-mt-20 flex h-full w-full flex-col items-center justify-center  gap-8">
         <div className="flex items-center gap-2">
           <AlertCircle className="h-12 w-12 text-gray-800" />

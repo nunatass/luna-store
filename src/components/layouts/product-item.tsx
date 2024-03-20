@@ -214,7 +214,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
       </motion.div>
 
       <div className="z-10 flex h-[30%] flex-col gap-1 bg-white px-2 py-4 font-medium sm:h-[20%]">
-        <h3 className="text-left transition-all duration-300 ease-in-out sm:mb-2">
+        <h2 className="text-left transition-all duration-300 ease-in-out sm:mb-2">
           <span
             className="line-clamp-1 text-xs sm:text-sm"
             aria-label={product.title}
@@ -222,7 +222,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           >
             {product.title}
           </span>
-        </h3>
+        </h2>
         <div className="w-full">
           <div className="flex w-full items-center justify-between">
             <span className="sm:font-base w-full text-left text-sm transition-all duration-300  ease-in-out sm:mb-2">

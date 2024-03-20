@@ -10,7 +10,7 @@ export const ContactArea = () => {
       <div className="flex flex-row bg-white px-10 py-12 drop-shadow-md">
         <div className="w-full space-y-8">
           <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-medium md:text-3xl">Sent A Message</h3>
+            <h2 className="text-xl font-medium md:text-3xl">Sent A Message</h2>
             <p>
               For any questions regarding our products or for assistance with
               your order, please email us and you will receive a response within{' '}

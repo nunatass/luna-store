@@ -4,7 +4,6 @@ import { Header } from '@/components/layouts/headers/header';
 import { ProductDetailsAreaLoading } from '@/components/layouts/loadings/pages/products/product-details-area-loading';
 import { ProductDetailsArea } from '@/components/layouts/pages/products/product-details/product-details-area';
 import { Wrapper } from '@/components/layouts/wrapper';
-import { SEO } from '@/components/seo';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
 import { useProductById } from '@/hooks/api/use-product';
 
@@ -28,17 +27,9 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
   return (
     <Wrapper>
-      <SEO
-        pageTitle={product?.title}
-        image={product?.medias?.[1].url}
-        description={product?.description}
-      />
       <Header secondary />
       <div className="mt-20">
-        <Breadcrumb
-          // title={product?.title}
-          label={product?.category.name || ' '}
-        />
+        <Breadcrumb label={product?.category.name || ' '} />
       </div>
       <div className="min-h-[60vh]">{content}</div>
     </Wrapper>

@@ -110,7 +110,7 @@ export function CollectionsProductsArea({
           >
             <div className="flex flex-col px-8">
               <div className="absolute left-0 right-0 top-0 flex w-full items-center justify-between border-b-[0.5px] bg-white p-8 pb-4">
-                <h4 className="text-base font-semibold">Filter products</h4>
+                <h3 className="text-base font-semibold">Filter products</h3>
                 <button
                   onClick={handleCloseSideFilter}
                   type="button"

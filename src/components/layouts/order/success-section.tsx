@@ -97,7 +97,7 @@ export function SuccessSection() {
       <div className="w-full px-8">
         <div className="flex items-center gap-2">
           <CartTwoIcon />
-          <h3 className="text-2xl font-semibold">Your Order</h3>
+          <h1 className="text-2xl font-semibold">Your Order</h1>
         </div>
 
         <div className="flex flex-col justify-center gap-10 divide-y">

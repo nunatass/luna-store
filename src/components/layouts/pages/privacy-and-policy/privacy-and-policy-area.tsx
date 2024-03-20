@@ -10,7 +10,7 @@ export const PrivacyAndPolicyArea = () => {
             className="flex w-full flex-col gap-2"
           >
             {section.title && (
-              <p className="text-lg font-semibold">{section.title}</p>
+              <h2 className="text-lg font-semibold">{section.title}</h2>
             )}
 
             {section.content.map((paragraph) => (
