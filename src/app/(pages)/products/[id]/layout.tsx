@@ -20,6 +20,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${res.data?.title} | Stella Stone`,
       description: res.data?.description,
       openGraph: {
+        title: `${res.data?.title} | Stella Stone`,
+        description: res.data?.description,
+        images: [
+          {
+            url: `https://pub-2815e42a47aa405db2fb0aeb816612b8.r2.dev/${res.data?.medias?.[1].url}`,
+          },
+        ],
+      },
+
+      twitter: {
+        card: 'summary_large_image',
+        title: `${res.data?.title} | Stella Stone`,
+        description: res.data?.description,
         images: [
           `https://pub-2815e42a47aa405db2fb0aeb816612b8.r2.dev/${res.data?.medias?.[1].url}`,
         ],

@@ -17,7 +17,7 @@ export function PriceBundle({
     if (prices[0].discount > 0) {
       return (
         <>
-          <span className="text-2xl font-medium text-black">
+          <span className="text-xl font-medium text-black">
             $
             {formatPriceWithDiscount(prices[0].value, prices[0].discount).price}
           </span>
@@ -29,7 +29,7 @@ export function PriceBundle({
     }
 
     return (
-      <span className="text-2xl font-medium text-black">
+      <span className="text-xl font-medium text-black">
         ${formatPrice(prices[0].value)}
       </span>
     );

@@ -1,5 +1,12 @@
 'use client';
-import { AskQuestionIcon, CartIcon, RulerIcon } from '@/components/icons';
+import {
+  AskQuestionIcon,
+  CartIcon,
+  RaindropsIcon,
+  RingsWeddingIcon,
+  RulerIcon,
+  SunIcon,
+} from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -45,9 +52,30 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   );
 
   return (
-    <div className="flex w-full flex-col gap-4 text-gray-600">
-      <div className="">
+    <div className="flex w-full flex-col gap-4 text-gray-800">
+      <div className="-mb-2">
         <h3 className="text-2xl font-medium  text-black">{product.title}</h3>
+      </div>
+
+      <PriceBundle
+        prices={product.prices}
+        onSelectChange={handleSelectPrice}
+        selectedPrice={price}
+      />
+
+      <div className="flex items-center justify-between border-b border-gray-300 pb-4 text-[10px] font-bold text-gray-700 md:text-[12px]">
+        <div className="flex max-w-40 items-center gap-2 text-wrap">
+          <RaindropsIcon className="h-6 w-6 shrink-0" />
+          <span>Resistant to water, sweat & perfume</span>
+        </div>
+        <div className="flex max-w-40 items-center gap-2">
+          <RingsWeddingIcon className="h-6 w-6 shrink-0" />
+          <span>10x more durable</span>
+        </div>
+        <div className="flex max-w-40 items-center gap-2 lg:mr-8">
+          <SunIcon className="h-6 w-6 shrink-0" />
+          <span>Does not fade & tarnish</span>
+        </div>
       </div>
 
       <p className="text-md w-full whitespace-pre-line text-wrap break-words font-inter">
@@ -61,12 +89,6 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
           {showMoreText ? 'See less' : 'See more'}
         </span>
       </p>
-
-      <PriceBundle
-        prices={product.prices}
-        onSelectChange={handleSelectPrice}
-        selectedPrice={price}
-      />
 
       <div className="flex flex-col gap-2">
         <div className="flex w-full items-end justify-between">
