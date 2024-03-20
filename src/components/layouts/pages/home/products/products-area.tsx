@@ -85,7 +85,10 @@ export const ProductsArea = () => {
   }
 
   return (
-    <section className="my-20 flex w-full items-center justify-center md:my-28">
+    <section
+      id="products"
+      className="my-20 flex w-full items-center justify-center md:my-28"
+    >
       <div className="px-4 sm:container">
         <div className="flex w-full flex-col items-center lg:items-start">
           <span className="text-lg text-[#bd844c]">Shop by Category</span>
