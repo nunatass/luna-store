@@ -1,5 +1,5 @@
 import { CartProduct } from '@/common/types';
-import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
+import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 
 type SuccessOrderEmailProps = {
   name: string;
@@ -115,7 +115,7 @@ export const SuccessOrderEmail = ({
                       <Row align="left">
                         <Column align="left">
                           <Link
-                            href={`https://stellastone.store/products/${product?.id}`}
+                            href={`https://stellastone.store/products/${stringToId(product.title)}`}
                             aria-label="product item"
                           >
                             <Img
@@ -133,7 +133,7 @@ export const SuccessOrderEmail = ({
                           className="ml-[12px] w-full text-[10px] text-black"
                         >
                           <Button
-                            href={`https://stellastone.store/products/${product?.id}`}
+                            href={`https://stellastone.store/products/${stringToId(product.title)}`}
                             className=" w-full text-center text-base font-medium text-black"
                           >
                             {product?.title}

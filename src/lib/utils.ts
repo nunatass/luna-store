@@ -33,3 +33,11 @@ export function generateRandomColor(colors: string[]): string {
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
 }
+
+export function stringToId(input: string): string {
+  return input.toLowerCase().replace(/\s+/g, '-');
+}
+
+export function idToString(id: string): string {
+  return id.replace(/-/g, ' ');
+}

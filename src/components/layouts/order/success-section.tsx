@@ -3,7 +3,7 @@
 import { AskQuestionIcon, CartTwoIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/use-cart';
-import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
+import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -103,7 +103,10 @@ export function SuccessSection() {
         <div className="flex flex-col justify-center gap-10 divide-y">
           {productData.map((product) => (
             <div className="flex items-center gap-2 pt-8" key={product.id}>
-              <Link href={`/products/${product.id}`} aria-label="product item">
+              <Link
+                href={`/products/${stringToId(product.title)}`}
+                aria-label="product item"
+              >
                 <div className="item-center flex h-20 w-20 justify-center bg-gray-200">
                   <Image
                     src={`${imageUrlPrefix}/${product.media}`}
@@ -117,7 +120,7 @@ export function SuccessSection() {
               </Link>
               <div className="ml-2 flex flex-col gap-2">
                 <Link
-                  href={`/products/${product.id}`}
+                  href={`/products/${stringToId(product.title)}`}
                   aria-label="product item"
                   className=" text-center text-base font-medium"
                 >

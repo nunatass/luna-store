@@ -4,7 +4,12 @@ import { CartProduct } from '@/common/types';
 import { CloseTwoIcon, TrashIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useWishlist } from '@/hooks/use-whishlist';
-import { cn, formatPrice, formatPriceWithDiscount } from '@/lib/utils';
+import {
+  cn,
+  formatPrice,
+  formatPriceWithDiscount,
+  stringToId,
+} from '@/lib/utils';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -62,7 +67,10 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
       className="flex w-full items-start gap-2 py-4"
     >
       <div className="border-[1px] border-gray-200">
-        <Link href={`/products/${product.id}`} aria-label="product link">
+        <Link
+          href={`/products/${stringToId(product.title)}`}
+          aria-label="product link"
+        >
           <Image
             src={`${imageUrlPrefix}/${product.media}`}
             width={70}
@@ -75,7 +83,10 @@ export const SideWishlist = ({ setIsOpen }: SideMenuProps) => {
       </div>
       <div className="w-full">
         <h5 className="font-semibold transition-all duration-300 ease-in-out hover:text-[#be844c]">
-          <Link className="text-sm" href={`/products/${product.id}`}>
+          <Link
+            className="text-sm"
+            href={`/products/${stringToId(product.title)}`}
+          >
             {product.title}
           </Link>
         </h5>

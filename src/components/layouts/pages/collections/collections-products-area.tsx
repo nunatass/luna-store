@@ -8,6 +8,7 @@ import { useCollectionById } from '@/hooks/api/use-collections';
 import { useFilter } from '@/hooks/use-filter';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
+import { notFound } from 'next/navigation';
 import { ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { ProductsAreaLoading } from '../../loadings/pages/products/products-area-loading';
 import { ProductAreaHeader } from '../products/components/product-area-header';
@@ -73,7 +74,7 @@ export function CollectionsProductsArea({
   }
 
   if (!isPending && isError) {
-    return null;
+    return notFound();
   }
 
   const renderNotFound = () => {

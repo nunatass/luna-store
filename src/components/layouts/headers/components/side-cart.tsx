@@ -6,7 +6,12 @@ import { CloseTwoIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useOrderCheckout } from '@/hooks/api/use-orders';
 import { useCart } from '@/hooks/use-cart';
-import { cn, formatPrice, formatPriceWithDiscount } from '@/lib/utils';
+import {
+  cn,
+  formatPrice,
+  formatPriceWithDiscount,
+  stringToId,
+} from '@/lib/utils';
 import { loadStripe } from '@stripe/stripe-js';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Loader } from 'lucide-react';
@@ -90,7 +95,10 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
       className="relative flex w-full items-start gap-2 py-4"
     >
       <div className="border-[1px] border-gray-200">
-        <Link href={`/products/${product.id}`} aria-label="product link">
+        <Link
+          href={`/products/${stringToId(product.title)}`}
+          aria-label="product link"
+        >
           <Image
             src={`${imageUrlPrefix}/${product.media}`}
             width={70}
@@ -104,7 +112,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
         <h5 className="font-semibold transition-all duration-300 ease-in-out ">
           <Link
             className="text-sm"
-            href={`/products/${product.id}`}
+            href={`/products/${stringToId(product.title)}`}
             aria-label={product.title}
           >
             {product.title}

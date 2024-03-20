@@ -1,5 +1,5 @@
 import { Variant } from '@/common/types';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, stringToId } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -38,7 +38,7 @@ export const CartProductCell = ({
       </Link>
       <div className="ml-2 flex flex-col gap-2">
         <Link
-          href={`/products/${id}`}
+          href={`/products/${stringToId(title)}`}
           aria-label={title}
           className=" text-left text-base"
         >

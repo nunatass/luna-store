@@ -2,16 +2,10 @@
 import type { Product } from '@/common/types';
 import { CartIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
-import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
+import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-
-// const cartAnimationVariants = {
-//   initial: { y: 10, opacity: 0 },
-//   animate: { y: 0, opacity: 1 },
-//   exit: { y: 10, opacity: 0 },
-// };
 
 const optionsAnimationVariants = {
   initial: { x: -10, opacity: 0 },
@@ -47,16 +41,10 @@ const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const ProductItem = ({ product }: ProductSliderItemProps) => {
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
-  // const { addProduct: addWishlistProduct, products: wishListProducts } =
-  //   useWishlist();
-  // const { setIsOpen: setIsPreviewModalOpen, setChildren } = useModal();
 
   const isAddedToCart = cartProducts.some(
     (cartProduct) => cartProduct.id === product.id
   );
-  // const isAddedToWishlist = wishListProducts.some(
-  //   (wishListProduct) => wishListProduct.id === product.id
-  // );
 
   const handleAddProduct = (product: Product) => {
     addCartProduct({
@@ -69,28 +57,13 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
     });
   };
 
-  // const handleAddWishlistProduct = (product: Product) => {
-  //   addWishlistProduct({
-  //     id: product.id,
-  //     media: product.medias[0].url,
-  //     price: product.prices[0].value,
-  //     title: product.title,
-  //     orderQuantity: 1,
-  //     discount: product.prices[0].discount,
-  //   });
-  // };
-
-  // const handleOpenPreviewModal = useCallback(() => {
-  //   setChildren(<PreviewProductModal productId={product.id} />);
-  //   setIsPreviewModalOpen(true);
-  // }, [setIsPreviewModalOpen, product.id, setChildren]);
   return (
     <motion.div
       {...animationsProps}
       className="relative flex h-60 w-40 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]"
     >
       <Link
-        href={`/products/${product.id}`}
+        href={`/products/${stringToId(product.title)}`}
         aria-label="product item"
         className=" group relative h-[70%] w-full sm:h-[80%]"
       >
@@ -99,16 +72,12 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           alt="product img"
           className="w-full object-cover transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
           fill
-          // width={284}
-          // height={352}
           priority
         />
         <Image
           src={`${imageUrlPrefix}/${product.medias[0].url}`}
           alt="product img"
           className="absolute left-0  top-0 w-full scale-95  object-cover opacity-0 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100"
-          // width={284}
-          // height={352}
           fill
           priority
         />
@@ -123,7 +92,6 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           {isAddedToCart ? (
             <motion.button {...animationsProps}>
               <Link
-                // onClick={() => redirect('/cart')}
                 href="/cart"
                 aria-label="cart"
                 className="flex cursor-pointer items-center gap-2"
@@ -170,47 +138,6 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
             </motion.button>
           )}
         </AnimatePresence>
-        {/* <motion.button
-            type="button"
-            {...animationsProps}
-            onClick={handleOpenPreviewModal}
-            className="hidden items-center gap-2 text-white md:flex"
-          >
-            <motion.div
-              {...optionHoverAnimation}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black shadow-sm md:flex md:h-11 md:w-11"
-            >
-              <QuickViewIcon />
-            </motion.div>
-            <motion.div
-              variants={tooltipAnimationVariants}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
-            >
-              Quick View
-            </motion.div>
-          </motion.button> */}
-        {/* <motion.button
-            type="button"
-            {...animationsProps}
-            onClick={() => handleAddWishlistProduct(product)}
-            className="flex items-center gap-2"
-          >
-            <motion.div
-              {...optionHoverAnimation}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm md:flex md:h-11 md:w-11"
-            >
-              <WishlistIcon />
-            </motion.div>
-
-            <motion.div
-              variants={tooltipAnimationVariants}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
-            >
-              {isAddedToWishlist ? 'Added to Wishlist' : 'Add To Wishlist'}
-            </motion.div>
-          </motion.button> */}
       </motion.div>
 
       <div className="z-10 flex h-[30%] flex-col gap-1 bg-white px-2 py-4 font-medium sm:h-[20%]">
@@ -218,7 +145,6 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           <span
             className="line-clamp-1 text-xs sm:text-sm"
             aria-label={product.title}
-            // href={`/products/${product.id}`}
           >
             {product.title}
           </span>
@@ -241,27 +167,6 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
               </span>
             )}
           </div>
-          {/* <motion.div
-              variants={cartAnimationVariants}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="absolute bottom-4 left-0 flex w-full items-center justify-end  px-2 py-1  text-xs sm:text-base"
-            >
-              {isAddedToCart ? (
-                <Link
-                  href="/cart"
-                  className="flex items-center gap-2 bg-white text-sm"
-                >
-                  <CartIcon /> View Cart
-                </Link>
-              ) : (
-                <button
-                  onClick={() => handleAddProduct(product)}
-                  className="flex items-center gap-2 bg-white text-sm"
-                >
-                  <CartIcon /> Add to Cart
-                </button>
-              )}
-            </motion.div> */}
         </div>
       </div>
       {product.prices[0].discount > 0 && (

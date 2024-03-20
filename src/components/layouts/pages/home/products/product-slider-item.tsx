@@ -2,16 +2,10 @@
 import type { Product } from '@/common/types';
 import { CartIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
-// import { useWishlist } from '@/hooks/use-whishlist';
-import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
+import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-// const cartAnimationVariants = {
-//   initial: { y: 10, opacity: 0 },
-//   animate: { y: 0, opacity: 1 },
-//   exit: { y: 10, opacity: 0 },
-// };
 
 const optionsAnimationVariants = {
   initial: { x: -10, opacity: 0 },
@@ -47,10 +41,7 @@ type ProductSliderItemProps = {
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
-  // const { setIsOpen: setIsPreviewModalOpen, setChildren } = useModal();
-
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
-  // const { addProduct: addWishlistProduct } = useWishlist();
 
   const isAddedToCart = cartProducts.some(
     (cardProduct) => cardProduct.id === product.id
@@ -67,21 +58,6 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
     });
   };
 
-  // const handleWishlistProduct = (product: Product) => {
-  //   addWishlistProduct({
-  //     id: product.id,
-  //     media: product.medias[0].url,
-  //     price: product.prices[0].value,
-  //     title: product.title,
-  //     orderQuantity: 1,
-  //     discount: product.prices[0].discount,
-  //   });
-  // };
-
-  // const handleOpenPreviewModal = useCallback(() => {
-  //   setChildren(<PreviewProductModal productId={product.id} />);
-  //   setIsPreviewModalOpen(true);
-  // }, [setIsPreviewModalOpen, product.id, setChildren]);
   return (
     <>
       <motion.div
@@ -90,7 +66,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
       >
         <Link
           className="relative h-full w-full"
-          href={`/products/${product.id}`}
+          href={`/products/${stringToId(product.title)}`}
           aria-label="product-item"
         >
           <div className="group relative h-full overflow-hidden">
@@ -207,7 +183,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
           <h3 className="text-left transition-all duration-300 ease-in-out">
             <Link
               className="text-sm"
-              href={`/products/${product.id}`}
+              href={`/products/${stringToId(product.title)}`}
               aria-label={product.title}
             >
               {product.title}
@@ -231,27 +207,6 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
                 </span>
               )}
             </div>
-            {/* <motion.div
-              variants={cartAnimationVariants}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="absolute bottom-2 left-0 flex w-full items-center justify-end  px-2 py-1"
-            >
-              {isAddedToCart ? (
-                <Link
-                  href="/cart"
-                  className="flex items-center gap-2 bg-white text-sm"
-                >
-                  <CartIcon /> View Cart
-                </Link>
-              ) : (
-                <button
-                  onClick={() => handleAddProduct(product)}
-                  className="flex items-center gap-2 bg-white text-sm"
-                >
-                  <CartIcon /> Add to Cart
-                </button>
-              )}
-            </motion.div> */}
           </div>
         </div>
         {product.prices[0].discount > 0 && (

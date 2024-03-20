@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 import { CartProduct } from '@/common/types';
 import { CloseTwoIcon } from '@/components/icons';
-import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
+import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { ProductQuantity } from '../products/product-details/product-quantity';
 import { CartCheckout } from './components/cart-checkout';
 import { columns } from './components/cart-table/columns';
@@ -50,7 +50,10 @@ export const CartArea = () => {
       className="relative flex w-full items-start gap-2 py-4"
     >
       <div className="border-[1px] border-gray-200">
-        <Link href={`/products/${product.id}`} aria-label="product link">
+        <Link
+          href={`/products/${stringToId(product.title)}`}
+          aria-label="product link"
+        >
           <Image
             src={`${imageUrlPrefix}/${product.media}`}
             width={70}
@@ -64,7 +67,7 @@ export const CartArea = () => {
         <h2 className="font-semibold transition-all duration-300 ease-in-out ">
           <Link
             className="text-sm"
-            href={`/products/${product.id}`}
+            href={`/products/${stringToId(product.title)}`}
             aria-label={product.title}
           >
             {product.title}

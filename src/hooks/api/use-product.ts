@@ -15,6 +15,7 @@ export const keys = {
   bySearchTerm: (searchTerm: string) => [...keys.all, 'searchTerm', searchTerm],
   byCategory: (category: string) => [...keys.all, 'category', category],
   byId: (id: string) => [...keys.all, 'byId', id],
+  byTitle: (title: string) => [...keys.all, 'byTitle', title],
 };
 
 type CreateProductRequest = {
@@ -107,6 +108,23 @@ export function useProductById(id: string) {
     queryKey: keys.byId(id),
     queryFn: async () => {
       const res = await API.get(`${BASE_PATH}/${id}`);
+      return res.data;
+    },
+  });
+}
+
+export function useProductByTitle(title: string) {
+  return useQuery<Product>({
+    queryKey: keys.byTitle(title),
+    queryFn: async () => {
+      const res = await API.get(
+        `${BASE_PATH}/8966586c-6d2e-4910-9855-29c34d77efb1`,
+        {
+          params: {
+            title,
+          },
+        }
+      );
       return res.data;
     },
   });

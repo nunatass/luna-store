@@ -5,22 +5,29 @@ import { ProductDetailsAreaLoading } from '@/components/layouts/loadings/pages/p
 import { ProductDetailsArea } from '@/components/layouts/pages/products/product-details/product-details-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
-import { useProductById } from '@/hooks/api/use-product';
+import { useProductByTitle } from '@/hooks/api/use-product';
+import { idToString } from '@/lib/utils';
+import { notFound } from 'next/navigation';
 
 type ProductPageProps = {
   params: { id: string };
 };
 
 export default function ProductPage({ params }: ProductPageProps) {
-  const { data: product, isPending, isError } = useProductById(params.id);
+  const {
+    data: product,
+    isPending,
+    isError,
+  } = useProductByTitle(idToString(params.id));
 
   let content = null;
 
   if (isPending) {
     content = <ProductDetailsAreaLoading />;
   }
+
   if (!isPending && isError) {
-    return null;
+    return notFound();
   }
   if (!isPending && !isError && product) {
     content = <ProductDetailsArea productItem={product} />;

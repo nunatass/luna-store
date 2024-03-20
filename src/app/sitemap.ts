@@ -1,5 +1,6 @@
 import { Collection, Product } from '@/common/types';
 import { API } from '@/lib/axios';
+import { stringToId } from '@/lib/utils';
 
 export default async function sitemap() {
   const productsResponse = await API.get(
@@ -18,7 +19,7 @@ export default async function sitemap() {
 
   const products = productsResponse.data.data.map((product: Product) => {
     return {
-      url: `https://www.stellastone.store/products/${product.id}`,
+      url: `https://www.stellastone.store/products/${stringToId(product.title)}`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,

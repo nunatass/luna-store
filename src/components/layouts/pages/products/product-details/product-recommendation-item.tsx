@@ -2,7 +2,7 @@
 import type { Product } from '@/common/types';
 import { CartIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
-import { formatPrice, formatPriceWithDiscount } from '@/lib/utils';
+import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -68,7 +68,7 @@ export const ProductRecommendationItem = ({
       >
         <Link
           className="group relative h-full w-full transition-all duration-300 ease-in-out"
-          href={`/products/${product.id}`}
+          href={`/products/${stringToId(product.title)}`}
           aria-label="product-item"
         >
           <Image
@@ -142,7 +142,7 @@ export const ProductRecommendationItem = ({
           <h3 className="text-left transition-all duration-300 ease-in-out">
             <Link
               className="text-sm"
-              href={`/products/${product.id}`}
+              href={`/products/${stringToId(product.title)}`}
               aria-label={product.title}
             >
               {product.title}

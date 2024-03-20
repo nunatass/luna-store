@@ -8,7 +8,6 @@ import logoLight from '@/assets/img/logo/logo.webp';
 import { CartTwoIcon, MenuIcon, SearchIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
 import { useSticky } from '@/hooks/use-sticky';
-// import { useWishlist } from '@/hooks/use-whishlist';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -32,9 +31,7 @@ export const Header = ({ secondary }: HeaderProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isSideCartOpen, setIsSideCartOpen] = useState(false);
-  // const [isSideWishlistOpen, setIsSideWishlistOpen] = useState(false);
   const { getTotal } = useCart();
-  // const { products } = useWishlist();
   const { sticky } = useSticky();
   const { quantity } = getTotal();
 
@@ -92,27 +89,6 @@ export const Header = ({ secondary }: HeaderProps) => {
                     <SearchIcon />
                   </button>
                 </div>
-                {/* <div className="relative">
-                  <button
-                    aria-label="wishlist"
-                    className="h-12 w-12 bg-transparent lg:h-8 lg:w-8"
-                    onClick={() => setIsSideWishlistOpen(true)}
-                  >
-                    <WishlistIcon aria-label="wishlist icon" />
-                    <motion.div
-                      variants={quantityAnimationVariants}
-                      transition={{ duration: 0.4, ease: 'easeInOut' }}
-                      animate={products.length ? 'show' : 'hide'}
-                      initial="hide"
-                      className={cn(
-                        'absolute  right-[20px] top-0 flex h-6  w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-black lg:-right-[5px] lg:top-[-5px]',
-                        (sticky || secondary) && 'bg-[#bd844c] text-white'
-                      )}
-                    >
-                      {products.length}
-                    </motion.div>
-                  </button>
-                </div> */}
                 <div className="relative">
                   <button
                     onClick={() => setIsSideCartOpen(true)}
@@ -162,16 +138,6 @@ export const Header = ({ secondary }: HeaderProps) => {
         <SidePanel isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen}>
           <SideMenu isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen} />
         </SidePanel>
-
-        {/* <SidePanel
-          isOpen={isSideWishlistOpen}
-          setIsOpen={setIsSideWishlistOpen}
-        >
-          <SideWishlist
-            isOpen={isSideWishlistOpen}
-            setIsOpen={setIsSideWishlistOpen}
-          />
-        </SidePanel> */}
       </div>
     </>
   );
