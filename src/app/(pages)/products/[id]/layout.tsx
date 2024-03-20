@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       }
     );
     return {
+      metadataBase: new URL('https://www.stellastone.store'),
       title: `${res.data?.title} | Stella Stone`,
       description: res.data?.description,
       openGraph: {

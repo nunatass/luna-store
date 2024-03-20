@@ -30,19 +30,31 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   const [showMoreText, setShowMoreText] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [price, setPrice] = useState<Price>(product.prices[0]);
-  const [variant, setVariant] = useState<Variant>(product.variants[0]);
+  const [variant, setVariant] = useState<Variant | null>(null);
+  const [showVariantDisclaimer, setShowVariantDisclaimer] = useState(false);
 
   const handleAddProduct = useCallback(() => {
-    addCartProduct({
-      id: product.id,
-      discount: price.discount,
-      price: price.value,
-      media: product.medias[0].url,
-      title: product.title,
-      orderQuantity: quantity,
-      variant,
-    });
-  }, [quantity, product, addCartProduct, price, variant]);
+    if (variant) {
+      addCartProduct({
+        id: product.id,
+        discount: price.discount,
+        price: price.value,
+        media: product.medias[0].url,
+        title: product.title,
+        orderQuantity: quantity,
+        variant,
+      });
+    } else {
+      setShowVariantDisclaimer(true);
+    }
+  }, [
+    quantity,
+    product,
+    addCartProduct,
+    price,
+    variant,
+    setShowVariantDisclaimer,
+  ]);
 
   const handleSelectPrice = useCallback(
     (price: Price) => {
@@ -109,8 +121,12 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
           <ProductQuantity setQuantity={setQuantity} quantity={quantity} />
           {product?.variants.length > 0 && (
             <ProductVariantSelect
-              onSelectChange={(value) => setVariant(value)}
+              onSelectChange={(value) => {
+                setVariant(value);
+                setShowVariantDisclaimer(false);
+              }}
               variants={product?.variants}
+              showSelectError={showVariantDisclaimer}
             />
           )}
           {product?.variants.length === 0 && (

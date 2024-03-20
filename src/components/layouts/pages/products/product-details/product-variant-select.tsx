@@ -8,36 +8,50 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
 type ProductVariantSelectProps = {
   variants: Variant[];
   onSelectChange: (value: Variant) => void;
+  showSelectError?: boolean;
+  ErrorMessage?: boolean;
 };
 
 export function ProductVariantSelect({
   variants,
   onSelectChange,
+  showSelectError,
+  ErrorMessage,
 }: ProductVariantSelectProps) {
   return (
-    <Select
-      onValueChange={(value) => {
-        const variant = variants?.find((v) => v.id === value);
-        onSelectChange(variant!);
-      }}
-    >
-      <SelectTrigger className="w-full">
-        <SelectValue className="text-black" placeholder="Select Size" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Sizes</SelectLabel>
-          {variants?.map((variant) => (
-            <SelectItem key={variant.id} value={variant.id}>
-              {variant.label}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div className="flex w-full flex-col gap-2">
+      <Select
+        onValueChange={(value) => {
+          const variant = variants?.find((v) => v.id === value);
+          onSelectChange(variant!);
+        }}
+      >
+        <SelectTrigger
+          className={cn('w-full', showSelectError && 'border-red-500')}
+        >
+          <SelectValue className="text-black" placeholder="Select Size" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Sizes</SelectLabel>
+            {variants?.map((variant) => (
+              <SelectItem key={variant.id} value={variant.id}>
+                {variant.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+      {showSelectError && (
+        <span className="text-sm text-red-500">
+          {ErrorMessage ?? 'Please select this field first'}
+        </span>
+      )}
+    </div>
   );
 }

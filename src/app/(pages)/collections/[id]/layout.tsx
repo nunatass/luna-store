@@ -15,6 +15,7 @@ export async function generateMetadata(
     const previousImages = (await parent).openGraph?.images || [];
 
     return {
+      metadataBase: new URL('https://www.stellastone.store'),
       title: `${res.data?.title} | Stella Stone`,
       description:
         'Elevate your style with our stunning jewelry collection. Discover elegance and sophistication in every piece.',
