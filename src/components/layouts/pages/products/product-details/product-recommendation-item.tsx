@@ -64,7 +64,7 @@ export const ProductRecommendationItem = ({
     <>
       <motion.div
         {...animationsProps}
-        className="relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-[#f6f6f6] text-center sm:w-80"
+        className="relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-[#f2f2f2] text-center sm:w-80"
       >
         <Link
           className="group relative h-full w-full transition-all duration-300 ease-in-out"

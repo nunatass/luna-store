@@ -60,7 +60,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
   return (
     <motion.div
       {...animationsProps}
-      className="relative flex h-60 w-40 flex-col overflow-hidden bg-[#f6f6f6] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]"
+      className="relative flex h-60 w-40 flex-col overflow-hidden bg-[#f2f2f2] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]"
     >
       <Link
         href={`/products/${stringToId(product.title)}`}
