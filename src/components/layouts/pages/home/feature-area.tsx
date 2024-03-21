@@ -5,7 +5,7 @@ export const feature_data = [
   {
     icon: <DeliveryIcon className="h-6 w-6" />,
     title: 'Fast Delivery',
-    subtitle: '2 - 3 days after purchase',
+    subtitle: 'Sent 2-3 days after purchase',
   },
   {
     icon: <RefundIcon className="h-6 w-6" />,
@@ -33,12 +33,14 @@ export const FeatureArea = () => {
             key={item.title}
             className="flex w-max flex-col items-center gap-2 text-center sm:flex-row sm:items-start sm:text-left md:px-2 lg:px-6"
           >
-            <span className="my-auto text-[#bd844c] ">{item.icon}</span>
+            <span className="my-auto">{item.icon}</span>
             <div className="text-sm text-gray-500">
               <h3 className="text-base font-medium text-gray-900">
                 {item.title}
               </h3>
-              <p>{item.subtitle}</p>
+              <p className="max-w-32 sm:max-w-36 lg:max-w-56">
+                {item.subtitle}
+              </p>
             </div>
           </div>
         ))}
