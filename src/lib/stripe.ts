@@ -5,11 +5,13 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   typescript: true,
 });
 
+const freeShippingThreshold =
+  Number(process.env.NEXT_PUBLIC_SHIPPING_THRESHOLD) || 6000;
+
 export const determineShippingOptions = (
   totalAmount: number,
   shippingMethod: 'fast' | 'standard' | 'free'
 ) => {
-  const freeShippingThreshold = 9900;
   if (totalAmount >= freeShippingThreshold) {
     return [
       {

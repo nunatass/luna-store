@@ -1,10 +1,8 @@
-// 'use client';
-
 import { cn } from '@/lib/utils';
-// import { usePathname } from 'next/navigation';
+const freeShippingThreshold =
+  Number(process.env.NEXT_PUBLIC_SHIPPING_THRESHOLD) || 6000;
 
 export const DiscountBanner = () => {
-  // const pathname = usePathname();
   return (
     <div
       className={cn(
@@ -18,7 +16,7 @@ export const DiscountBanner = () => {
       >
         <li />
         <li className="shrink-0 whitespace-nowrap">
-          Free stander delivery on purchases of +$99
+          {`Free stander delivery on purchases of +$${freeShippingThreshold/100}`}
         </li>
       </ul>
     </div>

@@ -24,10 +24,12 @@ type DetailsWrapperProps = {
   product: Product;
 };
 
+const freeShippingThreshold =
+  Number(process.env.NEXT_PUBLIC_SHIPPING_THRESHOLD) || 6000;
+
 export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   const { addProduct: addCartProduct } = useCart();
 
-  const [showMoreText, setShowMoreText] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [price, setPrice] = useState<Price>(product.prices[0]);
   const [variant, setVariant] = useState<Variant | undefined>(undefined);
@@ -78,7 +80,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         selectedPrice={price}
       />
 
-      <div className="flex items-center justify-between border-b border-gray-300 pb-4 text-[10px] font-bold text-gray-700 md:text-[12px]">
+      <div className="flex items-center justify-between border-b border-gray-200 pb-4 text-[10px] font-bold text-gray-700 md:text-[12px]">
         <div className="flex max-w-40 items-center gap-2 text-wrap">
           <RaindropsIcon className="h-6 w-6 shrink-0" />
           <span>Resistant to water, sweat & perfume</span>
@@ -93,19 +95,11 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         </div>
       </div>
 
-      <p className="text-md w-full whitespace-pre-line text-wrap break-words font-inter">
-        {showMoreText
-          ? product.description
-          : `${product.description.substring(0, 100)}...`}
-        <span
-          className="ml-2 cursor-pointer text-black"
-          onClick={() => setShowMoreText(!showMoreText)}
-        >
-          {showMoreText ? 'See less' : 'See more'}
-        </span>
+      <p className="w-full whitespace-pre-line text-wrap break-words font-inter text-sm">
+        product.description
       </p>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 border-t border-gray-200 pt-2">
         <div className="flex w-full items-end justify-between">
           <h3 className="text-base text-black">Quantity</h3>
           {product?.variants.length > 0 && (
@@ -156,7 +150,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
       </div>
 
       <div className="flex border-b-[1px] pb-2">
-        <Button variant="ghost" type="button" asChild>
+        <Button variant="ghost" type="button" asChild className="text-sm">
           <Link href="/contact" className="flex gap-2" aria-label="contact">
             <AskQuestionIcon />
             Ask a question
@@ -165,12 +159,12 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
       </div>
 
       <div className="">
-        <div className="flex items-center gap-2 ">
+        <div className="flex items-center gap-2 text-sm">
           <CheckCircle className="h-4 w-4 text-gray-400" /> 30 days easy returns
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 text-sm">
           <CheckCircle className="h-4 w-4 text-gray-400" />
-          Order yours before 2.30pm for same day dispatch
+          {`Free stander delivery on purchases of +$${freeShippingThreshold/100}`}
         </div>
       </div>
 
