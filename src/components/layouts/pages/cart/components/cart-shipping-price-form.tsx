@@ -141,8 +141,11 @@ export function CartShippingPriceForm() {
                             <RadioGroupItem
                               value={method}
                               disabled={
-                                method === 'free' &&
-                                totalWithDiscount < freeShippingTrashHolder
+                                (method === 'free' &&
+                                  totalWithDiscount <
+                                    freeShippingTrashHolder) ||
+                                (method === 'standard' &&
+                                  totalWithDiscount > freeShippingTrashHolder)
                               }
                             />
                           </FormControl>
