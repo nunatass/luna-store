@@ -17,10 +17,18 @@ import { formatPrice } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loadStripe } from '@stripe/stripe-js';
 import { Loader } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
+
+const freeShippingTrashHolder =
+  Number(process.env.NEXT_PUBLIC_SHIPPING_THRESHOLD) || 6000;
+
+const standardShippingPrice =
+  Number(process.env.NEXT_PUBLIC_SHIPPING_STANDARD) || 299;
+
+const fastShippingPrice = Number(process.env.NEXT_PUBLIC_SHIPPING_FAST) || 499;
 
 type ShippingMethods = {
   [key: string]: {
@@ -39,12 +47,12 @@ const shippingMethods: ShippingMethods = {
   standard: {
     id: 'standard',
     label: 'Standard shipping',
-    value: 299,
+    value: standardShippingPrice,
   },
   fast: {
     id: 'fast',
     label: 'Fast shipping',
-    value: 500,
+    value: fastShippingPrice,
   },
 };
 
@@ -54,10 +62,9 @@ const FormSchema = z.object({
 
 export function CartShippingPriceForm() {
   const { getTotal, products } = useCart();
+  const [method, setMethod] = useState('standard');
   const { total, totalWithDiscount } = getTotal();
   const { mutate: handleOrderCheckout, isPending } = useOrderCheckout();
-
-  const freeShippingTrashHolder = 9900;
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -68,12 +75,13 @@ export function CartShippingPriceForm() {
   });
 
   useEffect(() => {
-    const method =
+    const selectedMethod =
       totalWithDiscount > freeShippingTrashHolder ? 'free' : 'standard';
-    if (form.getValues().shippingMethod !== 'fast') {
-      form.setValue('shippingMethod', method);
+    if (method !== 'fast') {
+      setMethod(selectedMethod);
+      form.setValue('shippingMethod', selectedMethod);
     }
-  }, [form, totalWithDiscount]);
+  }, [setMethod, totalWithDiscount, method, form]);
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const stripe = await loadStripe(
@@ -113,7 +121,10 @@ export function CartShippingPriceForm() {
               <FormLabel>Shipping</FormLabel>
               <FormControl>
                 <RadioGroup
-                  onValueChange={field.onChange}
+                  onValueChange={(value) => {
+                    setMethod(value);
+                    field.onChange(value);
+                  }}
                   defaultValue={field.value}
                   value={form.getValues().shippingMethod}
                   className="flex flex-col space-y-1"
@@ -159,22 +170,21 @@ export function CartShippingPriceForm() {
                 $
                 {formatPrice(
                   totalWithDiscount +
-                    shippingMethods[form.getValues('shippingMethod')].value
+                    shippingMethods[form.getValues().shippingMethod].value
                 )}
               </span>
               {formatPrice(
                 totalWithDiscount +
-                  shippingMethods[form.getValues('shippingMethod')].value
+                  shippingMethods[form.getValues().shippingMethod].value
               ) !==
                 formatPrice(
-                  total +
-                    shippingMethods[form.getValues('shippingMethod')].value
+                  total + shippingMethods[form.getValues().shippingMethod].value
                 ) && (
                 <span className="text-sm font-normal line-through">
                   $
                   {formatPrice(
                     total +
-                      shippingMethods[form.getValues('shippingMethod')].value
+                      shippingMethods[form.getValues().shippingMethod].value
                   )}
                 </span>
               )}
