@@ -88,7 +88,7 @@ export function useMenuData() {
                   title: 'All Products',
                   link: `/products`,
                 },
-                ...categories?.slice(0, 4).map((category: Category) => ({
+                ...(categories ?? []).slice(0, 4).map((category: Category) => ({
                   title: category.name,
                   link: `/products?category=${category.name.toLocaleLowerCase()}`,
                 })),
