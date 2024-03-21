@@ -5,7 +5,7 @@ export function PopularProductsLoading() {
     <div className="flex gap-8">
       {Array.from({ length: 8 }, (_, i) => (
         <Skeleton
-          className="rounded-nonesm:w-80 h-96 w-full min-w-72"
+          className="h-96 w-full min-w-72 rounded-none sm:w-80"
           key={i}
         />
       ))}

@@ -1,28 +1,24 @@
-import {
-  DeliveryIcon,
-  DiscountIcon,
-  RefundIcon,
-  SupportIcon,
-} from '@/components/icons';
+import { DeliveryIcon, RefundIcon } from '@/components/icons';
+import { Globe, HeadphonesIcon } from 'lucide-react';
 
 export const feature_data = [
   {
-    icon: <DeliveryIcon />,
-    title: 'Free Delivery',
-    subtitle: 'Orders from all item',
+    icon: <DeliveryIcon className="h-6 w-6" />,
+    title: 'Fast Delivery',
+    subtitle: '2 - 3 days after purchase',
   },
   {
-    icon: <RefundIcon />,
+    icon: <RefundIcon className="h-6 w-6" />,
     title: 'Return & Refund',
     subtitle: 'Money back guarantee',
   },
   {
-    icon: <DiscountIcon />,
-    title: 'Member Discount',
-    subtitle: 'One every order over $140',
+    icon: <Globe className="h-6 w-6 stroke-[1.5px] text-black" />,
+    title: 'International',
+    subtitle: 'We ship all over the world',
   },
   {
-    icon: <SupportIcon />,
+    icon: <HeadphonesIcon className="h-6 w-6 stroke-[1.5px] text-black" />,
     title: 'Support 24/7',
     subtitle: 'Contact us 24 hours a day',
   },
@@ -31,7 +27,7 @@ export const feature_data = [
 export const FeatureArea = () => {
   return (
     <section className="container">
-      <div className="grid grid-cols-2 place-items-center gap-4 pt-8 md:grid-cols-4 md:divide-x-2">
+      <div className="grid grid-cols-2 place-items-center gap-4 pt-12 md:grid-cols-4 md:divide-x-2">
         {feature_data.map((item) => (
           <div
             key={item.title}

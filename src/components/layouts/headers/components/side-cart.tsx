@@ -1,6 +1,5 @@
 'use client';
 
-import emptyCartImg from '@/assets/img/side-cart/empty-cart.png';
 import { CartProduct } from '@/common/types';
 import { CloseTwoIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
@@ -210,7 +209,6 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
                 transition={{ duration: 0.6, ease: 'easeInOut' }}
                 className="-mt-56 flex h-full w-full flex-col items-center justify-center gap-2"
               >
-                <Image src={emptyCartImg} alt="empty-cart-img" priority />
                 <p className="text-base font-normal">Your Cart is empty</p>
                 {pathname !== '/products' && (
                   <Button
