@@ -16,7 +16,7 @@ export const DiscountBanner = () => {
       >
         <li />
         <li className="shrink-0 whitespace-nowrap">
-          {`Free stander delivery on purchases of +$${freeShippingThreshold/100}`}
+          {`Free stander delivery on purchases of +$${freeShippingThreshold / 100}`}
         </li>
       </ul>
     </div>

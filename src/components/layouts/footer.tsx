@@ -51,14 +51,15 @@ export const Footer = () => {
             <h4 className="text-xl font-medium">Subscribe.</h4>
             <div className="flex flex-col gap-2">
               <p className="text-sm text-gray-600">
-                🌟 COMING SOON! 🌟Sign up for 10% OFF your first order. Plus,
-                get exclusive early access to amazing sales, special discounts
-                and the chance to win free jewelry!
+                <span className="font-medium">COMING SOON!</span> Sign up for
+                10% OFF your first order. Plus, get exclusive early access to
+                amazing sales, special discounts and the chance to win free
+                jewelry!
               </p>
             </div>
 
             <div className="flex flex-col gap-2">
-              <h4 className="font-base font-medium">Follow Us On</h4>
+              <h4 className="font-base font-medium">Follow Us On:</h4>
               <div className="flex gap-2">
                 {socialData.map(({ link, id, icon: Icon }) => (
                   <a href={link} key={id} target="_blank" aria-label={link}>
