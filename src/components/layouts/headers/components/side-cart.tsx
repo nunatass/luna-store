@@ -241,6 +241,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
             className="flex w-full items-center"
             size="lg"
             onClick={handleCloseSideCart}
+            disabled={products.length === 0}
           >
             <Link href="/cart" aria-label="cart">
               View cart
@@ -251,6 +252,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
             variant="outline"
             className="flex w-full items-center gap-4"
             onClick={handleCheckout}
+            disabled={products.length === 0}
           >
             Checkout
             {isPending && <Loader className="h-5 w-5 animate-spin" />}

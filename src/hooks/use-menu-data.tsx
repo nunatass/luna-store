@@ -2,8 +2,8 @@ import { Category, Collection } from '@/common/types';
 import {
   CartIcon,
   CartTwoIcon,
-  EmailIcon,
   CollectionIcon,
+  EmailIcon,
 } from '@/components/icons';
 import { TruckIcon } from 'lucide-react';
 import { ReactNode, useCallback, useMemo } from 'react';
@@ -71,15 +71,15 @@ export function useMenuData() {
     }
   }, [collections, isCollectionsPending]);
 
-  const productMenuData = useCallback(
+  const jewelryMenuData = useCallback(
     () => ({
-      id: 2,
+      id: 1,
       products: true,
-      title: 'Products',
-      link: '/products',
+      title: 'Jewelry',
+      link: '/',
       productPages: [
         {
-          title: 'Category',
+          title: 'Categories',
           link: '/products',
           megaMenus: isCategoriesPending
             ? [{ title: 'loading...', link: '' }]
@@ -93,6 +93,18 @@ export function useMenuData() {
           link: '/',
           megaMenus: [{ title: '30% Off', link: '/discounts' }],
         },
+      ],
+    }),
+    [categories, isCategoriesPending]
+  );
+
+  const collectionsMenuData = useCallback(
+    () => ({
+      id: 2,
+      products: true,
+      title: 'Collections',
+      link: '#',
+      productPages: [
         {
           title: 'Collections',
           link: '/',
@@ -105,18 +117,12 @@ export function useMenuData() {
         },
       ],
     }),
-    [categories, collections, isCollectionsPending, isCategoriesPending]
+    [collections, isCollectionsPending]
   );
 
   const menuData: MenuItem[] = [
-    {
-      id: 1,
-      homes: true,
-      title: 'Home',
-      link: '/',
-      homePages: [],
-    },
-    productMenuData(),
+    jewelryMenuData(),
+    collectionsMenuData(),
     {
       id: 6,
       isSingleLink: true,
@@ -126,13 +132,6 @@ export function useMenuData() {
   ];
 
   const mobileMenuData: MenuItem[] = [
-    {
-      id: 1,
-      homes: true,
-      title: 'Home',
-      link: '/',
-      homePages: [],
-    },
     {
       id: 2,
       hasSubMenu: true,

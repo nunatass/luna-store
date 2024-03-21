@@ -1,44 +1,18 @@
-import { instagramMenuData } from '@/data/instagram-data';
-
 import Link from 'next/link';
 
-import { HomeIcon } from '@/components/icons';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { InstagramImageCard } from '@/components/ui/instagram-image-card';
 import { MenuItem, useMenuData } from '@/hooks/use-menu-data';
 
 export const MobileMenus = () => {
   const { mobileMenuData } = useMenuData();
 
   const renderMenu = (menu: MenuItem) => {
-    if (menu?.homes) {
-      return (
-        <Accordion type="single" collapsible className="h-full w-full px-4">
-          <AccordionItem value="item-1" className="border-0">
-            <AccordionTrigger className="font-normal hover:text-[#be844c]">
-              <div className="flex gap-2">
-                <HomeIcon />
-                Home
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="grid w-full grid-cols-2 gap-2">
-              {instagramMenuData.map((item) => (
-                <InstagramImageCard
-                  key={item.id}
-                  link={item.link}
-                  image={item.img}
-                />
-              ))}
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      );
-    } else if (menu?.hasSubMenu) {
+    if (menu?.hasSubMenu) {
       return (
         <Accordion type="single" collapsible className="h-full w-full px-4">
           <AccordionItem
