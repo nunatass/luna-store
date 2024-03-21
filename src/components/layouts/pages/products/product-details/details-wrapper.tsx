@@ -30,11 +30,14 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   const [showMoreText, setShowMoreText] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [price, setPrice] = useState<Price>(product.prices[0]);
-  const [variant, setVariant] = useState<Variant | null>(null);
+  const [variant, setVariant] = useState<Variant | undefined>(undefined);
   const [showVariantDisclaimer, setShowVariantDisclaimer] = useState(false);
 
   const handleAddProduct = useCallback(() => {
-    if (variant) {
+    if (
+      (product?.variants.length > 0 && variant) ||
+      product?.variants.length === 0
+    ) {
       addCartProduct({
         id: product.id,
         discount: price.discount,

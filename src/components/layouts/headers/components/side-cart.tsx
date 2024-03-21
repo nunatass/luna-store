@@ -92,7 +92,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const renderProductItem = (product: CartProduct) => (
     <motion.div
       {...itemProductAnimationProps}
-      className="relative flex w-full items-start gap-2 py-4"
+      className="relative z-40 flex w-full items-start gap-2 bg-white py-4"
     >
       <div className="border-[1px] border-gray-200">
         <Link
@@ -177,7 +177,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
           <Button
             onClick={handleCloseSideCart}
             aria-label="button close cart"
-            className="z-50 flex h-12 w-12  items-center justify-center bg-gray-200 text-black md:h-8 md:w-8 md:hover:bg-gray-200"
+            className="z-30 flex h-12 w-12  items-center justify-center bg-gray-200 text-black md:h-8 md:w-8 md:hover:bg-gray-200"
           >
             <div className="transition-all duration-300 ease-in-out md:hover:rotate-90">
               <CloseTwoIcon aria-label="close icon" />
@@ -191,7 +191,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
           )}
         >
           {products.length > 0 && (
-            <div className="flex w-full flex-col divide-y-[1px] pb-72 pt-16 sm:pb-56">
+            <div className="bg-30 flex w-full flex-col divide-y-[1px] bg-white pb-72 pt-16 sm:pb-56">
               {products.map((product, index) => (
                 <div key={product.id}>
                   {index === products.length
