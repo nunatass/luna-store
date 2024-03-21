@@ -67,7 +67,7 @@ export const PopularProducts = () => {
       className="my-14 flex w-full flex-col gap-12 bg-gray-50 py-28"
     >
       <div className="flex flex-col gap-2 text-center">
-        <span className="text-[#bd844c]">Product Collection</span>
+        <span className="text-lg text-[#bd844c]">Product Collection</span>
         <h3 className="text-3xl font-medium sm:text-5xl">
           Popular on the Stella Stone.
         </h3>
