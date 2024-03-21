@@ -4,8 +4,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
@@ -36,7 +34,7 @@ export const ProductRecommendations = ({
           onMouseLeave={carouselPlugin.current.reset}
           className="w-full"
         >
-          <CarouselContent className="mr-4 w-full md:mx-6">
+          <CarouselContent className="w-full">
             {recommendations.map((product) => (
               <CarouselItem key={product.id} className="basis-auto pr-1">
                 <ProductRecommendationItem
@@ -52,8 +50,8 @@ export const ProductRecommendations = ({
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden h-12 w-12 md:flex" />
-          <CarouselNext className="hidden h-12 w-12 md:flex" />
+          {/* <CarouselPrevious className="hidden h-12 w-12 md:flex" />
+          <CarouselNext className="hidden h-12 w-12 md:flex" /> */}
         </Carousel>
         <div className="" />
       </div>
