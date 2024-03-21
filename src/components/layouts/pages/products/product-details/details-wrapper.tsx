@@ -96,7 +96,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
       </div>
 
       <p className="w-full whitespace-pre-line text-wrap break-words font-inter text-sm">
-        product.description
+        {product.description}
       </p>
 
       <div className="flex flex-col gap-2 border-t border-gray-200 pt-2">
@@ -164,7 +164,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         </div>
         <div className="flex items-center gap-2 text-sm">
           <CheckCircle className="h-4 w-4 text-gray-400" />
-          {`Free stander delivery on purchases of +$${freeShippingThreshold/100}`}
+          {`Free stander delivery on purchases of +$${freeShippingThreshold / 100}`}
         </div>
       </div>
 
