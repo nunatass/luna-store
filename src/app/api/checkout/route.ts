@@ -1,19 +1,33 @@
 import { CartProduct } from '@/common/types';
 import { API } from '@/lib/axios';
 import { determineShippingOptions, stripe } from '@/lib/stripe';
+import crypto from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 const successUrl = process.env.NEXT_PUBLIC_STRIPE_SUCCESS_REDIRECT;
 const failUrl = process.env.NEXT_PUBLIC_STRIPE_FAIL_REDIRECT;
+const checkoutHashPassword = process.env
+  .NEXT_PUBLIC_CHECK_HASH_PASSWORD as string;
 
 export async function POST(req: NextRequest) {
   const order = await req.json();
+  const hash = crypto
+    .createHmac('sha256', checkoutHashPassword)
+    .update(JSON.stringify(order.payload))
+    .digest('hex');
+
+  if (hash !== order?.token) {
+    console.log('Invalid payload');
+    return NextResponse.json({ error: 'Invalid payload', status: 400 });
+  }
+
   let total = 0;
-  const lineItems = order.items.map((item: CartProduct) => {
+  const lineItems = order?.payload?.items.map((item: CartProduct) => {
     total +=
       Math.round((item.price * (100 - item.discount)) / 100) *
       item.orderQuantity;
+
     return {
       price_data: {
         currency: 'USD',
@@ -34,7 +48,7 @@ export async function POST(req: NextRequest) {
     email: '',
     name: '',
     total: total,
-    products: order.items.map((item: CartProduct) => ({
+    products: order?.payload.items.map((item: CartProduct) => ({
       productId: item.id,
       quantity: item.orderQuantity,
       variantId: item.variant?.id,
@@ -46,7 +60,10 @@ export async function POST(req: NextRequest) {
     // @ts-ignore
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
-      shipping_options: determineShippingOptions(total, order.shippingMethod),
+      shipping_options: determineShippingOptions(
+        total,
+        order?.payload.shippingMethod
+      ),
       mode: 'payment',
       payment_method_types: ['card', 'paypal'],
       billing_address_collection: 'required',

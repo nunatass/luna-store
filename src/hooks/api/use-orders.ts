@@ -10,8 +10,11 @@ const keys = {
 };
 
 type OrderCheckoutRequest = {
-  items: CartProduct[];
-  shippingMethod: ShippingMethod;
+  payload: {
+    items: CartProduct[];
+    shippingMethod: ShippingMethod;
+  };
+  token: string;
 };
 
 type createOrderRequest = {

@@ -1,6 +1,6 @@
 'use client';
 
-import { CartProduct } from '@/common/types';
+import { CartProduct, ShippingMethod } from '@/common/types';
 import { CloseTwoIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useOrderCheckout } from '@/hooks/api/use-orders';
@@ -12,6 +12,7 @@ import {
   stringToId,
 } from '@/lib/utils';
 import { loadStripe } from '@stripe/stripe-js';
+import crypto from 'crypto';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Loader } from 'lucide-react';
 import Image from 'next/image';
@@ -48,6 +49,8 @@ const renderEmptyDiv = () => (
 );
 
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
+const checkoutHashPassword = process.env
+  .NEXT_PUBLIC_CHECK_HASH_PASSWORD as string;
 
 export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const pathname = usePathname();
@@ -70,10 +73,20 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
 
     if (!stripe) throw new Error('Stripe failed to initialize.');
 
+    const payload = {
+      items: products,
+      shippingMethod: 'standard' as ShippingMethod,
+    };
+
+    const token = crypto
+      .createHmac('sha256', checkoutHashPassword)
+      .update(JSON.stringify(payload))
+      .digest('hex');
+
     handleOrderCheckout(
       {
-        items: products,
-        shippingMethod: 'standard',
+        payload,
+        token,
       },
       {
         onSuccess: async ({ sessionId }) => {

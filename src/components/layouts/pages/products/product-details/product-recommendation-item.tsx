@@ -75,6 +75,7 @@ export const ProductRecommendationItem = ({
             fill
             alt="product image"
             className="object-cover transition-all duration-300 ease-in-out group-hover:opacity-0"
+            loading="lazy"
             src={`${imageUrlPrefix}/${product.medias[0].url}`}
           />
           <Image
@@ -82,7 +83,7 @@ export const ProductRecommendationItem = ({
             alt="product img"
             className="absolute left-0  top-0 w-full  object-cover opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100"
             fill
-            priority
+            loading="lazy"
           />
         </Link>
         <motion.div

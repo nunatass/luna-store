@@ -1,7 +1,6 @@
 'use client';
 import { ShippingMethod } from '@/common/types';
 import { Button } from '@/components/ui/button';
-
 import {
   Form,
   FormControl,
@@ -16,6 +15,7 @@ import { useCart } from '@/hooks/use-cart';
 import { formatPrice } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loadStripe } from '@stripe/stripe-js';
+import crypto from 'crypto';
 import { Loader } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -27,6 +27,9 @@ const freeShippingTrashHolder =
 
 const standardShippingPrice =
   Number(process.env.NEXT_PUBLIC_SHIPPING_STANDARD) || 299;
+
+const checkoutHashPassword = process.env
+  .NEXT_PUBLIC_CHECK_HASH_PASSWORD as string;
 
 const fastShippingPrice = Number(process.env.NEXT_PUBLIC_SHIPPING_FAST) || 499;
 
@@ -89,11 +92,20 @@ export function CartShippingPriceForm() {
     );
 
     if (!stripe) throw new Error('Stripe failed to initialize.');
+    const payload = {
+      items: products,
+      shippingMethod: data.shippingMethod,
+    };
+
+    const token = crypto
+      .createHmac('sha256', checkoutHashPassword)
+      .update(JSON.stringify(payload))
+      .digest('hex');
 
     handleOrderCheckout(
       {
-        items: products,
-        shippingMethod: data.shippingMethod,
+        payload,
+        token,
       },
       {
         onSuccess: async ({ sessionId }) => {

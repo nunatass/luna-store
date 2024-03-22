@@ -88,7 +88,7 @@ export function useMenuData() {
                   title: 'All Products',
                   link: `/products`,
                 },
-                ...(categories ?? []).slice(0, 4).map((category: Category) => ({
+                ...(categories ?? []).slice(0, 6).map((category: Category) => ({
                   title: category.name,
                   link: `/products?category=${category.name.toLocaleLowerCase()}`,
                 })),
@@ -116,7 +116,7 @@ export function useMenuData() {
           link: '/',
           megaMenus: isCollectionsPending
             ? [{ title: 'loading...', link: '' }]
-            : collections?.slice(0, 4).map((collection: Collection) => ({
+            : collections?.slice(0, 6).map((collection: Collection) => ({
                 title: collection.title,
                 link: `/collections/${collection.id}`,
               })),

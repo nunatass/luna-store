@@ -1,6 +1,7 @@
 'use client';
 
 import { useMenuData } from '@/hooks/use-menu-data';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useMemo } from 'react';
 import { MenuItem } from './menu-item';
@@ -24,11 +25,17 @@ export const Menus = ({ secondary }: MenusProps) => {
             secondary={secondary}
             className="group/menu-products"
           >
-            <ul className="transform-all invisible absolute top-14 z-10 flex  h-max w-max justify-between gap-x-32 bg-white  px-16 py-8 pl-8 font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/menu-products:-translate-y-3 md:group-hover/menu-products:visible md:group-hover/menu-products:opacity-100">
+            <ul className="transform-all invisible absolute top-14 z-10 flex h-max min-h-60 w-max -translate-x-8 justify-between gap-x-32  bg-white  pb-6 pl-8 pr-16 pt-4 font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/menu-products:-translate-y-3 md:group-hover/menu-products:visible  md:group-hover/menu-products:opacity-100">
               {menu?.productPages?.map((product) => (
                 <li key={product.title} className="flex flex-col gap-2.5">
                   <span className="font-medium">{product.title}</span>
-                  <ul className="flex flex-col gap-2 text-sm">
+                  <ul
+                    className={cn(
+                      'flex flex-col gap-4 text-sm',
+                      product.title === 'Collections' &&
+                        'grid grid-cols-2 grid-rows-5 gap-x-20'
+                    )}
+                  >
                     {product.megaMenus.map((menu) => (
                       <li key={menu.title} className="md:hover:text-[#be844c]">
                         <Link href={menu.link} aria-label={menu.title}>

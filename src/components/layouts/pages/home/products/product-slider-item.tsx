@@ -74,6 +74,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
               fill
               alt="product image"
               className="object-cover transition-all duration-300 ease-in-out hover:scale-110 group-hover:opacity-0"
+              loading="lazy"
               src={`${imageUrlPrefix}/${product.medias[1].url}`}
             />
             <Image
@@ -81,7 +82,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
               alt="product img"
               className="absolute left-0 top-0 w-full  object-cover opacity-0 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100"
               fill
-              priority
+              loading="lazy"
             />
           </div>
         </Link>
