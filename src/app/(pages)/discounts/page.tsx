@@ -3,6 +3,7 @@ import { DiscountProductsArea } from '@/components/layouts/pages/discounts/disco
 import { Wrapper } from '@/components/layouts/wrapper';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
 
+const discount = Number(process.env.NEXT_PUBLIC_DISCOUNT) || 20;
 export const metadata = {
   title: 'Discounts | Stella Stone',
   description:
@@ -21,7 +22,7 @@ export default function ProductPage() {
       <div className="mt-32">
         <Breadcrumb title="Save 30%" disableSecondary />
       </div>
-      <DiscountProductsArea discount={30} />
+      <DiscountProductsArea discount={discount} />
     </Wrapper>
   );
 }

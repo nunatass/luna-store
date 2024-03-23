@@ -101,8 +101,8 @@ export function CollectionsProductsArea({
   }
 
   return (
-    <section className="container mb-20 mt-10 overflow-x-hidden">
-      <div className="">
+    <section className="container mb-20 mt-8 overflow-x-hidden">
+      <div className="relative">
         <div className="flex w-full md:gap-4">
           <ProductFilterArea />
           <SidePanel
@@ -126,7 +126,7 @@ export function CollectionsProductsArea({
               <ProductFilterArea className="mt-24 block w-full" />
             </div>
           </SidePanel>
-          <div className="w-full" id="products">
+          <div className=" w-full" id="products">
             <ProductAreaHeader />
             <div
               className={cn(

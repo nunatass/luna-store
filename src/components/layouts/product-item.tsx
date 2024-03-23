@@ -1,11 +1,17 @@
 'use client';
 import type { Product } from '@/common/types';
-import { CartIcon } from '@/components/icons';
+import { BoltIcon, CartIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
 import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+
+const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
+
+const sellingFastString = process.env.NEXT_PUBLIC_SELLING_FAST as string;
+
+const sellingFast = sellingFastString.split(',');
 
 const optionsAnimationVariants = {
   initial: { x: -10, opacity: 0 },
@@ -37,7 +43,6 @@ const animationsProps = {
 type ProductSliderItemProps = {
   product: Product;
 };
-const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const ProductItem = ({ product }: ProductSliderItemProps) => {
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
@@ -174,6 +179,13 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           {product.prices[0].discount}% OFF
         </span>
       )}
+
+      {product.prices[0].discount === 0 &&
+        sellingFast.includes(product?.id) && (
+          <span className="shaddow absolute right-2 top-2 flex items-center gap-1.5 bg-white p-1 text-xs uppercase text-black">
+            Selling Fast <BoltIcon className="h-3 w-3 " />
+          </span>
+        )}
     </motion.div>
   );
 };
