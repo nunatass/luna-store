@@ -11,7 +11,7 @@ const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 const sellingFastString = process.env.NEXT_PUBLIC_SELLING_FAST as string;
 
-const sellingFast = sellingFastString.split(',');
+const sellingFast = sellingFastString?.split(',') || [];
 
 const optionsAnimationVariants = {
   initial: { x: -10, opacity: 0 },
@@ -182,7 +182,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
 
       {product.prices[0].discount === 0 &&
         sellingFast.includes(product?.id) && (
-          <span className="shaddow absolute right-2 top-2 flex items-center gap-1.5 bg-white p-1 text-xs uppercase text-black">
+          <span className="absolute right-2 top-2 flex items-center gap-1.5 bg-white p-1 text-xs uppercase text-black shadow">
             Selling Fast <BoltIcon className="h-3 w-3 " />
           </span>
         )}
