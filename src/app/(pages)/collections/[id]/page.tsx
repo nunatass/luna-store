@@ -12,7 +12,7 @@ import { CollectionsProductsArea } from '@/components/layouts/pages/collections/
 import { Wrapper } from '@/components/layouts/wrapper';
 import { useCollectionById } from '@/hooks/api/use-collections';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 type ProductPageProps = {
   params: { id: string };
@@ -20,7 +20,7 @@ type ProductPageProps = {
 
 type CollectionItem = {
   description: string;
-  image: string;
+  image: StaticImageData;
 };
 
 type CollectionsBanner = {
