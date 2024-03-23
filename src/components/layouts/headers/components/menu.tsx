@@ -51,7 +51,9 @@ export const Menus = ({ secondary }: MenusProps) => {
                     width={300}
                     height={300}
                   />
-                  <span>Popular Product</span>
+                  <span className="absolute bottom-4 left-4 text-2xl text-white">
+                    Popular Products
+                  </span>
                 </Link>
               )}
             </ul>

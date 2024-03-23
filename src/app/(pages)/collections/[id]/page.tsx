@@ -76,6 +76,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             width={350}
             height={300}
             className="mt-8 h-[350px] w-full object-cover"
+            unoptimized
           />
         )}
         <div
