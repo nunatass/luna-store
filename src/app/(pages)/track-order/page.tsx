@@ -1,9 +1,7 @@
-import bannerTop from '@/assets/img/banner-top.webp';
 import { Header } from '@/components/layouts/headers/header';
 import { TrackOrderArea } from '@/components/layouts/pages/track-order/track-order-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
-import Image from 'next/image';
 
 export const metadata = {
   title: 'Track Your Order | Stella Stone',
@@ -18,9 +16,6 @@ export default function FAQsPage() {
         <Breadcrumb title="Track Your Order" />
       </div>
       <TrackOrderArea />
-      <div className="relative h-80 w-full">
-        <Image src={bannerTop} fill alt="banner top" className="object-cover" />
-      </div>
     </Wrapper>
   );
 }

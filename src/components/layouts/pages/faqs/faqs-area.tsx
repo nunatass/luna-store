@@ -1,4 +1,4 @@
-import faqImg from '@/assets/img/faq.webp';
+import faqImg from '@/assets/img/banner-faq.webp';
 import {
   Accordion,
   AccordionContent,
