@@ -63,7 +63,8 @@ export const ProductsArea = () => {
             <div className="flex w-full flex-wrap justify-center justify-items-center gap-4 ">
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
               <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
-              <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
+              <Skeleton className="hidden h-60 w-40  rounded-none sm:h-[400px] sm:w-64 md:block md:h-96 md:w-80 lg:h-[400px]" />
+              <Skeleton className="hidden h-60 w-40  rounded-none sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:block lg:h-[400px]" />
             </div>
             <span className="text-center text-sm text-gray-500">
               keep scrolling to load more products

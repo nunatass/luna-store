@@ -11,7 +11,7 @@ import { useCallback } from 'react';
 export const CategoryFilter = () => {
   const { filterCategory, setCategory } = useFilter();
 
-  const { data: categories, isLoading, isError } = useCategories();
+  const { data: categories, isPending, isError } = useCategories();
 
   const handleSelectCategory = useCallback(
     (category: Category) => {
@@ -20,10 +20,10 @@ export const CategoryFilter = () => {
     [setCategory]
   );
 
-  if (isLoading) {
+  if (isPending) {
     return 'loading...';
   }
-  if (!isLoading && isError) {
+  if (!isPending && isError) {
     return null;
   }
 

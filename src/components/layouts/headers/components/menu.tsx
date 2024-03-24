@@ -1,6 +1,6 @@
 'use client';
 
-import menuImage from '@/assets/img/menu.webp';
+import menuBanner from '@/assets/img/menu-banner.webp';
 import { useMenuData } from '@/hooks/use-menu-data';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -46,7 +46,7 @@ export const Menus = ({ secondary }: MenusProps) => {
                   className="relative"
                 >
                   <Image
-                    src={menuImage}
+                    src={menuBanner}
                     alt="menu image"
                     width={300}
                     height={300}

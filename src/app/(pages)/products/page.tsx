@@ -1,7 +1,6 @@
 import { Header } from '@/components/layouts/headers/header';
 import { ProductsArea } from '@/components/layouts/pages/products/products-area';
 import { Wrapper } from '@/components/layouts/wrapper';
-import { Breadcrumb } from '@/components/ui/breadcrumb';
 
 export const metadata = {
   title: 'Products | Stella Stone',
@@ -18,9 +17,6 @@ export default function ProductsPage() {
   return (
     <Wrapper className="bg-white">
       <Header secondary />
-      <div className="mt-32">
-        <Breadcrumb title="Products" />
-      </div>
       <ProductsArea />
     </Wrapper>
   );
