@@ -25,13 +25,16 @@ export const Menus = ({ secondary }: MenusProps) => {
             secondary={secondary}
             className="group/menu-products"
           >
-            <ul className="transform-all invisible absolute top-14 z-10 flex h-max min-h-60 w-max -translate-x-8 justify-between gap-x-16 bg-white pb-6 pl-8 pr-6 pt-4 font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/menu-products:-translate-y-3 md:group-hover/menu-products:visible  md:group-hover/menu-products:opacity-100">
+            <ul className="transform-all invisible absolute top-14 z-10 flex h-max min-h-60 w-max -translate-x-8 justify-between gap-x-16 bg-white px-4 pb-6 pt-4 font-normal text-black opacity-0 shadow-sm delay-200 duration-300 ease-in-out group-hover/menu-products:-translate-y-3 md:group-hover/menu-products:visible  md:group-hover/menu-products:opacity-100">
               {menu?.productPages?.map((product) => (
                 <li key={product.title} className="flex flex-col gap-2.5">
-                  <span className="font-medium">{product.title}</span>
+                  <span className="px-4 font-medium">{product.title}</span>
                   <ul className="flex flex-col gap-4 text-sm">
                     {product.megaMenus.map((menu) => (
-                      <li key={menu.title} className="md:hover:text-[#be844c]">
+                      <li
+                        key={menu.title}
+                        className="-mt-2 px-4 py-1.5 hover:bg-gray-200"
+                      >
                         <Link href={menu.link} aria-label={menu.title}>
                           {menu.title}
                         </Link>
