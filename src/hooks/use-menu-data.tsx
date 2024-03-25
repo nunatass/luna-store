@@ -64,7 +64,7 @@ export function useMenuData() {
     if (isCollectionsPending) {
       return [{ title: 'loading...', link: '' }];
     } else {
-      return collections?.slice(0, 4).map((collection: Collection) => ({
+      return collections?.map((collection: Collection) => ({
         title: collection.title,
         link: `/collections/${collection.id}`,
       }));
