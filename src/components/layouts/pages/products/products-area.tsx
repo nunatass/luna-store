@@ -100,6 +100,8 @@ export function ProductsArea() {
     }
   }, [searchParams, resetFilter, setCategory, isCategoryPending]);
 
+  useEffect(handleCloseSideFilter, [searchParams, handleCloseSideFilter]);
+
   let content: ReactNode | null = null;
 
   if (isPending) {
@@ -156,6 +158,7 @@ export function ProductsArea() {
           </p>
         </div>
       </div>
+      <ProductAreaHeader />
 
       <div ref={productsContainer} className="relative flex w-full md:gap-4">
         <div>
@@ -165,30 +168,30 @@ export function ProductsArea() {
           >
             <ProductFilterArea />
           </motion.div>
-          <div className={cn('w-72', sticky && '-z-10 opacity-0')}>
+          <div
+            className={cn('hidden w-72 lg:block', sticky && '-z-10 opacity-0')}
+          >
             <ProductFilterArea />
           </div>
         </div>
         <SidePanel isOpen={isFilterPanelOpen} setIsOpen={setIsFilterPanelOpen}>
           <div className="flex flex-col px-8">
             <div className="absolute left-0 right-0 top-0 flex w-full items-center justify-between border-b-[0.5px] bg-white p-8 pb-4">
-              <h4 className="text-base font-semibold">Filter products</h4>
-              <button
+              <h4 className="text-lg font-semibold">Filter products</h4>
+              <Button
+                aria-label="close button"
                 onClick={handleCloseSideFilter}
-                type="button"
-                aria-label="button close cart"
-                className="z-50 flex h-8 w-8 items-center justify-center bg-gray-200"
+                className="z-50 flex h-12 w-12  items-center justify-center bg-gray-200 text-black md:h-8 md:w-8 md:hover:bg-gray-200"
               >
                 <div className="transition-all duration-300 ease-in-out md:hover:rotate-90">
                   <CloseTwoIcon aria-label="close icon" />
                 </div>
-              </button>
+              </Button>
             </div>
-            <ProductFilterArea className="mt-24 block w-full" />
+            <ProductFilterArea className="mt-28 block w-full" />
           </div>
         </SidePanel>
         <div id="products">
-          <ProductAreaHeader />
           <InfiniteScroll
             dataLength={productItems.length}
             next={fetchNextPage}

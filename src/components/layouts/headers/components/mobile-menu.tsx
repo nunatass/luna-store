@@ -8,7 +8,11 @@ import {
 } from '@/components/ui/accordion';
 import { MenuItem, useMenuData } from '@/hooks/use-menu-data';
 
-export const MobileMenus = () => {
+type MobileMenusProps = {
+  onClose?: () => void;
+};
+
+export const MobileMenus = ({ onClose }: MobileMenusProps) => {
   const { mobileMenuData } = useMenuData();
 
   const renderMenu = (menu: MenuItem) => {
@@ -33,6 +37,7 @@ export const MobileMenus = () => {
                   href={subMenu.link}
                   className="pt-4 hover:text-[#be844c]"
                   aria-label={subMenu.title}
+                  onClick={onClose}
                 >
                   {subMenu.title}
                 </Link>
@@ -44,7 +49,7 @@ export const MobileMenus = () => {
     } else {
       return (
         <li key={menu?.id} className="p-4 hover:text-[#be844c]">
-          <Link href={menu?.link} aria-label={menu.title}>
+          <Link href={menu?.link} aria-label={menu.title} onClick={onClose}>
             <div className="flex gap-2">
               {menu.icon}
               {menu.title}

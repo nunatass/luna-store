@@ -184,8 +184,8 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-between p-8">
       <div className="scrollbar-hide h-full w-full overflow-x-hidden overflow-y-scroll">
-        <div className="absolute left-0 right-0 top-0 flex w-full items-center justify-between border-b-[0.5px] bg-white p-8 pb-4">
-          <h4 className="text-base font-semibold">Shopping cart</h4>
+        <div className=" flex w-full items-center justify-between border-b-[0.5px] bg-white pb-4">
+          <h4 className="text-xl font-semibold">Shopping cart</h4>
           <Button
             onClick={handleCloseSideCart}
             aria-label="button close cart"
@@ -196,6 +196,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
             </div>
           </Button>
         </div>
+
         <div
           className={cn(
             'flex h-full w-full items-center  justify-center',
@@ -203,7 +204,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
           )}
         >
           {products.length > 0 && (
-            <div className="bg-30 flex w-full flex-col divide-y-[1px] bg-white pb-72 pt-16 sm:pb-56">
+            <div className="bg-30 flex w-full flex-col divide-y-[1px] bg-white pb-72 sm:pb-56">
               {products.map((product, index) => (
                 <div key={product.id}>
                   {index === products.length
@@ -241,7 +242,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
           </AnimatePresence>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 flex h-72 w-full flex-col gap-4 border-t-[0.5px] bg-white p-8 pt-4 sm:h-auto">
+      <div className="mb-8 flex h-72 w-full flex-col gap-4 border-t-[0.5px] bg-white pt-2 sm:h-auto">
         <div className="flex items-center justify-between">
           <h4 className="text-md font-medium">Subtotal:</h4>
           <span className="text-md font-medium">

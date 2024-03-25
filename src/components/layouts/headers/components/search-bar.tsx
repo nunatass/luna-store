@@ -1,12 +1,12 @@
 'use client';
 
 import { SearchIcon } from '@/components/icons';
-import { AnimatePresence, motion } from 'framer-motion';
-
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Overlay from '../../overlay';
@@ -41,6 +41,12 @@ export const SearchBar = ({
     form.reset();
     router.push(`/products?searchTerm=${data.searchTerm}`, { scroll: false });
   };
+
+  useEffect(() => {
+    isSearchOpen
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'auto');
+  }, [isSearchOpen]);
 
   return (
     <>

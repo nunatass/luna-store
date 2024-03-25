@@ -117,7 +117,7 @@ export default function RootLayout({
             </ToasterProvider>
             <div className="relative">
               <Modal />
-              {children}
+              <main id="main">{children}</main>
               <BackToTopButton />
               <Footer />
             </div>

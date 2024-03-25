@@ -9,7 +9,7 @@ import { socialData } from '@/data/social-data';
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#f5f5f5]">
+    <footer className="z-[50] bg-[#f5f5f5]">
       <div className="container flex flex-col gap-8 px-12 py-10 md:py-20">
         <div className="grid grid-cols-1 justify-between gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:flex">
           <div className="flex flex-col gap-4">

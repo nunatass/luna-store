@@ -11,10 +11,12 @@ export const ProductAreaHeader = () => {
   }, [setIsFilterPanelOpen]);
 
   return (
-    <div className="my-4 flex h-12 w-full items-center justify-end md:px-2 lg:hidden ">
-      <div />
+    <div className="mb-8 flex w-full items-center justify-between ring-1 ring-gray-300 lg:hidden">
+      <span className="h-full border-r border-gray-500 px-4 text-sm text-gray-500">
+        Filter Products
+      </span>
       <div className="flex items-center gap-4">
-        <Button className=" right-8 flex gap-2" onClick={handleShowFilter}>
+        <Button className="flex gap-2" onClick={handleShowFilter}>
           <FilterIcon />
         </Button>
       </div>

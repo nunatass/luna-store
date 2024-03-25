@@ -13,7 +13,7 @@ type SideMenuProps = {
 
 export function SideMenu({ setIsOpen }: SideMenuProps) {
   return (
-    <div className="flex h-full w-full flex-col justify-between gap-8 p-6">
+    <div className="flex h-full w-full flex-col justify-between gap-8 overscroll-none p-6	">
       <div className="flex items-center justify-between">
         <Link href="/" aria-label="home">
           <Image src={logo} alt="logo" className="w-44" />
@@ -30,8 +30,8 @@ export function SideMenu({ setIsOpen }: SideMenuProps) {
         </Button>
       </div>
       <div className="flex h-full flex-col">
-        <div className="tp-main-menu-mobile fix d-lg-none mb-40 h-full ">
-          <MobileMenus />
+        <div className=" mb-40 h-full ">
+          <MobileMenus onClose={() => setIsOpen(false)} />
         </div>
         <span className="item-center flex justify-center text-sm">
           <p>
