@@ -155,8 +155,8 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           </span>
         </h2>
         <div className="w-full">
-          <div className="flex w-full items-center justify-between">
-            <span className="sm:font-base w-full text-left text-sm transition-all duration-300  ease-in-out sm:mb-2">
+          <div className="flex w-full items-center gap-2.5">
+            <span className="sm:font-base sm:mb text-left text-sm  transition-all duration-300 ease-in-out">
               $
               {
                 formatPriceWithDiscount(
@@ -167,7 +167,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
             </span>
 
             {product.prices[0].discount > 0 && (
-              <span className="sm:font-base w-full text-right text-sm text-xs text-gray-600  line-through transition-all duration-300 ease-in-out sm:mb-2">
+              <span className="text-right text-sm text-xs  text-red-700 line-through transition-all duration-300 ease-in-out sm:text-[13px]">
                 ${formatPrice(product.prices[0].value)}
               </span>
             )}
