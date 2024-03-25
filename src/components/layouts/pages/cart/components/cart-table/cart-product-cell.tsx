@@ -24,7 +24,7 @@ export const CartProductCell = ({
 }: CartProductCellProps) => {
   return (
     <div className="flex items-center gap-2">
-      <Link href={`/product/${stringToId(title)}`} aria-label="product item">
+      <Link href={`/products/${stringToId(title)}`} aria-label="product item">
         <div className="bg-gray-200">
           <Image
             src={`${imageUrlPrefix}/${media}`}
