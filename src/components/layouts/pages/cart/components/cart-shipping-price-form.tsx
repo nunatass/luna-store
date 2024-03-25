@@ -38,6 +38,7 @@ type ShippingMethods = {
     id: string;
     label: string;
     value: number;
+    description: string;
   };
 };
 
@@ -46,16 +47,19 @@ const shippingMethods: ShippingMethods = {
     id: 'free',
     label: 'Free shipping',
     value: 0,
+    description: '5-10 business days',
   },
   standard: {
     id: 'standard',
     label: 'Standard shipping',
     value: standardShippingPrice,
+    description: '5-10 business days',
   },
   fast: {
     id: 'fast',
     label: 'Fast shipping',
     value: fastShippingPrice,
+    description: '3-5 business days',
   },
 };
 
@@ -129,8 +133,14 @@ export function CartShippingPriceForm() {
           control={form.control}
           name="shippingMethod"
           render={({ field }) => (
-            <FormItem className="">
-              <FormLabel>Shipping</FormLabel>
+            <FormItem>
+              <div className="mb-4 flex flex-col gap-0.5">
+                <FormLabel className="text-lg">Shipping Methods</FormLabel>
+                <p className="text-[13px] text-gray-800">
+                  Free stander delivery on purchases of +$60
+                </p>
+              </div>
+
               <FormControl>
                 <RadioGroup
                   onValueChange={(value) => {
@@ -139,7 +149,7 @@ export function CartShippingPriceForm() {
                   }}
                   defaultValue={field.value}
                   value={form.getValues().shippingMethod}
-                  className="flex flex-col space-y-1"
+                  className="flex flex-col space-y-2"
                 >
                   {Object.keys(shippingMethods).map(
                     (methodKey: keyof typeof shippingMethods) => {
@@ -161,10 +171,15 @@ export function CartShippingPriceForm() {
                               }
                             />
                           </FormControl>
-                          <FormLabel className="flex gap-2 font-normal">
-                            {shippingMethods[method].label}
-                            <p className="font-semibold">
-                              ${formatPrice(shippingMethods[method].value)}
+                          <FormLabel className="flex flex-col gap-2">
+                            <div className="flex gap-2 font-normal">
+                              {shippingMethods[method].label}:
+                              <p className="font-semibold">
+                                ${formatPrice(shippingMethods[method].value)}
+                              </p>
+                            </div>
+                            <p className="text-xs text-gray-800">
+                              {shippingMethods[method].description}
                             </p>
                           </FormLabel>
                         </FormItem>
@@ -177,7 +192,7 @@ export function CartShippingPriceForm() {
             </FormItem>
           )}
         />
-        <div className="flex flex-col gap-2 py-2">
+        <div className="mt-2.5 flex flex-col gap-2 py-2">
           <div className="flex items-center justify-between text-xl font-medium">
             <span>Total</span>
             <div className="flex flex-col items-center justify-center">
