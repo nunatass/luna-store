@@ -33,7 +33,7 @@ export const Menus = ({ secondary }: MenusProps) => {
                     {product.megaMenus.map((menu) => (
                       <li
                         key={menu.title}
-                        className="-mt-2 px-4 py-1.5 hover:bg-gray-200"
+                        className="-mt-2 px-4 py-1.5 hover:bg-gray-100"
                       >
                         <Link href={menu.link} aria-label={menu.title}>
                           {menu.title}

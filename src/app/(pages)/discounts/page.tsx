@@ -20,7 +20,7 @@ export default function ProductPage() {
     <Wrapper className="bg-white">
       <Header secondary />
       <div className="mt-32">
-        <Breadcrumb title="Save 30%" disableSecondary />
+        <Breadcrumb title="Products on Sale" disableSecondary />
       </div>
       <DiscountProductsArea discount={discount} />
     </Wrapper>
