@@ -1,11 +1,11 @@
 import { Footer } from '@/components/layouts/footer';
 import { Modal } from '@/components/layouts/modal';
 import { BackToTopButton } from '@/components/ui/back-to-top-button';
+import { GoogleAnalytics } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/react';
 import { Metadata } from 'next';
 import { Charm, Inter, Oregano } from 'next/font/google';
 import { Toaster } from 'sonner';
-import { GoogleAnalytics } from '@next/third-parties/google'
-
 
 import { HydrationZustand } from '@/components/hydration-zustand';
 import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
@@ -127,6 +127,7 @@ export default function RootLayout({
             </div>
           </HydrationZustand>
         </TanstackQueryProvider>
+        <Analytics mode={'production'} />
       </body>
       <GoogleAnalytics gaId={googleAnalyticsId} />
     </html>
