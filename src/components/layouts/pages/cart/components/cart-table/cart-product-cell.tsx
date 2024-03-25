@@ -6,7 +6,7 @@ import Link from 'next/link';
 type CartProductCellProps = {
   media: string;
   title: string;
-  id: string;
+  id?: string;
   price: number;
   discount: number;
   orderQuantity: number;
@@ -15,7 +15,6 @@ type CartProductCellProps = {
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const CartProductCell = ({
-  id,
   media,
   title,
   price,
@@ -25,7 +24,7 @@ export const CartProductCell = ({
 }: CartProductCellProps) => {
   return (
     <div className="flex items-center gap-2">
-      <Link href={`/product/${id}`} aria-label="product item">
+      <Link href={`/product/${stringToId(title)}`} aria-label="product item">
         <div className="bg-gray-200">
           <Image
             src={`${imageUrlPrefix}/${media}`}
