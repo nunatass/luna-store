@@ -2,6 +2,7 @@
 import type { Product } from '@/common/types';
 import { BoltIcon, CartIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
+import * as pixel from '@/lib/fpixel';
 import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -59,6 +60,9 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
       title: product.title,
       orderQuantity: 1,
       discount: product.prices[0].discount,
+    });
+    pixel.event('add product to cart', {
+      productName: product.title,
     });
   };
 

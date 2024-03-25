@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/hooks/teste-coms-test.js",
-    "src/app/api/checkout/route.js"
+    "src/app/api/checkout/route.js",
+    "public/scripts/pixel.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -5,12 +5,14 @@ import { CloseTwoIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useOrderCheckout } from '@/hooks/api/use-orders';
 import { useCart } from '@/hooks/use-cart';
+import * as pixel from '@/lib/fpixel';
 import {
   cn,
   formatPrice,
   formatPriceWithDiscount,
   stringToId,
 } from '@/lib/utils';
+
 import { loadStripe } from '@stripe/stripe-js';
 import crypto from 'crypto';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -82,6 +84,8 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
       .createHmac('sha256', checkoutHashPassword)
       .update(JSON.stringify(payload))
       .digest('hex');
+
+    pixel.event('Go to Checkout');
 
     handleOrderCheckout(
       {
@@ -199,7 +203,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
 
         <div
           className={cn(
-            'flex h-full w-full items-center  justify-center',
+            'flex w-full items-center  justify-center',
             products.length > 0 && 'items-start  justify-start'
           )}
         >
@@ -221,18 +225,18 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
                 initial="hide"
                 animate={products.length > 0 ? 'hide' : 'show'}
                 transition={{ duration: 0.6, ease: 'easeInOut' }}
-                className="-mt-56 flex h-full w-full flex-col items-center justify-center gap-2"
+                className="flex h-[60vh] w-full flex-col items-center justify-center gap-2"
               >
                 <p className="text-base font-normal">Your Cart is empty</p>
                 {pathname !== '/products' && (
                   <Button
                     asChild
-                    aria-label="button go to shop"
+                    aria-label="button go to products"
                     variant="outline"
                     size="lg"
                     className="md:hover:border-black md:hover:bg-black md:hover:text-white"
                   >
-                    <Link href="/products" aria-label="go to shop">
+                    <Link href="/products" aria-label="go to products">
                       Go to products
                     </Link>
                   </Button>
@@ -257,7 +261,13 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
             onClick={handleCloseSideCart}
             disabled={products.length === 0}
           >
-            <Link href="/cart" aria-label="cart">
+            <Link
+              href="/cart"
+              aria-label="cart"
+              onClick={() => {
+                pixel.event('Go to cart');
+              }}
+            >
               View cart
             </Link>
           </Button>
