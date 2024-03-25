@@ -4,11 +4,15 @@ import { BackToTopButton } from '@/components/ui/back-to-top-button';
 import { Metadata } from 'next';
 import { Charm, Inter, Oregano } from 'next/font/google';
 import { Toaster } from 'sonner';
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 
 import { HydrationZustand } from '@/components/hydration-zustand';
 import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
 import { ToasterProvider } from '@/components/providers/toater-provider';
 import './globals.css';
+
+const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string;
 
 const charm = Charm({
   subsets: ['latin'],
@@ -124,6 +128,7 @@ export default function RootLayout({
           </HydrationZustand>
         </TanstackQueryProvider>
       </body>
+      <GoogleAnalytics gaId={googleAnalyticsId} />
     </html>
   );
 }
