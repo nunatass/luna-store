@@ -149,7 +149,11 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
         </AnimatePresence>
       </motion.div>
 
-      <div className="z-10 flex h-[30%] flex-col gap-1 bg-white px-2 py-4 font-medium sm:h-[20%]">
+      <Link
+        href={`/products/${stringToId(product.title)}`}
+        aria-label="product item"
+        className="z-10 flex h-[30%] flex-col gap-1 bg-white px-2 py-4 font-medium sm:h-[20%]"
+      >
         <h2 className="text-left transition-all duration-300 ease-in-out sm:mb-2">
           <span
             className="line-clamp-1 text-xs sm:text-sm"
@@ -177,7 +181,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
             )}
           </div>
         </div>
-      </div>
+      </Link>
       {product.prices[0].discount > 0 && (
         <span className="absolute right-2 top-2 bg-black p-1 text-xs text-white">
           {product.prices[0].discount}% OFF
