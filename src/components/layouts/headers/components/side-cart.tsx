@@ -156,7 +156,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
               </span>
             </div>
           ) : (
-            <span className="text-sm font-semibold">
+            <span className="text-sm">
               {symbol}
               {formatPrice(product.price * product.orderQuantity)}
             </span>
