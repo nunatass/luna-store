@@ -42,6 +42,6 @@ export const productsBanner: ProductsBanner = {
   all: {
     image: allProductBanner,
     description:
-      'Discover our large selection of quality jewellery, all our jewelery is durable and does not rub off on the colour. They also withstand water, sweat, irritation and perfume.',
+      'Explore our extensive collection of high-quality jewelry. Our pieces are crafted for durability, ensuring they maintain their original color without fading. Designed to withstand water, sweat, irritation, and perfume, our jewelry offers lasting beauty and resilience.',
   },
 };
