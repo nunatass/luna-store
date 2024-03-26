@@ -41,7 +41,7 @@ export default async function sitemap() {
     {
       url: 'https://www.stellastone.store',
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: 'weekly',
       priority: 1,
     },
     {

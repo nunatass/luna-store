@@ -37,7 +37,8 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.stellastone.store'),
   title: 'Stella Stone Jewelry',
   description:
-    'Discover exquisite craftsmanship and timeless elegance at our online jewelry store. Explore our stunning pieces, meticulously designed to complement every occasion and elevate your unique sense of beauty. Shop now and indulge in luxury that lasts a lifetime.',
+    'Shop timeless jewelry online: exquisite craftsmanship, elegant designs, endless elegance.',
+
   icons: {
     icon: {
       url: '/favicon.png',
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Stella Stone Jewelry',
     description:
-      'Discover exquisite craftsmanship and timeless elegance at our online jewelry store. Explore our stunning pieces, meticulously designed to complement every occasion and elevate your unique sense of beauty. Shop now and indulge in luxury that lasts a lifetime.',
+      'Shop timeless jewelry online: exquisite craftsmanship, elegant designs, endless elegance.',
     images: [
       {
         url: 'https://pub-2815e42a47aa405db2fb0aeb816612b8.r2.dev/098878e13cceb0c222e969ea26df5063_x800.jpg',
