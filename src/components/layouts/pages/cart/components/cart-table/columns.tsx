@@ -1,8 +1,8 @@
 'use client';
 
 import type { CartProduct } from '@/common/types';
-import { formatPriceWithDiscount } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
+import CartPriceCell from './cart-price-cell';
 import { CartProductCell } from './cart-product-cell';
 import { CartProductQuantityCell } from './cart-product-quantity-cell';
 import { CartRemoveProductCell } from './cart-remove-product-cell';
@@ -14,17 +14,7 @@ export const columns: ColumnDef<CartProduct>[] = [
   },
   {
     header: 'Price',
-    cell: ({ row }) => (
-      <p>
-        $
-        {
-          formatPriceWithDiscount(
-            row.original.price * row.original.orderQuantity,
-            row.original.discount
-          ).price
-        }
-      </p>
-    ),
+    cell: ({ row }) => <CartPriceCell {...row.original} />,
   },
   {
     header: 'Quantity',

@@ -1,4 +1,5 @@
 'use client';
+
 import banner2 from '@/assets/img/home/banner-2.png';
 import banner3 from '@/assets/img/home/banner-3.png';
 import banner from '@/assets/img/home/banner.jpeg';
@@ -25,6 +26,7 @@ export const JewelryBanner = () => {
     },
     [setCurrentBanner]
   );
+
   return (
     <div className=" relative h-screen w-screen overflow-hidden bg-[#AB9774]">
       <AnimatePresence>

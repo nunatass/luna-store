@@ -2,6 +2,7 @@
 import type { Product } from '@/common/types';
 import { CartIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
+import { useCurrency } from '@/hooks/use-currency';
 import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -43,6 +44,8 @@ const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 export const ProductRecommendationItem = ({
   product,
 }: ProductSliderItemProps) => {
+  const { symbol } = useCurrency();
+
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
 
   const isAddedToCart = cartProducts.some(
@@ -152,7 +155,7 @@ export const ProductRecommendationItem = ({
           <div className="w-full">
             <div className="flex w-full items-center justify-between">
               <span className="sm:font-base w-full text-left text-sm transition-all duration-300  ease-in-out sm:mb-2">
-                $
+                {symbol}
                 {
                   formatPriceWithDiscount(
                     product.prices[0].value,
@@ -163,7 +166,8 @@ export const ProductRecommendationItem = ({
 
               {product.prices[0].discount > 0 && (
                 <span className="sm:font-base w-full text-right text-sm text-xs text-gray-600  line-through transition-all duration-300 ease-in-out sm:mb-2">
-                  ${formatPrice(product.prices[0].value)}
+                  {symbol}
+                  {formatPrice(product.prices[0].value)}
                 </span>
               )}
             </div>

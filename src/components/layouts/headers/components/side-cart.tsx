@@ -22,6 +22,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { toast } from 'sonner';
 
+import { useCurrency } from '@/hooks/use-currency';
 import { useCallback } from 'react';
 import { ProductQuantity } from '../../pages/products/product-details/product-quantity';
 
@@ -56,6 +57,7 @@ const checkoutHashPassword = process.env
 
 export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const pathname = usePathname();
+  const { symbol, currency } = useCurrency();
   const { products, getTotal, removeProduct, addQuantity, removeQuantity } =
     useCart();
   const { mutate: handleOrderCheckout, isPending } = useOrderCheckout();
@@ -78,6 +80,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
     const payload = {
       items: products,
       shippingMethod: 'standard' as ShippingMethod,
+      currency,
     };
 
     const token = crypto
@@ -138,7 +141,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
           {product.discount > 0 ? (
             <div className="flex w-full items-center gap-2">
               <span className="text-left text-sm">
-                $
+                {symbol}
                 {
                   formatPriceWithDiscount(
                     product.price * product.orderQuantity,
@@ -148,12 +151,14 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
               </span>
 
               <span className="text-right text-sm text-gray-600  line-through">
-                ${formatPrice(product.price * product.orderQuantity)}
+                {symbol}
+                {formatPrice(product.price * product.orderQuantity)}
               </span>
             </div>
           ) : (
             <span className="text-sm font-semibold">
-              ${formatPrice(product.price * product.orderQuantity)}
+              {symbol}
+              {formatPrice(product.price * product.orderQuantity)}
             </span>
           )}
           <div className="flex w-full items-end justify-between">
@@ -250,7 +255,8 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
         <div className="flex items-center justify-between">
           <h4 className="text-md font-medium">Subtotal:</h4>
           <span className="text-md font-medium">
-            ${formatPrice(getTotal().totalWithDiscount)}
+            {symbol}
+            {formatPrice(getTotal().totalWithDiscount)}
           </span>
         </div>
         <div className="flex w-full flex-col gap-2">

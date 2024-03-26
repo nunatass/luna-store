@@ -1,4 +1,7 @@
 'use client';
+
+import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
+import { Price, Product, Variant } from '@/common/types';
 import {
   AskQuestionIcon,
   CartIcon,
@@ -8,17 +11,15 @@ import {
   SunIcon,
 } from '@/components/icons';
 import { Button } from '@/components/ui/button';
+import { useCart } from '@/hooks/use-cart';
+import { useCurrency } from '@/hooks/use-currency';
+import { CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
+import { PriceBundle } from './price-bundle';
 import { ProductQuantity } from './product-quantity';
 import { ProductVariantSelect } from './product-variant-select';
-
-import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
-import { Price, Product, Variant } from '@/common/types';
-import { useCart } from '@/hooks/use-cart';
-import { CheckCircle } from 'lucide-react';
-import { PriceBundle } from './price-bundle';
 
 type DetailsWrapperProps = {
   product: Product;
@@ -29,6 +30,7 @@ const freeShippingThreshold =
 
 export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   const { addProduct: addCartProduct } = useCart();
+  const { symbol } = useCurrency();
 
   const [quantity, setQuantity] = useState<number>(1);
   const [price, setPrice] = useState<Price>(product.prices[0]);
@@ -164,7 +166,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         </div>
         <div className="flex items-center gap-2 text-sm">
           <CheckCircle className="h-4 w-4 text-gray-400" />
-          {`Free stander delivery on purchases of +$${freeShippingThreshold / 100}`}
+          {`Free stander delivery on purchases of +${symbol}${freeShippingThreshold / 100}`}
         </div>
       </div>
 

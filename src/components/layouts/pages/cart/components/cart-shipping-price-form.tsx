@@ -1,4 +1,5 @@
 'use client';
+
 import { ShippingMethod } from '@/common/types';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,6 +13,7 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useOrderCheckout } from '@/hooks/api/use-orders';
 import { useCart } from '@/hooks/use-cart';
+import { useCurrency } from '@/hooks/use-currency';
 import { formatPrice } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loadStripe } from '@stripe/stripe-js';
@@ -69,9 +71,11 @@ const FormSchema = z.object({
 
 export function CartShippingPriceForm() {
   const { getTotal, products } = useCart();
+
   const [method, setMethod] = useState('standard');
   const { total, totalWithDiscount } = getTotal();
   const { mutate: handleOrderCheckout, isPending } = useOrderCheckout();
+  const { symbol, currency } = useCurrency();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -99,6 +103,7 @@ export function CartShippingPriceForm() {
     const payload = {
       items: products,
       shippingMethod: data.shippingMethod,
+      currency,
     };
 
     const token = crypto
@@ -137,7 +142,7 @@ export function CartShippingPriceForm() {
               <div className="mb-4 flex flex-col gap-0.5">
                 <FormLabel className="text-lg">Shipping Methods</FormLabel>
                 <p className="text-[13px] text-gray-800">
-                  Free stander delivery on purchases of +$60
+                  {`Free stander delivery on purchases of +${symbol}60`}
                 </p>
               </div>
 
@@ -175,7 +180,8 @@ export function CartShippingPriceForm() {
                             <div className="flex gap-2 font-normal">
                               {shippingMethods[method].label}:
                               <p className="font-semibold">
-                                ${formatPrice(shippingMethods[method].value)}
+                                {symbol}
+                                {formatPrice(shippingMethods[method].value)}
                               </p>
                             </div>
                             <p className="text-xs text-gray-800">
@@ -197,7 +203,7 @@ export function CartShippingPriceForm() {
             <span>Total</span>
             <div className="flex flex-col items-center justify-center">
               <span>
-                $
+                {symbol}
                 {formatPrice(
                   totalWithDiscount +
                     shippingMethods[form.getValues().shippingMethod].value
@@ -211,7 +217,7 @@ export function CartShippingPriceForm() {
                   total + shippingMethods[form.getValues().shippingMethod].value
                 ) && (
                 <span className="text-sm font-normal line-through">
-                  $
+                  {symbol}
                   {formatPrice(
                     total +
                       shippingMethods[form.getValues().shippingMethod].value

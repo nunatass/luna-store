@@ -1,5 +1,6 @@
 import { Price } from '@/common/types';
 import { Button } from '@/components/ui/button';
+import { useCurrency } from '@/hooks/use-currency';
 import { cn, formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import { useCallback, useMemo } from 'react';
 
@@ -13,12 +14,14 @@ export function PriceBundle({
   onSelectChange,
   selectedPrice,
 }: PriceBundleProps) {
+  const { symbol } = useCurrency();
+
   const renderPrice = useMemo(() => {
     if (prices[0].discount > 0) {
       return (
         <>
           <span className="text-xl font-medium text-black">
-            $
+            {symbol}
             {formatPriceWithDiscount(prices[0].value, prices[0].discount).price}
           </span>
           <span className="text-base	line-through">
@@ -30,7 +33,8 @@ export function PriceBundle({
 
     return (
       <span className="text-xl font-medium text-black">
-        ${formatPrice(prices[0].value)}
+        {symbol}
+        {formatPrice(prices[0].value)}
       </span>
     );
   }, [prices]);
@@ -61,7 +65,7 @@ export function PriceBundle({
               <div className="flex flex-col gap-2">
                 <span className="text-lg font-semibold">{price.label}</span>
                 <span className="text-sm">
-                  Saved $
+                  {`Saved ${symbol}`}
                   {
                     formatPriceWithDiscount(price.value, price.discount)
                       .diference
@@ -70,10 +74,12 @@ export function PriceBundle({
               </div>
               <div className="flex flex-col items-end gap-2">
                 <span className="text-lg font-semibold">
-                  ${formatPriceWithDiscount(price.value, price.discount).price}
+                  {symbol}
+                  {formatPriceWithDiscount(price.value, price.discount).price}
                 </span>
                 <span className="text-sm line-through">
-                  ${formatPrice(price.value)}
+                  {symbol}
+                  {formatPrice(price.value)}
                 </span>
               </div>
             </div>

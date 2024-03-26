@@ -15,7 +15,8 @@ const fastShippingPrice = Number(process.env.NEXT_PUBLIC_SHIPPING_FAST) || 499;
 
 export const determineShippingOptions = (
   totalAmount: number,
-  shippingMethod: 'fast' | 'standard' | 'free'
+  shippingMethod: 'fast' | 'standard' | 'free',
+  currency: string
 ) => {
   if (shippingMethod === 'fast') {
     return [
@@ -24,7 +25,7 @@ export const determineShippingOptions = (
           type: 'fixed_amount',
           fixed_amount: {
             amount: fastShippingPrice,
-            currency: 'usd',
+            currency,
           },
           display_name: 'Fast shipping',
           delivery_estimate: {
@@ -44,7 +45,7 @@ export const determineShippingOptions = (
           type: 'fixed_amount',
           fixed_amount: {
             amount: 0,
-            currency: 'usd',
+            currency,
           },
           display_name: 'Free shipping',
           delivery_estimate: {
@@ -69,7 +70,7 @@ export const determineShippingOptions = (
           type: 'fixed_amount',
           fixed_amount: {
             amount: 0,
-            currency: 'usd',
+            currency,
           },
           display_name: 'Free shipping',
           delivery_estimate: {
@@ -89,7 +90,7 @@ export const determineShippingOptions = (
           type: 'fixed_amount',
           fixed_amount: {
             amount: fastShippingPrice,
-            currency: 'usd',
+            currency,
           },
           display_name: 'Fast shipping',
           delivery_estimate: {
@@ -113,7 +114,7 @@ export const determineShippingOptions = (
         type: 'fixed_amount',
         fixed_amount: {
           amount: standardShippingPrice,
-          currency: 'usd',
+          currency,
         },
         display_name: 'Standard shipping',
         delivery_estimate: {
@@ -133,7 +134,7 @@ export const determineShippingOptions = (
         type: 'fixed_amount',
         fixed_amount: {
           amount: fastShippingPrice,
-          currency: 'usd',
+          currency,
         },
         display_name: 'Fast shipping',
         delivery_estimate: {

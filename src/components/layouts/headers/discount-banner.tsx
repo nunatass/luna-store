@@ -1,8 +1,13 @@
+'use client';
+
+import { useCurrency } from '@/hooks/use-currency';
 import { cn } from '@/lib/utils';
+
 const freeShippingThreshold =
   Number(process.env.NEXT_PUBLIC_SHIPPING_THRESHOLD) || 6000;
 
 export const DiscountBanner = () => {
+  const { symbol } = useCurrency();
   return (
     <div
       className={cn(
@@ -15,7 +20,7 @@ export const DiscountBanner = () => {
       >
         <li />
         <li className="shrink-0 whitespace-nowrap">
-          {`Free stander delivery on purchases of +$${freeShippingThreshold / 100}`}
+          {`Free stander delivery on purchases of +${symbol}${freeShippingThreshold / 100}`}
         </li>
       </ul>
     </div>

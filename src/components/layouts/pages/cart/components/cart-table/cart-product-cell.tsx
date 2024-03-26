@@ -1,4 +1,6 @@
+'use client';
 import { Variant } from '@/common/types';
+import { useCurrency } from '@/hooks/use-currency';
 import { formatPrice, stringToId } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,6 +24,8 @@ export const CartProductCell = ({
   variant,
   orderQuantity,
 }: CartProductCellProps) => {
+  const { symbol } = useCurrency();
+
   return (
     <div className="flex items-center gap-2">
       <Link href={`/products/${stringToId(title)}`} aria-label="product item">
@@ -46,7 +50,8 @@ export const CartProductCell = ({
         {discount > 0 && (
           <div className="flex items-center gap-2 ">
             <span className="line-through">
-              ${formatPrice(price * orderQuantity)}
+              {symbol}
+              {formatPrice(price * orderQuantity)}
             </span>
 
             <span className="bg-black p-1 text-sm text-white">

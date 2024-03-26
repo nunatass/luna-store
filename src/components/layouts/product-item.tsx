@@ -1,7 +1,9 @@
 'use client';
+
 import type { Product } from '@/common/types';
 import { BoltIcon, CartIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
+import { useCurrency } from '@/hooks/use-currency';
 import * as pixel from '@/lib/fpixel';
 import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -46,6 +48,8 @@ type ProductSliderItemProps = {
 };
 
 export const ProductItem = ({ product }: ProductSliderItemProps) => {
+  const { symbol } = useCurrency();
+
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
 
   const isAddedToCart = cartProducts.some(
@@ -165,7 +169,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
         <div className="w-full">
           <div className="flex w-full items-center gap-2.5">
             <span className="sm:font-base sm:mb text-left text-sm  transition-all duration-300 ease-in-out">
-              $
+              {symbol}
               {
                 formatPriceWithDiscount(
                   product.prices[0].value,
@@ -176,7 +180,8 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
 
             {product.prices[0].discount > 0 && (
               <span className="text-right text-sm text-xs  text-red-700 line-through transition-all duration-300 ease-in-out sm:text-[13px]">
-                ${formatPrice(product.prices[0].value)}
+                {symbol}
+                {formatPrice(product.prices[0].value)}
               </span>
             )}
           </div>

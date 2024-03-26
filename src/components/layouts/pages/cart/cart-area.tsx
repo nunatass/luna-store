@@ -8,6 +8,7 @@ import Link from 'next/link';
 
 import { CartProduct } from '@/common/types';
 import { CloseTwoIcon } from '@/components/icons';
+import { useCurrency } from '@/hooks/use-currency';
 import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { ProductQuantity } from '../products/product-details/product-quantity';
 import { CartCheckout } from './components/cart-checkout';
@@ -28,10 +29,10 @@ const itemProductAnimationProps = {
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const CartArea = () => {
+  const { symbol } = useCurrency();
   const { removeAll, removeProduct, products, addQuantity, removeQuantity } =
     useCart();
 
-  // handle remove all products
   const handleClearProducts = () => {
     removeAll();
   };
@@ -77,7 +78,7 @@ export const CartArea = () => {
           {product.discount > 0 ? (
             <div className="flex w-full items-center gap-2">
               <span className="text-left text-sm">
-                $
+                {symbol}
                 {
                   formatPriceWithDiscount(
                     product.price * product.orderQuantity,
@@ -87,12 +88,14 @@ export const CartArea = () => {
               </span>
 
               <span className="text-right text-sm text-gray-600  line-through">
-                ${formatPrice(product.price * product.orderQuantity)}
+                {symbol}
+                {formatPrice(product.price * product.orderQuantity)}
               </span>
             </div>
           ) : (
             <span className="text-sm font-semibold">
-              ${formatPrice(product.price * product.orderQuantity)}
+              {symbol}
+              {formatPrice(product.price * product.orderQuantity)}
             </span>
           )}
           <div className="flex w-full items-end justify-between">

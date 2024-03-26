@@ -1,7 +1,9 @@
 'use client';
+
 import type { Product } from '@/common/types';
 import { CartIcon } from '@/components/icons';
 import { useCart } from '@/hooks/use-cart';
+import { useCurrency } from '@/hooks/use-currency';
 import * as pixel from '@/lib/fpixel';
 import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -42,6 +44,8 @@ type ProductSliderItemProps = {
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
+  const { symbol } = useCurrency();
+
   const { addProduct: addCartProduct, products: cartProducts } = useCart();
 
   const isAddedToCart = cartProducts.some(
@@ -141,47 +145,6 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
               </motion.button>
             )}
           </AnimatePresence>
-          {/* <motion.button
-            type="button"
-            {...animationsProps}
-            className="flex items-center gap-2"
-            onClick={handleOpenPreviewModal}
-          >
-            <motion.div
-              {...optionHoverAnimation}
-              className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11"
-            >
-              <QuickViewIcon />
-            </motion.div>
-            <motion.div
-              variants={tooltipAnimationVariants}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
-            >
-              Quick View
-            </motion.div>
-          </motion.button>
-          <motion.button
-            type="button"
-            {...animationsProps}
-            onClick={() => handleWishlistProduct(product)}
-            className="flex items-center gap-2"
-          >
-            <motion.div
-              {...optionHoverAnimation}
-              className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11"
-            >
-              <WishlistIcon />
-            </motion.div>
-
-            <motion.div
-              variants={tooltipAnimationVariants}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
-            >
-              Add To Wishlist
-            </motion.div>
-          </motion.button> */}
         </motion.div>
 
         <div className="z-10 flex flex-col gap-2 px-2 py-2 font-medium">
@@ -197,7 +160,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
           <div className="w-full">
             <div className="flex w-full items-center justify-between">
               <span className="sm:font-base w-full text-left text-sm transition-all duration-300  ease-in-out sm:mb-2">
-                $
+                {symbol}
                 {
                   formatPriceWithDiscount(
                     product.prices[0].value,
@@ -208,7 +171,8 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
 
               {product.prices[0].discount > 0 && (
                 <span className="sm:font-base w-full text-right text-sm text-xs text-gray-600  line-through transition-all duration-300 ease-in-out sm:mb-2">
-                  ${formatPrice(product.prices[0].value)}
+                  {symbol}
+                  {formatPrice(product.prices[0].value)}
                 </span>
               )}
             </div>

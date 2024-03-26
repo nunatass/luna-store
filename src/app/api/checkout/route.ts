@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 
     return {
       price_data: {
-        currency: 'USD',
+        currency: order?.payload?.currency,
         product_data: {
           images: [`${imageUrlPrefix}/${item.media}`],
           name: item.title,
@@ -62,7 +62,8 @@ export async function POST(req: NextRequest) {
       line_items: lineItems,
       shipping_options: determineShippingOptions(
         total,
-        order?.payload.shippingMethod
+        order?.payload?.shippingMethod,
+        order?.payload?.currency
       ),
       mode: 'payment',
       payment_method_types: ['card', 'paypal'],

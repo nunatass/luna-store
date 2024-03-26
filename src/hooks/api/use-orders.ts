@@ -13,12 +13,13 @@ type OrderCheckoutRequest = {
   payload: {
     items: CartProduct[];
     shippingMethod: ShippingMethod;
+    currency: string;
   };
   token: string;
 };
 
 type createOrderRequest = {
-  status: 'CHECKOUT' | 'PAYED' | 'SENT' | 'DONE';
+  status: 'CHECKOUT' | 'PAYED';
   phone: string;
   address: string;
   email: string;
