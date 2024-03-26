@@ -1,3 +1,5 @@
+'use client';
+
 import { Price } from '@/common/types';
 import { Button } from '@/components/ui/button';
 import { useCurrency } from '@/hooks/use-currency';
@@ -25,7 +27,8 @@ export function PriceBundle({
             {formatPriceWithDiscount(prices[0].value, prices[0].discount).price}
           </span>
           <span className="text-base	line-through">
-            ${formatPrice(prices[0].value)}
+            {symbol}
+            {formatPrice(prices[0].value)}
           </span>
         </>
       );

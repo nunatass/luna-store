@@ -27,7 +27,14 @@ const GBPCurrency: Currency = {
 };
 
 export function useCurrency(): Currency {
-  const { data, isPending, isError } = useQuery<ResponseData>({
+  let currency: Currency = defaultCurrency;
+
+  const storedCurrency = localStorage.getItem('currency');
+  if (storedCurrency !== null) {
+    currency = JSON.parse(storedCurrency);
+  }
+
+  const { data, isFetching, isError } = useQuery<ResponseData>({
     queryKey: ['currency'],
     queryFn: async () => {
       const response = await API.get('https://ipapi.co/json', { baseURL: '' });
@@ -35,33 +42,19 @@ export function useCurrency(): Currency {
     },
   });
 
-  if (isError || isPending) {
-    return defaultCurrency;
-  }
-
-  if (data?.currency === 'USA') {
-    return defaultCurrency;
+  if (isError || isFetching) {
+    return currency;
   }
 
   if (data?.currency === 'EUR') {
-    return EuroCurrency;
+    currency = EuroCurrency;
+  } else if (data?.currency === 'GBP') {
+    currency = GBPCurrency;
+  } else if (data?.currency !== 'USA' && data?.continent_code !== 'EU') {
+    currency = defaultCurrency;
   }
 
-  if (data?.currency === 'GBP') {
-    return GBPCurrency;
-  }
+  localStorage.setItem('currency', JSON.stringify(currency));
 
-  if (
-    data?.currency !== 'USA' &&
-    data?.currency !== 'EUR' &&
-    data?.currency !== 'GBP'
-  ) {
-    if (data?.continent_code !== 'EU') {
-      return defaultCurrency;
-    }
-
-    return EuroCurrency;
-  }
-
-  return defaultCurrency;
+  return currency;
 }
