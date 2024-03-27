@@ -30,11 +30,8 @@ export function useCurrency(): Currency {
   let currency: Currency = defaultCurrency;
 
   const storedCurrency = localStorage.getItem('currency');
-  if (storedCurrency !== null) {
-    currency = JSON.parse(storedCurrency);
-  }
 
-  const { data, isFetching, isError } = useQuery<ResponseData>({
+  const { data, isPending, isError } = useQuery<ResponseData>({
     queryKey: ['currency'],
     queryFn: async () => {
       const response = await API.get('https://ipapi.co/json', { baseURL: '' });
@@ -42,7 +39,12 @@ export function useCurrency(): Currency {
     },
   });
 
-  if (isError || isFetching) {
+  if (storedCurrency !== null) {
+    currency = JSON.parse(storedCurrency);
+    return currency;
+  }
+
+  if (isError || isPending) {
     return currency;
   }
 
