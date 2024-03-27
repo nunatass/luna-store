@@ -29,20 +29,17 @@ const GBPCurrency: Currency = {
 export function useCurrency(): Currency {
   let currency: Currency = defaultCurrency;
 
-  const storedCurrency = localStorage.getItem('currency');
-
   const { data, isPending, isError } = useQuery<ResponseData>({
     queryKey: ['currency'],
     queryFn: async () => {
+      const storedCurrency = localStorage.getItem('currency');
+      if (storedCurrency !== null) {
+        return JSON.parse(storedCurrency);
+      }
       const response = await API.get('https://ipapi.co/json', { baseURL: '' });
       return response.data;
     },
   });
-
-  if (storedCurrency !== null) {
-    currency = JSON.parse(storedCurrency);
-    return currency;
-  }
 
   if (isError || isPending) {
     return currency;
