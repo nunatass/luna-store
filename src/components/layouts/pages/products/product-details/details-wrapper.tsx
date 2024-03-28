@@ -166,7 +166,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         </div>
         <div className="flex items-center gap-2 text-sm">
           <CheckCircle className="h-4 w-4 text-gray-400" />
-          {`Free stander delivery on purchases of +${symbol}${freeShippingThreshold / 100}`}
+          {`Free standard delivery on purchases of +${symbol}${freeShippingThreshold / 100}`}
         </div>
       </div>
 
