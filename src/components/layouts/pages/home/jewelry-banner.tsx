@@ -28,7 +28,7 @@ export const JewelryBanner = () => {
           priority
           unoptimized
         />
-        <div className="button absolute left-1/2 top-1/2 z-10 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-white">
+        <div className="button absolute left-1/2 top-1/2 z-10 -mt-16 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-white">
           <motion.div
             className="slider"
             animate={{ top: '-100%' }}
