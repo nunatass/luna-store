@@ -68,7 +68,7 @@ export const JewelryBanner = () => {
 
 function PerspectiveText({ label }: { label: string }) {
   return (
-    <div className="perspectiveText text-5xl font-bold">
+    <div className="perspectiveText text-2xl font-bold md:text-5xl">
       <p>{label}</p>
       <p>{label}</p>
     </div>
