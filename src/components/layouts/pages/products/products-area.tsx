@@ -165,8 +165,7 @@ export function ProductsArea() {
           <motion.div
             className={cn('fixed w-72 opacity-0', sticky && 'opacity-1')}
             style={{
-              top:
-                position.get() > -250  ? 100 : position,
+              top: position.get() > -250 ? 100 : position,
             }}
           >
             <ProductFilterArea />

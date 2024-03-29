@@ -1,119 +1,76 @@
 'use client';
 
-import banner2 from '@/assets/img/home/banner-2.png';
-import banner3 from '@/assets/img/home/banner-3.png';
 import banner from '@/assets/img/home/banner.jpeg';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { useSticky } from '@/hooks/use-sticky';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useCallback, useState } from 'react';
-const animationVariants = {
-  initial: { scale: 1.2, opacity: 0.45 },
-  animate: { scale: 1, opacity: 1 },
-  exit: {
-    scale: 1,
-    opacity: 0.5,
-    transition: { duration: 0.3, ease: 'easeInOut' },
-  },
-};
-export const JewelryBanner = () => {
-  const [currentBanner, setCurrentBanner] = useState({ key: 'banner 1' });
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 
-  const handleChangeBanner = useCallback(
-    (key: string) => {
-      setCurrentBanner({ key });
-    },
-    [setCurrentBanner]
-  );
+const animateButton = {
+  initial: { opacity: 0, scale: 0 },
+  animate: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0 },
+  transition: { duration: 0.9, ease: [0.34, 1.56, 0.64, 1] },
+};
+
+export const JewelryBanner = () => {
+  const { sticky } = useSticky();
 
   return (
     <div className=" relative h-screen w-screen overflow-hidden bg-[#AB9774]">
-      <AnimatePresence>
-        <motion.section
-          key={currentBanner.key}
-          {...animationVariants}
-          transition={{ duration: 1.1, ease: 'easeInOut' }}
-          className="relative h-full w-full"
-        >
-          <Image
-            fill
-            src={banner}
-            alt="banner image"
-            className={cn(
-              'hidden object-cover',
-              currentBanner.key === 'banner 1' && 'block'
-            )}
-            priority
-            unoptimized
-          />
+      <section className="relative h-full w-full">
+        <Image
+          fill
+          src={banner}
+          alt="banner image"
+          className="object-cover"
+          priority
+          unoptimized
+        />
+        <div className="button absolute left-1/2 top-1/2 z-10 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-white">
+          <motion.div
+            className="slider"
+            animate={{ top: '-100%' }}
+            transition={{
+              duration: 0.5,
+              type: 'tween',
+              ease: [0.76, 0, 0.24, 1],
+            }}
+          >
+            <div className="el" onClick={() => {}}>
+              <PerspectiveText label="20% OFF ON OUR FAVORITES" />
+            </div>
+            <div className="el" onClick={() => {}}>
+              <PerspectiveText label="BE YOU, WEARING US." />
+            </div>
+          </motion.div>
+        </div>
 
-          <Image
-            fill
-            src={banner2}
-            alt="banner image"
-            className={cn(
-              'hidden object-cover',
-              currentBanner.key === 'banner 2' && 'block'
+        <div className="absolute bottom-40 left-1/2 z-30 -translate-x-1/2 sm:bottom-16 md:left-20 md:translate-x-0">
+          <AnimatePresence>
+            {!sticky && (
+              <motion.div {...animateButton}>
+                <Button
+                  className="w-36 bg-white text-sm text-black transition-all duration-300 ease-in-out hover:bg-black hover:text-white md:w-56"
+                  asChild
+                >
+                  <AnchorLink href="#products">SHOP NOW</AnchorLink>
+                </Button>
+              </motion.div>
             )}
-            priority
-            unoptimized
-          />
-          <Image
-            fill
-            src={banner3}
-            alt="banner image"
-            className={cn(
-              'hidden object-cover',
-              currentBanner.key === 'banner 3' && 'block'
-            )}
-            priority
-            unoptimized
-          />
-          <div className="absolute left-1/2 top-1/2 z-10 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center text-white/80">
-            <span className="text-3xl md:text-5xl">Spring Collections</span>
-            <span className="text-lg">25% OFF</span>
-          </div>
-        </motion.section>
-      </AnimatePresence>
-      <div className="absolute bottom-20 left-8 z-10 flex h-4 w-20  gap-4  ">
-        <Button
-          className="bg-transparent px-1.5 hover:bg-transparent"
-          onClick={() => handleChangeBanner('banner 1')}
-          aria-label="banner 1 button"
-        >
-          <span
-            className={cn(
-              'h-2 w-2 cursor-pointer rounded-full bg-transparent ring-2 ring-white',
-              currentBanner.key === 'banner 1' && 'bg-white'
-            )}
-          />
-        </Button>
-        <Button
-          className="bg-transparent px-1.5 hover:bg-transparent"
-          onClick={() => handleChangeBanner('banner 2')}
-          aria-label="banner 2 button"
-        >
-          <span
-            className={cn(
-              'h-2 w-2 cursor-pointer rounded-full bg-transparent ring-2 ring-white',
-              currentBanner.key === 'banner 2' && 'bg-white'
-            )}
-          />
-        </Button>
-        <Button
-          className="bg-transparent px-1.5 hover:bg-transparent"
-          onClick={() => handleChangeBanner('banner 3')}
-          aria-label="banner 3 button"
-        >
-          <span
-            className={cn(
-              'h-2 w-2 cursor-pointer rounded-full bg-transparent ring-2 ring-white',
-              currentBanner.key === 'banner 3' && 'bg-white'
-            )}
-          />
-        </Button>
-      </div>
+          </AnimatePresence>
+        </div>
+      </section>
     </div>
   );
 };
+
+function PerspectiveText({ label }: { label: string }) {
+  return (
+    <div className="perspectiveText text-5xl font-bold">
+      <p>{label}</p>
+      <p>{label}</p>
+    </div>
+  );
+}
