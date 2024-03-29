@@ -39,7 +39,7 @@ export const JewelryBanner = () => {
             }}
           >
             <div className="el" onClick={() => {}}>
-              <PerspectiveText label="20% OFF ON OUR FAVORITES" />
+              <PerspectiveText label="BE YOU, WEARING US." />
             </div>
             <div className="el" onClick={() => {}}>
               <PerspectiveText label="BE YOU, WEARING US." />
