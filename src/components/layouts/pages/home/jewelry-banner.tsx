@@ -1,10 +1,8 @@
 'use client';
 
-import banner from '@/assets/img/home/banner.jpeg';
 import { Button } from '@/components/ui/button';
 import { useSticky } from '@/hooks/use-sticky';
 import { AnimatePresence, motion } from 'framer-motion';
-import Image from 'next/image';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 const animateButton = {
