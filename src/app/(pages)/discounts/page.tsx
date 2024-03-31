@@ -19,7 +19,7 @@ export default function ProductPage() {
   return (
     <Wrapper className="bg-white">
       <Header secondary />
-      <div className="mt-32">
+      <div className="mt-36">
         <Breadcrumb title="Products on Sale" disableSecondary />
       </div>
       <DiscountProductsArea discount={discount} />

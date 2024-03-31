@@ -1,7 +1,8 @@
+import contactImage from '@/assets/img/contact/contact.webp';
 import { Header } from '@/components/layouts/headers/header';
 import { ContactArea } from '@/components/layouts/pages/contact/contact-area';
 import { Wrapper } from '@/components/layouts/wrapper';
-import { Breadcrumb } from '@/components/ui/breadcrumb';
+import Image from 'next/image';
 
 export const metadata = {
   title: 'Contact US | Stella Stone',
@@ -18,8 +19,24 @@ export default function ContactPage() {
   return (
     <Wrapper>
       <Header secondary />
-      <div className="mt-32">
-        <Breadcrumb title="Keep In Touch With Us" label="Contact Us" />
+      <div className="container relative mt-20 pt-8">
+        <Image
+          src={contactImage}
+          alt="contact image"
+          width={350}
+          height={300}
+          className="mt-8 h-[300px] w-full object-cover"
+          unoptimized
+        />
+        <div className="absolute -left-2 bottom-6 ml-8 flex flex-col gap-4 text-white sm:left-6">
+          <h1 className="text-3xl font-medium md:text-4xl">
+            Keep In Touch With Us
+          </h1>
+          <p className="max-w-[400px] text-xs sm:text-sm">
+            If you need help with an order, questions about our products or
+            something else entirely, you can contact us here.
+          </p>
+        </div>
       </div>
       <ContactArea />
     </Wrapper>

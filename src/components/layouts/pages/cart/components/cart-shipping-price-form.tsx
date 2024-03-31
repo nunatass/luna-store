@@ -32,7 +32,7 @@ const standardShippingPrice =
 const checkoutHashPassword = process.env
   .NEXT_PUBLIC_CHECK_HASH_PASSWORD as string;
 
-const fastShippingPrice = Number(process.env.NEXT_PUBLIC_SHIPPING_FAST) || 499;
+// const fastShippingPrice = Number(process.env.NEXT_PUBLIC_SHIPPING_FAST) || 499;
 
 type ShippingMethods = {
   [key: string]: {
@@ -48,20 +48,20 @@ const shippingMethods: ShippingMethods = {
     id: 'free',
     label: 'Free shipping',
     value: 0,
-    description: '5-10 business days',
+    description: '7-10 business days',
   },
   standard: {
     id: 'standard',
-    label: 'Standard shipping',
+    label: 'Shipping',
     value: standardShippingPrice,
-    description: '5-10 business days',
+    description: '7-10 business days',
   },
-  fast: {
-    id: 'fast',
-    label: 'Fast shipping',
-    value: fastShippingPrice,
-    description: '3-5 business days',
-  },
+  // fast: {
+  //   id: 'fast',
+  //   label: 'Fast shipping',
+  //   value: fastShippingPrice,
+  //   description: '5-7 business days',
+  // },
 };
 
 const FormSchema = z.object({
@@ -198,7 +198,7 @@ export function CartShippingPriceForm() {
                       </FormLabel>
                     </FormItem>
                   )}
-                  <FormItem
+                  {/* <FormItem
                     key={'fast'}
                     className="flex items-center space-x-3 space-y-0"
                   >
@@ -217,7 +217,7 @@ export function CartShippingPriceForm() {
                         {shippingMethods['fast'].description}
                       </p>
                     </FormLabel>
-                  </FormItem>
+                  </FormItem> */}
                 </RadioGroup>
               </FormControl>
               <FormMessage />

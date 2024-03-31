@@ -13,7 +13,7 @@ export default function TermsAndConditionsPage() {
   return (
     <Wrapper>
       <Header secondary />
-      <div className="mt-32">
+      <div className="mt-36">
         <Breadcrumb title="Terms of Services" label="Terms of Services" />
       </div>
       <TermsAndConditionsArea />

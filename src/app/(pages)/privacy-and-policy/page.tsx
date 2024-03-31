@@ -14,7 +14,7 @@ export default function PolicyAndPrivacy() {
   return (
     <Wrapper>
       <Header secondary />
-      <div className="mt-32">
+      <div className="mt-36">
         <Breadcrumb title="Policy And Privacy" label="Policy And Privacy" />
       </div>
       <PrivacyAndPolicyArea />

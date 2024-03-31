@@ -151,6 +151,12 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         )}
       </div>
 
+      <div>
+        <div className="flex h-12 w-full items-center justify-center bg-[#669e5c] text-lg text-white">
+          Buy 2 items and get one free
+        </div>
+      </div>
+
       <div className="flex border-b-[1px] pb-2">
         <Button variant="ghost" type="button" asChild className="text-sm">
           <Link href="/contact" className="flex gap-2" aria-label="contact">

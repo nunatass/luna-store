@@ -7,7 +7,7 @@ export default function Loading() {
   return (
     <Wrapper>
       <Header secondary />
-      <div className="mt-20">
+      <div className="mt-32">
         <Breadcrumb label=" " />
       </div>
       <div className="min-h-[60vh]">

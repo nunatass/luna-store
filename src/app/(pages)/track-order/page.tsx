@@ -12,7 +12,7 @@ export default function FAQsPage() {
   return (
     <Wrapper>
       <Header secondary />
-      <div className="mt-32">
+      <div className="mt-36">
         <Breadcrumb title="Track Your Order" />
       </div>
       <TrackOrderArea />

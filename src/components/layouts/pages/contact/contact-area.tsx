@@ -7,7 +7,7 @@ import { socialData } from '@/data/social-data';
 export const ContactArea = () => {
   return (
     <section className="container pb-20 pt-8">
-      <div className="flex flex-row bg-white px-10 py-12 drop-shadow-md">
+      <div className="flex flex-row bg-white px-10 py-12">
         <div className="w-full space-y-8">
           <div className="flex flex-col gap-2">
             <h2 className="text-xl font-medium md:text-3xl">Sent A Message</h2>
@@ -35,16 +35,12 @@ export const ContactArea = () => {
               </div>
 
               <div className="flex flex-col gap-4">
-                <div className="flex gap-2 p-2">
+                <div className="flex gap-2">
                   {socialData.map(({ link, id, icon: Icon }) => (
-                    <a
-                      href={link}
-                      key={id}
-                      target="_blank"
-                      className="ring-[1px] ring-black"
-                    >
-                      <div className="bg-white p-2 transition-all duration-300 ease-in-out md:hover:bg-black md:hover:text-white">
-                        <Icon className="h-4 w-4" />
+                    <a href={link} key={id} target="_blank" className="">
+                      <div className="flex items-center gap-4 text-gray-700">
+                        <Icon className="h-5 w-5" />
+                        instagram
                       </div>
                     </a>
                   ))}

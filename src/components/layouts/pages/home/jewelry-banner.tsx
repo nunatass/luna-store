@@ -18,16 +18,8 @@ export const JewelryBanner = () => {
   const { sticky } = useSticky();
 
   return (
-    <div className=" relative h-screen w-screen overflow-hidden bg-[#AB9774]">
-      <section className="relative h-full w-full">
-        <Image
-          fill
-          src={banner}
-          alt="banner image"
-          className="object-cover"
-          priority
-          unoptimized
-        />
+    <div className=" relative h-screen w-screen overflow-hidden">
+      <section className="relative h-full w-full bg-[#AB9774] bg-[url('/banner.jpeg')] bg-center bg-no-repeat">
         <div className="button absolute left-1/2 top-1/2 z-10 -mt-16 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-white">
           <div className="hidden md:block">
             <div className="text-2xl font-bold md:text-5xl">

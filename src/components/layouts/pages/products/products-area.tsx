@@ -132,7 +132,7 @@ export function ProductsArea() {
   }
 
   return (
-    <section className="container mb-20 mt-16 overflow-x-hidden">
+    <section className="container mb-20 mt-24 overflow-x-hidden">
       <div className="relative my-12">
         <Image
           src={

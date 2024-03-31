@@ -18,7 +18,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   return (
     <Wrapper className="bg-white">
       <Header secondary />
-      <div className="container relative mt-8 pt-8">
+      <div className="container relative mt-20 pt-8">
         {collection?.title && (
           <Image
             src={collectionsBanner[collection?.title].image}

@@ -13,7 +13,7 @@ export default function SizeGuidePage() {
   return (
     <Wrapper className="bg-white">
       <Header secondary />
-      <div className="mt-32">
+      <div className="mt-36">
         <Breadcrumb title="Size Guide" label="" />
       </div>
       <SizeGuideArea />

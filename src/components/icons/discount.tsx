@@ -1,4 +1,8 @@
-export const DiscountIcon = () => {
+type DiscountIconProps = {
+  className?: string;
+};
+
+export const DiscountIcon = ({ className }: DiscountIconProps) => {
   return (
     <svg
       width="31"
@@ -6,6 +10,7 @@ export const DiscountIcon = () => {
       viewBox="0 0 31 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <mask
         id="mask0_1211_583"

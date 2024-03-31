@@ -29,12 +29,12 @@ export const CartProductCell = ({
   return (
     <div className="flex items-center gap-2">
       <Link href={`/products/${stringToId(title)}`} aria-label="product item">
-        <div className="bg-gray-200">
+        <div className="relative h-24 w-20 bg-gray-200">
           <Image
             src={`${imageUrlPrefix}/${media}`}
             alt="product img"
-            width={70}
-            height={110}
+            fill
+            className="object-cover"
             priority
           />
         </div>

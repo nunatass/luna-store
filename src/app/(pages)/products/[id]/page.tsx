@@ -35,7 +35,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   return (
     <Wrapper>
       <Header secondary />
-      <div className="mt-20">
+      <div className="mt-36">
         <Breadcrumb label={product?.category.name || ' '} />
       </div>
       <div className="min-h-[60vh]">{content}</div>
