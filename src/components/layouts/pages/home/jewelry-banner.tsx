@@ -30,26 +30,10 @@ export const JewelryBanner = () => {
         />
         <div className="button absolute left-1/2 top-1/2 z-10 -mt-16 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-white">
           <div className="hidden md:block">
-            <motion.div
-              className="slider"
-              animate={{ top: '-100%' }}
-              transition={{
-                duration: 0.5,
-                type: 'tween',
-                ease: [0.76, 0, 0.24, 1],
-              }}
-            >
-              <div className="el" onClick={() => {}}>
-                <PerspectiveText label="BE YOU, WEARING US." />
-              </div>
-              <div className="el" onClick={() => {}}>
-                <PerspectiveText label="BE YOU, WEARING US." />
-              </div>
-            </motion.div>
+            <div className="text-2xl font-bold md:text-5xl">
+              BE YOU, WEARING US.
+            </div>
           </div>
-          <p className="text-2xl font-bold md:hidden md:text-5xl">
-            BE YOU, WEARING US.
-          </p>
         </div>
 
         <div className="absolute bottom-40 left-1/2 z-30 -translate-x-1/2 sm:bottom-16 md:left-20 md:translate-x-0">
@@ -70,12 +54,3 @@ export const JewelryBanner = () => {
     </div>
   );
 };
-
-function PerspectiveText({ label }: { label: string }) {
-  return (
-    <div className="perspectiveText text-2xl font-bold md:text-5xl">
-      <p>{label}</p>
-      <p>{label}</p>
-    </div>
-  );
-}
