@@ -141,7 +141,7 @@ export function CartShippingPriceForm() {
               <div className="mb-4 flex flex-col gap-0.5">
                 <FormLabel className="text-lg">Shipping Methods</FormLabel>
                 <p className="text-[13px] text-gray-800">
-                  {`Free stander delivery on purchases of +${symbol}60`}
+                  {`Free shipping on purchases over ${symbol}60`}
                 </p>
               </div>
 
