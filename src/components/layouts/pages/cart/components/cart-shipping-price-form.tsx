@@ -1,6 +1,5 @@
 'use client';
 
-import { ShippingMethod } from '@/common/types';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -156,42 +155,69 @@ export function CartShippingPriceForm() {
                   value={form.getValues().shippingMethod}
                   className="flex flex-col space-y-2"
                 >
-                  {Object.keys(shippingMethods).map(
-                    (methodKey: keyof typeof shippingMethods) => {
-                      const method = methodKey as ShippingMethod;
-                      return (
-                        <FormItem
-                          key={method}
-                          className="flex items-center space-x-3 space-y-0"
-                        >
-                          <FormControl>
-                            <RadioGroupItem
-                              value={method}
-                              disabled={
-                                (method === 'free' &&
-                                  totalWithDiscount <
-                                    freeShippingTrashHolder) ||
-                                (method === 'standard' &&
-                                  totalWithDiscount > freeShippingTrashHolder)
-                              }
-                            />
-                          </FormControl>
-                          <FormLabel className="flex flex-col gap-2">
-                            <div className="flex gap-2 font-normal">
-                              {shippingMethods[method].label}:
-                              <p className="font-semibold">
-                                {symbol}
-                                {formatPrice(shippingMethods[method].value)}
-                              </p>
-                            </div>
-                            <p className="text-xs text-gray-800">
-                              {shippingMethods[method].description}
-                            </p>
-                          </FormLabel>
-                        </FormItem>
-                      );
-                    }
+                  {totalWithDiscount >= freeShippingTrashHolder ? (
+                    <FormItem
+                      key="free"
+                      className="flex items-center space-x-3 space-y-0"
+                    >
+                      <FormControl>
+                        <RadioGroupItem value="free" />
+                      </FormControl>
+                      <FormLabel className="flex flex-col gap-2">
+                        <div className="flex gap-2 font-normal">
+                          {shippingMethods['free'].label}:
+                          <p className="font-semibold">
+                            {symbol}
+                            {formatPrice(shippingMethods['free'].value)}
+                          </p>
+                        </div>
+                        <p className="text-xs text-gray-800">
+                          {shippingMethods['free'].description}
+                        </p>
+                      </FormLabel>
+                    </FormItem>
+                  ) : (
+                    <FormItem
+                      key="standard"
+                      className="flex items-center space-x-3 space-y-0"
+                    >
+                      <FormControl>
+                        <RadioGroupItem value="standard" />
+                      </FormControl>
+                      <FormLabel className="flex flex-col gap-2">
+                        <div className="flex gap-2 font-normal">
+                          {shippingMethods['standard'].label}:
+                          <p className="font-semibold">
+                            {symbol}
+                            {formatPrice(shippingMethods['standard'].value)}
+                          </p>
+                        </div>
+                        <p className="text-xs text-gray-800">
+                          {shippingMethods['standard'].description}
+                        </p>
+                      </FormLabel>
+                    </FormItem>
                   )}
+                  <FormItem
+                    key={'fast'}
+                    className="flex items-center space-x-3 space-y-0"
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="fast" />
+                    </FormControl>
+                    <FormLabel className="flex flex-col gap-2">
+                      <div className="flex gap-2 font-normal">
+                        {shippingMethods['fast'].label}:
+                        <p className="font-semibold">
+                          {symbol}
+                          {formatPrice(shippingMethods['fast'].value)}
+                        </p>
+                      </div>
+                      <p className="text-xs text-gray-800">
+                        {shippingMethods['fast'].description}
+                      </p>
+                    </FormLabel>
+                  </FormItem>
                 </RadioGroup>
               </FormControl>
               <FormMessage />
