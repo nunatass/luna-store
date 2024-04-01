@@ -31,14 +31,14 @@ export const Menus = ({ secondary }: MenusProps) => {
                   <span className="px-4 font-medium">{product.title}</span>
                   <ul className="flex flex-col gap-4 text-sm">
                     {product.megaMenus.map((menu) => (
-                      <li
-                        key={menu.title}
-                        className="-mt-2 px-4 py-1.5 hover:bg-gray-100"
-                      >
-                        <Link href={menu.link} aria-label={menu.title}>
+                      <Link href={menu.link} aria-label={menu.title}>
+                        <li
+                          key={menu.title}
+                          className="-mt-2 px-4 py-1.5 hover:bg-gray-100"
+                        >
                           {menu.title}
-                        </Link>
-                      </li>
+                        </li>
+                      </Link>
                     ))}
                   </ul>
                 </li>
