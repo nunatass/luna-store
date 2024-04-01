@@ -36,6 +36,7 @@ export const CategoryFilter = () => {
             <li key={category.id} className="group">
               <Link
                 aria-label={category.name}
+                scroll={false}
                 href={`/products?category=${category.name.toLocaleLowerCase()}`}
               >
                 <Button

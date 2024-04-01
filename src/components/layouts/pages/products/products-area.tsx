@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { keys, useProducts } from '@/hooks/api/use-product';
 import { useFilter } from '@/hooks/use-filter';
-import { cn } from '@/lib/utils';
+import { cn, formatPriceWithDiscount } from '@/lib/utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
@@ -20,22 +20,10 @@ import Image from 'next/image';
 
 import { productsBanner } from '@/data/product-banner-data';
 import { useCategories } from '@/hooks/api/use-categories';
-import { useSticky } from '@/hooks/use-sticky';
-import { motion, useScroll, useTransform } from 'framer-motion';
 
 export function ProductsArea() {
   const productsContainer = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: productsContainer,
-    offset: ['start start', 'end end'],
-  });
-
-  const position = useTransform(scrollYProgress, [0, 1], [100, -250]);
-
   const searchParams = useSearchParams();
-
-  const { sticky } = useSticky(386);
 
   const { data: categories, isPending: isCategoryPending } = useCategories();
 
@@ -70,7 +58,12 @@ export function ProductsArea() {
       products.filter((product) => {
         const priceMatches =
           product.prices.length > 0 &&
-          product.prices[0].value <= filterPrice * 100;
+          Number(
+            formatPriceWithDiscount(
+              product.prices[0].value,
+              product.prices[0].discount
+            ).price
+          ) <= filterPrice;
         return priceMatches;
       }),
     [filterPrice, products]
@@ -112,17 +105,6 @@ export function ProductsArea() {
     return null;
   }
 
-  const renderNotFound = () => {
-    if (!isPending && productItems.length === 0) {
-      return (
-        <div className="absolute left-1/2 top-[20%] flex -translate-x-1/2 flex-col gap-4 sm:top-[30%] lg:left-[60%]">
-          <p>No item found</p>
-          <Button onClick={handleClearFilter}>Reset</Button>
-        </div>
-      );
-    }
-  };
-
   if (!isPending && !isError && products?.length > 0) {
     content = productItems.map((product) => (
       <div key={product.id}>
@@ -132,7 +114,7 @@ export function ProductsArea() {
   }
 
   return (
-    <section className="container mb-20 mt-24 overflow-x-hidden">
+    <section className="scrollbar-hide container mb-20 mt-24 overflow-x-hidden">
       <div className="relative my-12">
         <Image
           src={
@@ -159,23 +141,7 @@ export function ProductsArea() {
         </div>
       </div>
       <ProductAreaHeader />
-
       <div ref={productsContainer} className="relative flex w-full md:gap-4">
-        <div>
-          <motion.div
-            className={cn('fixed w-72 opacity-0', sticky && 'opacity-1')}
-            style={{
-              top: position.get() > -250 ? 100 : position,
-            }}
-          >
-            <ProductFilterArea />
-          </motion.div>
-          <div
-            className={cn('hidden w-72 lg:block', sticky && '-z-10 opacity-0')}
-          >
-            <ProductFilterArea />
-          </div>
-        </div>
         <SidePanel isOpen={isFilterPanelOpen} setIsOpen={setIsFilterPanelOpen}>
           <div className="flex flex-col px-8">
             <div className="absolute left-0 right-0 top-0 flex w-full items-center justify-between border-b-[0.5px] bg-white p-8 pb-4">
@@ -194,12 +160,19 @@ export function ProductsArea() {
           </div>
         </SidePanel>
         <div id="products">
+          {!isPending && productItems.length === 0 && (
+            <div className="-ml-6 flex h-[300px] w-screen flex-col items-center justify-center gap-4">
+              <p>No item found</p>
+              <Button onClick={handleClearFilter}>Reset</Button>
+            </div>
+          )}
+
           <InfiniteScroll
             dataLength={productItems.length}
             next={fetchNextPage}
             hasMore={hasNextPage && productItems.length > 0}
             loader={
-              <div className="flex flex-col gap-4 overflow-hidden">
+              <div className="flex flex-col gap-4 overflow-hidden  md:gap-6">
                 <div className="flex w-full flex-wrap justify-center justify-items-center gap-4 ">
                   <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
                   <Skeleton className="h-60 w-40 rounded-none  sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]" />
@@ -211,9 +184,8 @@ export function ProductsArea() {
                 </span>
               </div>
             }
-            endMessage={renderNotFound()}
             className={cn(
-              'flex w-full flex-wrap justify-center justify-items-center gap-4 '
+              'flex w-full flex-wrap justify-center justify-items-center gap-4 md:gap-6 '
             )}
           >
             {content}
