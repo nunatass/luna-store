@@ -17,7 +17,7 @@ export const JewelryBanner = () => {
 
   return (
     <div className=" relative h-screen w-screen overflow-hidden">
-      <section className="relative h-full w-full bg-[#AB9774] bg-[url('/banner.jpeg')] bg-center bg-no-repeat">
+      <section className="relative h-full w-full bg-[#AB9774] bg-[url('/banner.jpeg')] bg-center bg-no-repeat bg-cover">
         <div className="button absolute left-1/2 top-1/2 z-10 -mt-16 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-white">
           <div className="hidden md:block">
             <div className="text-2xl font-bold md:text-5xl">
