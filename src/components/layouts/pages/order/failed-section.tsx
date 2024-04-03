@@ -1,12 +1,15 @@
+import { Breadcrumb } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
+import * as pixel from '@/lib/fpixel';
 import { AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export function FailedSection() {
+  pixel.event('Order Failed');
   return (
     <section className="container flex h-screen flex-col justify-center">
-      <h1 className="text-2xl font-semibold">Order Failed</h1>
-      <div className="-mt-20 flex h-full w-full flex-col items-center justify-center  gap-8">
+      <Breadcrumb title="Order Failed" label="Order Failed" />
+      <div className="-mt-40 flex h-full w-full flex-col items-center justify-center  gap-8">
         <div className="flex items-center gap-2">
           <AlertCircle className="h-12 w-12 text-gray-800" />
           <div className="flex flex-col">

@@ -174,7 +174,6 @@ export const CartArea = () => {
               </div>
             </div>
           </div>
-
           <CartCheckout />
         </div>
       )}

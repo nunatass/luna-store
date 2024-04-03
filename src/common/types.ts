@@ -81,4 +81,11 @@ export type Variant = {
   label: string;
 };
 
+export type CheckoutProduct = {
+  productId: string;
+  media: string;
+  variantId?: string;
+  quantity: number;
+};
+
 export type ShippingMethod = 'free' | 'standard' | 'fast';

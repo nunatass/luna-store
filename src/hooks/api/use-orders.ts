@@ -1,4 +1,4 @@
-import { CartProduct, ShippingMethod } from '@/common/types';
+import { CheckoutProduct } from '@/common/types';
 import { API } from '@/lib/axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -10,16 +10,11 @@ const keys = {
 };
 
 type OrderCheckoutRequest = {
-  payload: {
-    items: CartProduct[];
-    shippingMethod: ShippingMethod;
-    currency: string;
-  };
-  token: string;
+  products: CheckoutProduct[];
 };
 
 type createOrderRequest = {
-  status: 'CHECKOUT' | 'PAYED';
+  status: 'CHECKOUT';
   phone: string;
   address: string;
   email: string;
@@ -28,6 +23,7 @@ type createOrderRequest = {
     {
       productId: string;
       quantity: number;
+      variant?: string;
     },
   ];
 };
@@ -37,9 +33,7 @@ export function useOrderCheckout() {
 
   return useMutation({
     mutationFn: async (orderCheckoutRequest: OrderCheckoutRequest) => {
-      const res = await API.post('/api/checkout', orderCheckoutRequest, {
-        baseURL: '',
-      });
+      const res = await API.post('/checkout', orderCheckoutRequest);
       return res.data;
     },
     onSuccess: () => {

@@ -1,5 +1,6 @@
 'use client';
 
+import { CheckoutProduct } from '@/common/types';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -15,12 +16,10 @@ import { useCart } from '@/hooks/use-cart';
 import { useCurrency } from '@/hooks/use-currency';
 import { formatPrice } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loadStripe } from '@stripe/stripe-js';
-import crypto from 'crypto';
 import { Loader } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import * as z from 'zod';
 
 const freeShippingTrashHolder =
@@ -28,11 +27,6 @@ const freeShippingTrashHolder =
 
 const standardShippingPrice =
   Number(process.env.NEXT_PUBLIC_SHIPPING_STANDARD) || 299;
-
-const checkoutHashPassword = process.env
-  .NEXT_PUBLIC_CHECK_HASH_PASSWORD as string;
-
-// const fastShippingPrice = Number(process.env.NEXT_PUBLIC_SHIPPING_FAST) || 499;
 
 type ShippingMethods = {
   [key: string]: {
@@ -56,12 +50,6 @@ const shippingMethods: ShippingMethods = {
     value: standardShippingPrice,
     description: '7-10 business days',
   },
-  // fast: {
-  //   id: 'fast',
-  //   label: 'Fast shipping',
-  //   value: fastShippingPrice,
-  //   description: '5-7 business days',
-  // },
 };
 
 const FormSchema = z.object({
@@ -69,12 +57,14 @@ const FormSchema = z.object({
 });
 
 export function CartShippingPriceForm() {
+  const router = useRouter();
+
   const { getTotal, products } = useCart();
 
   const [method, setMethod] = useState('standard');
   const { total, totalWithDiscount } = getTotal();
   const { mutate: handleOrderCheckout, isPending } = useOrderCheckout();
-  const { symbol, currency } = useCurrency();
+  const { symbol } = useCurrency();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -87,41 +77,23 @@ export function CartShippingPriceForm() {
   useEffect(() => {
     const selectedMethod =
       totalWithDiscount > freeShippingTrashHolder ? 'free' : 'standard';
-    if (method !== 'fast') {
-      setMethod(selectedMethod);
-      form.setValue('shippingMethod', selectedMethod);
-    }
+    setMethod(selectedMethod);
+    form.setValue('shippingMethod', selectedMethod);
   }, [setMethod, totalWithDiscount, method, form]);
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const stripe = await loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
-    );
-
-    if (!stripe) throw new Error('Stripe failed to initialize.');
-    const payload = {
-      items: products,
-      shippingMethod: data.shippingMethod,
-      currency,
-    };
-
-    const token = crypto
-      .createHmac('sha256', checkoutHashPassword)
-      .update(JSON.stringify(payload))
-      .digest('hex');
-
+  async function onSubmit() {
     handleOrderCheckout(
       {
-        payload,
-        token,
+        products: products.map((product) => ({
+          productId: product.id,
+          media: product.media,
+          quantity: product.orderQuantity,
+          variantId: product.variant?.id,
+        })) as CheckoutProduct[],
       },
       {
-        onSuccess: async ({ sessionId }) => {
-          const stripeError = await stripe.redirectToCheckout({ sessionId });
-
-          if (stripeError) {
-            toast.error('Problem redirecting to checkout');
-          }
+        onSuccess: async ({ clientSecret }) => {
+          router.push(`/checkout?cs=${clientSecret}`);
         },
       }
     );
@@ -198,26 +170,6 @@ export function CartShippingPriceForm() {
                       </FormLabel>
                     </FormItem>
                   )}
-                  {/* <FormItem
-                    key={'fast'}
-                    className="flex items-center space-x-3 space-y-0"
-                  >
-                    <FormControl>
-                      <RadioGroupItem value="fast" />
-                    </FormControl>
-                    <FormLabel className="flex flex-col gap-2">
-                      <div className="flex gap-2 font-normal">
-                        {shippingMethods['fast'].label}:
-                        <p className="font-semibold">
-                          {symbol}
-                          {formatPrice(shippingMethods['fast'].value)}
-                        </p>
-                      </div>
-                      <p className="text-xs text-gray-800">
-                        {shippingMethods['fast'].description}
-                      </p>
-                    </FormLabel>
-                  </FormItem> */}
                 </RadioGroup>
               </FormControl>
               <FormMessage />

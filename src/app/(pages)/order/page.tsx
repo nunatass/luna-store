@@ -1,4 +1,5 @@
-import { OrderArea } from '@/components/layouts/order/order-area';
+import { Header } from '@/components/layouts/headers/header';
+import { OrderArea } from '@/components/layouts/pages/order/order-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 
 export const metadata = {
@@ -10,7 +11,10 @@ export const metadata = {
 export default function OrderPage() {
   return (
     <Wrapper>
-      <OrderArea />
+      <Header secondary />
+      <div className="mt-36">
+        <OrderArea />
+      </div>
     </Wrapper>
   );
 }

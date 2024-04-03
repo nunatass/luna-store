@@ -1,6 +1,6 @@
 'use client';
 
-import { CartProduct, ShippingMethod } from '@/common/types';
+import { CartProduct, CheckoutProduct } from '@/common/types';
 import { CloseTwoIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useOrderCheckout } from '@/hooks/api/use-orders';
@@ -12,17 +12,13 @@ import {
   formatPriceWithDiscount,
   stringToId,
 } from '@/lib/utils';
-
-import { loadStripe } from '@stripe/stripe-js';
-import crypto from 'crypto';
-import { AnimatePresence, motion } from 'framer-motion';
 import { Loader } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { toast } from 'sonner';
 
 import { useCurrency } from '@/hooks/use-currency';
+import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import { ProductQuantity } from '../../pages/products/product-details/product-quantity';
 
@@ -52,12 +48,12 @@ const renderEmptyDiv = () => (
 );
 
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
-const checkoutHashPassword = process.env
-  .NEXT_PUBLIC_CHECK_HASH_PASSWORD as string;
 
 export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   const pathname = usePathname();
-  const { symbol, currency } = useCurrency();
+  const router = useRouter();
+
+  const { symbol } = useCurrency();
   const { products, getTotal, removeProduct, addQuantity, removeQuantity } =
     useCart();
   const { mutate: handleOrderCheckout, isPending } = useOrderCheckout();
@@ -71,38 +67,19 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
   }, [setIsOpen]);
 
   const handleCheckout = async () => {
-    const stripe = await loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
-    );
-
-    if (!stripe) throw new Error('Stripe failed to initialize.');
-
-    const payload = {
-      items: products,
-      shippingMethod: 'standard' as ShippingMethod,
-      currency,
-    };
-
-    const token = crypto
-      .createHmac('sha256', checkoutHashPassword)
-      .update(JSON.stringify(payload))
-      .digest('hex');
-
     pixel.event('Go to Checkout');
-
     handleOrderCheckout(
       {
-        payload,
-        token,
+        products: products.map((product) => ({
+          productId: product.id,
+          media: product.media,
+          quantity: product.orderQuantity,
+          variantId: product.variant?.id,
+        })) as CheckoutProduct[],
       },
       {
-        onSuccess: async ({ sessionId }) => {
-          const stripeError = await stripe.redirectToCheckout({ sessionId });
-          handleCloseSideCart();
-
-          if (stripeError) {
-            toast.error('Problem redirecting to checkout');
-          }
+        onSuccess: async ({ clientSecret }) => {
+          router.push(`/checkout?cs=${clientSecret}`);
         },
       }
     );

@@ -11,7 +11,7 @@ export default function CartPage() {
   return (
     <Wrapper>
       <Header secondary />
-      <div className="mt-32">
+      <div className="mt-36">
         <Breadcrumb title="Shopping Cart" label="Shopping Cart" />
       </div>
       <CartArea />
