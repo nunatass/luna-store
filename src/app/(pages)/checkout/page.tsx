@@ -2,7 +2,6 @@
 
 import { Header } from '@/components/layouts/headers/header';
 import { Wrapper } from '@/components/layouts/wrapper';
-import * as pixel from '@/lib/fpixel';
 import { useSearchParams } from 'next/navigation';
 
 import {
@@ -16,12 +15,11 @@ const stripePromise = loadStripe(
 );
 
 export default function CheckoutPage() {
-  pixel.event('Checkout Page');
   const searchParams = useSearchParams();
 
   const clientSecret = searchParams.get('cs');
   return (
-    <Wrapper className="bg-white">
+    <Wrapper className="bg-[#f2f2f2]">
       <Header secondary />
       <div className="py-24">
         <div id="checkout">
