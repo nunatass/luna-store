@@ -21,8 +21,9 @@ export const Footer = () => {
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
                   <EmailIcon />
-                  <p className="transition-all duration-300 ease-in-out md:hover:text-[#be844c]">
-                    <Link href="/contact">support@stellastone.store</Link>
+                  <p className="text-sm text-gray-600 transition-all duration-300 ease-in-out md:hover:text-[#be844c]">
+                    We are available 24/7 at
+                    <Link href="/contact"> support@stellastone.store</Link>
                   </p>
                 </div>
               </div>

@@ -76,7 +76,7 @@ export function useMenuData() {
       id: 1,
       products: true,
       title: 'Jewelry',
-      link: '/',
+      link: '/products',
       productPages: [
         {
           title: 'Categories',

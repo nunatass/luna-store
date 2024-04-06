@@ -24,7 +24,7 @@ export const DiscountBanner = () => {
       </Slider.Slide>
       <Slider.Slide className="flex  h-10 items-center justify-center gap-2 border-2 border-black bg-black text-white">
         <DiscountIcon className="w-6 w-6" />
-        {`Mother’s Day - Buy 1, Get 1 free`}
+        {`Mother’s Day - BUY 2, GET 1 FREE`}
       </Slider.Slide>
     </Slider>
   );

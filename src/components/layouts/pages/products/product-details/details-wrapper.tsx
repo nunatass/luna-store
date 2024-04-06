@@ -29,7 +29,7 @@ const freeShippingThreshold =
   Number(process.env.NEXT_PUBLIC_SHIPPING_THRESHOLD) || 6000;
 
 export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
-  const { addProduct: addCartProduct } = useCart();
+  const { addProduct: addCartProduct, setSideCartOpen } = useCart();
   const { symbol } = useCurrency();
 
   const [quantity, setQuantity] = useState<number>(1);
@@ -50,7 +50,9 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         title: product.title,
         orderQuantity: quantity,
         variant,
+        giftAmount: 0,
       });
+      setSideCartOpen(true);
     } else {
       setShowVariantDisclaimer(true);
     }
@@ -151,11 +153,11 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         )}
       </div>
 
-      {/* <div>
-        <div className="flex h-12 w-full items-center justify-center bg-[#669e5c] text-lg text-white">
-          Buy 2 items and get one free
+      <div>
+        <div className="w-full bg-[#669e5cee] p-4 text-center text-sm text-white">
+          Buy 2, Get Any 3rd Free - code added automatically
         </div>
-      </div> */}
+      </div>
 
       <div className="flex border-b-[1px] pb-2">
         <Button variant="ghost" type="button" asChild className="text-sm">

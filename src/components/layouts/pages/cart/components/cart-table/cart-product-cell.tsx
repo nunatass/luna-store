@@ -2,6 +2,7 @@
 import { Variant } from '@/common/types';
 import { useCurrency } from '@/hooks/use-currency';
 import { formatPrice, stringToId } from '@/lib/utils';
+import { GiftIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -13,6 +14,7 @@ type CartProductCellProps = {
   discount: number;
   orderQuantity: number;
   variant?: Variant;
+  giftAmount?: number;
 };
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
@@ -23,6 +25,7 @@ export const CartProductCell = ({
   discount,
   variant,
   orderQuantity,
+  giftAmount,
 }: CartProductCellProps) => {
   const { symbol } = useCurrency();
 
@@ -47,7 +50,7 @@ export const CartProductCell = ({
         >
           {title}
         </Link>
-        {discount > 0 && (
+        {discount > 0 && giftAmount === 0 && (
           <div className="flex items-center gap-2 ">
             <span className="line-through">
               {symbol}
@@ -62,6 +65,18 @@ export const CartProductCell = ({
         <span className="-mt-2 text-[12px] text-gray-700">
           {variant?.label}
         </span>
+        {giftAmount! > 0 && (
+          <>
+            <span className="line-through">
+              {symbol}
+              {formatPrice(price * orderQuantity)}
+            </span>
+            <span className="flex h-5 w-20 items-center justify-center gap-2 rounded bg-[#669e5cee] px-1 py-0.5 text-sm text-white">
+              {giftAmount} GIFT
+              <GiftIcon className="h-4 w-4" />
+            </span>
+          </>
+        )}
       </div>
     </div>
   );

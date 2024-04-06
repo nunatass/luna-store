@@ -6,6 +6,8 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface CartStore {
+  isSideCartOpen: boolean;
+  setSideCartOpen: (value: boolean) => void;
   products: CartProduct[];
   addProduct: (product: CartProduct) => void;
   removeProduct: (id: string) => void;
@@ -25,6 +27,11 @@ export const useCart = create(
   persist<CartStore>(
     (set, get) => ({
       products: [],
+      isSideCartOpen: false,
+      amountProduct: 0,
+      setSideCartOpen: (isSideCartOpen: boolean) => {
+        set({ isSideCartOpen });
+      },
       addProduct: (product: CartProduct) => {
         const currentProducts = get().products;
         const existingProduct = currentProducts.find(
@@ -43,14 +50,39 @@ export const useCart = create(
             product,
           ],
         });
+
         toast('Item added to cart.');
+        findGiftProduct(get().products);
       },
       removeProduct: (id: string) => {
-        set({
-          products: [...get().products.filter((product) => product.id !== id)],
+        // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+        set((state: any) => {
+          const updatedProducts = state.products
+            .map((product: CartProduct) => {
+              if (product.id === id) {
+                if (product.giftAmount && product.giftAmount > 0) {
+                  return {
+                    ...product,
+                    orderQuantity: Math.max(0, product.orderQuantity - 1),
+                    giftAmount: Math.max(0, product.giftAmount - 1),
+                  };
+                } else {
+                  return null;
+                }
+              }
+              return product;
+            })
+            .filter(Boolean);
+
+          return {
+            products: updatedProducts,
+          };
         });
+
         toast('Item removed from cart.');
+        findGiftProduct(get().products);
       },
+
       removeAll: () => set({ products: [] }),
       getQuantity: (id: string) => {
         const product = get().products.filter(
@@ -74,6 +106,7 @@ export const useCart = create(
             }),
           ],
         });
+        findGiftProduct(get().products);
       },
 
       removeQuantity: (id: string) => {
@@ -81,6 +114,10 @@ export const useCart = create(
           products: [
             ...get().products.map((product) => {
               if (product.id === id) {
+                if (product.orderQuantity > 0 && product.giftAmount! > 0) {
+                  product.orderQuantity--;
+                  return product;
+                }
                 if (product.orderQuantity < 2) {
                   toast.success('must have at lest one product');
                   return product;
@@ -91,6 +128,7 @@ export const useCart = create(
             }),
           ],
         });
+        findGiftProduct(get().products);
       },
       selectVariant: (id: string, variant: Variant) => {
         set({
@@ -107,10 +145,11 @@ export const useCart = create(
       getTotal: () => {
         return get().products.reduce(
           (cartTotal, cartItem) => {
-            const { price, orderQuantity } = cartItem;
-            cartTotal.total += price * orderQuantity;
+            const { price, orderQuantity, giftAmount } = cartItem;
+            cartTotal.total += price * (orderQuantity - giftAmount!);
             cartTotal.totalWithDiscount +=
-              (price - (price * cartItem.discount) / 100) * orderQuantity;
+              (price - (price * cartItem.discount) / 100) *
+              (orderQuantity - giftAmount!);
             cartTotal.quantity = get().products.length;
             return cartTotal;
           },
@@ -125,3 +164,43 @@ export const useCart = create(
     }
   )
 );
+
+function findGiftProduct(products: CartProduct[]) {
+  const totalProducts = products.reduce(
+    (total, product) => total + product.orderQuantity,
+    0
+  );
+  const giftAmount = Math.floor(totalProducts / 3);
+
+  if (totalProducts <= 0 || giftAmount < 0) {
+    return;
+  }
+
+  const sortedProducts = products.sort(
+    (a, b) =>
+      (a.price * (100 - a.discount)) / 100 -
+      (b.price * (100 - b.discount)) / 100
+  );
+
+  let remainingGiftAmount = giftAmount;
+
+  for (const product of sortedProducts) {
+    product.giftAmount = 0;
+  }
+
+  for (const product of sortedProducts) {
+    product.giftAmount = 0;
+    const increaseAmount = Math.min(remainingGiftAmount, product.orderQuantity);
+    product.giftAmount = increaseAmount;
+    remainingGiftAmount -= increaseAmount;
+
+    if (remainingGiftAmount === 0) {
+      break;
+    }
+  }
+  console.log({
+    giftAmount,
+    totalProducts,
+    products,
+  });
+}

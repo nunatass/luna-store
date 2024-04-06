@@ -30,7 +30,7 @@ type HeaderProps = {
 export const Header = ({ secondary }: HeaderProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const [isSideCartOpen, setIsSideCartOpen] = useState(false);
+  const { isSideCartOpen, setSideCartOpen } = useCart();
   const { getTotal } = useCart();
   const { sticky } = useSticky();
   const { quantity } = getTotal();
@@ -93,7 +93,7 @@ export const Header = ({ secondary }: HeaderProps) => {
                 </div>
                 <div className="relative">
                   <button
-                    onClick={() => setIsSideCartOpen(true)}
+                    onClick={() => setSideCartOpen(true)}
                     type="button"
                     className="h-12 w-12 bg-transparent lg:h-8 lg:w-8"
                     aria-label="cart button"
@@ -133,8 +133,8 @@ export const Header = ({ secondary }: HeaderProps) => {
           setIsSearchOpen={setIsSearchOpen}
         />
 
-        <SidePanel isOpen={isSideCartOpen} setIsOpen={setIsSideCartOpen}>
-          <SideCart isOpen={isSideCartOpen} setIsOpen={setIsSideCartOpen} />
+        <SidePanel isOpen={isSideCartOpen} setIsOpen={setSideCartOpen}>
+          <SideCart isOpen={isSideCartOpen} setIsOpen={setSideCartOpen} />
         </SidePanel>
 
         <SidePanel isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen}>

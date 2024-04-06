@@ -12,7 +12,7 @@ import {
   formatPriceWithDiscount,
   stringToId,
 } from '@/lib/utils';
-import { Loader } from 'lucide-react';
+import { GiftIcon, Loader } from 'lucide-react';
 
 import { useCurrency } from '@/hooks/use-currency';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -85,87 +85,243 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
     );
   };
 
-  const renderProductItem = (product: CartProduct) => (
-    <motion.div
-      {...itemProductAnimationProps}
-      className="relative z-40 flex w-full items-start gap-2 bg-white py-4"
-    >
-      <div className="border-[1px] border-gray-200">
-        <Link
-          href={`/products/${stringToId(product.title)}`}
-          aria-label="product link"
+  const renderProductItem = (product: CartProduct) => {
+    if (product.giftAmount === 0) {
+      return (
+        <motion.div
+          {...itemProductAnimationProps}
+          className="relative z-40 flex w-full items-start gap-2 bg-white py-4"
         >
-          <Image
-            src={`${imageUrlPrefix}/${product.media}`}
-            width={70}
-            height={60}
-            alt="product img"
-            className="h-20 w-24"
-          />
-        </Link>
-      </div>
-      <div className="w-full">
-        <h5 className="font-semibold transition-all duration-300 ease-in-out ">
-          <Link
-            className="text-sm"
-            href={`/products/${stringToId(product.title)}`}
-            aria-label={product.title}
-          >
-            {product.title}
-          </Link>
-        </h5>
-        <div className="w-full">
-          {product.discount > 0 ? (
-            <div className="flex w-full items-center gap-2">
-              <span className="text-left text-sm">
-                {symbol}
-                {
-                  formatPriceWithDiscount(
-                    product.price * product.orderQuantity,
-                    product.discount
-                  ).price
-                }
-              </span>
+          <div className="border-[1px] border-gray-200">
+            <Link
+              href={`/products/${stringToId(product.title)}`}
+              aria-label="product link"
+            >
+              <Image
+                src={`${imageUrlPrefix}/${product.media}`}
+                width={70}
+                height={60}
+                alt="product img"
+                className="h-20 w-24"
+              />
+            </Link>
+          </div>
+          <div className="w-full">
+            <h5 className="font-semibold transition-all duration-300 ease-in-out ">
+              <Link
+                className="text-sm"
+                href={`/products/${stringToId(product.title)}`}
+                aria-label={product.title}
+              >
+                {product.title}
+              </Link>
+            </h5>
+            <div className="w-full">
+              {product.discount > 0 ? (
+                <div className="flex w-full items-center gap-2">
+                  <span className="text-left text-sm">
+                    {symbol}
+                    {
+                      formatPriceWithDiscount(
+                        product.price * product.orderQuantity,
+                        product.discount
+                      ).price
+                    }
+                  </span>
 
-              <span className="text-right text-sm text-gray-600  line-through">
+                  <span className="text-right text-sm text-gray-600  line-through">
+                    {symbol}
+                    {formatPrice(product.price * product.orderQuantity)}
+                  </span>
+                </div>
+              ) : (
+                <span className="text-sm">
+                  {symbol}
+                  {formatPrice(product.price * product.orderQuantity)}
+                </span>
+              )}
+              <div className="flex w-full items-end justify-between">
+                <span className="-mt-2 text-[12px] text-gray-700">
+                  {product?.variant?.label}
+                </span>
+                <ProductQuantity
+                  className="mt-1.5 h-8 w-20"
+                  setQuantity={(value) => {
+                    if (value > product.orderQuantity) {
+                      addQuantity(product.id);
+                    } else {
+                      removeQuantity(product.id);
+                    }
+                  }}
+                  quantity={product.orderQuantity}
+                />
+              </div>
+            </div>
+          </div>
+          <Button
+            onClick={() => handleRemoveProduct(product.id)}
+            variant="link"
+            size="icon"
+            className="absolute right-0 top-2 py-0 text-gray-600"
+          >
+            <CloseTwoIcon />
+          </Button>
+        </motion.div>
+      );
+    }
+    return (
+      <>
+        {product.orderQuantity > product.giftAmount! && (
+          <motion.div
+            {...itemProductAnimationProps}
+            className="relative z-40 flex w-full items-start gap-2 bg-white py-4"
+          >
+            <div className="border-[1px] border-gray-200">
+              <Link
+                href={`/products/${stringToId(product.title)}`}
+                aria-label="product link"
+              >
+                <Image
+                  src={`${imageUrlPrefix}/${product.media}`}
+                  width={70}
+                  height={60}
+                  alt="product img"
+                  className="h-20 w-24"
+                />
+              </Link>
+            </div>
+            <div className="w-full">
+              <h5 className="font-semibold transition-all duration-300 ease-in-out ">
+                <Link
+                  className="text-sm"
+                  href={`/products/${stringToId(product.title)}`}
+                  aria-label={product.title}
+                >
+                  {product.title}
+                </Link>
+              </h5>
+              <div className="w-full">
+                {product.discount > 0 ? (
+                  <div className="flex w-full items-center gap-2">
+                    <span className="text-left text-sm">
+                      {symbol}
+                      {
+                        formatPriceWithDiscount(
+                          product.price * product.orderQuantity,
+                          product.discount
+                        ).price
+                      }
+                    </span>
+
+                    <span className="text-right text-sm text-gray-600  line-through">
+                      {symbol}
+                      {formatPrice(product.price * product.orderQuantity)}
+                    </span>
+                  </div>
+                ) : (
+                  <span className="text-sm">
+                    {symbol}
+                    {formatPrice(
+                      product.price *
+                        (product.orderQuantity - product.giftAmount!)
+                    )}
+                  </span>
+                )}
+                <div className="flex w-full items-end justify-between">
+                  <span className="-mt-2 text-[12px] text-gray-700">
+                    {product?.variant?.label}
+                  </span>
+                  <ProductQuantity
+                    className="mt-1.5 h-8 w-20"
+                    setQuantity={(value) => {
+                      if (value > product.orderQuantity - product.giftAmount!) {
+                        addQuantity(product.id);
+                      } else {
+                        removeQuantity(product.id);
+                      }
+                    }}
+                    quantity={product.orderQuantity - product.giftAmount!}
+                  />
+                </div>
+              </div>
+            </div>
+            <Button
+              onClick={() => handleRemoveProduct(product.id)}
+              variant="link"
+              size="icon"
+              className="absolute right-0 top-2 py-0 text-gray-600"
+            >
+              <CloseTwoIcon />
+            </Button>
+          </motion.div>
+        )}
+        <motion.div
+          {...itemProductAnimationProps}
+          className="relative z-40 flex w-full items-start gap-2 bg-white py-4"
+        >
+          <div className="border-[1px] border-gray-200">
+            <Link
+              href={`/products/${stringToId(product.title)}`}
+              aria-label="product link"
+            >
+              <Image
+                src={`${imageUrlPrefix}/${product.media}`}
+                width={70}
+                height={60}
+                alt="product img"
+                className="h-20 w-24"
+              />
+            </Link>
+          </div>
+          <div className="w-full">
+            <h5 className="font-semibold transition-all duration-300 ease-in-out ">
+              <Link
+                className="text-sm"
+                href={`/products/${stringToId(product.title)}`}
+                aria-label={product.title}
+              >
+                {product.title}
+              </Link>
+            </h5>
+            <div className="flex w-full gap-2">
+              <span className="text-sm">
                 {symbol}
-                {formatPrice(product.price * product.orderQuantity)}
+                {formatPrice(0)}
+              </span>
+              <span className="flex h-5 items-center justify-center gap-2 rounded bg-[#669e5cee] px-1 py-0.5 text-xs text-white">
+                GIFT
+                <GiftIcon className="h-4 w-4" />
               </span>
             </div>
-          ) : (
-            <span className="text-sm">
-              {symbol}
-              {formatPrice(product.price * product.orderQuantity)}
-            </span>
-          )}
-          <div className="flex w-full items-end justify-between">
-            <span className="-mt-2 text-[12px] text-gray-700">
-              {product?.variant?.label}
-            </span>
-            <ProductQuantity
-              className="mt-1.5 h-8 w-20"
-              setQuantity={(value) => {
-                if (value > product.orderQuantity) {
-                  addQuantity(product.id);
-                } else {
-                  removeQuantity(product.id);
-                }
-              }}
-              quantity={product.orderQuantity}
-            />
+            <div className="flex w-full items-end justify-between">
+              <span className="-mt-1 text-[12px] text-gray-700">
+                {product?.variant?.label}
+              </span>
+              <ProductQuantity
+                className="mt-1.5 h-8 w-20"
+                setQuantity={(value) => {
+                  if (value > product.giftAmount!) {
+                    addQuantity(product.id);
+                  } else {
+                    removeQuantity(product.id);
+                  }
+                }}
+                quantity={product.giftAmount!}
+              />
+            </div>
           </div>
-        </div>
-      </div>
-      <Button
-        onClick={() => handleRemoveProduct(product.id)}
-        variant="link"
-        size="icon"
-        className="absolute right-0 top-2 py-0 text-gray-600"
-      >
-        <CloseTwoIcon />
-      </Button>
-    </motion.div>
-  );
+          <Button
+            onClick={() => handleRemoveProduct(product.id)}
+            variant="link"
+            size="icon"
+            className="absolute right-0 top-2 py-0 text-gray-600"
+          >
+            <CloseTwoIcon />
+          </Button>
+        </motion.div>
+      </>
+    );
+  };
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-between p-8">
@@ -191,6 +347,9 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
         >
           {products.length > 0 && (
             <div className="bg-30 flex w-full flex-col divide-y-[1px] bg-white pb-72 sm:pb-56">
+              <div className="w-full bg-[#669e5cee] p-4 text-center text-sm text-white">
+                Buy 2, Get Any 3rd Free - code added automatically
+              </div>
               {products.map((product, index) => (
                 <div key={product.id}>
                   {index === products.length

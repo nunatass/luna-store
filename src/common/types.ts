@@ -74,6 +74,7 @@ export type CartProduct = {
   orderQuantity: number;
   media: string;
   variant?: Variant;
+  giftAmount?: number;
 };
 
 export type Variant = {

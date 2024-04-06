@@ -22,20 +22,6 @@ const optionsAnimationVariants = {
   exit: { x: -10, opacity: 0 },
 };
 
-const optionHoverAnimation = {
-  whileHover: {
-    backgroundColor: 'black',
-    color: 'white',
-  },
-  transition: { duration: 0.4, ease: 'easeInOut' },
-};
-
-const tooltipAnimationVariants = {
-  initial: { x: 10, opacity: 0 },
-  animate: { x: 0, opacity: 1 },
-  exit: { x: 10, opacity: 0 },
-};
-
 const animationsProps = {
   initial: 'initial',
   animate: 'initial',
@@ -50,7 +36,11 @@ type ProductSliderItemProps = {
 export const ProductItem = ({ product }: ProductSliderItemProps) => {
   const { symbol } = useCurrency();
 
-  const { addProduct: addCartProduct, products: cartProducts } = useCart();
+  const {
+    addProduct: addCartProduct,
+    products: cartProducts,
+    setSideCartOpen,
+  } = useCart();
 
   const isAddedToCart = cartProducts.some(
     (cartProduct) => cartProduct.id === product.id
@@ -64,7 +54,9 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
       title: product.title,
       orderQuantity: 1,
       discount: product.prices[0].discount,
+      giftAmount: 0,
     });
+    setSideCartOpen(true);
     pixel.event('add product to cart', {
       productName: product.title,
     });
@@ -73,7 +65,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
   return (
     <motion.div
       {...animationsProps}
-      className="relative flex h-60 w-40 flex-col overflow-hidden bg-[#f2f2f2] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]"
+      className="group relative flex h-60 w-40 flex-col overflow-hidden bg-[#f2f2f2] text-center transition-all duration-300 ease-in-out sm:h-[400px] sm:w-64 md:h-96 md:w-80 lg:h-[400px]"
     >
       <Link
         href={`/products/${stringToId(product.title)}`}
@@ -109,19 +101,12 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
                 aria-label="cart"
                 className="flex cursor-pointer items-center gap-2"
               >
-                <motion.div
-                  {...optionHoverAnimation}
-                  className="text-gray-4 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-sm"
-                >
+                <div className="text-gray-4 flex h-11 w-11 items-center justify-center rounded-full bg-black text-white shadow-sm">
                   <CartIcon />
-                </motion.div>
-                <motion.span
-                  variants={tooltipAnimationVariants}
-                  transition={{ duration: 0.4, ease: 'easeInOut' }}
-                  className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white "
-                >
+                </div>
+                <span className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
                   View Cart
-                </motion.span>
+                </span>
               </Link>
             </motion.button>
           ) : (
@@ -136,18 +121,12 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
               onClick={() => handleAddProduct(product)}
               className="flex items-center gap-2"
             >
-              <motion.div
-                {...optionHoverAnimation}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm md:flex md:h-11 md:w-11"
-              >
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white shadow-sm md:flex md:h-11 md:w-11">
                 <CartIcon />
-              </motion.div>
-              <motion.div
-                variants={tooltipAnimationVariants}
-                className="rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
-              >
+              </div>
+              <div className="rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
                 Add to Cart
-              </motion.div>
+              </div>
             </motion.button>
           )}
         </AnimatePresence>

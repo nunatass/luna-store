@@ -16,20 +16,6 @@ const optionsAnimationVariants = {
   exit: { x: -10, opacity: 0 },
 };
 
-const optionHoverAnimation = {
-  whileHover: {
-    backgroundColor: 'black',
-    color: 'white',
-  },
-  transition: { duration: 0.4, ease: 'easeInOut' },
-};
-
-const tooltipAnimationVariants = {
-  initial: { x: 10, opacity: 0 },
-  animate: { x: 0, opacity: 1 },
-  exit: { x: 10, opacity: 0 },
-};
-
 const animationsProps = {
   initial: 'initial',
   animate: 'initial',
@@ -60,6 +46,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
       title: product.title,
       orderQuantity: 1,
       discount: product.prices[0].discount,
+      giftAmount: 0,
     });
     pixel.event('add product to cart', {
       productName: product.title,
@@ -70,7 +57,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
     <>
       <motion.div
         {...animationsProps}
-        className="relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-white text-center sm:w-80"
+        className="group relative flex h-96 w-full min-w-72 flex-col overflow-hidden bg-white text-center sm:w-80"
       >
         <Link
           className="relative h-full w-full"
@@ -103,19 +90,12 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
             {isAddedToCart ? (
               <motion.div {...animationsProps}>
                 <Link href="/cart" className="flex items-center gap-2">
-                  <motion.div
-                    {...optionHoverAnimation}
-                    className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11 "
-                  >
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11">
                     <CartIcon />
-                  </motion.div>
-                  <motion.span
-                    variants={tooltipAnimationVariants}
-                    transition={{ duration: 0.4, ease: 'easeInOut' }}
-                    className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
-                  >
+                  </div>
+                  <span className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
                     View Cart
-                  </motion.span>
+                  </span>
                 </Link>
               </motion.div>
             ) : (
@@ -130,18 +110,12 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
                 onClick={() => handleAddProduct(product)}
                 className="flex items-center gap-2"
               >
-                <motion.div
-                  {...optionHoverAnimation}
-                  className="flex h-8 w-8 items-center justify-center rounded-full shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11"
-                >
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11">
                   <CartIcon />
-                </motion.div>
-                <motion.div
-                  variants={tooltipAnimationVariants}
-                  className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white"
-                >
+                </div>
+                <div className="rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
                   Add to Cart
-                </motion.div>
+                </div>
               </motion.button>
             )}
           </AnimatePresence>
