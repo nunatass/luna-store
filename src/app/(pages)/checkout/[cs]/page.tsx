@@ -2,22 +2,21 @@
 
 import { Header } from '@/components/layouts/headers/header';
 import { Wrapper } from '@/components/layouts/wrapper';
-import { useSearchParams } from 'next/navigation';
-
 import {
   EmbeddedCheckout,
   EmbeddedCheckoutProvider,
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
-export default function CheckoutPage() {
-  const searchParams = useSearchParams();
-
-  const clientSecret = searchParams.get('cs');
+type CheckoutPageProps = {
+  params: { cs: string };
+};
+export default function CheckoutPage({ params }: CheckoutPageProps) {
   return (
     <Wrapper className="bg-[#f2f2f2]">
       <Header secondary />
@@ -25,7 +24,7 @@ export default function CheckoutPage() {
         <div id="checkout">
           <EmbeddedCheckoutProvider
             stripe={stripePromise}
-            options={{ clientSecret }}
+            options={{ clientSecret: params.cs }}
           >
             <div className="pt-20">
               <EmbeddedCheckout />

@@ -28,10 +28,6 @@ import {
 } from '@react-email/components';
 import { Tailwind } from '@react-email/tailwind';
 
-// const imageUrlPrefix =
-//   process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START ||
-//   'https://pub-2815e42a47aa405db2fb0aeb816612b8.r2.dev';
-
 export const SuccessOrderEmail = ({
   name,
   address,
@@ -151,13 +147,32 @@ export const SuccessOrderEmail = ({
                                   product?.price,
                                   product?.discount
                                 ).price
-                              ) * product?.orderQuantity}
+                              ) *
+                                (product.orderQuantity - product.giftAmount!)}
+                            </span>
+                          </Text>
+                          <Text>
+                            <span className="line-through	">
+                              $
+                              {Number(
+                                formatPriceWithDiscount(
+                                  product.price,
+                                  product.discount
+                                ).price
+                              ) * product.orderQuantity}
                             </span>
                           </Text>
                           <Text>
                             <span className="text-sm">
                               {product?.variant?.label}
                             </span>
+                          </Text>
+                          <Text>
+                            {product.giftAmount && (
+                              <span className="flex h-5 w-20 items-center justify-center gap-2 rounded bg-[#669e5cee] px-1 py-0.5 text-sm text-white">
+                                {`${product.giftAmount!} GIFT`}
+                              </span>
+                            )}
                           </Text>
                         </Column>
                       </Row>

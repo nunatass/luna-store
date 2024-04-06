@@ -13,8 +13,8 @@ export const ContactArea = () => {
             <h2 className="text-xl font-medium md:text-3xl">Sent A Message</h2>
             <p>
               For any questions regarding our products or for assistance with
-              your order, please email us and you will receive a response within{' '}
-              <span className="font-semibold">1-3 business days.</span>
+              your order, please email us and you will receive a response as
+              soon as possible!
             </p>
             <p>
               If you are emailing about your order, please make sure to include

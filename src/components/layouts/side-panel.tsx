@@ -1,10 +1,11 @@
 'use client';
 
+import { useCart } from '@/hooks/use-cart';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
 import Overlay from './overlay';
-
 const sidebarPanelAnimation = {
   initial: { x: '100%' },
   animate: { x: '0' },
@@ -25,11 +26,17 @@ export const SidePanel = ({
   children,
   className,
 }: SidePanelProps) => {
+  const { setSideCartOpen } = useCart();
+
   useEffect(() => {
     isOpen
       ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = 'auto');
   }, [isOpen]);
+
+  useEffect(() => {
+    setSideCartOpen(false);
+  }, [usePathname]);
 
   return (
     <div className="z-[9999]">

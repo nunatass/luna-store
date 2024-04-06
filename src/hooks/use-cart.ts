@@ -52,7 +52,7 @@ export const useCart = create(
         });
 
         toast('Item added to cart.');
-        findGiftProduct(get().products);
+        findGiftProducts(get().products);
       },
       removeProduct: (id: string) => {
         // eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -61,11 +61,15 @@ export const useCart = create(
             .map((product: CartProduct) => {
               if (product.id === id) {
                 if (product.giftAmount && product.giftAmount > 0) {
-                  return {
+                  const p = {
                     ...product,
                     orderQuantity: Math.max(0, product.orderQuantity - 1),
                     giftAmount: Math.max(0, product.giftAmount - 1),
                   };
+                  if (p.orderQuantity === 0) {
+                    return null;
+                  }
+                  return p;
                 } else {
                   return null;
                 }
@@ -80,7 +84,7 @@ export const useCart = create(
         });
 
         toast('Item removed from cart.');
-        findGiftProduct(get().products);
+        findGiftProducts(get().products);
       },
 
       removeAll: () => set({ products: [] }),
@@ -106,7 +110,7 @@ export const useCart = create(
             }),
           ],
         });
-        findGiftProduct(get().products);
+        findGiftProducts(get().products);
       },
 
       removeQuantity: (id: string) => {
@@ -128,7 +132,7 @@ export const useCart = create(
             }),
           ],
         });
-        findGiftProduct(get().products);
+        findGiftProducts(get().products);
       },
       selectVariant: (id: string, variant: Variant) => {
         set({
@@ -165,7 +169,7 @@ export const useCart = create(
   )
 );
 
-function findGiftProduct(products: CartProduct[]) {
+export function findGiftProducts(products: CartProduct[]) {
   const totalProducts = products.reduce(
     (total, product) => total + product.orderQuantity,
     0
@@ -198,9 +202,4 @@ function findGiftProduct(products: CartProduct[]) {
       break;
     }
   }
-  console.log({
-    giftAmount,
-    totalProducts,
-    products,
-  });
 }

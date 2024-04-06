@@ -93,7 +93,7 @@ export function CartShippingPriceForm() {
       },
       {
         onSuccess: async ({ clientSecret }) => {
-          router.push(`/checkout?cs=${clientSecret}`);
+          router.push(`/checkout/${clientSecret}`);
         },
       }
     );

@@ -79,7 +79,11 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
       },
       {
         onSuccess: async ({ clientSecret }) => {
-          router.push(`/checkout?cs=${clientSecret}`);
+          if (pathname.includes('/checkout/')) {
+            router.replace(`/checkout/${clientSecret}`);
+          } else {
+            router.push(`/checkout/${clientSecret}`);
+          }
         },
       }
     );

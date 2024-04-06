@@ -1,6 +1,6 @@
 import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useState } from 'react';
-export const useSticky = (offset = 80) => {
+export const useSticky = (offset = 50) => {
   const [sticky, setSticky] = useState(false);
   const [position, setPosition] = useState(0);
 
