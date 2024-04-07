@@ -49,7 +49,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
   const handleAddProduct = (product: Product) => {
     addCartProduct({
       id: product.id,
-      media: product.medias[0].url,
+      media: product.medias[1].url,
       price: product.prices[0].value,
       title: product.title,
       orderQuantity: 1,

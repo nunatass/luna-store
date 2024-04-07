@@ -46,7 +46,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         id: product.id,
         discount: price.discount,
         price: price.value,
-        media: product.medias[0].url,
+        media: product.medias[1].url,
         title: product.title,
         orderQuantity: quantity,
         variant,

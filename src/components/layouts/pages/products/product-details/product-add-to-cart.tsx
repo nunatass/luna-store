@@ -7,7 +7,7 @@ import { useCart } from '@/hooks/use-cart';
 import { useCurrency } from '@/hooks/use-currency';
 import { useSticky } from '@/hooks/use-sticky';
 import { useWindowSize } from '@/hooks/use-window-size';
-import { cn, formatPriceWithDiscount } from '@/lib/utils';
+import { cn, formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
 import { ProductAddToCartWithSelectVariant } from './product-add-to-cart-with-select-variant';
@@ -99,15 +99,23 @@ export function ProductAddToCart({ productItem }: ProductAddToCartProps) {
           </div>
           <div className=" flex flex-col justify-center">
             <p className="text-sm font-medium">{productItem.title}</p>
-            <span className="text-left text-sm">
-              {symbol}
-              {
-                formatPriceWithDiscount(
-                  productItem.prices[0].value,
-                  productItem.prices[0].discount
-                ).price
-              }
-            </span>
+            <div className="flex gap-2.5">
+              <span className="text-left text-sm">
+                {symbol}
+                {
+                  formatPriceWithDiscount(
+                    productItem.prices[0].value,
+                    productItem.prices[0].discount
+                  ).price
+                }
+              </span>
+              {productItem.prices[0].discount > 0 && (
+                <span className="text-left text-sm line-through">
+                  {symbol}
+                  {formatPrice(productItem.prices[0].value)}
+                </span>
+              )}
+            </div>
           </div>
         </div>
 

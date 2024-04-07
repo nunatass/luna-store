@@ -62,7 +62,7 @@ export async function POST(req: Request) {
           discount: product.prices[0].discount,
           title: product.title,
           orderQuantity: 1,
-          media: product.medias[0].url,
+          media: product.medias[1].url,
         })),
       },
     });
