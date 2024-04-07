@@ -63,7 +63,7 @@ export function ProductAddToCart({ productItem }: ProductAddToCartProps) {
         id: productItem.id,
         discount: productItem.prices[0].discount,
         price: productItem.prices[0].value,
-        media: productItem.medias[0].url,
+        media: productItem.medias[1].url,
         title: productItem.title,
         orderQuantity: 1,
         variant,
