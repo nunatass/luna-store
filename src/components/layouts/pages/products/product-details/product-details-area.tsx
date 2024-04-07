@@ -5,6 +5,7 @@ import { Product } from '@/common/types';
 import Image from 'next/image';
 import { DetailsThumbWrapper } from './details-thumb-wrapper';
 import { DetailsWrapper } from './details-wrapper';
+import { ProductAddToCart } from './product-add-to-cart';
 import { ProductRecommendations } from './product-recommendations';
 import { ProductReviewsArea } from './product-reviews-area';
 
@@ -16,7 +17,7 @@ export const ProductDetailsArea = ({
   productItem,
 }: ProductDetailsAreaProps) => {
   return (
-    <section className="pb-20 pt-8">
+    <section className="relative pb-20 pt-8">
       <div className="container">
         <div className="flex flex-col gap-14 md:flex-row xl:gap-20">
           <DetailsThumbWrapper
@@ -54,6 +55,7 @@ export const ProductDetailsArea = ({
       <div className="my-8">
         <ProductReviewsArea productId={productItem.id} />
       </div>
+      <ProductAddToCart productItem={productItem} />
     </section>
   );
 };

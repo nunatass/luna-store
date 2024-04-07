@@ -14,17 +14,19 @@ type ProductVariantSelectProps = {
   variants: Variant[];
   onSelectChange: (value: Variant) => void;
   showSelectError?: boolean;
-  ErrorMessage?: boolean;
+  errorMessage?: boolean;
+  className?: string;
 };
 
 export function ProductVariantSelect({
   variants,
   onSelectChange,
   showSelectError,
-  ErrorMessage,
+  errorMessage,
+  className,
 }: ProductVariantSelectProps) {
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className={cn('flex w-full flex-col gap-2', className)}>
       <Select
         onValueChange={(value) => {
           const variant = variants?.find((v) => v.id === value);
@@ -49,7 +51,7 @@ export function ProductVariantSelect({
       </Select>
       {showSelectError && (
         <span className="text-sm text-red-500">
-          {ErrorMessage ?? 'Please select this field first'}
+          {errorMessage ?? 'Select Size'}
         </span>
       )}
     </div>

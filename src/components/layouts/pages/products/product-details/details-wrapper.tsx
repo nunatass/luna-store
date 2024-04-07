@@ -34,7 +34,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
 
   const [quantity, setQuantity] = useState<number>(1);
   const [price, setPrice] = useState<Price>(product.prices[0]);
-  const [variant, setVariant] = useState<Variant | undefined>(undefined);
+  const [variant, setVariant] = useState<Variant | undefined>();
   const [showVariantDisclaimer, setShowVariantDisclaimer] = useState(false);
 
   const handleAddProduct = useCallback(() => {

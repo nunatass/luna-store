@@ -47,6 +47,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
       orderQuantity: 1,
       discount: product.prices[0].discount,
       giftAmount: 0,
+      variant: product.variants[0],
     });
     pixel.event('add product to cart', {
       productName: product.title,
@@ -90,7 +91,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
             {isAddedToCart ? (
               <motion.div {...animationsProps}>
                 <Link href="/cart" className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white opacity-0 shadow-sm ring-1 ring-black group-hover:opacity-100 md:flex md:h-11 md:w-11">
                     <CartIcon />
                   </div>
                   <span className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
@@ -110,7 +111,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
                 onClick={() => handleAddProduct(product)}
                 className="flex items-center gap-2"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white shadow-sm ring-1 ring-black md:flex md:h-11 md:w-11">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white opacity-0 shadow-sm ring-1 ring-black group-hover:opacity-100 md:flex md:h-11 md:w-11">
                   <CartIcon />
                 </div>
                 <div className="rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">

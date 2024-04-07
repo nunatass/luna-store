@@ -44,7 +44,7 @@ export const BackToTopButton = ({ className }: BackToTopButtonProps) => {
             type="button"
             aria-label="back to top button"
             className={cn(
-              'fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded-full bg-black text-white drop-shadow-lg',
+              'fixed bottom-20 right-10 flex h-11 w-11 items-center justify-center rounded-full bg-black text-white drop-shadow-lg',
               className
             )}
             onClick={handleClick}

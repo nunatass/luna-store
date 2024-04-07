@@ -37,7 +37,7 @@ export const Header = ({ secondary }: HeaderProps) => {
 
   return (
     <>
-      <div className="relative z-20">
+      <div className="relative z-[999]">
         <div className="fixed top-0 z-[999]">
           <DiscountBanner />
         </div>

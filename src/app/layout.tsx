@@ -124,7 +124,7 @@ export default function RootLayout({
             <div className="relative">
               <Modal />
               <main id="main">{children}</main>
-              <BackToTopButton />
+              <BackToTopButton className="z-[10]" />
               <Footer />
             </div>
           </HydrationZustand>

@@ -53,6 +53,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
       price: product.prices[0].value,
       title: product.title,
       orderQuantity: 1,
+      variant: product.variants[0],
       discount: product.prices[0].discount,
       giftAmount: 0,
     });
@@ -101,7 +102,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
                 aria-label="cart"
                 className="flex cursor-pointer items-center gap-2"
               >
-                <div className="text-gray-4 flex h-11 w-11 items-center justify-center rounded-full bg-black text-white shadow-sm">
+                <div className="text-gray-4 flex h-11 w-11 items-center justify-center rounded-full bg-black text-white opacity-0 shadow-sm group-hover:opacity-100">
                   <CartIcon />
                 </div>
                 <span className="rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
@@ -121,7 +122,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
               onClick={() => handleAddProduct(product)}
               className="flex items-center gap-2"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white shadow-sm md:flex md:h-11 md:w-11">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white opacity-0 shadow-sm group-hover:opacity-100 md:flex md:h-11 md:w-11">
                 <CartIcon />
               </div>
               <div className="rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
