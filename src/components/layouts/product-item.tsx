@@ -104,7 +104,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
                 <div className="text-gray-4 flex h-11 w-11 items-center justify-center rounded-full bg-black text-white shadow-sm">
                   <CartIcon />
                 </div>
-                <span className=" rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
+                <span className="rounded-xl bg-black px-2 py-0.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
                   View Cart
                 </span>
               </Link>
