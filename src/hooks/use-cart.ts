@@ -154,7 +154,7 @@ export const useCart = create(
             cartTotal.totalWithDiscount +=
               (price - (price * cartItem.discount) / 100) *
               (orderQuantity - giftAmount!);
-            cartTotal.quantity = get().products.length;
+            cartTotal.quantity += orderQuantity;
             return cartTotal;
           },
           { total: 0, totalWithDiscount: 0, quantity: 0 }
