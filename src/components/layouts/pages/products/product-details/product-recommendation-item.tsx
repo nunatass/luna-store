@@ -52,7 +52,7 @@ export const ProductRecommendationItem = ({
       orderQuantity: 1,
       discount: product.prices[0].discount,
       giftAmount: 0,
-      variant: product.variants[0],
+      variant: product?.variants?.[0],
     });
 
     setSideCartOpen(true);

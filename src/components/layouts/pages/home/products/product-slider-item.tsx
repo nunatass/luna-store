@@ -47,7 +47,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
       orderQuantity: 1,
       discount: product.prices[0].discount,
       giftAmount: 0,
-      variant: product.variants[0],
+      variant: product?.variants?.[0],
     });
     pixel.event('add product to cart', {
       productName: product.title,

@@ -53,7 +53,7 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
       price: product.prices[0].value,
       title: product.title,
       orderQuantity: 1,
-      variant: product.variants[0],
+      variant: product?.variants?.[0],
       discount: product.prices[0].discount,
       giftAmount: 0,
     });
