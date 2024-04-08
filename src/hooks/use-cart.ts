@@ -33,14 +33,14 @@ export const useCart = create(
         set({ isSideCartOpen });
       },
       addProduct: (product: CartProduct) => {
-        const currentProducts = get().products;
-        const existingProduct = currentProducts.find(
-          (currentProduct) => currentProduct.id === product.id
-        );
+        //const currentProducts = get().products;
+        // const existingProduct = currentProducts.find(
+        //   (currentProduct) => currentProduct.id === product.id
+        // );
 
-        if (existingProduct && existingProduct.price === product.price) {
-          return toast('Item already in cart.');
-        }
+        // if (existingProduct && existingProduct.price === product.price) {
+        //   return toast('Item already in cart.');
+        // }
 
         set({
           products: [
