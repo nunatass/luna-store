@@ -40,7 +40,7 @@ export const ContactForm = () => {
       email: string;
       message: string;
     }) => {
-      await axios.post('http://localhost:3000/api/contact-us', data);
+      await axios.post('https://www.stellastone.store/api/contact-us', data);
     },
   });
 
