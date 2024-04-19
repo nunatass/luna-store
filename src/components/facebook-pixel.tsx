@@ -15,6 +15,7 @@ const FacebookPixel = () => {
 
     pixel.pageview();
     TiktokPixel.init('COHBQ7BC77U0PSRU1NNG');
+    TiktokPixel.pageView();
   }, [pathname, loaded]);
 
   return (
