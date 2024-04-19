@@ -1,11 +1,19 @@
+'use client';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import * as pixel from '@/lib/fpixel';
 import { AlertCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import TiktokPixel from 'tiktok-pixel';
 
 export function FailedSection() {
-  pixel.event('Order Failed');
+  useEffect(() => {
+    pixel.event('Order Failed');
+    TiktokPixel.track('OrderFailed', {
+      content_type: 'Order Failed',
+    });
+  }, []);
   return (
     <section className="container flex h-screen flex-col justify-center">
       <Breadcrumb title="Order Failed" label="Order Failed" />

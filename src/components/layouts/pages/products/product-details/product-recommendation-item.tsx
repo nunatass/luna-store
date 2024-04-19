@@ -64,7 +64,7 @@ export const ProductRecommendationItem = ({
       content_type: 'product',
       quantity: 1,
       content_name: product.title,
-      content_id: '2',
+      content_id: product.id,
     });
   };
 

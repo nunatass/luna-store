@@ -63,7 +63,7 @@ export const ProductAddToCartWithSelectVariant = ({
         content_type: 'product',
         quantity: 1,
         content_name: productItem.title,
-        content_id: '2',
+        content_id: productItem.id,
       });
       pixel.event('add product to cart', {
         productName: productItem.title,

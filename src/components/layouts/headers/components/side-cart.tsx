@@ -20,6 +20,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useCallback } from 'react';
+import TiktokPixel from 'tiktok-pixel';
 import { ProductQuantity } from '../../pages/products/product-details/product-quantity';
 
 const emptyCartAnimationVariants = {
@@ -68,6 +69,9 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
 
   const handleCheckout = async () => {
     pixel.event('Go to Checkout');
+    TiktokPixel.track('GoToCheckout', {
+      content_type: 'go to checkout',
+    });
     handleOrderCheckout(
       {
         products: products.map((product) => ({

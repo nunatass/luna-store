@@ -2,11 +2,14 @@
 
 import { Header } from '@/components/layouts/headers/header';
 import { Wrapper } from '@/components/layouts/wrapper';
+import * as pixel from '@/lib/fpixel';
 import {
   EmbeddedCheckout,
   EmbeddedCheckoutProvider,
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { useEffect } from 'react';
+import TiktokPixel from 'tiktok-pixel';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -15,7 +18,15 @@ const stripePromise = loadStripe(
 type CheckoutPageProps = {
   params: { cs: string };
 };
+
 export default function CheckoutPage({ params }: CheckoutPageProps) {
+  useEffect(() => {
+    pixel.event('Checkout page');
+    TiktokPixel.track('CheckoutPage', {
+      content_type: 'Checkout page',
+    });
+  }, []);
+
   return (
     <Wrapper className="bg-[#f2f2f2]">
       <Header secondary />

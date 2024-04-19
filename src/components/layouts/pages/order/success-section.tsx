@@ -11,6 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import TiktokPixel from 'tiktok-pixel';
 
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
@@ -32,9 +33,13 @@ export function SuccessSection() {
       }
       setIsInitialRender(false);
       removeAll();
+      pixel.event('Order Success');
+      TiktokPixel.track('OrderCompleted', {
+        content_type: 'Order Success',
+      });
     }
   }, [isInitialRender, removeAll, products.length, orderId]);
-  pixel.event('Order Success');
+
   return (
     <div className="flex flex-col gap-8">
       <div className="container">

@@ -14,12 +14,14 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useOrderCheckout } from '@/hooks/api/use-orders';
 import { useCart } from '@/hooks/use-cart';
 import { useCurrency } from '@/hooks/use-currency';
+import * as pixel from '@/lib/fpixel';
 import { formatPrice } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import TiktokPixel from 'tiktok-pixel';
 import * as z from 'zod';
 
 const freeShippingTrashHolder =
@@ -82,6 +84,10 @@ export function CartShippingPriceForm() {
   }, [setMethod, totalWithDiscount, method, form]);
 
   async function onSubmit() {
+    pixel.event('Go to Checkout');
+    TiktokPixel.track('GoToCheckout', {
+      content_type: 'go to checkout',
+    });
     handleOrderCheckout(
       {
         products: products.map((product) => ({

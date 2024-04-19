@@ -57,9 +57,9 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
       setSideCartOpen(true);
       TiktokPixel.track('AddToCart', {
         content_type: 'product',
-        quantity: 1,
+        quantity: quantity,
         content_name: product.title,
-        content_id: '2',
+        content_id: product.id,
       });
       pixel.event('add product to cart', {
         productName: product.title,
