@@ -9,6 +9,7 @@ import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import TiktokPixel from 'tiktok-pixel';
 
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
@@ -60,6 +61,13 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
     setSideCartOpen(true);
     pixel.event('add product to cart', {
       productName: product.title,
+    });
+
+    TiktokPixel.track('AddToCart', {
+      content_type: 'product',
+      quantity: 1,
+      content_name: product.title,
+      content_id: '2',
     });
   };
 

@@ -8,6 +8,7 @@ import { Charm, Inter, Oregano } from 'next/font/google';
 import { Toaster } from 'sonner';
 
 import FacebookPixel from '@/components/facebook-pixel';
+
 import { HydrationZustand } from '@/components/hydration-zustand';
 import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
 import { ToasterProvider } from '@/components/providers/toater-provider';

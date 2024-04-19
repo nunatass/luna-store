@@ -7,9 +7,11 @@ import { useCart } from '@/hooks/use-cart';
 import { useCurrency } from '@/hooks/use-currency';
 import { useSticky } from '@/hooks/use-sticky';
 import { useWindowSize } from '@/hooks/use-window-size';
+import * as pixel from '@/lib/fpixel';
 import { cn, formatPrice, formatPriceWithDiscount } from '@/lib/utils';
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
+import TiktokPixel from 'tiktok-pixel';
 import { ProductAddToCartWithSelectVariant } from './product-add-to-cart-with-select-variant';
 import { ProductVariantSelect } from './product-variant-select';
 
@@ -44,6 +46,15 @@ export function ProductAddToCart({ productItem }: ProductAddToCartProps) {
         giftAmount: 0,
       });
       setSideCartOpen(true);
+      TiktokPixel.track('AddToCart', {
+        content_type: 'product',
+        quantity: 1,
+        content_name: productItem.title,
+        content_id: '2',
+      });
+      pixel.event('add product to cart', {
+        productName: productItem.title,
+      });
     } else {
       setShowVariantDisclaimer(true);
     }

@@ -5,8 +5,10 @@ import { CartIcon, CloseTwoIcon } from '@/components/icons';
 import Overlay from '@/components/layouts/overlay';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/use-cart';
+import * as pixel from '@/lib/fpixel';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
+import TiktokPixel from 'tiktok-pixel';
 import { ProductVariantSelect } from './product-variant-select';
 
 type AddToCartWithSelectVariantProps = {
@@ -57,6 +59,15 @@ export const ProductAddToCartWithSelectVariant = ({
       });
       setSideCartOpen(true);
       setIsOpen(false);
+      TiktokPixel.track('AddToCart', {
+        content_type: 'product',
+        quantity: 1,
+        content_name: productItem.title,
+        content_id: '2',
+      });
+      pixel.event('add product to cart', {
+        productName: productItem.title,
+      });
     } else {
       setShowVariantDisclaimer(true);
     }

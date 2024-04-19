@@ -13,10 +13,12 @@ import {
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/use-cart';
 import { useCurrency } from '@/hooks/use-currency';
+import * as pixel from '@/lib/fpixel';
 import { CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
+import TiktokPixel from 'tiktok-pixel';
 import { PriceBundle } from './price-bundle';
 import { ProductQuantity } from './product-quantity';
 import { ProductVariantSelect } from './product-variant-select';
@@ -53,6 +55,15 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
         giftAmount: 0,
       });
       setSideCartOpen(true);
+      TiktokPixel.track('AddToCart', {
+        content_type: 'product',
+        quantity: 1,
+        content_name: product.title,
+        content_id: '2',
+      });
+      pixel.event('add product to cart', {
+        productName: product.title,
+      });
     } else {
       setShowVariantDisclaimer(true);
     }

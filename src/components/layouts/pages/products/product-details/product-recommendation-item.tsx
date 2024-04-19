@@ -8,6 +8,7 @@ import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import TiktokPixel from 'tiktok-pixel';
 
 const optionsAnimationVariants = {
   initial: { x: -10, opacity: 0 },
@@ -58,6 +59,12 @@ export const ProductRecommendationItem = ({
     setSideCartOpen(true);
     pixel.event('add product to cart', {
       productName: product.title,
+    });
+    TiktokPixel.track('AddToCart', {
+      content_type: 'product',
+      quantity: 1,
+      content_name: product.title,
+      content_id: '2',
     });
   };
 

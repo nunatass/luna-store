@@ -4,6 +4,7 @@ import * as pixel from '@/lib/fpixel';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
+import TiktokPixel from 'tiktok-pixel';
 
 const FacebookPixel = () => {
   const [loaded, setLoaded] = useState(false);
@@ -13,6 +14,7 @@ const FacebookPixel = () => {
     if (!loaded) return;
 
     pixel.pageview();
+    TiktokPixel.init('COH9TBBC77UE1BQ8R9JG');
   }, [pathname, loaded]);
 
   return (

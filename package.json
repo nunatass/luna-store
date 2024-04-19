@@ -64,6 +64,7 @@
     "stripe": "^14.17.0",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
+    "tiktok-pixel": "^2.0.3",
     "zod": "^3.22.4",
     "zustand": "^4.4.7"
   },
