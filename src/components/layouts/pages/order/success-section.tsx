@@ -146,7 +146,7 @@ export function SuccessSection() {
                   <span className="-mt-2 text-[12px] text-gray-700">
                     {product?.variant?.label}
                   </span>
-                  {product.giftAmount > 0 && (
+                  {product.giftAmount! > 0 && (
                     <span className="flex h-5 w-20 items-center justify-center gap-2 rounded bg-[#669e5cee] px-1 py-0.5 text-sm text-white">
                       {`${product.giftAmount!} GIFT`}
 

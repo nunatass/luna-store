@@ -170,7 +170,7 @@ export const SuccessOrderEmail = ({
                             </span>
                           </Text>
                           <Text>
-                            {product.giftAmount > 0 && (
+                            {product.giftAmount! > 0 && (
                               <span className="flex h-5 w-20 items-center justify-center gap-2 rounded bg-[#669e5cee] px-1 py-0.5 text-sm text-white">
                                 {`${product.giftAmount!} GIFT`}
                               </span>
