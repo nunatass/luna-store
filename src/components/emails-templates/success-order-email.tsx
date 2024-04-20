@@ -144,8 +144,8 @@ export const SuccessOrderEmail = ({
                               $
                               {Number(
                                 formatPriceWithDiscount(
-                                  product?.price,
-                                  product?.discount
+                                  product.price,
+                                  product.discount
                                 ).price
                               ) *
                                 (product.orderQuantity - product.giftAmount!)}
