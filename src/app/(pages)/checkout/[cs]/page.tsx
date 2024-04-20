@@ -24,6 +24,7 @@ export default function CheckoutPage({ params }: CheckoutPageProps) {
     pixel.event('Checkout page');
     TiktokPixel.track('CheckoutPage', {
       content_type: 'Checkout page',
+      content_id: 'go to checkout',
     });
   }, []);
 

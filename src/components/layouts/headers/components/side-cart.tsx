@@ -71,6 +71,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
     pixel.event('Go to Checkout');
     TiktokPixel.track('GoToCheckout', {
       content_type: 'go to checkout',
+      content_id: 'go to checkout',
     });
     handleOrderCheckout(
       {

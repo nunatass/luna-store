@@ -10,6 +10,7 @@ export function FailedSection() {
   useEffect(() => {
     TiktokPixel.track('OrderFailed', {
       content_type: 'Order Failed',
+      content_id: 'OrderFailed',
     });
   }, []);
   return (

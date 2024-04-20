@@ -34,6 +34,7 @@ export function SuccessSection() {
       removeAll();
       TiktokPixel.track('OrderCompleted', {
         content_type: 'Order Success',
+        content_id: 'Order Success',
       });
     }
   }, [isInitialRender, removeAll, products.length, orderId]);
