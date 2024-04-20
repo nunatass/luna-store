@@ -130,7 +130,7 @@ export const SuccessOrderEmail = ({
                         >
                           <Button
                             href={`https://stellastone.store/products/${stringToId(product.title)}`}
-                            className=" w-full text-center text-base font-medium text-black"
+                            className=" w-full text-left text-base font-medium text-black"
                           >
                             {product?.title}
                           </Button>
@@ -151,24 +151,26 @@ export const SuccessOrderEmail = ({
                                 (product.orderQuantity - product.giftAmount!)}
                             </span>
                           </Text>
-                          <Text>
-                            <span className="line-through	">
-                              $
-                              {Number(
-                                formatPriceWithDiscount(
-                                  product.price,
-                                  product.discount
-                                ).price
-                              ) * product.orderQuantity}
-                            </span>
-                          </Text>
+                          {product.discount > 0 && (
+                            <Text>
+                              <span className="line-through	">
+                                $
+                                {Number(
+                                  formatPriceWithDiscount(
+                                    product.price,
+                                    product.discount
+                                  ).price
+                                ) * product.orderQuantity}
+                              </span>
+                            </Text>
+                          )}
                           <Text>
                             <span className="text-sm">
                               {product?.variant?.label}
                             </span>
                           </Text>
                           <Text>
-                            {product.giftAmount && (
+                            {product.giftAmount > 0 && (
                               <span className="flex h-5 w-20 items-center justify-center gap-2 rounded bg-[#669e5cee] px-1 py-0.5 text-sm text-white">
                                 {`${product.giftAmount!} GIFT`}
                               </span>

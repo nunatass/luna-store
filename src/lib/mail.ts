@@ -1,7 +1,7 @@
 import { CartProduct } from '@/common/types';
 import { SuccessOrderEmail } from '@/components/emails-templates/success-order-email';
-import { findGiftProducts } from '@/hooks/use-cart';
 import { Resend } from 'resend';
+import { findGiftProducts } from './utils';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -22,7 +22,8 @@ export const sendSuccessOrderEmail = async ({
   name,
   order,
 }: SendSuccessOrderEmailProps) => {
-  findGiftProducts(order.items);
+  const orderWithGift = findGiftProducts(order.items);
+  order.items = orderWithGift;
   const { data, error } = await resend.emails.send({
     from: 'Stella Stone <support@stellastone.store>',
     to: [email],

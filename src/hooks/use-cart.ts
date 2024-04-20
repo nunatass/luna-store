@@ -1,6 +1,7 @@
 'use client';
 
 import { CartProduct, Variant } from '@/common/types';
+import { findGiftProducts } from '@/lib/utils';
 import { toast } from 'sonner';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
@@ -33,15 +34,6 @@ export const useCart = create(
         set({ isSideCartOpen });
       },
       addProduct: (product: CartProduct) => {
-        //const currentProducts = get().products;
-        // const existingProduct = currentProducts.find(
-        //   (currentProduct) => currentProduct.id === product.id
-        // );
-
-        // if (existingProduct && existingProduct.price === product.price) {
-        //   return toast('Item already in cart.');
-        // }
-
         set({
           products: [
             ...get().products.filter(
@@ -168,38 +160,3 @@ export const useCart = create(
     }
   )
 );
-
-export function findGiftProducts(products: CartProduct[]) {
-  const totalProducts = products.reduce(
-    (total, product) => total + product.orderQuantity,
-    0
-  );
-  const giftAmount = Math.floor(totalProducts / 3);
-
-  if (totalProducts <= 0 || giftAmount < 0) {
-    return;
-  }
-
-  const sortedProducts = products.sort(
-    (a, b) =>
-      (a.price * (100 - a.discount)) / 100 -
-      (b.price * (100 - b.discount)) / 100
-  );
-
-  let remainingGiftAmount = giftAmount;
-
-  for (const product of sortedProducts) {
-    product.giftAmount = 0;
-  }
-
-  for (const product of sortedProducts) {
-    product.giftAmount = 0;
-    const increaseAmount = Math.min(remainingGiftAmount, product.orderQuantity);
-    product.giftAmount = increaseAmount;
-    remainingGiftAmount -= increaseAmount;
-
-    if (remainingGiftAmount === 0) {
-      break;
-    }
-  }
-}

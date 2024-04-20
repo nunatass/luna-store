@@ -4,7 +4,6 @@ import { AskQuestionIcon, CartTwoIcon } from '@/components/icons';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/use-cart';
-import * as pixel from '@/lib/fpixel';
 import { formatPrice, formatPriceWithDiscount, stringToId } from '@/lib/utils';
 import { CheckCircle2, GiftIcon } from 'lucide-react';
 import Image from 'next/image';
@@ -33,7 +32,6 @@ export function SuccessSection() {
       }
       setIsInitialRender(false);
       removeAll();
-      pixel.event('Order Success');
       TiktokPixel.track('OrderCompleted', {
         content_type: 'Order Success',
       });
@@ -115,7 +113,7 @@ export function SuccessSection() {
                   <Link
                     href={`/products/${stringToId(product.title)}`}
                     aria-label="product item"
-                    className=" text-center text-base font-medium"
+                    className="text-left text-base font-medium"
                   >
                     {product.title}
                   </Link>
@@ -123,17 +121,17 @@ export function SuccessSection() {
                     <span className="text-sm">
                       Qtd: {product.orderQuantity}
                     </span>
-                    <div className="flex gap-2">
-                      <span className="font-semibold">
-                        $
-                        {Number(
-                          formatPriceWithDiscount(
-                            product.price,
-                            product.discount
-                          ).price
-                        ) *
-                          (product.orderQuantity - product.giftAmount!)}
-                      </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="font-semibold">
+                      $
+                      {Number(
+                        formatPriceWithDiscount(product.price, product.discount)
+                          .price
+                      ) *
+                        (product.orderQuantity - product.giftAmount!)}
+                    </span>
+                    {product.discount > 0 && (
                       <span className="line-through	">
                         $
                         {Number(
@@ -143,12 +141,12 @@ export function SuccessSection() {
                           ).price
                         ) * product.orderQuantity}
                       </span>
-                    </div>
+                    )}
                   </div>
                   <span className="-mt-2 text-[12px] text-gray-700">
                     {product?.variant?.label}
                   </span>
-                  {product.giftAmount && (
+                  {product.giftAmount > 0 && (
                     <span className="flex h-5 w-20 items-center justify-center gap-2 rounded bg-[#669e5cee] px-1 py-0.5 text-sm text-white">
                       {`${product.giftAmount!} GIFT`}
 

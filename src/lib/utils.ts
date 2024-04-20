@@ -1,3 +1,4 @@
+import { CartProduct } from '@/common/types';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -40,4 +41,41 @@ export function stringToId(input: string): string {
 
 export function idToString(id: string): string {
   return id.replace(/-/g, ' ');
+}
+
+export function findGiftProducts(products: CartProduct[]) {
+  const totalProducts = products.reduce(
+    (total, product) => total + product.orderQuantity,
+    0
+  );
+  const giftAmount = Math.floor(totalProducts / 3);
+
+  if (totalProducts <= 0 || giftAmount < 0) {
+    return products;
+  }
+
+  const sortedProducts = products.sort(
+    (a, b) =>
+      (a.price * (100 - a.discount)) / 100 -
+      (b.price * (100 - b.discount)) / 100
+  );
+
+  let remainingGiftAmount = giftAmount;
+
+  for (const product of sortedProducts) {
+    product.giftAmount = 0;
+  }
+
+  for (const product of sortedProducts) {
+    product.giftAmount = 0;
+    const increaseAmount = Math.min(remainingGiftAmount, product.orderQuantity);
+    product.giftAmount = increaseAmount;
+    remainingGiftAmount -= increaseAmount;
+
+    if (remainingGiftAmount === 0) {
+      return sortedProducts;
+    }
+  }
+
+  return sortedProducts;
 }
