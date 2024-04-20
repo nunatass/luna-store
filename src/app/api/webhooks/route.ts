@@ -10,6 +10,8 @@ export async function POST(req: Request) {
   const body = await req.text();
   const signature = headers().get('Stripe-Signature') as string;
 
+  console.log(signature);
+
   let event: Stripe.Event;
 
   try {
@@ -19,6 +21,7 @@ export async function POST(req: Request) {
       process.env.STRIPE_WEBHOOK_SECRET!
     );
   } catch (error) {
+    console.log(error);
     return new NextResponse(`Webhook Error: ${error}`, { status: 400 });
   }
 
@@ -27,7 +30,7 @@ export async function POST(req: Request) {
   const email = session?.customer_details?.email || '';
   const name = session?.customer_details?.name || '';
   const phone = session?.customer_details?.phone || '';
-  const orderId = session?.metadata?.id;
+  const orderId = session?.metadata?.orderId;
 
   const addressComponents = [
     address?.line1,
