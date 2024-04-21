@@ -94,6 +94,7 @@ export const metadata: Metadata = {
     'Unique Jewelry Pieces',
     'Dazzling Earrings',
     'Elegant Bracelets',
+    'BE YOU, WEARING US.'
   ],
   robots: {
     index: true,

@@ -19,8 +19,12 @@ export const JewelryBanner = () => {
     <div className=" relative h-screen w-screen overflow-hidden">
       <section className="relative h-full w-full bg-[#AB9774] bg-[url('/banner.jpeg')] bg-cover bg-center bg-no-repeat">
         <div className="button absolute left-1/2 top-1/2 z-10 -mt-16 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-white">
-          <div className="text-2xl font-bold md:text-5xl">
+          <h2 className="text-2xl font-bold md:text-5xl mt-4" >
             BE YOU, WEARING US.
+          </h2>
+          <div className="opacity-0 h-0 w-0">
+          <h1>Stella Stone</h1>
+          <h3>Stella Stone Jewelry</h3>
           </div>
         </div>
 
