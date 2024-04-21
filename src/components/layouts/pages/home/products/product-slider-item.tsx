@@ -130,7 +130,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
         </motion.div>
 
         <div className="z-10 flex flex-col gap-2 px-2 py-2 font-medium">
-          <h3 className="text-left transition-all duration-300 ease-in-out">
+          <h2 className="text-left transition-all duration-300 ease-in-out">
             <Link
               className="text-sm"
               href={`/products/${stringToId(product.title)}`}
@@ -138,7 +138,7 @@ export const ProductSliderItem = ({ product }: ProductSliderItemProps) => {
             >
               {product.title}
             </Link>
-          </h3>
+          </h2>
           <div className="w-full">
             <div className="flex w-full items-center justify-between">
               <span className="sm:font-base w-full text-left text-sm transition-all duration-300  ease-in-out sm:mb-2">
