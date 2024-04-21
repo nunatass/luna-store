@@ -86,7 +86,7 @@ export const DetailsWrapper = ({ product }: DetailsWrapperProps) => {
   return (
     <div className="flex w-full flex-col gap-4 text-gray-800">
       <div className="-mb-2">
-        <h3 className="text-2xl font-medium  text-black">{product.title}</h3>
+        <h1 className="text-2xl font-medium  text-black">{product.title}</h1>
       </div>
 
       <PriceBundle

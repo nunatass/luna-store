@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.stellastone.store'),
   title: 'Stella Stone Jewelry',
   description:
-    'Shop timeless jewelry online: exquisite craftsmanship, elegant designs, endless elegance.',
+    'Explore our extensive collection of high-quality jewelry. Our pieces are crafted for durability, ensuring they maintain their original color without fading. Designed to withstand water, sweat, irritation, and perfume, our jewelry offers lasting beauty and resilience.',
 
   icons: {
     icon: {
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Stella Stone Jewelry',
     description:
-      'Shop timeless jewelry online: exquisite craftsmanship, elegant designs, endless elegance.',
+      'Explore our extensive collection of high-quality jewelry. Our pieces are crafted for durability, ensuring they maintain their original color without fading. Designed to withstand water, sweat, irritation, and perfume, our jewelry offers lasting beauty and resilience.',
     images: [
       {
         url: 'https://pub-2815e42a47aa405db2fb0aeb816612b8.r2.dev/098878e13cceb0c222e969ea26df5063_x800.jpg',
@@ -70,7 +70,11 @@ export const metadata: Metadata = {
   keywords: [
     'Stella Stone',
     'Stella Store',
+    'Stella Stone Store',
     'jewelry store',
+    'Stella jewelry store',
+    'Stella Stone jewelry store',
+    'Stella Stone store',
     'jewelry',
     'bracelets',
     'necklaces',
@@ -80,6 +84,7 @@ export const metadata: Metadata = {
     'Stunning Jewelry',
     'Fine Jewelry',
     'Handcrafted Jewelry',
+    'Gold Jewelry',
     'Fashion Accessories',
     'Luxury Jewelry',
     'Affordable Elegance',

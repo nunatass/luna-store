@@ -50,7 +50,7 @@ export const Header = ({ secondary }: HeaderProps) => {
               secondary && 'border-0 bg-white shadow-md'
             )}
           >
-            <div className="sh w-36 md:w-44">
+            <h1 className="sh w-36 md:w-44" aria-label="Stella Stone Store">
               <Link href="/" aria-label="home">
                 <Image
                   className={cn('block', (sticky || secondary) && 'hidden')}
@@ -65,7 +65,7 @@ export const Header = ({ secondary }: HeaderProps) => {
                   loading="eager"
                 />
               </Link>
-            </div>
+            </h1>
             <div className="flex items-center lg:w-full">
               <div
                 className={cn(

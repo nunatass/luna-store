@@ -35,7 +35,10 @@ export default function ProductPage({ params }: ProductPageProps) {
             collection?.title === 'Silver Collection' && 'text-black'
           )}
         >
-          <h1 className="text-3xl font-medium md:text-4xl">
+          <h1
+            className="text-3xl font-medium md:text-4xl"
+            aria-label="stella stone store collections"
+          >
             {collection?.title}
           </h1>
           {collection?.title && (
