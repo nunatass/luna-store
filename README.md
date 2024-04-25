@@ -9,9 +9,22 @@ This project is an online store built with Next.js 14, React Query, and Stripe f
 - **Stripe Husk**: Integrated to handle secure payment transactions.
 - **Spring Boot Backend**: Provides RESTful APIs for managing products, cart, and orders.
 
-#  Screenshots
-<video width="320" height="240" controls>
-  <source src="https://pub-2815e42a47aa405db2fb0aeb816612b8.r2.dev/screen.mov" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
 
+[You can visite out website in](https://www.stellastone.store/)
+
+
+#  Screenshots
+
+![screenshot](https://github.com/nunatass/animated-gradients/blob/main/public/Screenshot%202024-04-25%20at%2001.19.34.png?raw=true)
+
+![screenshot](https://github.com/nunatass/animated-gradients/blob/main/public/Screenshot%202024-04-25%20at%2001.46.23.png?raw=true)
+
+![screenshot](https://github.com/nunatass/animated-gradients/blob/main/public/Screenshot%202024-04-25%20at%2001.46.29.png?raw=true)
+
+![screenshot](https://github.com/nunatass/animated-gradients/blob/main/public/Screenshot%202024-04-25%20at%2001.46.34.png?raw=true)
+
+![screenshot](https://github.com/nunatass/animated-gradients/blob/main/public/Screenshot%202024-04-25%20at%2001.46.41.png?raw=true)
+
+![screenshot](https://github.com/nunatass/animated-gradients/blob/main/public/Screenshot%202024-04-25%20at%2001.46.55.png?raw=true)
+
+![screenshot](https://github.com/nunatass/animated-gradients/blob/main/public/Screenshot%202024-04-25%20at%2001.46.58.png?raw=true)
