@@ -18,7 +18,7 @@ export const DiscountBanner = () => {
       blurBorders={false}
       className="h-20 border-0"
     >
-      <Slider.Slide className=" flex h-10 items-center justify-center gap-2 border-0 border-2 border-black bg-black text-white">
+      <Slider.Slide className=" flex h-10 items-center justify-center gap-2 border-2 border-black bg-black text-white">
         <DeliveryIcon className="w-8 w-8 text-white" />
         {`Free Shipping over ${symbol}${freeShippingThreshold / 100}`}
       </Slider.Slide>
