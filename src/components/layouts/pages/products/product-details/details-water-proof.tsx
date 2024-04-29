@@ -18,8 +18,7 @@ export function DetailsWaterProof() {
           fade and retain the coating regardless of whether you choose 18K
           gold-plated or silver. The jewelery is specially designed to resist
           water and moisture, with its unique PVD coating, so you can wear them
-          without worry, whether it&rsquos for a swim, in the gym or on the
-          beach.
+          without worry, whether it`s for a swim, in the gym or on the beach.
         </p>
         <div className="container flex w-full flex-col items-center px-4">
           <video
