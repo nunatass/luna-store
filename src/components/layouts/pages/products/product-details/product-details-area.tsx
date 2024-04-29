@@ -1,9 +1,18 @@
 'use client';
+import faqImg from '@/assets/img/banner-faq.webp';
 
 import paymentOptionImg from '@/assets/img/footer/payments-icons.svg';
 import { Product } from '@/common/types';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { faqsData } from '@/data/faqs-data';
 import Image from 'next/image';
 import { DetailsThumbWrapper } from './details-thumb-wrapper';
+import { DetailsWaterProof } from './details-water-proof';
 import { DetailsWrapper } from './details-wrapper';
 import { ProductAddToCart } from './product-add-to-cart';
 import { ProductRecommendations } from './product-recommendations';
@@ -41,9 +50,10 @@ export const ProductDetailsArea = ({
           </div>
         </div>
       </div>
+
       {productItem.recommendations &&
         productItem.recommendations.length > 0 && (
-          <div className="mt-8 bg-white py-5">
+          <div className="bg-white py-5">
             <div className="container">
               <ProductRecommendations
                 recommendations={productItem.recommendations}
@@ -51,6 +61,30 @@ export const ProductDetailsArea = ({
             </div>
           </div>
         )}
+
+      <DetailsWaterProof />
+
+      <div className="my-8 flex w-full flex-col md:flex-row container md:gap-20">
+        <div className="h-full w-full">
+          <Image
+            src={faqImg}
+            alt="faq img"
+            width={500}
+            height={500}
+            className="h-[200px] w-full object-cover md:h-[400px]"
+          />
+        </div>
+        <Accordion type="single" collapsible className="w-full">
+          {faqsData.map((faq, index) => (
+            <AccordionItem key={faq.question} value={`item-${index + 1}`}>
+              <AccordionTrigger className="text-sm md:text-base">{faq.question}</AccordionTrigger>
+              <AccordionContent>
+                <p className="whitespace-pre-line	 text-sm">{faq.answer}</p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
 
       <div className="my-8">
         <ProductReviewsArea productId={productItem.id} />

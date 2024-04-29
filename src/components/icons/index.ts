@@ -27,5 +27,6 @@ export * from './search';
 export * from './spinner-cion';
 export * from './sun';
 export * from './support';
+export * from './surgical';
 export * from './trash';
 export * from './wishlist';
