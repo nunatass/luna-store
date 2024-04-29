@@ -36,7 +36,7 @@ export function DetailsWaterProof() {
       <div className="">
         <Slider
           width="400px"
-          duration={35}
+          duration={20}
           pauseOnHover={true}
           blurBorders={false}
           className="border-0"
