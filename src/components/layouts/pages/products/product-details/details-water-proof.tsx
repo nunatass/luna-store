@@ -27,6 +27,7 @@ export function DetailsWaterProof() {
             loop
             muted
             id="video"
+            playsInline
             className="h-80 w-full object-cover"
           >
             <source src="/water-proof.mp4" type="video/mp4" />
