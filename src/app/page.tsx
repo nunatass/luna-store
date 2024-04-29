@@ -1,5 +1,6 @@
 import { Header } from '@/components/layouts/headers/header';
 import { FeatureArea } from '@/components/layouts/pages/home/feature-area';
+import HomeReviewArea from '@/components/layouts/pages/home/home-review-area';
 import { JewelryBanner } from '@/components/layouts/pages/home/jewelry-banner';
 import { PopularProducts } from '@/components/layouts/pages/home/products/popular-products';
 import { ProductsArea } from '@/components/layouts/pages/home/products/products-area';
@@ -14,6 +15,7 @@ export default function HomePage() {
       <FeatureArea />
       <PopularProducts />
       <ProductsArea />
+      <HomeReviewArea />
     </Wrapper>
   );
 }
