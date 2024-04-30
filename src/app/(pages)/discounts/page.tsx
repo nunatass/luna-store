@@ -1,5 +1,6 @@
 import { Header } from '@/components/layouts/headers/header';
 import { DiscountProductsArea } from '@/components/layouts/pages/discounts/discount-products-area';
+import HomeReviewArea from '@/components/layouts/pages/home/home-review-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
 
@@ -23,6 +24,7 @@ export default function ProductPage() {
         <Breadcrumb title="Products on Sale" disableSecondary />
       </div>
       <DiscountProductsArea discount={discount} />
+      <HomeReviewArea />
     </Wrapper>
   );
 }

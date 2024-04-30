@@ -1,5 +1,6 @@
 import { Header } from '@/components/layouts/headers/header';
 import { CartArea } from '@/components/layouts/pages/cart/cart-area';
+import HomeReviewArea from '@/components/layouts/pages/home/home-review-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
 
@@ -15,6 +16,7 @@ export default function CartPage() {
         <Breadcrumb title="Shopping Cart" label="Shopping Cart" />
       </div>
       <CartArea />
+      <HomeReviewArea />
     </Wrapper>
   );
 }

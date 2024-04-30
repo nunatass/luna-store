@@ -2,6 +2,7 @@
 
 import { Header } from '@/components/layouts/headers/header';
 import { CollectionsProductsArea } from '@/components/layouts/pages/collections/collections-products-area';
+import HomeReviewArea from '@/components/layouts/pages/home/home-review-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 import { collectionsBanner } from '@/data/collections-banner-data';
 import { useCollectionById } from '@/hooks/api/use-collections';
@@ -49,6 +50,7 @@ export default function ProductPage({ params }: ProductPageProps) {
         </div>
       </div>
       <CollectionsProductsArea collectionId={params?.id} />
+      <HomeReviewArea />
     </Wrapper>
   );
 }

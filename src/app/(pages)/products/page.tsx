@@ -1,4 +1,5 @@
 import { Header } from '@/components/layouts/headers/header';
+import HomeReviewArea from '@/components/layouts/pages/home/home-review-area';
 import { ProductsArea } from '@/components/layouts/pages/products/products-area';
 import { Wrapper } from '@/components/layouts/wrapper';
 
@@ -18,6 +19,7 @@ export default function ProductsPage() {
     <Wrapper className="bg-white">
       <Header secondary />
       <ProductsArea />
+      <HomeReviewArea />
     </Wrapper>
   );
 }
