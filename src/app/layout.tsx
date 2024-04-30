@@ -4,7 +4,7 @@ import { BackToTopButton } from '@/components/ui/back-to-top-button';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/react';
 import { Metadata } from 'next';
-import { Charm, Inter, Oregano } from 'next/font/google';
+import { Inter, Montserrat } from 'next/font/google';
 import { Toaster } from 'sonner';
 
 import FacebookPixel from '@/components/facebook-pixel';
@@ -16,22 +16,16 @@ import './globals.css';
 
 const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string;
 
-const charm = Charm({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-charm',
-});
-
 const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-inter',
 });
 
-const oregano = Oregano({
+const americana = Montserrat({
   subsets: ['latin'],
   weight: ['400'],
-  variable: '--font-oregano',
+  variable: '--font-americana',
 });
 
 export const metadata: Metadata = {
@@ -94,7 +88,7 @@ export const metadata: Metadata = {
     'Unique Jewelry Pieces',
     'Dazzling Earrings',
     'Elegant Bracelets',
-    'BE YOU, WEARING US.'
+    'BE YOU, WEARING US.',
   ],
   robots: {
     index: true,
@@ -115,9 +109,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${charm.variable} ${inter.variable} ${oregano.variable} font-inter`}
-      >
+      <body className={`${inter.variable} ${americana.variable} font-inter`}>
         <TanstackQueryProvider>
           <HydrationZustand>
             <ToasterProvider>

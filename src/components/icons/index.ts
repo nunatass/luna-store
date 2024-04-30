@@ -25,8 +25,10 @@ export * from './rings-wedding';
 export * from './ruler';
 export * from './search';
 export * from './spinner-cion';
+export * from './start';
 export * from './sun';
 export * from './support';
 export * from './surgical';
 export * from './trash';
 export * from './wishlist';
+

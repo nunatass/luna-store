@@ -1,46 +1,36 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { useSticky } from '@/hooks/use-sticky';
-import { AnimatePresence, motion } from 'framer-motion';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 
-const animateButton = {
-  initial: { opacity: 0, scale: 0 },
-  animate: { opacity: 1, scale: 1 },
-  exit: { opacity: 0, scale: 0 },
-  transition: { duration: 0.6, ease: [0.34, 1.56, 0.64, 1] },
-};
-
 export const JewelryBanner = () => {
-  const { sticky } = useSticky();
-
   return (
     <div className=" relative h-screen w-screen overflow-hidden">
       <section className="relative h-full w-full bg-[#AB9774] bg-[url('/banner.jpeg')] bg-cover bg-center bg-no-repeat">
-        <div className="button absolute left-1/2 top-1/2 z-10 -mt-16 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-white">
-          <h2 className="text-2xl font-bold md:text-5xl mt-4" >
-            BE YOU, WEARING US.
-          </h2>
-          <div className="opacity-0 h-0 w-0">
-          <h1>Stella Stone</h1>
-          <h3>Stella Stone Jewelry</h3>
+        <div className="button absolute left-1/2 top-1/2 z-10  flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 text-white">
+          <div className="flex flex-col items-center text-center">
+            <div className="md:text-md text-[13px] font-light text-white">
+              ★★★★★ LOVED BY 150,000+ CLIENTS
+            </div>
           </div>
-        </div>
-
-        <div className="absolute bottom-40 left-1/2 -translate-x-1/2 sm:bottom-16 md:left-20 md:translate-x-0">
-          <AnimatePresence>
-            {!sticky && (
-              <motion.div {...animateButton}>
-                <Button
-                  className="w-36 bg-white text-sm text-black transition-all duration-300 ease-in-out hover:bg-black hover:text-white md:w-56"
-                  asChild
-                >
-                  <AnchorLink href="#products">SHOP NOW</AnchorLink>
-                </Button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <h2 className="my-8 text-center font-americana text-5xl font-bold md:text-7xl">
+            Buy 2, Get 1 Free!
+          </h2>
+          <div className="text-[13px] font-light text-white md:text-base">
+            Be You WEARING US.
+          </div>
+          <div className="">
+            <Button
+              className="mt-4 bg-white px-12 text-sm text-black hover:bg-black hover:text-white"
+              asChild
+            >
+              <AnchorLink href="#products">SHOP NOW</AnchorLink>
+            </Button>
+          </div>
+          <div className="h-0 w-0 opacity-0">
+            <h1>Stella Stone</h1>
+            <h3>Stella Stone Jewelry</h3>
+          </div>
         </div>
       </section>
     </div>

@@ -19,8 +19,7 @@ const config = {
     extend: {
       fontFamily: {
         inter: 'var(--font-inter)',
-        charm: 'var(--font-charm)',
-        oregano: 'var(--font-oregano)',
+        americana: 'var(--font-americana)',
       },
       fontSize: {
         xs: '11px',
