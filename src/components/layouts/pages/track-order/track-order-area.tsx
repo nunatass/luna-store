@@ -27,7 +27,7 @@ export function TrackOrderArea() {
   // on submit
   const onSubmit = (data: { trackId: string }) => {
     window.open(
-      `https://parcelsapp.com/en/tracking/${data.trackId}`,
+      `https://www.ordertracker.com/track/${data.trackId}`,
       '_target'
     );
   };
