@@ -12,6 +12,7 @@ import FacebookPixel from '@/components/facebook-pixel';
 import { HydrationZustand } from '@/components/hydration-zustand';
 import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
 import { ToasterProvider } from '@/components/providers/toater-provider';
+import { ToaltAffiliated } from '@/components/toalt-affiliated';
 import './globals.css';
 
 const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string;
@@ -130,6 +131,7 @@ export default function RootLayout({
         </TanstackQueryProvider>
         <Analytics mode={'production'} />
         <FacebookPixel />
+        <ToaltAffiliated />
       </body>
       <GoogleAnalytics gaId={googleAnalyticsId} />
     </html>

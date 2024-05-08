@@ -11,6 +11,7 @@ const keys = {
 
 type OrderCheckoutRequest = {
   products: CheckoutProduct[];
+  referralId: string;
 };
 
 type createOrderRequest = {

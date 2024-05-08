@@ -96,6 +96,7 @@ export function CartShippingPriceForm() {
           quantity: product.orderQuantity,
           variantId: product.variant?.id,
         })) as CheckoutProduct[],
+        referralId: window?.tolt_referral,
       },
       {
         onSuccess: async ({ clientSecret }) => {

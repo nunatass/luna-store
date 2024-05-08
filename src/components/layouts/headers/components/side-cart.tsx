@@ -81,6 +81,7 @@ export const SideCart = ({ setIsOpen }: SideMenuProps) => {
           quantity: product.orderQuantity,
           variantId: product.variant?.id,
         })) as CheckoutProduct[],
+        referralId: window?.tolt_referral,
       },
       {
         onSuccess: async ({ clientSecret }) => {
