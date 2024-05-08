@@ -14,6 +14,7 @@ import TiktokPixel from 'tiktok-pixel';
 const imageUrlPrefix = process.env.NEXT_PUBLIC_CLOUDFLARE_FILE_URL_START;
 
 const sellingFastString = process.env.NEXT_PUBLIC_SELLING_FAST as string;
+const soldOut = process.env.NEXT_PUBLIC_SOLD_OUT as string;
 
 const sellingFast = sellingFastString?.split(',') || [];
 
@@ -175,13 +176,19 @@ export const ProductItem = ({ product }: ProductSliderItemProps) => {
           </div>
         </div>
       </Link>
-      {product.prices[0].discount > 0 && (
+      {soldOut.includes(product?.id) && (
+        <span className="absolute right-2 top-2 flex items-center gap-1.5 bg-red-200 p-1 text-xs uppercase text-black shadow">
+          Sold out
+        </span>
+      )}
+
+      {!soldOut.includes(product?.id) && product.prices[0].discount > 0 && (
         <span className="absolute right-2 top-2 bg-black p-1 text-xs text-white">
           {product.prices[0].discount}% off
         </span>
       )}
-
-      {product.prices[0].discount === 0 &&
+      {!soldOut.includes(product?.id) &&
+        product.prices[0].discount === 0 &&
         sellingFast.includes(product?.id) && (
           <span className="absolute right-2 top-2 flex items-center gap-1.5 bg-white p-1 text-xs uppercase text-black shadow">
             Selling Fast <BoltIcon className="h-3 w-3 " />

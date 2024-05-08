@@ -28,6 +28,17 @@ export const Footer = () => {
                 </div>
               </div>
             </div>
+            <div className="flex max-w-md flex-col gap-6">
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-2">
+                  <p className="text-[13px] text-gray-600 transition-all duration-300 ease-in-out md:text-sm">
+                    If you&apos;re interested in collaborating with us or
+                    becoming an affiliate, shoot us a message on Instagram.
+                    Let&apos;s create something amazing together!
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {footerData.map((data) => (

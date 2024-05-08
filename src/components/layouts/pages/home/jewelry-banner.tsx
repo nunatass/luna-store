@@ -17,7 +17,7 @@ export const JewelryBanner = () => {
             Buy 2, Get 1 Free!
           </h2>
           <div className="text-[13px] font-light text-white md:text-base">
-            Be You WEARING US.
+            Be You, wearing US.
           </div>
           <div className="">
             <Button
