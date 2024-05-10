@@ -34,7 +34,9 @@ export const metadata: Metadata = {
   title: 'Stella Stone Jewelry',
   description:
     'Explore our extensive collection of high-quality jewelry. Our pieces are crafted for durability, ensuring they maintain their original color without fading. Designed to withstand water, sweat, irritation, and perfume, our jewelry offers lasting beauty and resilience.',
-
+  other: {
+    ['fb:app_id']: '971685314153862',
+  },
   icons: {
     icon: {
       url: '/favicon.png',
