@@ -44,6 +44,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Stella Stone Jewelry',
+    url: 'https://www.stellastone.store',
+    type: 'website',
     description:
       'Explore our extensive collection of high-quality jewelry. Our pieces are crafted for durability, ensuring they maintain their original color without fading. Designed to withstand water, sweat, irritation, and perfume, our jewelry offers lasting beauty and resilience.',
     images: [
