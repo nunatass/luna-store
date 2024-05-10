@@ -114,6 +114,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta property="fb:app_id" content="971685314153862" />
+      </head>
       <body className={`${inter.variable} ${americana.variable} font-inter`}>
         <TanstackQueryProvider>
           <HydrationZustand>
