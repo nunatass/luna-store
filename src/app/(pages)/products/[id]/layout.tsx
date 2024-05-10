@@ -23,6 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         title: `${res.data?.title} | Stella Stone`,
         description: res.data?.description,
+        url: 'https://www.stellastone.store',
+        type: 'website',
         images: [
           {
             url: `https://pub-2815e42a47aa405db2fb0aeb816612b8.r2.dev/${res.data?.medias?.[1].url}`,

@@ -19,14 +19,18 @@ export async function generateMetadata(
       title: `${res.data?.title} | Stella Stone`,
       description:
         'Elevate your style with our stunning jewelry collection. Discover elegance and sophistication in every piece.',
-
       openGraph: {
         title: `${res.data?.title} | Stella Stone`,
         description:
           'Elevate your style with our stunning jewelry collection. Discover elegance and sophistication in every piece.',
+        url: 'https://www.stellastone.store',
+        type: 'website',
         images: [
           {
             url: `https://pub-2815e42a47aa405db2fb0aeb816612b8.r2.dev/1bc5650f-8e12-4aad-9095-6e9397a26d99`,
+            alt: `${res.data?.title}`,
+            width: 800,
+            height: 600,
           },
         ],
       },
