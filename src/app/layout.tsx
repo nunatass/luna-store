@@ -116,6 +116,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta property="fb:app_id" content="971685314153862" />
+        <meta
+          name="p:domain_verify"
+          content="69b6a2a16737740c63c0d73c7f1f1347"
+        />
       </head>
       <body className={`${inter.variable} ${americana.variable} font-inter`}>
         <TanstackQueryProvider>
